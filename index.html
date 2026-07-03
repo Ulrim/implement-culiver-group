@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>컬리버 그룹 CULIVER GROUP — 바다에서 농장까지, 순환하는 내일을 기릅니다</title>
+  <meta name="description" content="컬리버 그룹은 스마트 양식, 수처리, 자원순환 소재, 스마트팜을 잇는 지속가능한 생산 생태계를 만들어 갑니다.">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-lang="ko">
+
+  <!-- progress bar -->
+  <div class="progress" id="progress"></div>
+
+  <!-- ══════════ NAV ══════════ -->
+  <header class="gnb" id="gnb">
+    <a href="#top" class="brand">
+      <span class="brand-mark">CULIVER</span>
+      <span class="brand-sub">GROUP</span>
+    </a>
+    <nav>
+      <div class="nav-links" id="navLinks">
+        <a href="#about" data-sec="about"><span class="t-ko">그룹소개</span><span class="t-en">About</span></a>
+        <a href="#business" data-sec="business"><span class="t-ko">사업영역</span><span class="t-en">Business</span></a>
+        <a href="#esg" data-sec="esg"><span class="t-ko">지속가능경영</span><span class="t-en">Sustainability</span></a>
+        <a href="#news" data-sec="news"><span class="t-ko">뉴스룸</span><span class="t-en">Newsroom</span></a>
+        <a href="#careers" data-sec="careers"><span class="t-ko">채용</span><span class="t-en">Careers</span></a>
+        <a href="#contact" data-sec="contact"><span class="t-ko">문의</span><span class="t-en">Contact</span></a>
+      </div>
+      <button class="lang-toggle" id="langToggle">EN</button>
+      <button class="hamburger" id="hamburger" aria-label="menu">☰</button>
+    </nav>
+  </header>
+
+  <!-- ══════════ MOBILE MENU ══════════ -->
+  <div class="mobile-menu" id="mobileMenu">
+    <nav>
+      <a href="#business"><span class="mm-no">01</span><span class="mm-label"><span class="t-ko">사업영역</span><span class="t-en">Business</span></span></a>
+      <a href="#cycle"><span class="mm-no">02</span><span class="mm-label"><span class="t-ko">순환구조</span><span class="t-en">The Loop</span></span></a>
+      <a href="#about"><span class="mm-no">03</span><span class="mm-label"><span class="t-ko">그룹소개</span><span class="t-en">About</span></span></a>
+      <a href="#history"><span class="mm-no">04</span><span class="mm-label"><span class="t-ko">연혁</span><span class="t-en">History</span></span></a>
+      <a href="#esg"><span class="mm-no">05</span><span class="mm-label"><span class="t-ko">지속가능경영</span><span class="t-en">Sustainability</span></span></a>
+      <a href="#news"><span class="mm-no">06</span><span class="mm-label"><span class="t-ko">뉴스룸</span><span class="t-en">Newsroom</span></span></a>
+      <a href="#careers"><span class="mm-no">07</span><span class="mm-label"><span class="t-ko">채용</span><span class="t-en">Careers</span></span></a>
+      <a href="#contact"><span class="mm-no">08</span><span class="mm-label"><span class="t-ko">문의</span><span class="t-en">Contact</span></span></a>
+    </nav>
+    <div class="mm-family">
+      <span class="mm-family-label">FAMILY</span>
+      <div class="mm-family-row">
+        <a href="culiver-aqua.html">컬리버</a>
+        <a href="amp.html">에이엠피</a>
+        <a href="cobaltive.html">코발티브</a>
+        <a href="susinje-farm.html">수신제팜</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ HERO ══════════ -->
+  <section id="top" class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-inner">
+      <p class="hero-eyebrow">CULIVER GROUP</p>
+      <h1 class="t-ko">바다에서 농장까지,<br>순환하는 내일을 기릅니다</h1>
+      <h1 class="t-en">From ocean to farm,<br>we cultivate a circular tomorrow</h1>
+      <p class="hero-lead t-ko">컬리버 그룹은 스마트 양식, 수처리, 자원순환 소재, 스마트팜을 잇는<br>지속가능한 생산 생태계를 만들어 갑니다.</p>
+      <p class="hero-lead t-en">CULIVER Group builds a sustainable production ecosystem spanning smart aquaculture, water treatment, upcycled materials, and smart farming.</p>
+      <div class="hero-cta">
+        <a href="#business" class="btn btn-primary"><span class="t-ko">사업영역 보기</span><span class="t-en">Our Business</span><span>→</span></a>
+        <a href="#contact" class="btn btn-ghost"><span class="t-ko">문의하기</span><span class="t-en">Contact</span></a>
+      </div>
+    </div>
+    <div class="scroll-hint"><span>SCROLL</span><span class="bar"></span></div>
+  </section>
+
+  <!-- ══════════ STATS ══════════ -->
+  <section class="stats">
+    <div class="wrap stats-grid reveal">
+      <div class="stat"><div class="stat-num"><span class="val" data-count="4">0</span><span class="suffix"></span></div><span class="stat-label"><span class="t-ko">계열사</span><span class="t-en">Affiliates</span></span></div>
+      <div class="stat"><div class="stat-num"><span class="val" data-count="100">0</span><span class="suffix">%</span></div><span class="stat-label"><span class="t-ko">무항생제 양식</span><span class="t-en">Antibiotic-free</span></span></div>
+      <div class="stat"><div class="stat-num"><span class="val" data-count="365">0</span><span class="suffix"></span></div><span class="stat-label"><span class="t-ko">연중 생산</span><span class="t-en">Days a year</span></span></div>
+      <div class="stat"><div class="stat-num"><span class="val" data-count="2019">0</span><span class="suffix"></span></div><span class="stat-label"><span class="t-ko">그룹 시작</span><span class="t-en">Since</span></span></div>
+    </div>
+  </section>
+
+  <!-- ══════════ BUSINESS ══════════ -->
+  <section id="business" class="section bg-paper">
+    <div class="wrap">
+      <div class="biz-head reveal">
+        <div>
+          <p class="eyebrow">OUR BUSINESS</p>
+          <h2 class="h2 t-ko">하나의 순환,<br>네 개의 사업</h2>
+          <h2 class="h2 t-en">One cycle,<br>four businesses</h2>
+        </div>
+        <p class="biz-head-desc t-ko">양식에서 나온 물은 다시 정화되고, 껍데기는 소재가 되며, 데이터는 농장으로 이어집니다. 컬리버 그룹의 네 회사는 하나의 순환 구조로 연결되어 있습니다.</p>
+        <p class="biz-head-desc t-en">Water is treated and returned, shells become materials, and data flows to the farm. Our four companies form one connected cycle.</p>
+      </div>
+      <div class="biz-list reveal" id="bizList"></div>
+    </div>
+  </section>
+
+  <!-- ══════════ CYCLE (interactive) ══════════ -->
+  <section id="cycle" class="section bg-card">
+    <div class="wrap">
+      <div class="cycle-head reveal">
+        <p class="eyebrow">THE LOOP</p>
+        <h2 class="h2 t-ko">버려지는 것 없이, 순환합니다</h2>
+        <h2 class="h2 t-en">Nothing wasted — everything circulates</h2>
+        <p class="sub t-ko">노드를 눌러 각 사업이 순환 구조에서 맡는 역할을 확인하세요.</p>
+        <p class="sub t-en">Tap a node to see the role each business plays in the loop.</p>
+      </div>
+      <div class="cycle-grid reveal">
+        <div class="ring">
+          <div class="ring-dash"></div>
+          <div class="ring-core">
+            <span class="role" id="ringRole"></span>
+            <span class="ko" id="ringKo"></span>
+            <span class="en" id="ringEn"></span>
+          </div>
+          <div id="ringNodes"></div>
+        </div>
+        <div class="cycle-detail">
+          <span class="cycle-badge" id="cycleBadge"></span>
+          <h3 id="cycleTitle"></h3>
+          <p class="t-ko" id="cycleDescKo"></p>
+          <p class="t-en" id="cycleDescEn"></p>
+          <div class="cycle-dots" id="cycleDots"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ ABOUT ══════════ -->
+  <section id="about" class="section tall bg-paper">
+    <div class="wrap about-grid">
+      <div class="about-intro reveal">
+        <p class="eyebrow">ABOUT CULIVER GROUP</p>
+        <h2 class="h2 t-ko">기르는 일의<br>순환을 설계합니다</h2>
+        <h2 class="h2 t-en">We design the cycle<br>of cultivation</h2>
+        <p class="t-ko">컬리버 그룹은 ‘기른다’는 하나의 동사에서 출발했습니다. 새우를 기르고, 물을 되살리고, 껍데기를 소재로 기르고, 작물을 길러 식탁에 올립니다. 각 사업은 서로의 출발점이 됩니다.</p>
+        <p class="t-en">CULIVER Group began with a single verb: to cultivate. We raise shrimp, restore water, grow materials from shells, and bring crops to the table — each business feeding the next.</p>
+      </div>
+      <div class="values reveal" id="valuesList"></div>
+    </div>
+  </section>
+
+  <!-- ══════════ HISTORY (interactive) ══════════ -->
+  <section id="history" class="section bg-card">
+    <div class="wrap">
+      <div class="hist-head reveal">
+        <p class="eyebrow">HISTORY</p>
+        <h2 class="h2 t-ko">순환을 만들어온 길</h2>
+        <h2 class="h2 t-en">The path to the loop</h2>
+      </div>
+      <div class="hist-years reveal" id="histYears"></div>
+      <div class="hist-detail">
+        <div class="hist-big" id="histBig"></div>
+        <div class="hist-text">
+          <h3 id="histTitle"></h3>
+          <p class="t-ko" id="histDescKo"></p>
+          <p class="t-en" id="histDescEn"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ ESG ══════════ -->
+  <section id="esg" class="section tall esg">
+    <div class="esg-glow"></div>
+    <div class="wrap esg-inner">
+      <div class="reveal">
+        <p class="eyebrow on-dark">SUSTAINABILITY</p>
+        <div class="esg-head">
+          <h2 class="h2 t-ko">지속가능성은 사업 그 자체입니다</h2>
+          <h2 class="h2 t-en">Sustainability is the business itself</h2>
+          <p class="sub t-ko">ESG는 컬리버 그룹의 별도 활동이 아니라, 네 사업이 존재하는 이유입니다.</p>
+          <p class="sub t-en">ESG is not a side program — it is why our four businesses exist.</p>
+        </div>
+      </div>
+      <div class="esg-grid reveal" id="esgList"></div>
+    </div>
+  </section>
+
+  <!-- ══════════ NEWSROOM ══════════ -->
+  <section id="news" class="section tall bg-paper">
+    <div class="wrap">
+      <div class="news-head reveal">
+        <div>
+          <p class="eyebrow">NEWSROOM</p>
+          <h2 class="h2 t-ko">컬리버 그룹 소식</h2>
+          <h2 class="h2 t-en">News from the group</h2>
+        </div>
+        <div class="news-filters" id="newsFilters"></div>
+      </div>
+      <div class="news-grid reveal" id="newsList"></div>
+    </div>
+  </section>
+
+  <!-- ══════════ CAREERS ══════════ -->
+  <section id="careers" class="section tall bg-card">
+    <div class="wrap">
+      <div class="careers-head reveal">
+        <div>
+          <p class="eyebrow">CAREERS</p>
+          <h2 class="h2 t-ko">기르는 사람들과<br>함께 자랍니다</h2>
+          <h2 class="h2 t-en">Grow with the growers</h2>
+        </div>
+        <p class="t-ko">컬리버 그룹은 바다와 농장, 실험실과 현장을 잇는 사람들을 찾습니다. 각 계열사의 진행 중인 채용을 확인하세요.</p>
+        <p class="t-en">We look for people who connect the sea and the farm, the lab and the field. See open roles across our affiliates.</p>
+      </div>
+      <div class="roles reveal" id="rolesList"></div>
+    </div>
+  </section>
+
+  <!-- ══════════ CONTACT ══════════ -->
+  <section id="contact" class="section tall contact">
+    <div class="wrap contact-grid">
+      <div class="reveal">
+        <p class="eyebrow on-dark">CONTACT</p>
+        <h2 class="h2 t-ko">함께 만들<br>순환을 제안하세요</h2>
+        <h2 class="h2 t-en">Let's build a loop together</h2>
+        <div class="contact-info">
+          <div class="row"><span class="k">EMAIL</span><span class="v">contact@culiver.co.kr</span></div>
+          <div class="row"><span class="k">TEL</span><span class="v">000-0000-0000</span></div>
+          <div class="row">
+            <span class="k"><span class="t-ko">주소</span><span class="t-en">ADDRESS</span></span>
+            <span class="addr t-ko">본사 주소를 입력하세요 (실제 정보로 교체)</span>
+            <span class="addr t-en">Replace with headquarters address</span>
+          </div>
+        </div>
+      </div>
+      <div class="form-wrap reveal" id="formWrap">
+        <form class="form" id="contactForm">
+          <div class="form-row">
+            <label>
+              <span class="lbl"><span class="t-ko">이름</span><span class="t-en">Name</span></span>
+              <input name="name" placeholder="홍길동">
+            </label>
+            <label>
+              <span class="lbl"><span class="t-ko">회사·소속</span><span class="t-en">Company</span></span>
+              <input name="company" placeholder="컬리버">
+            </label>
+          </div>
+          <label>
+            <span class="lbl"><span class="t-ko">문의 유형</span><span class="t-en">Inquiry type</span></span>
+            <select name="type">
+              <option>사업 제휴</option>
+              <option>투자 · IR</option>
+              <option>제품 · 구매</option>
+              <option>채용</option>
+              <option>기타</option>
+            </select>
+          </label>
+          <label>
+            <span class="lbl"><span class="t-ko">내용</span><span class="t-en">Message</span></span>
+            <textarea name="message" rows="4" placeholder="문의 내용을 입력하세요"></textarea>
+          </label>
+          <button type="submit" class="form-submit"><span class="t-ko">문의 보내기</span><span class="t-en">Send inquiry</span></button>
+        </form>
+        <div class="form-sent" id="formSent">
+          <span class="check">✓</span>
+          <h3 class="t-ko">문의가 접수되었습니다</h3>
+          <h3 class="t-en">Your inquiry has been received</h3>
+          <p class="t-ko">빠른 시일 내에 담당자가 연락드리겠습니다.</p>
+          <p class="t-en">Our team will get back to you shortly.</p>
+          <button class="form-reset" id="formReset"><span class="t-ko">새 문의 작성</span><span class="t-en">New inquiry</span></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ FOOTER ══════════ -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="mark"><span class="m">CULIVER</span><span class="s">GROUP</span></div>
+          <p class="t-ko">바다에서 농장까지, 순환하는 내일을 기릅니다.</p>
+          <p class="t-en">From ocean to farm, we cultivate a circular tomorrow.</p>
+        </div>
+        <div class="footer-cols">
+          <div class="footer-col">
+            <span class="head">FAMILY</span>
+            <a href="culiver-aqua.html">컬리버 <span class="rom">CULIVER</span></a>
+            <a href="amp.html">에이엠피 <span class="rom">AMP</span></a>
+            <a href="cobaltive.html">코발티브 <span class="rom">COBALTIVE</span></a>
+            <a href="susinje-farm.html">수신제팜 <span class="rom">SUSINJE FARM</span></a>
+          </div>
+          <div class="footer-col">
+            <span class="head">GROUP</span>
+            <a href="#about"><span class="t-ko">그룹소개</span><span class="t-en">About</span></a>
+            <a href="#history"><span class="t-ko">연혁</span><span class="t-en">History</span></a>
+            <a href="#esg"><span class="t-ko">지속가능경영</span><span class="t-en">Sustainability</span></a>
+            <a href="#careers"><span class="t-ko">채용</span><span class="t-en">Careers</span></a>
+          </div>
+          <div class="footer-col">
+            <span class="head">CONTACT</span>
+            <a href="#contact"><span class="t-ko">문의하기</span><span class="t-en">Contact</span></a>
+            <span>contact@culiver.co.kr</span>
+            <span>T. 000-0000-0000</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 CULIVER GROUP. All rights reserved.</span>
+        <span class="t-ko">사업자 정보 · 주소는 실제 정보로 교체하세요</span>
+        <span class="t-en">Replace with real business registration &amp; address</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- back to top -->
+  <button class="to-top" id="toTop" aria-label="top">↑</button>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
