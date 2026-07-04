@@ -48,8 +48,15 @@ assets/
 ## 기술
 
 - 순수 HTML / CSS / Vanilla JavaScript (프레임워크·빌드 도구 없음)
+- **콘텐츠는 HTML에 정적으로 포함** — JS는 인터랙션만 담당하므로 JS가 없어도 전체 내용이 보이고 검색엔진에 노출됩니다(점진적 향상)
 - 폰트: Pretendard Variable, Noto Serif KR (CDN)
 - 반응형 (모바일 ~ 데스크톱), `prefers-reduced-motion` 대응
+
+## 배포
+
+`main` 브랜치에 푸시되면 GitHub Actions(`.github/workflows/deploy.yml`)가 자동으로 GitHub Pages에 배포합니다. 별도 빌드 단계 없이 리포지토리 루트를 그대로 게시합니다.
+
+- 공개 URL: `https://ulrim.github.io/implement-culiver-group/`
 
 ## 교체가 필요한 플레이스홀더
 
