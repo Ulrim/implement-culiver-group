@@ -63,6 +63,30 @@ Vercel로 배포합니다. 정적 사이트라 빌드 단계가 없으며 `verce
 
 이후에는 `main` 브랜치에 푸시될 때마다 Vercel이 자동으로 재배포합니다(프리뷰 배포는 다른 브랜치·PR에도 생성).
 
+## 문의 폼 (동적)
+
+문의 폼은 Vercel 서버리스 함수 `api/contact.js`가 처리하며, [Resend](https://resend.com)로 이메일을 발송합니다. 별도 프레임워크 없이 정적 사이트 + 함수 하나로 동작합니다.
+
+**설정 (Vercel → Project → Settings → Environment Variables)**
+
+| 변수 | 필수 | 설명 |
+|------|------|------|
+| `RESEND_API_KEY` | ✅ | Resend 대시보드에서 발급한 API 키 (`re_...`) |
+| `CONTACT_TO_EMAIL` | ✅ | 문의를 수신할 이메일 주소 |
+| `CONTACT_FROM_EMAIL` | 선택 | 발신 주소. 도메인 인증 필요. 미설정 시 테스트용 `onboarding@resend.dev` 사용 |
+
+1. [resend.com](https://resend.com) 가입 → API Key 생성 → `RESEND_API_KEY`에 입력
+2. 수신 주소를 `CONTACT_TO_EMAIL`에 입력
+3. (권장) 회사 도메인을 Resend에 인증한 뒤 `CONTACT_FROM_EMAIL`을 `CULIVER GROUP <noreply@culiver.co.kr>` 형식으로 설정
+4. 환경 변수 저장 후 재배포
+
+**동작 / 보안**
+- 프런트엔드는 `/api/contact`로 JSON POST → 성공 시 접수 화면, 실패 시 오류 메시지 표시
+- 허니팟(`_gotcha`) 필드로 기본 봇 차단, 서버에서 입력 길이 제한·검증
+- 키가 없으면 함수가 안전하게 오류를 반환(메일은 발송되지 않음)
+
+> 스팸이 많아지면 rate limiting(예: Vercel KV/Upstash)이나 캡차(Turnstile) 추가를 권장합니다.
+
 ## 교체가 필요한 플레이스홀더
 
 디자인에 포함된 예시 정보이므로 실제 정보로 교체하세요:

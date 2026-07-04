@@ -478,6 +478,7 @@
       </div>
       <div class="form-wrap reveal" id="formWrap">
         <form class="form" id="contactForm">
+          <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
           <div class="form-row">
             <label>
               <span class="lbl"><span class="t-ko">이름</span><span class="t-en">Name</span></span>
@@ -503,6 +504,7 @@
             <textarea name="message" rows="4" placeholder="문의 내용을 입력하세요"></textarea>
           </label>
           <button type="submit" class="form-submit"><span class="t-ko">문의 보내기</span><span class="t-en">Send inquiry</span></button>
+          <p class="form-error" id="formError" role="alert" hidden></p>
         </form>
         <div class="form-sent" id="formSent">
           <span class="check">✓</span>
