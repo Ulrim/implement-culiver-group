@@ -194,16 +194,64 @@
 
   /* ---------------------------------------------- CONTACT form */
   function setupForm() {
-    var wrap = $('#formWrap'), form = $('#contactForm'), sent = $('#formSent'), reset = $('#formReset');
+    var wrap = $('#formWrap'), form = $('#contactForm'), sent = $('#formSent'),
+        reset = $('#formReset'), submit = $('.form-submit', form), errBox = $('#formError');
     if (!form) return;
+
+    var submitHtml = submit ? submit.innerHTML : '';
+    function setError(msg) {
+      if (!errBox) return;
+      if (msg) { errBox.textContent = msg; errBox.hidden = false; }
+      else { errBox.textContent = ''; errBox.hidden = true; }
+    }
+    function setBusy(busy) {
+      if (!submit) return;
+      submit.disabled = busy;
+      submit.innerHTML = busy
+        ? '<span class="t-ko">보내는 중…</span><span class="t-en">Sending…</span>'
+        : submitHtml;
+    }
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      if (wrap) wrap.classList.add('sent');
-      if (sent) sent.classList.add('show');
+      setError('');
+      var data = {
+        name: form.name.value,
+        company: form.company.value,
+        type: form.type.value,
+        message: form.message.value,
+        _gotcha: form._gotcha ? form._gotcha.value : ''
+      };
+      var lang = document.body.getAttribute('data-lang');
+      setBusy(true);
+      fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      }).then(function (r) {
+        return r.json().catch(function () { return { ok: r.ok }; });
+      }).then(function (res) {
+        if (res && res.ok) {
+          if (wrap) wrap.classList.add('sent');
+          if (sent) sent.classList.add('show');
+        } else {
+          setError((res && res.error) || (lang === 'en'
+            ? 'Failed to send. Please try again.'
+            : '전송에 실패했습니다. 다시 시도해 주세요.'));
+        }
+      }).catch(function () {
+        setError(lang === 'en'
+          ? 'Network error. Please try again.'
+          : '네트워크 오류입니다. 다시 시도해 주세요.');
+      }).then(function () {
+        setBusy(false);
+      });
     });
+
     if (reset) reset.addEventListener('click', function () {
       if (wrap) wrap.classList.remove('sent');
       if (sent) sent.classList.remove('show');
+      setError('');
       form.reset();
     });
   }
