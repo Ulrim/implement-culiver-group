@@ -52,11 +52,16 @@ assets/
 - 폰트: Pretendard Variable, Noto Serif KR (CDN)
 - 반응형 (모바일 ~ 데스크톱), `prefers-reduced-motion` 대응
 
-## 배포
+## 배포 (Vercel)
 
-`main` 브랜치에 푸시되면 GitHub Actions(`.github/workflows/deploy.yml`)가 자동으로 GitHub Pages에 배포합니다. 별도 빌드 단계 없이 리포지토리 루트를 그대로 게시합니다.
+Vercel로 배포합니다. 정적 사이트라 빌드 단계가 없으며 `vercel.json`으로 자산 캐시 헤더만 지정합니다. 비공개 레포도 Vercel 무료(Hobby) 티어에서 배포됩니다.
 
-- 공개 URL: `https://ulrim.github.io/implement-culiver-group/`
+**최초 1회 설정**
+1. [vercel.com](https://vercel.com)에 GitHub 계정으로 로그인
+2. **Add New… → Project → `Ulrim/implement-culiver-group` Import**
+3. Framework Preset은 **Other**(자동 감지), Build/Output 설정은 비워 둠 → **Deploy**
+
+이후에는 `main` 브랜치에 푸시될 때마다 Vercel이 자동으로 재배포합니다(프리뷰 배포는 다른 브랜치·PR에도 생성).
 
 ## 교체가 필요한 플레이스홀더
 
