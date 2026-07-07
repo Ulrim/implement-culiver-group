@@ -232,21 +232,157 @@
     btns.forEach(function (b, i) { b.addEventListener('click', function () { select(i); }); });
   }
 
-  /* ---------------------------------------------- NEWSROOM (filter) */
+  /* ---------------------------------------------- NEWSROOM (dynamic list + filter) */
+  // article text now comes from the admin-managed /api/news store, not
+  // build-time literals, so every field must be escaped before it goes
+  // into innerHTML.
+  function escHtml(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  var BIZ_INFO = {
+    'culiver-aqua.html': { no: '01', nko: '컬리버', nen: 'CULIVER', tko: '스마트 양식', ten: 'SMART AQUACULTURE', ink: '#0E4E78' },
+    'amp.html': { no: '02', nko: '에이엠피', nen: 'AMP', tko: '수처리 솔루션', ten: 'WATER TREATMENT', ink: '#166578' },
+    'cobaltive.html': { no: '03', nko: '코발티브', nen: 'COBALTIVE', tko: '자원순환 소재', ten: 'UPCYCLED MATERIALS', ink: '#6E5D38' },
+    'susinje-farm.html': { no: '04', nko: '수신제팜', nen: 'SUSINJE FARM', tko: '스마트팜 · 유통', ten: 'SMART FARM · DISTRIBUTION', ink: '#3E7C4F' }
+  };
+
+  function newsDateLabel(iso) {
+    return iso && iso.length >= 7 ? iso.slice(0, 7).replace('-', '.') : (iso || '');
+  }
+
+  // color/chipbg/overlay/cover are always server-derived from a fixed
+  // theme enum (see api/_lib/news-store.js THEMES) — never free text —
+  // so they're safe to place directly into a style attribute.
+  function newsCardHtml(n) {
+    var bg = n.photo ? n.overlay + ",url('assets/img/" + escHtml(n.photo) + "')" : n.overlay;
+    return '<a href="news.html?id=' + encodeURIComponent(n.id) + '" class="news-card" data-tag="' + escHtml(n.tagKo) + '">' +
+      '<div class="news-photo" role="img" aria-label="' + escHtml(n.titleKo) + ' 관련 이미지" style="background-image:' + bg + '"></div>' +
+      '<div class="news-body">' +
+      '<div class="news-meta"><span class="news-tag" style="color:' + n.color + ';background:' + n.chipbg + '">' +
+      '<span class="t-ko">' + escHtml(n.tagKo) + '</span><span class="t-en">' + escHtml(n.tagEn) + '</span></span>' +
+      '<span class="news-date">' + escHtml(newsDateLabel(n.date)) + '</span></div>' +
+      '<h3><span class="t-ko">' + escHtml(n.titleKo) + '</span><span class="t-en">' + escHtml(n.titleEn) + '</span></h3>' +
+      '<span class="news-arrow">→</span>' +
+      '</div></a>';
+  }
+
+  function loadNewsInto(container, opts) {
+    if (!container) return;
+    var qs = opts && opts.limit ? '?limit=' + opts.limit : '';
+    fetch('/api/news' + qs).then(function (r) { return r.ok ? r.json() : null; }).then(function (data) {
+      if (!data || !data.ok || !data.items) return; // keep the static seed fallback already in the DOM
+      container.innerHTML = data.items.map(newsCardHtml).join('');
+    }).catch(function () {
+      // offline / KV not configured yet — static seed cards already rendered stay as-is
+    });
+  }
+
   function setupNews() {
-    var cards = $all('#newsList .news-card');
+    var list = $('#newsList');
+    var preview = $('#newsPreview');
     var btns = $all('#newsFilters .news-filter');
+
+    if (list) loadNewsInto(list);
+    if (preview) loadNewsInto(preview, { limit: 3 });
+
     if (!btns.length) return;
     btns.forEach(function (btn) {
       btn.addEventListener('click', function () {
         var key = btn.getAttribute('data-key');
-        cards.forEach(function (c) {
+        $all('#newsList .news-card').forEach(function (c) {
           var show = key === 'all' || c.getAttribute('data-tag') === key;
           c.classList.toggle('hidden', !show);
         });
         btns.forEach(function (b) { b.classList.toggle('active', b === btn); });
       });
     });
+  }
+
+  /* ---------------------------------------------- NEWS ARTICLE (news.html) */
+  function setupArticle() {
+    var root = $('#articleRoot');
+    if (!root) return;
+    var params;
+    try { params = new URLSearchParams(window.location.search); } catch (e) { params = null; }
+    var id = params ? params.get('id') : null;
+    if (!id) { renderArticleError(root); return; }
+
+    fetch('/api/news/' + encodeURIComponent(id)).then(function (r) {
+      if (!r.ok) throw new Error('not found');
+      return r.json();
+    }).then(function (data) {
+      if (!data || !data.ok) throw new Error('bad response');
+      renderArticle(root, data.article, data.prevId, data.nextId);
+    }).catch(function () {
+      renderArticleError(root);
+    });
+  }
+
+  function renderArticleError(root) {
+    root.innerHTML = '<div class="article reveal in-view">' +
+      '<p><span class="t-ko">기사를 찾을 수 없습니다.</span><span class="t-en">Article not found.</span></p>' +
+      '<p><a class="btn btn-primary" href="newsroom.html"><span class="t-ko">뉴스룸으로</span><span class="t-en">Back to Newsroom</span></a></p>' +
+      '</div>';
+  }
+
+  function zipParagraphs(ko, en) {
+    ko = ko || []; en = en || [];
+    var n = Math.max(ko.length, en.length);
+    var out = [];
+    for (var i = 0; i < n; i++) out.push([ko[i] || en[i] || '', en[i] || ko[i] || '']);
+    return out;
+  }
+
+  function aboutCardHtml(bizFile) {
+    var b = bizFile && BIZ_INFO[bizFile];
+    if (b) {
+      return '<a class="about-card" href="' + bizFile + '">' +
+        '<span class="badge" style="background:' + b.ink + '">' + b.no + '</span>' +
+        '<span class="body"><h4><span class="t-ko">' + b.nko + '</span><span class="t-en">' + b.nen + '</span></h4>' +
+        '<p><span class="t-ko">' + b.tko + '</span><span class="t-en">' + b.ten + '</span></p></span></a>';
+    }
+    return '<a class="about-card" href="careers.html">' +
+      '<span class="badge" style="background:#0B2438">👥</span>' +
+      '<span class="body"><h4><span class="t-ko">채용 공고 보기</span><span class="t-en">View open positions</span></h4>' +
+      '<p><span class="t-ko">컬리버 그룹 채용</span><span class="t-en">CULIVER Group careers</span></p></span></a>';
+  }
+
+  function renderArticle(root, n, prevId, nextId) {
+    var bg = n.photo ? n.cover + ",url('assets/img/" + escHtml(n.photo) + "')" : n.cover;
+    var paras = zipParagraphs(n.bodyKo, n.bodyEn).map(function (pair) {
+      return '<p><span class="t-ko">' + escHtml(pair[0]) + '</span><span class="t-en">' + escHtml(pair[1]) + '</span></p>';
+    }).join('\n');
+    var prevLink = prevId
+      ? '<a href="news.html?id=' + encodeURIComponent(prevId) + '">← <span class="t-ko">이전 글</span><span class="t-en">Previous</span></a>'
+      : '<span class="disabled">← <span class="t-ko">이전 글</span><span class="t-en">Previous</span></span>';
+    var nextLink = nextId
+      ? '<a href="news.html?id=' + encodeURIComponent(nextId) + '"><span class="t-ko">다음 글</span><span class="t-en">Next</span> →</a>'
+      : '<span class="disabled"><span class="t-ko">다음 글</span><span class="t-en">Next</span> →</span>';
+
+    root.innerHTML = '<article class="article reveal in-view">' +
+      '<div class="art-meta">' +
+      '<span class="art-tag" style="color:' + n.color + ';background:' + n.chipbg + '">' +
+      '<span class="t-ko">' + escHtml(n.tagKo) + '</span><span class="t-en">' + escHtml(n.tagEn) + '</span></span>' +
+      '<span class="art-date">' + escHtml(newsDateLabel(n.date)) + '</span></div>' +
+      '<h1><span class="t-ko">' + escHtml(n.titleKo) + '</span><span class="t-en">' + escHtml(n.titleEn) + '</span></h1>' +
+      '<div class="art-cover" role="img" aria-label="' + escHtml(n.titleKo) + ' 관련 이미지" style="background-image:' + bg + '"></div>' +
+      paras +
+      aboutCardHtml(n.biz) +
+      '</article>' +
+      '<div class="pager">' + prevLink +
+      '<a href="newsroom.html"><span class="t-ko">목록</span><span class="t-en">List</span></a>' +
+      nextLink + '</div>';
+
+    document.title = n.titleKo + ' — 컬리버 그룹 뉴스룸';
+    var crumb = $('.page-hero .breadcrumb [aria-current="page"]');
+    if (crumb) {
+      var ko = crumb.querySelector('.t-ko'), en = crumb.querySelector('.t-en');
+      if (ko) ko.textContent = n.titleKo;
+      if (en) en.textContent = n.titleEn;
+    }
   }
 
   /* ---------------------------------------------- CONTACT form */
@@ -358,6 +494,7 @@
     setupCycle();
     setupHistory();
     setupNews();
+    setupArticle();
     setupForm();
   }
 

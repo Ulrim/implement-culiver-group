@@ -710,9 +710,14 @@ def biz_bento():
 
 
 def news_cards(limit=None):
+    """Server-rendered seed snapshot used as (a) the no-JS fallback and
+    (b) instant first paint before assets/js/main.js's setupNews() fetches
+    /api/news and replaces this with the live, admin-managed list — so
+    admin edits/deletes/new posts show up for JS users, while no-JS
+    visitors still see a working (if static) newsroom."""
     out = ""
     for i, n in enumerate(NEWS[:limit]):
-        out += f"""        <a href="news-{i+1}.html" class="news-card" data-tag="{n['tagko']}">
+        out += f"""        <a href="news.html?id=news-{i+1}" class="news-card" data-tag="{n['tagko']}">
           <div class="news-photo" role="img" aria-label="{n['title']} 관련 이미지" style="background-image:{n['overlay']},url('assets/img/{n['photo']}')"></div>
           <div class="news-body">
             <div class="news-meta"><span class="news-tag" style="color:{n['color']};background:{n['chipbg']}"><span class="t-ko">{n['tagko']}</span><span class="t-en">{n['tagen']}</span></span><span class="news-date">{n['date']}</span></div>
@@ -762,13 +767,12 @@ TITLES = {
     "business.html": ("사업영역 Business — 컬리버 그룹 CULIVER GROUP", "스마트 양식·수처리·자원순환 소재·스마트팜, 하나의 순환으로 연결된 컬리버 그룹의 네 개 사업."),
     "sustainability.html": ("지속가능경영 Sustainability — 컬리버 그룹 CULIVER GROUP", "ESG는 별도 활동이 아니라 컬리버 그룹 네 사업이 존재하는 이유입니다."),
     "newsroom.html": ("뉴스룸 Newsroom — 컬리버 그룹 CULIVER GROUP", "컬리버 그룹과 계열사의 보도자료·소식·채용 소식을 전합니다."),
+    "news.html": ("뉴스룸 Newsroom — 컬리버 그룹 CULIVER GROUP", "컬리버 그룹과 계열사의 보도자료·소식·채용 소식을 전합니다."),
     "careers.html": ("채용 Careers — 컬리버 그룹 CULIVER GROUP", "바다와 농장, 실험실과 현장을 잇는 사람들을 찾습니다. 인재상·채용 절차·공고·복리후생 안내."),
     "contact.html": ("문의 Contact — 컬리버 그룹 CULIVER GROUP", "사업 제휴, 투자, 제품·구매, 채용 등 컬리버 그룹에 문의하세요."),
 }
 for _c in BIZ:
     TITLES[_c["file"]] = (f"{_c['nko']} {_c['nen']} — 컬리버 그룹 CULIVER GROUP", _c["dko"])
-for _i, _n in enumerate(NEWS, 1):
-    TITLES[f"news-{_i}.html"] = (f"{_n['title']} — 컬리버 그룹 뉴스룸", _n["title"])
 for _r in ROLES:
     TITLES[f"careers-{_r['slug']}.html"] = (f"{_r['role_ko']} ({_r['team_ko']}) 채용 — 컬리버 그룹", f"{_r['team_ko']} {_r['role_ko']} 채용 공고")
 
@@ -779,8 +783,8 @@ home = f"""  <section id="top" class="hero">
       <p class="hero-eyebrow">CULIVER GROUP</p>
       <h1 class="t-ko">바다에서 농장까지,<br>순환하는 내일을 기릅니다</h1>
       <h1 class="t-en">From ocean to farm,<br>we cultivate a circular tomorrow</h1>
-      <p class="hero-lead t-ko">컬리버 그룹은 스마트 양식, 수처리, 자원순환 소재, 스마트팜을 잇는<br>지속가능한 생산 생태계를 만들어 갑니다.</p>
-      <p class="hero-lead t-en">CULIVER Group builds a sustainable production ecosystem spanning smart aquaculture, water treatment, upcycled materials, and smart farming.</p>
+      <p class="hero-lead t-ko">스마트 양식·수처리·자원순환 소재·스마트팜, 4개 계열사를 둔 지주회사입니다.<br>한 사업의 부산물이 다음 사업의 원료가 되는 순환 생산 구조를 만듭니다.</p>
+      <p class="hero-lead t-en">A holding company over four affiliates — smart aquaculture, water treatment, upcycled materials, and smart farming — where one business's byproduct becomes the next one's raw material.</p>
       <div class="hero-cta">
         <a href="business.html" class="btn btn-primary"><span class="t-ko">사업영역 보기</span><span class="t-en">Our Business</span><span>→</span></a>
         <a href="contact.html" class="btn btn-ghost"><span class="t-ko">문의하기</span><span class="t-en">Contact</span></a>
@@ -811,6 +815,18 @@ home = f"""  <section id="top" class="hero">
       <div class="bento-grid reveal">
 {biz_bento()}      </div>
     </div>
+  </section>
+
+  <section id="cycle" class="section tall bg-paper">
+    <div class="wrap">
+      <div class="cycle-head reveal">
+        <p class="eyebrow">THE LOOP</p>
+        <h2 class="h2 t-ko">네 사업이 아니라, 하나의 순환입니다</h2>
+        <h2 class="h2 t-en">Not four businesses — one loop</h2>
+        <p class="sub t-ko">컬리버 그룹이 무엇을 하는 회사인지는 이 순환 하나로 설명됩니다. 노드를 눌러 각 사업이 맡는 역할을 확인하세요.</p>
+        <p class="sub t-en">This loop is the simplest way to understand what CULIVER Group does. Tap a node to see each business's role.</p>
+      </div>
+{CYCLE_BLOCK}    </div>
   </section>
 
   <section class="section tall bg-card">
@@ -852,7 +868,7 @@ home = f"""  <section id="top" class="hero">
         </div>
         <a class="more-link" href="newsroom.html"><span class="t-ko">뉴스룸 전체 보기</span><span class="t-en">All news</span> →</a>
       </div>
-      <div class="news-grid reveal">
+      <div class="news-grid reveal" id="newsPreview">
 {news_cards(3)}      </div>
     </div>
   </section>
@@ -1277,7 +1293,7 @@ for c in BIZ:
         <h2 class="h2 t-en">Related content</h2>
       </div>
       <div class="related-grid reveal">
-        <a class="related-card" href="news-{news_idx}.html">
+        <a class="related-card" href="news.html?id=news-{news_idx}">
           <span class="ic">📰</span>
           <span class="body"><span class="kicker"><span class="t-ko">최근 소식</span><span class="t-en">LATEST NEWS</span></span><span class="title">{related_news['title']}</span></span>
         </a>
@@ -1358,53 +1374,50 @@ for c in BIZ:
     )
     write(c["file"], body, active="business.html")
 
-# ================================================================= NEWS DETAIL PAGES
-for i, n in enumerate(NEWS):
-    idx = i + 1
-    prev_link = f'<a href="news-{idx-1}.html">← <span class="t-ko">이전 글</span><span class="t-en">Previous</span></a>' if idx > 1 else '<span class="disabled">← <span class="t-ko">이전 글</span><span class="t-en">Previous</span></span>'
-    next_link = f'<a href="news-{idx+1}.html"><span class="t-ko">다음 글</span><span class="t-en">Next</span> →</a>' if idx < len(NEWS) else '<span class="disabled"><span class="t-ko">다음 글</span><span class="t-en">Next</span> →</span>'
-    paras = "".join(f'          <p>{p}</p>\n' for p in n["body"])
-
-    if n["biz"]:
-        c = BIZ_BY_FILE[n["biz"]]
-        about_card = f"""      <a class="about-card" href="{c['file']}">
-        <span class="badge" style="background:{c['ink']}">{c['no']}</span>
-        <span class="body"><h4><span class="t-ko">{c['nko']}</span><span class="t-en">{c['nen']}</span></h4><p><span class="t-ko">{c['tko']}</span><span class="t-en">{c['ten']}</span></p></span>
-      </a>
-"""
-    else:
-        about_card = """      <a class="about-card" href="careers.html">
-        <span class="badge" style="background:#0B2438">👥</span>
-        <span class="body"><h4><span class="t-ko">채용 공고 보기</span><span class="t-en">View open positions</span></h4><p><span class="t-ko">컬리버 그룹 채용</span><span class="t-en">CULIVER Group careers</span></p></span>
-      </a>
-"""
-
-    body = (
-        page_hero("NEWSROOM", "컬리버 그룹 소식", "News from the group",
-                  "보도자료·소식·채용 소식을 전합니다.", "Press, updates, and hiring news.",
-                  [("newsroom.html", "뉴스룸", "Newsroom"), (None, n["title"], n["titleen"])],
-                  heading_level="h2")
-        + f"""  <section class="section bg-paper">
+# ================================================================= NEWS ARTICLE (dynamic)
+# One template, not one file per article: content is admin-managed (see
+# api/news, admin.html), so assets/js/main.js's setupArticle() fetches
+# /api/news/<id> (read from the ?id= query string) and fills #articleRoot
+# client-side. The 6 build-time seed articles get thin redirect stubs
+# below so any old news-N.html links/bookmarks keep working.
+news_detail = (
+    page_hero("NEWSROOM", "컬리버 그룹 소식", "News from the group",
+              "보도자료·소식·채용 소식을 전합니다.", "Press, updates, and hiring news.",
+              [("newsroom.html", "뉴스룸", "Newsroom"), (None, "불러오는 중...", "Loading…")],
+              heading_level="h2")
+    + """  <section class="section bg-paper">
     <div class="wrap">
-      <article class="article reveal">
-        <div class="art-meta">
-          <span class="art-tag" style="color:{n['color']};background:{n['chipbg']}"><span class="t-ko">{n['tagko']}</span><span class="t-en">{n['tagen']}</span></span>
-          <span class="art-date">{n['date']}</span>
-        </div>
-        <h1><span class="t-ko">{n['title']}</span><span class="t-en">{n['titleen']}</span></h1>
-        <div class="art-cover" role="img" aria-label="{n['title']} 관련 이미지" style="background-image:{n['cover']},url('assets/img/{n['photo']}')"></div>
-{paras}          <p class="note"><span class="t-ko">※ 본 기사는 예시 콘텐츠입니다. 실제 보도자료·소식으로 교체하세요.</span><span class="t-en">※ Example content — replace with a real article.</span></p>
-{about_card}      </article>
-      <div class="pager">
-        {prev_link}
-        <a href="newsroom.html"><span class="t-ko">목록</span><span class="t-en">List</span></a>
-        {next_link}
+      <div id="articleRoot">
+        <p><span class="t-ko">불러오는 중…</span><span class="t-en">Loading…</span></p>
       </div>
+      <noscript>
+        <p><span class="t-ko">이 페이지는 JavaScript가 필요합니다. 목록은 </span><span class="t-en">This page needs JavaScript. See the </span><a href="newsroom.html"><span class="t-ko">뉴스룸</span><span class="t-en">Newsroom</span></a><span class="t-ko">에서 확인하세요.</span><span class="t-en"> list instead.</span></p>
+      </noscript>
     </div>
   </section>
 """
-    )
-    write(f"news-{idx}.html", body, active="newsroom.html")
+)
+write("news.html", news_detail, active="newsroom.html")
+
+for i, n in enumerate(NEWS):
+    idx = i + 1
+    stub_id = f"news-{idx}"
+    stub_html = f"""<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="refresh" content="0; url=news.html?id={stub_id}">
+<link rel="canonical" href="news.html?id={stub_id}">
+<title>{n['title']}</title>
+</head>
+<body>
+<p><a href="news.html?id={stub_id}">{n['title']}</a></p>
+</body>
+</html>
+"""
+    with open(os.path.join(ROOT, f"{stub_id}.html"), "w", encoding="utf-8") as f:
+        f.write(stub_html)
+    print("wrote", f"{stub_id}.html", f"({len(stub_html)} bytes, redirect stub)")
 
 # ================================================================= ROLE DETAIL PAGES
 for r in ROLES:

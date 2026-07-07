@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>뉴스룸 관리자 — 컬리버 그룹</title>
+  <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body>
+  <div class="admin-topbar">
+    <div class="brand">CULIVER GROUP<small>뉴스룸 관리자</small></div>
+    <button class="btn btn-ghost hidden" id="logoutBtn">로그아웃</button>
+  </div>
+
+  <div class="admin-wrap">
+    <!-- login -->
+    <div class="login-card" id="loginView">
+      <h1>관리자 로그인</h1>
+      <p>뉴스룸 게시글을 작성·수정·삭제하려면 로그인하세요.</p>
+      <form id="loginForm">
+        <div class="field">
+          <label for="loginPassword">비밀번호</label>
+          <input type="password" id="loginPassword" name="password" autocomplete="current-password" required>
+        </div>
+        <button type="submit" class="btn btn-primary" id="loginSubmit" style="width:100%">로그인</button>
+        <p class="error-msg" id="loginError"></p>
+      </form>
+    </div>
+
+    <!-- dashboard: list -->
+    <div id="listView" class="hidden">
+      <div class="admin-head-row">
+        <h2>뉴스룸 게시글</h2>
+        <button class="btn btn-primary" id="newBtn">+ 새 글 작성</button>
+      </div>
+      <table class="news-table" id="newsTable">
+        <thead>
+          <tr><th>날짜</th><th>테마</th><th>태그</th><th>제목</th><th>상태</th><th></th></tr>
+        </thead>
+        <tbody id="newsTableBody"></tbody>
+      </table>
+      <p class="empty-state hidden" id="emptyState">아직 작성된 글이 없습니다.</p>
+    </div>
+
+    <!-- dashboard: editor -->
+    <div id="editorView" class="hidden">
+      <div class="admin-head-row">
+        <h2 id="editorTitle">새 글 작성</h2>
+        <button class="btn btn-line" id="cancelEditBtn">← 목록으로</button>
+      </div>
+      <div class="editor-card">
+        <form id="editorForm">
+          <input type="hidden" id="fId">
+          <div class="editor-grid">
+            <div class="field">
+              <label for="fTheme">테마 (색상·연결 계열사)</label>
+              <select id="fTheme" required>
+                <option value="culiver">컬리버 CULIVER</option>
+                <option value="amp">에이엠피 AMP</option>
+                <option value="cobaltive">코발티브 COBALTIVE</option>
+                <option value="susinje">수신제팜 SUSINJE FARM</option>
+                <option value="group">컬리버 그룹 (공지)</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="fTag">분류</label>
+              <select id="fTag" required>
+                <option value="press">보도자료 Press</option>
+                <option value="updates">소식 Updates</option>
+                <option value="hiring">채용 Hiring</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="fDate">날짜</label>
+              <input type="date" id="fDate" required>
+            </div>
+            <div class="field">
+              <label for="fPhoto">이미지 URL (선택)</label>
+              <input type="text" id="fPhoto" placeholder="예: news-1.jpg 또는 https://...">
+              <p class="hint">assets/img/ 안의 파일명이거나 외부 이미지 URL. 비워두면 색상 그라디언트만 표시됩니다.</p>
+            </div>
+            <div class="field full">
+              <label for="fTitleKo">제목 (한글)</label>
+              <input type="text" id="fTitleKo" required>
+            </div>
+            <div class="field full">
+              <label for="fTitleEn">제목 (영문)</label>
+              <input type="text" id="fTitleEn" required>
+            </div>
+            <div class="field full">
+              <label for="fBodyKo">본문 (한글) — 한 줄 = 한 문단</label>
+              <textarea id="fBodyKo" required></textarea>
+            </div>
+            <div class="field full">
+              <label for="fBodyEn">본문 (영문) — 한 줄 = 한 문단</label>
+              <textarea id="fBodyEn" required></textarea>
+              <p class="hint">한글/영문 문단 줄 수를 맞춰주세요. 다르면 부족한 언어 쪽은 있는 문장으로 채워집니다.</p>
+            </div>
+            <div class="field full checkbox-field">
+              <input type="checkbox" id="fPublished" checked>
+              <label for="fPublished" style="margin:0">게시함 (체크 해제 시 임시저장 — 관리자만 미리보기 가능)</label>
+            </div>
+          </div>
+          <div class="editor-actions">
+            <button type="submit" class="btn btn-primary" id="saveBtn">저장</button>
+            <button type="button" class="btn btn-danger hidden" id="deleteBtn">삭제</button>
+          </div>
+          <p class="error-msg" id="editorError"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="assets/js/admin.js"></script>
+</body>
+</html>

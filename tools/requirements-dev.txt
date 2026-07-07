@@ -1,0 +1,5 @@
+# Only needed to regenerate content/copy-editing-sheet.xlsx
+# (tools/generate_copy_sheet.py). The site itself and tools/build_pages.py
+# need nothing beyond the Python standard library.
+beautifulsoup4
+openpyxl

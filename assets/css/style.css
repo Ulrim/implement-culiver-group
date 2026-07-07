@@ -137,16 +137,28 @@ input:focus, textarea:focus, select:focus {
 .gnb nav { display: flex; align-items: center; gap: clamp(12px,2vw,34px); font-size: 14.5px; font-weight: 600; letter-spacing: .01em; }
 .nav-links { display: flex; align-items: center; gap: clamp(16px,2vw,28px); }
 .nav-links a {
+  position: relative;
   color: inherit; text-decoration: none; padding: 6px 0;
   border-bottom: 2px solid transparent; opacity: .72;
   transition: opacity .25s, border-color .25s;
 }
+.nav-links a::after {
+  content: ""; position: absolute; left: 0; right: 100%; bottom: -2px; height: 2px;
+  background: currentColor; transition: right .3s cubic-bezier(.16,.8,.3,1);
+}
+.nav-links a:hover::after { right: 0; }
 .nav-links a:hover { opacity: 1; }
 .nav-links a.current { opacity: 1; border-bottom-color: currentColor; }
 
 /* desktop "Business" dropdown — mirrors the mobile FAMILY quick-links */
 .nav-item-drop { position: relative; }
-.nav-drop-toggle { display: inline-flex; align-items: center; gap: 5px; background: none; border: none; padding: 6px 0; font: inherit; color: inherit; opacity: .72; cursor: pointer; border-bottom: 2px solid transparent; transition: opacity .25s; }
+.nav-drop-toggle { position: relative; display: inline-flex; align-items: center; gap: 5px; background: none; border: none; padding: 6px 0; font: inherit; color: inherit; opacity: .72; cursor: pointer; border-bottom: 2px solid transparent; transition: opacity .25s; }
+.nav-drop-toggle::after {
+  content: ""; position: absolute; left: 0; right: 100%; bottom: -2px; height: 2px;
+  background: currentColor; transition: right .3s cubic-bezier(.16,.8,.3,1);
+}
+.nav-item-drop:hover .nav-drop-toggle::after,
+.nav-item-drop:focus-within .nav-drop-toggle::after { right: 0; }
 .nav-drop-toggle .car { font-size: 9px; transition: transform .2s; }
 .nav-item-drop:hover .nav-drop-toggle,
 .nav-item-drop:focus-within .nav-drop-toggle,
@@ -235,6 +247,7 @@ input:focus, textarea:focus, select:focus {
 .hero-lead.t-en { line-height: 1.7; }
 .hero-cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 52px; animation: heroRise .9s .36s ease both; }
 .btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-size: 15px; border-radius: 99px; padding: 16px 30px; transition: background .25s, border-color .25s, color .25s, transform .2s; }
+.btn:active { transform: scale(.96); }
 .btn-primary { background: var(--paper); color: var(--ink); font-weight: 700; }
 .btn-primary:hover { background: var(--aqua); transform: translateY(-2px); }
 .btn-ghost { background: transparent; color: var(--paper); border: 1px solid rgba(246,244,239,.4); font-weight: 600; }
@@ -274,7 +287,8 @@ input:focus, textarea:focus, select:focus {
   transition: transform .3s, box-shadow .3s;
 }
 .biz-card:hover { transform: scale(1.015); box-shadow: 0 24px 48px -20px rgba(14,78,120,.32); }
-.biz-media { position: relative; display: flex; align-items: flex-end; padding: 28px; min-height: 240px; background-size: cover; background-position: center; }
+.biz-media { position: relative; display: flex; align-items: flex-end; padding: 28px; min-height: 240px; background-size: cover; background-position: center; transition: transform .5s cubic-bezier(.16,.8,.3,1); }
+.biz-card:hover .biz-media { transform: scale(1.05); }
 .biz-media.img-right { order: 1; }
 .biz-no { position: absolute; top: 24px; left: 28px; font-size: 13px; font-weight: 800; letter-spacing: .2em; color: rgba(246,244,239,.85); }
 .biz-body { display: flex; flex-direction: column; justify-content: center; gap: 16px; padding: clamp(28px,4.5vw,52px) clamp(24px,4.5vw,56px); }
@@ -300,7 +314,8 @@ input:focus, textarea:focus, select:focus {
   color: var(--paper); text-decoration: none;
   transition: transform .3s, box-shadow .3s;
 }
-.bento-bg { position: absolute; inset: 0; z-index: 0; background-size: cover; background-position: center; }
+.bento-bg { position: absolute; inset: 0; z-index: 0; background-size: cover; background-position: center; transition: transform .5s cubic-bezier(.16,.8,.3,1); }
+.bento-tile:hover .bento-bg { transform: scale(1.08); }
 .bento-tile::before {
   content: ""; position: absolute; inset: 0; z-index: 1;
   background: linear-gradient(180deg, transparent 40%, rgba(8,20,32,.55) 100%);
@@ -413,7 +428,8 @@ input:focus, textarea:focus, select:focus {
 .news-card { display: flex; flex-direction: column; background: var(--card); border: 1px solid rgba(11,30,45,.08); border-radius: var(--radius-card); overflow: hidden; text-decoration: none; color: var(--ink); transition: transform .3s, box-shadow .3s; }
 .news-card:hover { transform: scale(1.015); box-shadow: 0 20px 40px -18px rgba(11,30,45,.25); }
 .news-card.hidden { display: none; }
-.news-photo { height: 186px; background-size: cover; background-position: center; }
+.news-photo { height: 186px; background-size: cover; background-position: center; transition: transform .5s cubic-bezier(.16,.8,.3,1); }
+.news-card:hover .news-photo { transform: scale(1.06); }
 .news-body { display: flex; flex-direction: column; gap: 12px; padding: 26px 28px 30px; flex: 1; }
 .news-meta { display: flex; align-items: center; gap: 10px; }
 .news-tag { font-size: 11.5px; font-weight: 800; letter-spacing: .1em; border-radius: 99px; padding: 5px 12px; }
