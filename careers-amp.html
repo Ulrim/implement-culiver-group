@@ -13,7 +13,8 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body data-lang="ko" class="subpage" data-page="careers.html">
+<body data-lang="ko" class="subpage">
+<script>(function(){try{var l=localStorage.getItem('cg_lang');if(l==='en'){document.body.setAttribute('data-lang','en');document.documentElement.setAttribute('lang','en');}}catch(e){}})();</script>
 
   <div class="progress" id="progress"></div>
 
@@ -25,14 +26,22 @@
     <nav>
       <div class="nav-links" id="navLinks">
         <a href="about.html" class=""><span class="t-ko">그룹소개</span><span class="t-en">About</span></a>
-        <a href="business.html" class=""><span class="t-ko">사업영역</span><span class="t-en">Business</span></a>
+        <div class="nav-item-drop">
+          <a href="business.html" class="nav-drop-toggle " aria-haspopup="true" aria-expanded="false"><span class="t-ko">사업영역</span><span class="t-en">Business</span><span class="car" aria-hidden="true">▾</span></a>
+          <div class="nav-drop-panel">
+          <a href="culiver-aqua.html"><span class="nm t-ko">컬리버</span><span class="en t-en">CULIVER</span></a>
+          <a href="amp.html"><span class="nm t-ko">에이엠피</span><span class="en t-en">AMP</span></a>
+          <a href="cobaltive.html"><span class="nm t-ko">코발티브</span><span class="en t-en">COBALTIVE</span></a>
+          <a href="susinje-farm.html"><span class="nm t-ko">수신제팜</span><span class="en t-en">SUSINJE FARM</span></a>
+          </div>
+        </div>
         <a href="sustainability.html" class=""><span class="t-ko">지속가능경영</span><span class="t-en">Sustainability</span></a>
         <a href="newsroom.html" class=""><span class="t-ko">뉴스룸</span><span class="t-en">Newsroom</span></a>
         <a href="careers.html" class="current"><span class="t-ko">채용</span><span class="t-en">Careers</span></a>
         <a href="contact.html" class=""><span class="t-ko">문의</span><span class="t-en">Contact</span></a>
       </div>
       <button class="lang-toggle" id="langToggle">EN</button>
-      <button class="hamburger" id="hamburger" aria-label="menu">☰</button>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">☰</button>
     </nav>
   </header>
   <div class="mobile-menu" id="mobileMenu">
@@ -47,19 +56,20 @@
     <div class="mm-family">
       <span class="mm-family-label">FAMILY</span>
       <div class="mm-family-row">
-        <a href="culiver-aqua.html">컬리버</a>
-        <a href="amp.html">에이엠피</a>
-        <a href="cobaltive.html">코발티브</a>
-        <a href="susinje-farm.html">수신제팜</a>
+        <a href="culiver-aqua.html"><span class="t-ko">컬리버</span><span class="t-en">CULIVER</span></a>
+        <a href="amp.html"><span class="t-ko">에이엠피</span><span class="t-en">AMP</span></a>
+        <a href="cobaltive.html"><span class="t-ko">코발티브</span><span class="t-en">COBALTIVE</span></a>
+        <a href="susinje-farm.html"><span class="t-ko">수신제팜</span><span class="t-en">SUSINJE FARM</span></a>
       </div>
     </div>
   </div>
   <section class="page-hero">
     <div class="inner">
-      <nav class="breadcrumb"><a href="index.html"><span class="t-ko">홈</span><span class="t-en">Home</span></a><span class="sep">/</span><a href="careers.html"><span class="t-ko">채용</span><span class="t-en">Careers</span></a><span class="sep">/</span><span class="t-ko">수처리 공정 엔지니어</span><span class="t-en">수처리 공정 엔지니어</span></nav>
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html"><span class="t-ko">홈</span><span class="t-en">Home</span></a><span class="sep">/</span><a href="careers.html"><span class="t-ko">채용</span><span class="t-en">Careers</span></a><span class="sep">/</span><span aria-current="page"><span class="t-ko">수처리 공정 엔지니어</span><span class="t-en">Water Treatment Process Engineer</span></span></nav>
       <p class="eyebrow">CAREERS</p>
-      <h1><span class="t-ko">수처리 공정 엔지니어</span><span class="t-en">수처리 공정 엔지니어</span></h1>
-      <p class="sub"><span class="t-ko">에이엠피 · 경기 안산 · 정규직</span><span class="t-en">에이엠피 · 경기 안산 · 정규직</span></p>
+      <h1><span class="t-ko">수처리 공정 엔지니어</span><span class="t-en">Water Treatment Process Engineer</span></h1>
+      <p class="sub"><span class="t-ko">에이엠피 · 경기 안산 · 정규직</span><span class="t-en">AMP · Ansan, Gyeonggi · Full-time</span></p>
+      
     </div>
   </section>
   <section class="section bg-paper">
@@ -67,7 +77,7 @@
       <div class="job-grid">
         <div class="reveal">
           <div class="job-block">
-            <h3><span class="t-ko">담당 업무</span><span class="t-en">Responsibilities</span></h3>
+            <h2><span class="t-ko">담당 업무</span><span class="t-en">Responsibilities</span></h2>
             <ul class="ticks">
             <li><span class="t-ko">순환여과(RAS) 설비 설계·운영</span><span class="t-en">Design and operate recirculating (RAS) systems</span></li>
             <li><span class="t-ko">미생물 제제 적용 및 수질 최적화</span><span class="t-en">Apply microbial agents and optimize water quality</span></li>
@@ -75,7 +85,7 @@
             </ul>
           </div>
           <div class="job-block">
-            <h3><span class="t-ko">자격 요건</span><span class="t-en">Requirements</span></h3>
+            <h2><span class="t-ko">자격 요건</span><span class="t-en">Requirements</span></h2>
             <ul class="ticks">
             <li><span class="t-ko">환경·화공·기계 관련 전공</span><span class="t-en">Degree in environmental/chemical/mechanical engineering</span></li>
             <li><span class="t-ko">수처리 공정에 대한 이해</span><span class="t-en">Understanding of water-treatment processes</span></li>
@@ -83,19 +93,19 @@
             </ul>
           </div>
           <div class="job-block">
-            <h3><span class="t-ko">우대 사항</span><span class="t-en">Nice to have</span></h3>
+            <h2><span class="t-ko">우대 사항</span><span class="t-en">Nice to have</span></h2>
             <ul class="ticks">
             <li><span class="t-ko">RAS·폐수처리 경험</span><span class="t-en">RAS or wastewater experience</span></li>
             <li><span class="t-ko">수질환경기사 등 자격증</span><span class="t-en">Water-quality engineering license</span></li>
             </ul>
           </div>
-          <p class="note" style="font-size:13px;color:rgba(11,30,45,.45)"><span class="t-ko">※ 본 공고는 예시입니다. 실제 채용 내용으로 교체하세요.</span><span class="t-en">※ Example posting — replace with a real job description.</span></p>
+          <p class="note" style="font-size:13px;color:var(--text-3)"><span class="t-ko">※ 본 공고는 예시입니다. 실제 채용 내용으로 교체하세요.</span><span class="t-en">※ Example posting — replace with a real job description.</span></p>
         </div>
         <aside class="job-aside reveal">
-          <div class="meta"><span class="k">TEAM</span><span class="v" style="color:#1E7F96">에이엠피</span></div>
-          <div class="meta"><span class="k">LOCATION</span><span class="v">경기 안산</span></div>
-          <div class="meta"><span class="k">TYPE</span><span class="v">정규직</span></div>
-          <a class="btn btn-primary" href="contact.html"><span class="t-ko">지원 · 문의</span><span class="t-en">Apply</span> →</a>
+          <div class="meta"><span class="k">TEAM</span><a class="v" href="amp.html" style="color:#166578"><span class="t-ko">에이엠피</span><span class="t-en">AMP</span></a></div>
+          <div class="meta"><span class="k">LOCATION</span><span class="v"><span class="t-ko">경기 안산</span><span class="t-en">Ansan, Gyeonggi</span></span></div>
+          <div class="meta"><span class="k">TYPE</span><span class="v"><span class="t-ko">정규직</span><span class="t-en">Full-time</span></span></div>
+          <a class="btn btn-primary" href="contact.html?type=%EC%B1%84%EC%9A%A9&role_ko=%EC%97%90%EC%9D%B4%EC%97%A0%ED%94%BC+%EC%88%98%EC%B2%98%EB%A6%AC+%EA%B3%B5%EC%A0%95+%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4&role_en=AMP+Water+Treatment+Process+Engineer"><span class="t-ko">지원 · 문의</span><span class="t-en">Apply</span> →</a>
           <a class="more-link" href="careers.html" style="margin-top:0"><span class="t-ko">← 전체 공고</span><span class="t-en">← All roles</span></a>
         </aside>
       </div>
@@ -127,8 +137,8 @@
           <div class="footer-col">
             <span class="head">CONTACT</span>
             <a href="contact.html"><span class="t-ko">문의하기</span><span class="t-en">Contact</span></a>
-            <span>contact@culiver.co.kr</span>
-            <span>T. 000-0000-0000</span>
+            <span class="plain">contact@culiver.co.kr</span>
+            <span class="plain">T. 000-0000-0000</span>
           </div>
         </div>
       </div>

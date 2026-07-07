@@ -1,56 +1,114 @@
 /* ============================================================
    CULIVER GROUP — interactions (progressive enhancement)
-   All content lives in index.html; this script only wires up
-   behavior: language toggle, mobile menu, scroll progress /
-   active-nav, number counters, scroll reveal, the interactive
-   loop diagram, history timeline, news filter, and the form.
+   All content lives in the generated HTML; this script only wires
+   up behavior: language toggle (persisted), mobile menu + desktop
+   dropdown, scroll progress / back-to-top, number counters, scroll
+   reveal, the interactive loop diagram, history timeline, news
+   filter, and the contact form (incl. query-param prefill).
    ============================================================ */
 (function () {
   'use strict';
 
+  var LANG_KEY = 'cg_lang';
+
   function $(sel, ctx) { return (ctx || document).querySelector(sel); }
   function $all(sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); }
 
-  /* ---------------------------------------------- LANGUAGE */
+  /* ---------------------------------------------- LANGUAGE (persisted)
+     Everything else on the site toggles language via CSS ([data-lang]
+     hiding .t-ko/.t-en spans), but native <input placeholder> and
+     <option> text are plain attributes/strings a CSS rule can't reach
+     into — this applies those from data-ph-ko/-en and data-ko/-en. */
+  function applyFormI18n() {
+    var lang = document.body.getAttribute('data-lang') === 'en' ? 'en' : 'ko';
+    $all('[data-ph-ko]').forEach(function (el) {
+      var ph = el.getAttribute(lang === 'en' ? 'data-ph-en' : 'data-ph-ko');
+      if (ph) el.placeholder = ph;
+    });
+    $all('option[data-ko]').forEach(function (opt) {
+      var label = opt.getAttribute(lang === 'en' ? 'data-en' : 'data-ko');
+      if (label) opt.textContent = label;
+    });
+  }
+
   function setupLang() {
     var btn = $('#langToggle');
+    var current = document.body.getAttribute('data-lang') === 'en' ? 'en' : 'ko';
+    if (btn) btn.textContent = current === 'ko' ? 'EN' : 'KR';
+    applyFormI18n();
     if (!btn) return;
     btn.addEventListener('click', function () {
       var next = document.body.getAttribute('data-lang') === 'ko' ? 'en' : 'ko';
       document.body.setAttribute('data-lang', next);
       document.documentElement.setAttribute('lang', next);
       btn.textContent = next === 'ko' ? 'EN' : 'KR';
+      applyFormI18n();
+      try { localStorage.setItem(LANG_KEY, next); } catch (e) { /* storage unavailable */ }
     });
   }
 
-  /* ---------------------------------------------- MOBILE MENU */
+  /* ---------------------------------------------- MOBILE MENU + desktop dropdown */
   function setupMenu() {
     var menu = $('#mobileMenu'), ham = $('#hamburger'), gnb = $('#gnb');
-    if (!menu || !ham) return;
-    function close() {
-      menu.classList.remove('open');
-      ham.textContent = '☰';
-      if (gnb) gnb.classList.remove('menu-open');
-      document.body.style.overflow = '';
+    if (menu && ham) {
+      function close() {
+        menu.classList.remove('open');
+        ham.textContent = '☰';
+        ham.setAttribute('aria-expanded', 'false');
+        ham.setAttribute('aria-label', 'Open menu');
+        if (gnb) gnb.classList.remove('menu-open');
+        document.body.style.overflow = '';
+      }
+      ham.addEventListener('click', function () {
+        var open = menu.classList.toggle('open');
+        ham.textContent = open ? '✕' : '☰';
+        ham.setAttribute('aria-expanded', open ? 'true' : 'false');
+        ham.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        if (gnb) gnb.classList.toggle('menu-open', open);
+        document.body.style.overflow = open ? 'hidden' : '';
+      });
+      $all('a[href^="#"], a[href$=".html"]', menu).forEach(function (a) { a.addEventListener('click', close); });
+      window.matchMedia('(max-width: 900px)').addEventListener('change', function (e) {
+        if (!e.matches) close();
+      });
     }
-    ham.addEventListener('click', function () {
-      var open = menu.classList.toggle('open');
-      ham.textContent = open ? '✕' : '☰';
-      if (gnb) gnb.classList.toggle('menu-open', open);
-      document.body.style.overflow = open ? 'hidden' : '';
-    });
-    $all('a[href^="#"]', menu).forEach(function (a) { a.addEventListener('click', close); });
-    window.matchMedia('(max-width: 900px)').addEventListener('change', function (e) {
-      if (!e.matches) close();
-    });
+
+    // desktop "Business" dropdown: the panel's visibility is CSS-driven
+    // (:hover/:focus-within on .nav-item-drop); this only keeps the
+    // aria-expanded state in sync, since a mismatched ARIA state is worse
+    // than none for screen-reader users.
+    var drop = $('.nav-item-drop');
+    var toggle = drop && $('.nav-drop-toggle', drop);
+    if (drop && toggle) {
+      function closeDrop() { toggle.setAttribute('aria-expanded', 'false'); }
+      document.addEventListener('click', function (e) {
+        if (!drop.contains(e.target)) closeDrop();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && drop.contains(document.activeElement)) {
+          // focus the toggle first (its own focusin would otherwise re-open
+          // the panel if this ran after closeDrop), then close last so the
+          // final aria-expanded is false and the CSS force-close rule applies
+          toggle.focus();
+          closeDrop();
+        }
+      });
+      drop.addEventListener('focusin', function () { toggle.setAttribute('aria-expanded', 'true'); });
+      drop.addEventListener('focusout', function () {
+        // let the newly-focused element settle before checking — on the
+        // same tick, document.activeElement can still be the old one
+        setTimeout(function () {
+          if (!drop.contains(document.activeElement)) closeDrop();
+        }, 0);
+      });
+      drop.addEventListener('mouseenter', function () { toggle.setAttribute('aria-expanded', 'true'); });
+      drop.addEventListener('mouseleave', closeDrop);
+    }
   }
 
-  /* ---------------------------------------------- SCROLL: progress, nav, back-to-top */
+  /* ---------------------------------------------- SCROLL: progress + back-to-top */
   function setupScroll() {
     var progress = $('#progress'), gnb = $('#gnb'), toTop = $('#toTop'), menu = $('#mobileMenu');
-    var secIds = ['top', 'business', 'cycle', 'about', 'history', 'esg', 'news', 'careers', 'contact'];
-    var sections = secIds.map(function (id) { return document.getElementById(id); });
-    var navLinks = $all('.nav-links a');
     var doc = document.documentElement;
 
     function onScroll() {
@@ -59,14 +117,6 @@
       if (progress) progress.style.width = Math.min(100, Math.max(0, (sc / max) * 100)) + '%';
       if (gnb) gnb.classList.toggle('scrolled', sc > 40 && !(menu && menu.classList.contains('open')));
       if (toTop) toTop.classList.toggle('show', sc > 600);
-      var active = 'top';
-      for (var i = 0; i < sections.length; i++) {
-        var e = sections[i];
-        if (e && e.offsetTop - 140 <= sc) active = secIds[i];
-      }
-      navLinks.forEach(function (a) {
-        a.classList.toggle('active', a.getAttribute('data-sec') === active);
-      });
     }
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
@@ -117,7 +167,13 @@
     co.observe(counters[0]);
   }
 
-  /* ---------------------------------------------- CYCLE (interactive) */
+  /* ---------------------------------------------- CYCLE (interactive)
+     Base/inactive appearance (background: var(--card), color: var(--ink),
+     box-shadow) is already supplied by the .node CSS rule, and the
+     active look (color: var(--paper), scale) by .node.active — so this
+     only needs to set the per-node DYNAMIC accent color inline, and
+     clear it (empty string) when inactive so the CSS default re-applies.
+     No hex literals duplicated here. */
   function setupCycle() {
     var nodes = $all('#ring .node');
     if (!nodes.length) return;
@@ -129,9 +185,8 @@
       nodes.forEach(function (n, k) {
         var on = k === idx, color = n.getAttribute('data-color');
         n.classList.toggle('active', on);
-        n.style.background = on ? color : '#FDFCFA';
-        n.style.color = on ? '#F6F4EF' : '#0B1E2D';
-        n.style.boxShadow = on ? '0 16px 34px -12px ' + color : '0 8px 20px -12px rgba(11,30,45,.35)';
+        n.style.background = on ? color : '';
+        n.style.boxShadow = on ? '0 16px 34px -12px ' + color : '';
       });
       var d = nodes[idx], c = d.getAttribute('data-color');
       if (ringRole) { ringRole.textContent = d.getAttribute('data-role'); ringRole.style.color = c; }
@@ -143,8 +198,8 @@
       if (dEn) dEn.textContent = d.getAttribute('data-den');
       dots.forEach(function (dot, k) {
         var on = k === idx;
-        dot.style.width = on ? '30px' : '8px';
-        dot.style.background = on ? nodes[k].getAttribute('data-color') : 'rgba(11,30,45,.18)';
+        dot.classList.toggle('active', on);
+        dot.style.background = on ? nodes[k].getAttribute('data-color') : '';
       });
     }
     nodes.forEach(function (n, i) {
@@ -153,7 +208,10 @@
     });
   }
 
-  /* ---------------------------------------------- HISTORY (interactive) */
+  /* ---------------------------------------------- HISTORY (interactive)
+     Same pattern as setupCycle(): base/active TEXT color comes from the
+     .hist-year / .hist-year.active CSS rules; only the per-year dynamic
+     background/border accent is set inline, cleared on deselect. */
   function setupHistory() {
     var btns = $all('#histYears .hist-year');
     if (!btns.length) return;
@@ -162,9 +220,8 @@
       btns.forEach(function (b, k) {
         var on = k === idx, color = b.getAttribute('data-color');
         b.classList.toggle('active', on);
-        b.style.background = on ? color : 'transparent';
-        b.style.borderColor = on ? color : 'rgba(11,30,45,.2)';
-        b.style.color = on ? '#F6F4EF' : 'rgba(11,30,45,.6)';
+        b.style.background = on ? color : '';
+        b.style.borderColor = on ? color : '';
       });
       var y = btns[idx];
       if (big) { big.textContent = y.textContent; big.style.color = y.getAttribute('data-color'); }
@@ -193,10 +250,43 @@
   }
 
   /* ---------------------------------------------- CONTACT form */
+  var MESSAGE_MAX = 4000;
+
+  function prefillFromQuery(form) {
+    var params;
+    try { params = new URLSearchParams(window.location.search); } catch (e) { return; }
+    var type = params.get('type');
+    // job postings pass both role_ko and role_en (the static site can't
+    // know the visitor's language at build time); show whichever matches
+    // the language currently active (persisted via localStorage, already
+    // applied to <body> before this script runs).
+    var lang = document.body.getAttribute('data-lang') === 'en' ? 'en' : 'ko';
+    var role = params.get('role_' + lang) || params.get('role_ko') || params.get('role_en');
+    if (type && form.type) {
+      var opts = Array.prototype.slice.call(form.type.options).map(function (o) { return o.value; });
+      if (opts.indexOf(type) !== -1) form.type.value = type;
+    }
+    if (role && form.message && !form.message.value) {
+      var label = lang === 'en' ? 'Role: ' : '지원 직무: ';
+      form.message.value = '[' + label + role + ']\n\n';
+    }
+  }
+
   function setupForm() {
     var wrap = $('#formWrap'), form = $('#contactForm'), sent = $('#formSent'),
-        reset = $('#formReset'), submit = $('.form-submit', form), errBox = $('#formError');
+        reset = $('#formReset'), submit = $('.form-submit', form), errBox = $('#formError'),
+        counter = $('#msgCounter');
     if (!form) return;
+
+    prefillFromQuery(form);
+
+    if (counter && form.message) {
+      var updateCounter = function () {
+        counter.textContent = form.message.value.length + ' / ' + MESSAGE_MAX;
+      };
+      form.message.addEventListener('input', updateCounter);
+      updateCounter();
+    }
 
     var submitHtml = submit ? submit.innerHTML : '';
     function setError(msg) {
@@ -217,6 +307,7 @@
       setError('');
       var data = {
         name: form.name.value,
+        email: form.email ? form.email.value : '',
         company: form.company.value,
         type: form.type.value,
         message: form.message.value,
@@ -253,6 +344,7 @@
       if (sent) sent.classList.remove('show');
       setError('');
       form.reset();
+      if (counter) counter.textContent = '0 / ' + MESSAGE_MAX;
     });
   }
 

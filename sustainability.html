@@ -13,7 +13,8 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body data-lang="ko" class="subpage" data-page="sustainability.html">
+<body data-lang="ko" class="subpage">
+<script>(function(){try{var l=localStorage.getItem('cg_lang');if(l==='en'){document.body.setAttribute('data-lang','en');document.documentElement.setAttribute('lang','en');}}catch(e){}})();</script>
 
   <div class="progress" id="progress"></div>
 
@@ -25,14 +26,22 @@
     <nav>
       <div class="nav-links" id="navLinks">
         <a href="about.html" class=""><span class="t-ko">그룹소개</span><span class="t-en">About</span></a>
-        <a href="business.html" class=""><span class="t-ko">사업영역</span><span class="t-en">Business</span></a>
+        <div class="nav-item-drop">
+          <a href="business.html" class="nav-drop-toggle " aria-haspopup="true" aria-expanded="false"><span class="t-ko">사업영역</span><span class="t-en">Business</span><span class="car" aria-hidden="true">▾</span></a>
+          <div class="nav-drop-panel">
+          <a href="culiver-aqua.html"><span class="nm t-ko">컬리버</span><span class="en t-en">CULIVER</span></a>
+          <a href="amp.html"><span class="nm t-ko">에이엠피</span><span class="en t-en">AMP</span></a>
+          <a href="cobaltive.html"><span class="nm t-ko">코발티브</span><span class="en t-en">COBALTIVE</span></a>
+          <a href="susinje-farm.html"><span class="nm t-ko">수신제팜</span><span class="en t-en">SUSINJE FARM</span></a>
+          </div>
+        </div>
         <a href="sustainability.html" class="current"><span class="t-ko">지속가능경영</span><span class="t-en">Sustainability</span></a>
         <a href="newsroom.html" class=""><span class="t-ko">뉴스룸</span><span class="t-en">Newsroom</span></a>
         <a href="careers.html" class=""><span class="t-ko">채용</span><span class="t-en">Careers</span></a>
         <a href="contact.html" class=""><span class="t-ko">문의</span><span class="t-en">Contact</span></a>
       </div>
       <button class="lang-toggle" id="langToggle">EN</button>
-      <button class="hamburger" id="hamburger" aria-label="menu">☰</button>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">☰</button>
     </nav>
   </header>
   <div class="mobile-menu" id="mobileMenu">
@@ -47,19 +56,20 @@
     <div class="mm-family">
       <span class="mm-family-label">FAMILY</span>
       <div class="mm-family-row">
-        <a href="culiver-aqua.html">컬리버</a>
-        <a href="amp.html">에이엠피</a>
-        <a href="cobaltive.html">코발티브</a>
-        <a href="susinje-farm.html">수신제팜</a>
+        <a href="culiver-aqua.html"><span class="t-ko">컬리버</span><span class="t-en">CULIVER</span></a>
+        <a href="amp.html"><span class="t-ko">에이엠피</span><span class="t-en">AMP</span></a>
+        <a href="cobaltive.html"><span class="t-ko">코발티브</span><span class="t-en">COBALTIVE</span></a>
+        <a href="susinje-farm.html"><span class="t-ko">수신제팜</span><span class="t-en">SUSINJE FARM</span></a>
       </div>
     </div>
   </div>
   <section class="page-hero">
     <div class="inner">
-      <nav class="breadcrumb"><a href="index.html"><span class="t-ko">홈</span><span class="t-en">Home</span></a><span class="sep">/</span><a href="sustainability.html"><span class="t-ko">지속가능경영</span><span class="t-en">Sustainability</span></a></nav>
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html"><span class="t-ko">홈</span><span class="t-en">Home</span></a><span class="sep">/</span><span aria-current="page"><span class="t-ko">지속가능경영</span><span class="t-en">Sustainability</span></span></nav>
       <p class="eyebrow">SUSTAINABILITY</p>
       <h1><span class="t-ko">지속가능성은 사업 그 자체입니다</span><span class="t-en">Sustainability is the business itself</span></h1>
       <p class="sub"><span class="t-ko">ESG는 컬리버 그룹의 별도 활동이 아니라, 네 사업이 존재하는 이유입니다.</span><span class="t-en">ESG is not a side program — it is why our four businesses exist.</span></p>
+      
     </div>
   </section>
   <section class="section esg">
@@ -103,13 +113,13 @@
         <p class="eyebrow">IMPACT</p>
         <h2 class="h2 t-ko">성과 지표</h2>
         <h2 class="h2 t-en">Our impact</h2>
-        <p class="lead"><span class="t-ko">아래 수치는 예시입니다 — 실제 성과 데이터로 교체하세요.</span><span class="t-en">The figures below are examples — replace with real performance data.</span></p>
+        <p class="lead"><span class="t-ko">‘예시’로 표기된 수치는 실제 성과 데이터로 교체하세요.</span><span class="t-en">Figures marked “예시 / example” should be replaced with real performance data.</span></p>
       </div>
-      <div class="metrics reveal">
-        <div class="metric"><span class="v" style="color:#0E4E78">100%</span><span class="l"><span class="t-ko">무항생제 양식</span><span class="t-en">Antibiotic-free</span></span></div>
-        <div class="metric"><span class="v" style="color:#1E7F96">예시</span><span class="l"><span class="t-ko">양식수 재이용률</span><span class="t-en">Water reused</span></span><span class="note"><span class="t-ko">실제 수치로 교체</span><span class="t-en">replace</span></span></div>
-        <div class="metric"><span class="v" style="color:#8E7A5C">예시</span><span class="l"><span class="t-ko">재활용 굴패각(톤)</span><span class="t-en">Shells recycled</span></span><span class="note"><span class="t-ko">실제 수치로 교체</span><span class="t-en">replace</span></span></div>
-        <div class="metric"><span class="v" style="color:#3E7C4F">예시</span><span class="l"><span class="t-ko">지역 일자리</span><span class="t-en">Local jobs</span></span><span class="note"><span class="t-ko">실제 수치로 교체</span><span class="t-en">replace</span></span></div>
+      <div class="metrics bento-metrics reveal">
+        <div class="metric"><span class="v" style="color:#0E4E78"><span data-count="100">0</span>%</span><span class="l"><span class="t-ko">무항생제 양식</span><span class="t-en">Antibiotic-free</span></span></div>
+        <div class="metric"><span class="v" style="color:#166578"><span class="t-ko">예시</span><span class="t-en">example</span></span><span class="l"><span class="t-ko">양식수 재이용률</span><span class="t-en">Water reused</span></span><span class="note"><span class="t-ko">실제 수치로 교체</span><span class="t-en">replace</span></span></div>
+        <div class="metric"><span class="v" style="color:#6E5D38"><span class="t-ko">예시</span><span class="t-en">example</span></span><span class="l"><span class="t-ko">재활용 굴패각(톤)</span><span class="t-en">Shells recycled</span></span><span class="note"><span class="t-ko">실제 수치로 교체</span><span class="t-en">replace</span></span></div>
+        <div class="metric"><span class="v" style="color:#3E7C4F"><span class="t-ko">예시</span><span class="t-en">example</span></span><span class="l"><span class="t-ko">지역 일자리</span><span class="t-en">Local jobs</span></span><span class="note"><span class="t-ko">실제 수치로 교체</span><span class="t-en">replace</span></span></div>
       </div>
     </div>
   </section>
@@ -136,10 +146,10 @@
         <p class="eyebrow">REPORTS</p>
         <h2 class="h2 t-ko">지속가능경영 자료</h2>
         <h2 class="h2 t-en">Reports &amp; resources</h2>
-        <p class="lead"><span class="t-ko">지속가능경영 보고서를 준비 중입니다. 실제 파일로 링크를 교체하세요.</span><span class="t-en">A sustainability report is in preparation — replace the links with real files.</span></p>
+        <p class="lead"><span class="t-ko">지속가능경영 보고서를 준비 중입니다. 실제 파일로 링크를 교체하세요.</span><span class="t-en">A sustainability report is in preparation — replace with a real file.</span></p>
       </div>
       <div class="report-row reveal">
-        <a class="btn-outline" href="#" onclick="return false"><span class="t-ko">📄 지속가능경영 보고서 (준비 중)</span><span class="t-en">📄 Sustainability report (soon)</span></a>
+        <span class="btn-outline is-disabled" aria-disabled="true"><span class="t-ko">📄 지속가능경영 보고서 (준비 중)</span><span class="t-en">📄 Sustainability report (soon)</span></span>
         <a class="btn-outline" href="contact.html"><span class="t-ko">문의하기</span><span class="t-en">Contact us</span> →</a>
       </div>
     </div>
@@ -170,8 +180,8 @@
           <div class="footer-col">
             <span class="head">CONTACT</span>
             <a href="contact.html"><span class="t-ko">문의하기</span><span class="t-en">Contact</span></a>
-            <span>contact@culiver.co.kr</span>
-            <span>T. 000-0000-0000</span>
+            <span class="plain">contact@culiver.co.kr</span>
+            <span class="plain">T. 000-0000-0000</span>
           </div>
         </div>
       </div>
