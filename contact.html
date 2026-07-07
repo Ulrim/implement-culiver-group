@@ -29,10 +29,10 @@
         <div class="nav-item-drop">
           <a href="business.html" class="nav-drop-toggle " aria-haspopup="true" aria-expanded="false"><span class="t-ko">사업영역</span><span class="t-en">Business</span><span class="car" aria-hidden="true">▾</span></a>
           <div class="nav-drop-panel">
-          <a href="culiver-aqua.html"><span class="nm">컬리버</span><span class="en">CULIVER</span></a>
-          <a href="amp.html"><span class="nm">에이엠피</span><span class="en">AMP</span></a>
-          <a href="cobaltive.html"><span class="nm">코발티브</span><span class="en">COBALTIVE</span></a>
-          <a href="susinje-farm.html"><span class="nm">수신제팜</span><span class="en">SUSINJE FARM</span></a>
+          <a href="culiver-aqua.html"><span class="nm t-ko">컬리버</span><span class="en t-en">CULIVER</span></a>
+          <a href="amp.html"><span class="nm t-ko">에이엠피</span><span class="en t-en">AMP</span></a>
+          <a href="cobaltive.html"><span class="nm t-ko">코발티브</span><span class="en t-en">COBALTIVE</span></a>
+          <a href="susinje-farm.html"><span class="nm t-ko">수신제팜</span><span class="en t-en">SUSINJE FARM</span></a>
           </div>
         </div>
         <a href="sustainability.html" class=""><span class="t-ko">지속가능경영</span><span class="t-en">Sustainability</span></a>
@@ -56,10 +56,10 @@
     <div class="mm-family">
       <span class="mm-family-label">FAMILY</span>
       <div class="mm-family-row">
-        <a href="culiver-aqua.html">컬리버</a>
-        <a href="amp.html">에이엠피</a>
-        <a href="cobaltive.html">코발티브</a>
-        <a href="susinje-farm.html">수신제팜</a>
+        <a href="culiver-aqua.html"><span class="t-ko">컬리버</span><span class="t-en">CULIVER</span></a>
+        <a href="amp.html"><span class="t-ko">에이엠피</span><span class="t-en">AMP</span></a>
+        <a href="cobaltive.html"><span class="t-ko">코발티브</span><span class="t-en">COBALTIVE</span></a>
+        <a href="susinje-farm.html"><span class="t-ko">수신제팜</span><span class="t-en">SUSINJE FARM</span></a>
       </div>
     </div>
   </div>
@@ -94,7 +94,7 @@
           <div class="form-row">
             <label>
               <span class="lbl"><span class="t-ko">이름</span><span class="t-en">Name</span></span>
-              <input name="name" placeholder="홍길동" required autocomplete="name">
+              <input name="name" placeholder="홍길동" data-ph-ko="홍길동" data-ph-en="e.g. John Doe" required autocomplete="name">
             </label>
             <label>
               <span class="lbl"><span class="t-ko">이메일</span><span class="t-en">Email</span></span>
@@ -104,16 +104,19 @@
           <div class="form-row">
             <label>
               <span class="lbl"><span class="t-ko">회사·소속</span><span class="t-en">Company</span></span>
-              <input name="company" placeholder="컬리버" autocomplete="organization">
+              <input name="company" placeholder="컬리버" data-ph-ko="컬리버" data-ph-en="e.g. CULIVER" autocomplete="organization">
             </label>
             <label>
               <span class="lbl"><span class="t-ko">문의 유형</span><span class="t-en">Inquiry type</span></span>
+              <!-- native <option> can't hold t-ko/t-en spans; value stays the
+                   fixed Korean string (matched elsewhere, e.g. prefillFromQuery),
+                   main.js swaps the displayed label from data-ko/data-en -->
               <select name="type">
-                <option>사업 제휴</option>
-                <option>투자 · IR</option>
-                <option>제품 · 구매</option>
-                <option>채용</option>
-                <option>기타</option>
+                <option value="사업 제휴" data-ko="사업 제휴" data-en="Business partnership">사업 제휴</option>
+                <option value="투자 · IR" data-ko="투자 · IR" data-en="Investment · IR">투자 · IR</option>
+                <option value="제품 · 구매" data-ko="제품 · 구매" data-en="Product · Purchase">제품 · 구매</option>
+                <option value="채용" data-ko="채용" data-en="Careers">채용</option>
+                <option value="기타" data-ko="기타" data-en="Other">기타</option>
               </select>
             </label>
           </div>
@@ -122,7 +125,7 @@
               <span class="lbl"><span class="t-ko">내용</span><span class="t-en">Message</span></span>
               <span class="counter" id="msgCounter">0 / 4000</span>
             </span>
-            <textarea name="message" rows="4" maxlength="4000" placeholder="문의 내용을 입력하세요" required></textarea>
+            <textarea name="message" rows="4" maxlength="4000" placeholder="문의 내용을 입력하세요" data-ph-ko="문의 내용을 입력하세요" data-ph-en="Enter your message" required></textarea>
           </label>
           <button type="submit" class="form-submit"><span class="t-ko">문의 보내기</span><span class="t-en">Send inquiry</span></button>
           <p class="form-error" id="formError" role="alert" hidden></p>

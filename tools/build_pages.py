@@ -20,6 +20,7 @@ CULIVER (#0E4E78) and SUSINJE (#3E7C4F) already clear 4.5:1, so their ink
 equals their canonical color; AMP/teal (#1E7F96, ~4.2:1) and COBALTIVE
 (#8E7A5C, ~3.75:1) do not, so their ink is darkened (#166578 / #6E5D38).
 """
+import html
 import os
 import urllib.parse
 
@@ -81,7 +82,7 @@ def header(active):
         if href == "business.html":
             cur = "current" if href == active else ""
             fam_links = "".join(
-                f'          <a href="{fh}"><span class="nm">{fko}</span><span class="en">{fen}</span></a>\n'
+                f'          <a href="{fh}"><span class="nm t-ko">{fko}</span><span class="en t-en">{fen}</span></a>\n'
                 for fh, fko, fen in FAMILY
             )
             links += (
@@ -124,7 +125,10 @@ def mobile_menu():
             f'      <a href="{href}"><span class="mm-no">{i:02d}</span>'
             f'<span class="mm-label"><span class="t-ko">{ko}</span><span class="t-en">{en}</span></span></a>\n'
         )
-    fam = "".join(f'        <a href="{fh}">{fko}</a>\n' for fh, fko, fen in FAMILY)
+    fam = "".join(
+        f'        <a href="{fh}"><span class="t-ko">{fko}</span><span class="t-en">{fen}</span></a>\n'
+        for fh, fko, fen in FAMILY
+    )
     return (
         '  <div class="mobile-menu" id="mobileMenu">\n'
         "    <nav>\n" + items + "    </nav>\n"
@@ -212,13 +216,25 @@ def page_hero(eyebrow, title_ko, title_en, sub_ko, sub_en, crumbs, bg=None, head
 """
 
 
+def metric_value(v):
+    """Wrap the literal placeholder-metric marker in t-ko/t-en; real values
+    (numbers, "RAS", "Farm→Table", etc.) are already language-neutral."""
+    if v == "예시":
+        return '<span class="t-ko">예시</span><span class="t-en">example</span>'
+    return v
+
+
 def linkify_first(paragraphs, term, href):
-    """Wrap the first occurrence of `term` (across the paragraph list) in a link."""
+    """Wrap the first occurrence of `term` (across the paragraph list) in a link.
+    term/href are always build-time literals here, never external/user input,
+    but the inserted markup is still escaped as defense in depth."""
     done = False
     out = []
+    safe_term = html.escape(term)
+    safe_href = html.escape(href, quote=True)
     for p in paragraphs:
         if not done and term in p:
-            p = p.replace(term, f'<a href="{href}">{term}</a>', 1)
+            p = p.replace(term, f'<a href="{safe_href}">{safe_term}</a>', 1)
             done = True
         out.append(p)
     return out
@@ -304,33 +320,39 @@ AFFILIATE_LINKS = {
 
 NEWS = [
     dict(tagko="보도자료", tagen="Press", date="2026.06", title="컬리버, BFT 기반 흰다리새우 스마트 양식장 2호기 준공",
+         titleen="CULIVER completes second BFT-based smart shrimp farm",
          overlay="linear-gradient(150deg,rgba(14,78,120,.32),rgba(10,44,70,.55))", cover="linear-gradient(150deg,rgba(14,78,120,.5),rgba(10,44,70,.7))",
          photo="news-1.jpg", color="#0E4E78", chipbg="rgba(14,78,120,.08)", biz="culiver-aqua.html",
          body=["컬리버가 BFT(바이오플락) 기반 흰다리새우 스마트 양식장 2호기를 준공했습니다. 이번 2호기는 데이터 기반 사육 관제 시스템을 전면 적용해 연중 안정 생산 역량을 한층 강화했습니다.",
                "육상 순환 양식 방식으로 항생제 없이 균일한 품질의 새우를 생산하며, 사육수는 계열사 에이엠피의 수처리 공정과 연계해 순환·재사용됩니다.",
                "컬리버 그룹은 이번 증설을 계기로 스마트 양식 생산 규모를 지속 확대해 나갈 계획입니다."]),
     dict(tagko="소식", tagen="Updates", date="2026.05", title="코발티브, 굴패각 업사이클 소재 친환경 인증 획득",
+         titleen="COBALTIVE earns eco-certification for upcycled oyster-shell materials",
          overlay="linear-gradient(150deg,rgba(142,122,92,.3),rgba(94,79,58,.55))", cover="linear-gradient(150deg,rgba(142,122,92,.5),rgba(94,79,58,.7))",
          photo="news-2.jpg", color="#6E5D38", chipbg="rgba(142,122,92,.12)", biz="cobaltive.html",
          body=["코발티브가 굴 패각을 업사이클한 친환경 소재로 인증을 획득했습니다. 버려지던 패각을 자원으로 되살려 폐기물과 배출을 구조적으로 줄이는 성과를 인정받았습니다.",
                "코발티브는 패각 정제·가공을 통해 탄산칼슘 기반 기능성 소재 ‘숨쉘’과 생활 제품 ‘셸픽’을 선보이고 있습니다.",
                "앞으로도 자원순환 소재 라인업을 확대해 나갈 예정입니다."]),
     dict(tagko="소식", tagen="Updates", date="2026.04", title="수신제팜, 데이터 기반 수경재배 채소 정기유통 시작",
+         titleen="SUSINJE FARM launches subscription delivery for hydroponic vegetables",
          overlay="linear-gradient(150deg,rgba(62,124,79,.3),rgba(36,82,50,.55))", cover="linear-gradient(150deg,rgba(62,124,79,.5),rgba(36,82,50,.7))",
          photo="news-3.jpg", color="#3E7C4F", chipbg="rgba(62,124,79,.1)", biz="susinje-farm.html",
          body=["수신제팜이 데이터 기반 수경재배로 기른 채소의 정기유통을 시작했습니다. 스마트팜 환경제어로 균일한 품질을 유지하며, 산지에서 식탁까지 신선하게 배송합니다.",
                "순환수를 활용한 재배로 자원 효율을 높였으며, 가정과 기업 고객을 대상으로 정기배송 서비스를 운영합니다."]),
     dict(tagko="보도자료", tagen="Press", date="2026.03", title="에이엠피, 산업용수 순환여과 플랜트 신규 수주",
+         titleen="AMP wins new industrial water recirculation plant contract",
          overlay="linear-gradient(150deg,rgba(30,127,150,.3),rgba(15,74,92,.55))", cover="linear-gradient(150deg,rgba(30,127,150,.5),rgba(15,74,92,.7))",
          photo="news-4.jpg", color="#166578", chipbg="rgba(30,127,150,.09)", biz="amp.html",
          body=["에이엠피가 산업용수 순환여과 플랜트를 신규 수주했습니다. 순환여과(RAS)와 미생물 제제 기술을 결합해 용수 재이용률을 높이는 맞춤형 설비를 공급합니다.",
                "에이엠피는 양식 수처리에서 축적한 기술을 산업 현장으로 확장하며 수처리 사업 영역을 넓혀가고 있습니다."]),
     dict(tagko="채용", tagen="Hiring", date="2026.02", title="컬리버 그룹 2026 상반기 신입·경력 공개채용 시작",
+         titleen="CULIVER Group opens 2026 first-half hiring",
          overlay="linear-gradient(150deg,rgba(11,36,56,.34),rgba(8,24,38,.6))", cover="linear-gradient(150deg,rgba(11,36,56,.55),rgba(8,24,38,.75))",
          photo="news-5.jpg", color="#0B2438", chipbg="rgba(11,36,56,.08)", biz=None,
          body=["컬리버 그룹이 2026년 상반기 신입·경력 공개채용을 시작합니다. 양식 생산, 수처리 엔지니어링, 소재 R&D, 스마트팜 재배 등 계열사 전 직무에서 인재를 모집합니다.",
                "자세한 직무 내용과 지원 방법은 채용 페이지에서 확인하실 수 있습니다."]),
     dict(tagko="소식", tagen="Updates", date="2026.01", title="수신제팜 수경재배 채소, 대형 유통사 입점 확정",
+         titleen="SUSINJE FARM's hydroponic vegetables land major retail placement",
          overlay="linear-gradient(150deg,rgba(62,124,79,.3),rgba(36,82,50,.55))", cover="linear-gradient(150deg,rgba(62,124,79,.5),rgba(36,82,50,.7))",
          photo="news-6.jpg", color="#3E7C4F", chipbg="rgba(62,124,79,.1)", biz="susinje-farm.html",
          body=["수신제팜의 수경재배 채소가 대형 유통사 입점을 확정했습니다. 데이터 기반 재배로 균일한 품질을 확보한 점이 좋은 평가를 받았습니다.",
@@ -583,7 +605,7 @@ FORM_BLOCK = """      <div class="form-wrap reveal" id="formWrap">
           <div class="form-row">
             <label>
               <span class="lbl"><span class="t-ko">이름</span><span class="t-en">Name</span></span>
-              <input name="name" placeholder="홍길동" required autocomplete="name">
+              <input name="name" placeholder="홍길동" data-ph-ko="홍길동" data-ph-en="e.g. John Doe" required autocomplete="name">
             </label>
             <label>
               <span class="lbl"><span class="t-ko">이메일</span><span class="t-en">Email</span></span>
@@ -593,16 +615,19 @@ FORM_BLOCK = """      <div class="form-wrap reveal" id="formWrap">
           <div class="form-row">
             <label>
               <span class="lbl"><span class="t-ko">회사·소속</span><span class="t-en">Company</span></span>
-              <input name="company" placeholder="컬리버" autocomplete="organization">
+              <input name="company" placeholder="컬리버" data-ph-ko="컬리버" data-ph-en="e.g. CULIVER" autocomplete="organization">
             </label>
             <label>
               <span class="lbl"><span class="t-ko">문의 유형</span><span class="t-en">Inquiry type</span></span>
+              <!-- native <option> can't hold t-ko/t-en spans; value stays the
+                   fixed Korean string (matched elsewhere, e.g. prefillFromQuery),
+                   main.js swaps the displayed label from data-ko/data-en -->
               <select name="type">
-                <option>사업 제휴</option>
-                <option>투자 · IR</option>
-                <option>제품 · 구매</option>
-                <option>채용</option>
-                <option>기타</option>
+                <option value="사업 제휴" data-ko="사업 제휴" data-en="Business partnership">사업 제휴</option>
+                <option value="투자 · IR" data-ko="투자 · IR" data-en="Investment · IR">투자 · IR</option>
+                <option value="제품 · 구매" data-ko="제품 · 구매" data-en="Product · Purchase">제품 · 구매</option>
+                <option value="채용" data-ko="채용" data-en="Careers">채용</option>
+                <option value="기타" data-ko="기타" data-en="Other">기타</option>
               </select>
             </label>
           </div>
@@ -611,7 +636,7 @@ FORM_BLOCK = """      <div class="form-wrap reveal" id="formWrap">
               <span class="lbl"><span class="t-ko">내용</span><span class="t-en">Message</span></span>
               <span class="counter" id="msgCounter">0 / 4000</span>
             </span>
-            <textarea name="message" rows="4" maxlength="4000" placeholder="문의 내용을 입력하세요" required></textarea>
+            <textarea name="message" rows="4" maxlength="4000" placeholder="문의 내용을 입력하세요" data-ph-ko="문의 내용을 입력하세요" data-ph-en="Enter your message" required></textarea>
           </label>
           <button type="submit" class="form-submit"><span class="t-ko">문의 보내기</span><span class="t-en">Send inquiry</span></button>
           <p class="form-error" id="formError" role="alert" hidden></p>
@@ -670,7 +695,12 @@ def biz_bento():
     out = ""
     for i, c in enumerate(BIZ):
         large = " bento-lg" if i == 0 else ""
-        out += f"""        <a href="{c['file']}" class="bento-tile{large}" role="img" aria-label="{c['nko']} {c['tko']} 이미지" style="background-image:{c['overlay']},url('assets/img/{c['img']}')">
+        # role="img" sits on a decorative inner layer, not the <a> itself,
+        # so the tile keeps its native "link" role/name from its own
+        # visible text (bento-tag/bento-name) instead of being replaced
+        # by a single Korean-only aria-label.
+        out += f"""        <a href="{c['file']}" class="bento-tile{large}">
+          <span class="bento-bg" role="img" aria-label="{c['nko']} {c['tko']} 이미지" style="background-image:{c['overlay']},url('assets/img/{c['img']}')"></span>
           <span class="bento-no">{c['no']}</span>
           <p class="bento-tag"><span class="t-ko">{c['tko']}</span><span class="t-en">{c['ten']}</span></p>
           <h3 class="bento-name"><span class="t-ko">{c['nko']}</span><span class="t-en">{c['nen']}</span><span class="rom t-ko">{c['nen']}</span></h3>
@@ -685,8 +715,8 @@ def news_cards(limit=None):
         out += f"""        <a href="news-{i+1}.html" class="news-card" data-tag="{n['tagko']}">
           <div class="news-photo" role="img" aria-label="{n['title']} 관련 이미지" style="background-image:{n['overlay']},url('assets/img/{n['photo']}')"></div>
           <div class="news-body">
-            <div class="news-meta"><span class="news-tag" style="color:{n['color']};background:{n['chipbg']}">{n['tagko']}</span><span class="news-date">{n['date']}</span></div>
-            <h3>{n['title']}</h3>
+            <div class="news-meta"><span class="news-tag" style="color:{n['color']};background:{n['chipbg']}"><span class="t-ko">{n['tagko']}</span><span class="t-en">{n['tagen']}</span></span><span class="news-date">{n['date']}</span></div>
+            <h3><span class="t-ko">{n['title']}</span><span class="t-en">{n['titleen']}</span></h3>
             <span class="news-arrow">→</span>
           </div>
         </a>
@@ -1032,9 +1062,9 @@ sustain = (
       </div>
       <div class="metrics bento-metrics reveal">
         <div class="metric"><span class="v" style="color:#0E4E78"><span data-count="100">0</span>%</span><span class="l"><span class="t-ko">무항생제 양식</span><span class="t-en">Antibiotic-free</span></span></div>
-        <div class="metric"><span class="v" style="color:#166578">예시</span><span class="l"><span class="t-ko">양식수 재이용률</span><span class="t-en">Water reused</span></span><span class="note"><span class="t-ko">실제 수치로 교체</span><span class="t-en">replace</span></span></div>
-        <div class="metric"><span class="v" style="color:#6E5D38">예시</span><span class="l"><span class="t-ko">재활용 굴패각(톤)</span><span class="t-en">Shells recycled</span></span><span class="note"><span class="t-ko">실제 수치로 교체</span><span class="t-en">replace</span></span></div>
-        <div class="metric"><span class="v" style="color:#3E7C4F">예시</span><span class="l"><span class="t-ko">지역 일자리</span><span class="t-en">Local jobs</span></span><span class="note"><span class="t-ko">실제 수치로 교체</span><span class="t-en">replace</span></span></div>
+        <div class="metric"><span class="v" style="color:#166578"><span class="t-ko">예시</span><span class="t-en">example</span></span><span class="l"><span class="t-ko">양식수 재이용률</span><span class="t-en">Water reused</span></span><span class="note"><span class="t-ko">실제 수치로 교체</span><span class="t-en">replace</span></span></div>
+        <div class="metric"><span class="v" style="color:#6E5D38"><span class="t-ko">예시</span><span class="t-en">example</span></span><span class="l"><span class="t-ko">재활용 굴패각(톤)</span><span class="t-en">Shells recycled</span></span><span class="note"><span class="t-ko">실제 수치로 교체</span><span class="t-en">replace</span></span></div>
+        <div class="metric"><span class="v" style="color:#3E7C4F"><span class="t-ko">예시</span><span class="t-en">example</span></span><span class="l"><span class="t-ko">지역 일자리</span><span class="t-en">Local jobs</span></span><span class="note"><span class="t-ko">실제 수치로 교체</span><span class="t-en">replace</span></span></div>
       </div>
     </div>
   </section>
@@ -1233,7 +1263,7 @@ for c in BIZ:
         </div>
 """ for (pko, pen, dko, den) in c["products"])
     mets = "".join(
-        f"""        <div class="metric"><span class="v" style="color:{c['ink']}">{v}</span><span class="l"><span class="t-ko">{lko}</span><span class="t-en">{len_}</span></span></div>
+        f"""        <div class="metric"><span class="v" style="color:{c['ink']}">{metric_value(v)}</span><span class="l"><span class="t-ko">{lko}</span><span class="t-en">{len_}</span></span></div>
 """ for (v, lko, len_) in c["metrics"])
 
     news_idx, careers_slug = AFFILIATE_LINKS[c["file"]]
@@ -1352,16 +1382,16 @@ for i, n in enumerate(NEWS):
     body = (
         page_hero("NEWSROOM", "컬리버 그룹 소식", "News from the group",
                   "보도자료·소식·채용 소식을 전합니다.", "Press, updates, and hiring news.",
-                  [("newsroom.html", "뉴스룸", "Newsroom"), (None, n["title"], n["title"])],
+                  [("newsroom.html", "뉴스룸", "Newsroom"), (None, n["title"], n["titleen"])],
                   heading_level="h2")
         + f"""  <section class="section bg-paper">
     <div class="wrap">
       <article class="article reveal">
         <div class="art-meta">
-          <span class="art-tag" style="color:{n['color']};background:{n['chipbg']}">{n['tagko']}</span>
+          <span class="art-tag" style="color:{n['color']};background:{n['chipbg']}"><span class="t-ko">{n['tagko']}</span><span class="t-en">{n['tagen']}</span></span>
           <span class="art-date">{n['date']}</span>
         </div>
-        <h1>{n['title']}</h1>
+        <h1><span class="t-ko">{n['title']}</span><span class="t-en">{n['titleen']}</span></h1>
         <div class="art-cover" role="img" aria-label="{n['title']} 관련 이미지" style="background-image:{n['cover']},url('assets/img/{n['photo']}')"></div>
 {paras}          <p class="note"><span class="t-ko">※ 본 기사는 예시 콘텐츠입니다. 실제 보도자료·소식으로 교체하세요.</span><span class="t-en">※ Example content — replace with a real article.</span></p>
 {about_card}      </article>
@@ -1381,7 +1411,14 @@ for r in ROLES:
     duties = "".join(f'            <li><span class="t-ko">{ko}</span><span class="t-en">{en}</span></li>\n' for ko, en in r["duties"])
     quals = "".join(f'            <li><span class="t-ko">{ko}</span><span class="t-en">{en}</span></li>\n' for ko, en in r["quals"])
     plus = "".join(f'            <li><span class="t-ko">{ko}</span><span class="t-en">{en}</span></li>\n' for ko, en in r["plus"])
-    apply_href = "contact.html?" + urllib.parse.urlencode({"type": "채용", "role": f"{r['team_ko']} {r['role_ko']}"})
+    # pass both languages; the static site can't know the visitor's current
+    # language at build time, so main.js's prefillFromQuery() picks whichever
+    # matches the persisted data-lang when contact.html actually loads.
+    apply_href = "contact.html?" + urllib.parse.urlencode({
+        "type": "채용",
+        "role_ko": f"{r['team_ko']} {r['role_ko']}",
+        "role_en": f"{r['team_en']} {r['role_en']}",
+    })
 
     body = (
         page_hero("CAREERS", r["role_ko"], r["role_en"],

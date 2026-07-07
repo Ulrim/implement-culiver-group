@@ -14,17 +14,35 @@
   function $(sel, ctx) { return (ctx || document).querySelector(sel); }
   function $all(sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); }
 
-  /* ---------------------------------------------- LANGUAGE (persisted) */
+  /* ---------------------------------------------- LANGUAGE (persisted)
+     Everything else on the site toggles language via CSS ([data-lang]
+     hiding .t-ko/.t-en spans), but native <input placeholder> and
+     <option> text are plain attributes/strings a CSS rule can't reach
+     into — this applies those from data-ph-ko/-en and data-ko/-en. */
+  function applyFormI18n() {
+    var lang = document.body.getAttribute('data-lang') === 'en' ? 'en' : 'ko';
+    $all('[data-ph-ko]').forEach(function (el) {
+      var ph = el.getAttribute(lang === 'en' ? 'data-ph-en' : 'data-ph-ko');
+      if (ph) el.placeholder = ph;
+    });
+    $all('option[data-ko]').forEach(function (opt) {
+      var label = opt.getAttribute(lang === 'en' ? 'data-en' : 'data-ko');
+      if (label) opt.textContent = label;
+    });
+  }
+
   function setupLang() {
     var btn = $('#langToggle');
     var current = document.body.getAttribute('data-lang') === 'en' ? 'en' : 'ko';
     if (btn) btn.textContent = current === 'ko' ? 'EN' : 'KR';
+    applyFormI18n();
     if (!btn) return;
     btn.addEventListener('click', function () {
       var next = document.body.getAttribute('data-lang') === 'ko' ? 'en' : 'ko';
       document.body.setAttribute('data-lang', next);
       document.documentElement.setAttribute('lang', next);
       btn.textContent = next === 'ko' ? 'EN' : 'KR';
+      applyFormI18n();
       try { localStorage.setItem(LANG_KEY, next); } catch (e) { /* storage unavailable */ }
     });
   }
@@ -55,19 +73,36 @@
       });
     }
 
-    // desktop "Business" dropdown: close on Escape / outside click for keyboard + mouse users
+    // desktop "Business" dropdown: the panel's visibility is CSS-driven
+    // (:hover/:focus-within on .nav-item-drop); this only keeps the
+    // aria-expanded state in sync, since a mismatched ARIA state is worse
+    // than none for screen-reader users.
     var drop = $('.nav-item-drop');
     var toggle = drop && $('.nav-drop-toggle', drop);
     if (drop && toggle) {
+      function closeDrop() { toggle.setAttribute('aria-expanded', 'false'); }
       document.addEventListener('click', function (e) {
-        if (!drop.contains(e.target)) toggle.setAttribute('aria-expanded', 'false');
+        if (!drop.contains(e.target)) closeDrop();
       });
       document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') toggle.setAttribute('aria-expanded', 'false');
+        if (e.key === 'Escape' && drop.contains(document.activeElement)) {
+          // focus the toggle first (its own focusin would otherwise re-open
+          // the panel if this ran after closeDrop), then close last so the
+          // final aria-expanded is false and the CSS force-close rule applies
+          toggle.focus();
+          closeDrop();
+        }
       });
       drop.addEventListener('focusin', function () { toggle.setAttribute('aria-expanded', 'true'); });
+      drop.addEventListener('focusout', function () {
+        // let the newly-focused element settle before checking — on the
+        // same tick, document.activeElement can still be the old one
+        setTimeout(function () {
+          if (!drop.contains(document.activeElement)) closeDrop();
+        }, 0);
+      });
       drop.addEventListener('mouseenter', function () { toggle.setAttribute('aria-expanded', 'true'); });
-      drop.addEventListener('mouseleave', function () { toggle.setAttribute('aria-expanded', 'false'); });
+      drop.addEventListener('mouseleave', closeDrop);
     }
   }
 
@@ -221,13 +256,19 @@
     var params;
     try { params = new URLSearchParams(window.location.search); } catch (e) { return; }
     var type = params.get('type');
-    var role = params.get('role');
+    // job postings pass both role_ko and role_en (the static site can't
+    // know the visitor's language at build time); show whichever matches
+    // the language currently active (persisted via localStorage, already
+    // applied to <body> before this script runs).
+    var lang = document.body.getAttribute('data-lang') === 'en' ? 'en' : 'ko';
+    var role = params.get('role_' + lang) || params.get('role_ko') || params.get('role_en');
     if (type && form.type) {
       var opts = Array.prototype.slice.call(form.type.options).map(function (o) { return o.value; });
       if (opts.indexOf(type) !== -1) form.type.value = type;
     }
     if (role && form.message && !form.message.value) {
-      form.message.value = '[지원 직무 / Role: ' + role + ']\n\n';
+      var label = lang === 'en' ? 'Role: ' : '지원 직무: ';
+      form.message.value = '[' + label + role + ']\n\n';
     }
   }
 

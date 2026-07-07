@@ -16,6 +16,12 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 function clean(v, max) {
   return typeof v === 'string' ? v.trim().slice(0, max) : '';
 }
+// single-line fields (name/email/company/type) feed the email Subject —
+// strip CR/LF so a crafted value can't inject extra mail headers,
+// regardless of whether Resend's own API already guards against it.
+function cleanLine(v, max) {
+  return typeof v === 'string' ? v.replace(/[\r\n]+/g, ' ').trim().slice(0, max) : '';
+}
 function escapeHtml(s) {
   return String(s).replace(/[&<>"']/g, function (c) {
     return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
@@ -40,10 +46,10 @@ module.exports = async function handler(req, res) {
     return res.status(200).json({ ok: true });
   }
 
-  var name = clean(body.name, MAX.name);
-  var email = clean(body.email, MAX.email);
-  var company = clean(body.company, MAX.company);
-  var type = clean(body.type, MAX.type);
+  var name = cleanLine(body.name, MAX.name);
+  var email = cleanLine(body.email, MAX.email);
+  var company = cleanLine(body.company, MAX.company);
+  var type = cleanLine(body.type, MAX.type);
   var message = clean(body.message, MAX.message);
 
   if (!name || !email || !message) {
