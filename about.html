@@ -13,7 +13,8 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body data-lang="ko" class="subpage" data-page="about.html">
+<body data-lang="ko" class="subpage">
+<script>(function(){try{var l=localStorage.getItem('cg_lang');if(l==='en'){document.body.setAttribute('data-lang','en');document.documentElement.setAttribute('lang','en');}}catch(e){}})();</script>
 
   <div class="progress" id="progress"></div>
 
@@ -25,14 +26,22 @@
     <nav>
       <div class="nav-links" id="navLinks">
         <a href="about.html" class="current"><span class="t-ko">그룹소개</span><span class="t-en">About</span></a>
-        <a href="business.html" class=""><span class="t-ko">사업영역</span><span class="t-en">Business</span></a>
+        <div class="nav-item-drop">
+          <a href="business.html" class="nav-drop-toggle " aria-haspopup="true" aria-expanded="false"><span class="t-ko">사업영역</span><span class="t-en">Business</span><span class="car" aria-hidden="true">▾</span></a>
+          <div class="nav-drop-panel">
+          <a href="culiver-aqua.html"><span class="nm">컬리버</span><span class="en">CULIVER</span></a>
+          <a href="amp.html"><span class="nm">에이엠피</span><span class="en">AMP</span></a>
+          <a href="cobaltive.html"><span class="nm">코발티브</span><span class="en">COBALTIVE</span></a>
+          <a href="susinje-farm.html"><span class="nm">수신제팜</span><span class="en">SUSINJE FARM</span></a>
+          </div>
+        </div>
         <a href="sustainability.html" class=""><span class="t-ko">지속가능경영</span><span class="t-en">Sustainability</span></a>
         <a href="newsroom.html" class=""><span class="t-ko">뉴스룸</span><span class="t-en">Newsroom</span></a>
         <a href="careers.html" class=""><span class="t-ko">채용</span><span class="t-en">Careers</span></a>
         <a href="contact.html" class=""><span class="t-ko">문의</span><span class="t-en">Contact</span></a>
       </div>
       <button class="lang-toggle" id="langToggle">EN</button>
-      <button class="hamburger" id="hamburger" aria-label="menu">☰</button>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">☰</button>
     </nav>
   </header>
   <div class="mobile-menu" id="mobileMenu">
@@ -56,10 +65,11 @@
   </div>
   <section class="page-hero">
     <div class="inner">
-      <nav class="breadcrumb"><a href="index.html"><span class="t-ko">홈</span><span class="t-en">Home</span></a><span class="sep">/</span><a href="about.html"><span class="t-ko">그룹소개</span><span class="t-en">About</span></a></nav>
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html"><span class="t-ko">홈</span><span class="t-en">Home</span></a><span class="sep">/</span><span aria-current="page"><span class="t-ko">그룹소개</span><span class="t-en">About</span></span></nav>
       <p class="eyebrow">ABOUT CULIVER GROUP</p>
       <h1><span class="t-ko">기르는 일의 순환을 설계합니다</span><span class="t-en">We design the cycle of cultivation</span></h1>
       <p class="sub"><span class="t-ko">‘기른다’는 하나의 동사에서 출발한 네 개의 사업이 하나의 순환으로 연결됩니다.</span><span class="t-en">Four businesses born from a single verb — to cultivate — connected as one loop.</span></p>
+      
     </div>
   </section>
   <section class="section bg-paper">
@@ -96,7 +106,7 @@
           </div>
         </div>
         <div class="value">
-          <span class="value-no" style="color:#1E7F96">02</span>
+          <span class="value-no" style="color:#166578">02</span>
           <div class="value-body">
             <h3><span class="t-ko">기술 Technology</span><span class="t-en">Technology</span></h3>
             <p class="t-ko">미생물, 수처리, 데이터. 1차 산업을 과학의 언어로 다시 씁니다.</p>
@@ -127,10 +137,10 @@
         <button class="hist-year" data-i="0" data-color="#0E4E78" data-tko="컬리버 설립" data-ten="CULIVER founded"
           data-dko="육상 흰다리새우 BFT 양식 연구로 그룹의 출발점을 세웠습니다."
           data-den="The group began with R&amp;D in land-based whiteleg shrimp BFT aquaculture.">2019</button>
-        <button class="hist-year" data-i="1" data-color="#1E7F96" data-tko="에이엠피 합류 · 수처리 내재화" data-ten="AMP joins — water treatment"
+        <button class="hist-year" data-i="1" data-color="#166578" data-tko="에이엠피 합류 · 수처리 내재화" data-ten="AMP joins — water treatment"
           data-dko="수처리·미생물 기술을 그룹에 내재화하며 순환 구조의 두 번째 축을 마련했습니다."
           data-den="Brought water-treatment and microbial technology in-house, forming the second axis of the loop.">2021</button>
-        <button class="hist-year" data-i="2" data-color="#8E7A5C" data-tko="코발티브 출범 · 자원순환" data-ten="COBALTIVE launched"
+        <button class="hist-year" data-i="2" data-color="#6E5D38" data-tko="코발티브 출범 · 자원순환" data-ten="COBALTIVE launched"
           data-dko="굴 패각 업사이클 사업을 시작하며 자원순환 영역으로 확장했습니다."
           data-den="Started oyster-shell upcycling, expanding into the circular-materials domain.">2023</button>
         <button class="hist-year" data-i="3" data-color="#3E7C4F" data-tko="수신제팜 편입 · 스마트팜" data-ten="SUSINJE FARM joins"
@@ -139,7 +149,7 @@
         <button class="hist-year active" data-i="4" data-color="#0B2438" data-tko="컬리버 그룹 지주 체제 전환" data-ten="Holding structure"
           data-dko="네 개 사업을 하나의 그룹 비전 아래 정렬하고 지주 체제로 전환했습니다."
           data-den="Aligned four businesses under one group vision and transitioned to a holding structure."
-          style="background:#0B2438;border-color:#0B2438;color:#F6F4EF">2026</button>
+          style="background:#0B2438;border-color:#0B2438">2026</button>
       </div>
       <div class="hist-detail">
         <div class="hist-big" id="histBig" style="color:#0B2438">2026</div>
@@ -164,10 +174,10 @@
         <div class="org-top"><div class="t">컬리버 그룹</div><div class="s">CULIVER GROUP · HOLDINGS</div></div>
         <div class="org-stem"></div>
         <div class="org-row">
-          <a class="org-node" href="culiver-aqua.html" style="text-decoration:none;color:inherit"><div class="nm">컬리버</div><div class="en">CULIVER</div><div class="role">스마트 양식</div></a>
-          <a class="org-node" href="amp.html" style="text-decoration:none;color:inherit;border-top-color:#1E7F96"><div class="nm">에이엠피</div><div class="en">AMP</div><div class="role">수처리</div></a>
-          <a class="org-node" href="cobaltive.html" style="text-decoration:none;color:inherit;border-top-color:#8E7A5C"><div class="nm">코발티브</div><div class="en">COBALTIVE</div><div class="role">자원순환 소재</div></a>
-          <a class="org-node" href="susinje-farm.html" style="text-decoration:none;color:inherit;border-top-color:#3E7C4F"><div class="nm">수신제팜</div><div class="en">SUSINJE FARM</div><div class="role">스마트팜·유통</div></a>
+          <a class="org-node" href="culiver-aqua.html"><div class="nm">컬리버</div><div class="en">CULIVER</div><div class="role">스마트 양식</div></a>
+          <a class="org-node" href="amp.html" style="border-top-color:#1E7F96"><div class="nm">에이엠피</div><div class="en">AMP</div><div class="role">수처리</div></a>
+          <a class="org-node" href="cobaltive.html" style="border-top-color:#8E7A5C"><div class="nm">코발티브</div><div class="en">COBALTIVE</div><div class="role">자원순환 소재</div></a>
+          <a class="org-node" href="susinje-farm.html" style="border-top-color:#3E7C4F"><div class="nm">수신제팜</div><div class="en">SUSINJE FARM</div><div class="role">스마트팜·유통</div></a>
         </div>
       </div>
     </div>
@@ -234,8 +244,8 @@
           <div class="footer-col">
             <span class="head">CONTACT</span>
             <a href="contact.html"><span class="t-ko">문의하기</span><span class="t-en">Contact</span></a>
-            <span>contact@culiver.co.kr</span>
-            <span>T. 000-0000-0000</span>
+            <span class="plain">contact@culiver.co.kr</span>
+            <span class="plain">T. 000-0000-0000</span>
           </div>
         </div>
       </div>

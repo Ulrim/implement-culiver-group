@@ -10,7 +10,8 @@
    외부 npm 패키지 없이 Resend REST API를 fetch로 호출합니다.
    ============================================================ */
 
-const MAX = { name: 100, company: 120, type: 40, message: 4000 };
+const MAX = { name: 100, email: 200, company: 120, type: 40, message: 4000 };
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function clean(v, max) {
   return typeof v === 'string' ? v.trim().slice(0, max) : '';
@@ -40,12 +41,16 @@ module.exports = async function handler(req, res) {
   }
 
   var name = clean(body.name, MAX.name);
+  var email = clean(body.email, MAX.email);
   var company = clean(body.company, MAX.company);
   var type = clean(body.type, MAX.type);
   var message = clean(body.message, MAX.message);
 
-  if (!name || !message) {
-    return res.status(400).json({ ok: false, error: '이름과 문의 내용을 입력해 주세요.' });
+  if (!name || !email || !message) {
+    return res.status(400).json({ ok: false, error: '이름, 이메일, 문의 내용을 입력해 주세요.' });
+  }
+  if (!EMAIL_RE.test(email)) {
+    return res.status(400).json({ ok: false, error: '올바른 이메일 주소를 입력해 주세요.' });
   }
 
   var apiKey = process.env.RESEND_API_KEY;
@@ -60,6 +65,7 @@ module.exports = async function handler(req, res) {
   var subject = '[컬리버 그룹 문의] ' + (type || '일반') + ' · ' + name;
   var lines = [
     ['이름', name],
+    ['이메일', email],
     ['회사·소속', company || '-'],
     ['문의 유형', type || '-'],
     ['내용', message]
@@ -74,8 +80,7 @@ module.exports = async function handler(req, res) {
   var text = lines.map(function (l) { return l[0] + ': ' + l[1]; }).join('\n');
 
   try {
-    var payload = { from: from, to: [to], subject: subject, html: html, text: text };
-    // 발신자에게 회신 가능하도록 reply_to에 문의자 회사/이름 표기는 생략(이메일 미수집)
+    var payload = { from: from, to: [to], subject: subject, html: html, text: text, reply_to: email };
     var r = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {

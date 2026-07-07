@@ -13,7 +13,8 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body data-lang="ko" class="subpage" data-page="newsroom.html">
+<body data-lang="ko" class="subpage">
+<script>(function(){try{var l=localStorage.getItem('cg_lang');if(l==='en'){document.body.setAttribute('data-lang','en');document.documentElement.setAttribute('lang','en');}}catch(e){}})();</script>
 
   <div class="progress" id="progress"></div>
 
@@ -25,14 +26,22 @@
     <nav>
       <div class="nav-links" id="navLinks">
         <a href="about.html" class=""><span class="t-ko">그룹소개</span><span class="t-en">About</span></a>
-        <a href="business.html" class=""><span class="t-ko">사업영역</span><span class="t-en">Business</span></a>
+        <div class="nav-item-drop">
+          <a href="business.html" class="nav-drop-toggle " aria-haspopup="true" aria-expanded="false"><span class="t-ko">사업영역</span><span class="t-en">Business</span><span class="car" aria-hidden="true">▾</span></a>
+          <div class="nav-drop-panel">
+          <a href="culiver-aqua.html"><span class="nm">컬리버</span><span class="en">CULIVER</span></a>
+          <a href="amp.html"><span class="nm">에이엠피</span><span class="en">AMP</span></a>
+          <a href="cobaltive.html"><span class="nm">코발티브</span><span class="en">COBALTIVE</span></a>
+          <a href="susinje-farm.html"><span class="nm">수신제팜</span><span class="en">SUSINJE FARM</span></a>
+          </div>
+        </div>
         <a href="sustainability.html" class=""><span class="t-ko">지속가능경영</span><span class="t-en">Sustainability</span></a>
         <a href="newsroom.html" class="current"><span class="t-ko">뉴스룸</span><span class="t-en">Newsroom</span></a>
         <a href="careers.html" class=""><span class="t-ko">채용</span><span class="t-en">Careers</span></a>
         <a href="contact.html" class=""><span class="t-ko">문의</span><span class="t-en">Contact</span></a>
       </div>
       <button class="lang-toggle" id="langToggle">EN</button>
-      <button class="hamburger" id="hamburger" aria-label="menu">☰</button>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">☰</button>
     </nav>
   </header>
   <div class="mobile-menu" id="mobileMenu">
@@ -56,10 +65,11 @@
   </div>
   <section class="page-hero">
     <div class="inner">
-      <nav class="breadcrumb"><a href="index.html"><span class="t-ko">홈</span><span class="t-en">Home</span></a><span class="sep">/</span><a href="newsroom.html"><span class="t-ko">뉴스룸</span><span class="t-en">Newsroom</span></a></nav>
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html"><span class="t-ko">홈</span><span class="t-en">Home</span></a><span class="sep">/</span><span aria-current="page"><span class="t-ko">뉴스룸</span><span class="t-en">Newsroom</span></span></nav>
       <p class="eyebrow">NEWSROOM</p>
       <h1><span class="t-ko">컬리버 그룹 소식</span><span class="t-en">News from the group</span></h1>
       <p class="sub"><span class="t-ko">컬리버 그룹과 계열사의 보도자료·소식·채용 소식을 전합니다.</span><span class="t-en">Press releases, updates, and hiring news from CULIVER Group and its affiliates.</span></p>
+      
     </div>
   </section>
   <section class="section bg-paper">
@@ -79,7 +89,7 @@
       </div>
       <div class="news-grid reveal" id="newsList">
         <a href="news-1.html" class="news-card" data-tag="보도자료">
-          <div class="news-photo" style="background-image:linear-gradient(150deg,rgba(14,78,120,.32),rgba(10,44,70,.55)),url('assets/img/news-1.jpg')"></div>
+          <div class="news-photo" role="img" aria-label="컬리버, BFT 기반 흰다리새우 스마트 양식장 2호기 준공 관련 이미지" style="background-image:linear-gradient(150deg,rgba(14,78,120,.32),rgba(10,44,70,.55)),url('assets/img/news-1.jpg')"></div>
           <div class="news-body">
             <div class="news-meta"><span class="news-tag" style="color:#0E4E78;background:rgba(14,78,120,.08)">보도자료</span><span class="news-date">2026.06</span></div>
             <h3>컬리버, BFT 기반 흰다리새우 스마트 양식장 2호기 준공</h3>
@@ -87,15 +97,15 @@
           </div>
         </a>
         <a href="news-2.html" class="news-card" data-tag="소식">
-          <div class="news-photo" style="background-image:linear-gradient(150deg,rgba(142,122,92,.3),rgba(94,79,58,.55)),url('assets/img/news-2.jpg')"></div>
+          <div class="news-photo" role="img" aria-label="코발티브, 굴패각 업사이클 소재 친환경 인증 획득 관련 이미지" style="background-image:linear-gradient(150deg,rgba(142,122,92,.3),rgba(94,79,58,.55)),url('assets/img/news-2.jpg')"></div>
           <div class="news-body">
-            <div class="news-meta"><span class="news-tag" style="color:#77653F;background:rgba(142,122,92,.12)">소식</span><span class="news-date">2026.05</span></div>
+            <div class="news-meta"><span class="news-tag" style="color:#6E5D38;background:rgba(142,122,92,.12)">소식</span><span class="news-date">2026.05</span></div>
             <h3>코발티브, 굴패각 업사이클 소재 친환경 인증 획득</h3>
             <span class="news-arrow">→</span>
           </div>
         </a>
         <a href="news-3.html" class="news-card" data-tag="소식">
-          <div class="news-photo" style="background-image:linear-gradient(150deg,rgba(62,124,79,.3),rgba(36,82,50,.55)),url('assets/img/news-3.jpg')"></div>
+          <div class="news-photo" role="img" aria-label="수신제팜, 데이터 기반 수경재배 채소 정기유통 시작 관련 이미지" style="background-image:linear-gradient(150deg,rgba(62,124,79,.3),rgba(36,82,50,.55)),url('assets/img/news-3.jpg')"></div>
           <div class="news-body">
             <div class="news-meta"><span class="news-tag" style="color:#3E7C4F;background:rgba(62,124,79,.1)">소식</span><span class="news-date">2026.04</span></div>
             <h3>수신제팜, 데이터 기반 수경재배 채소 정기유통 시작</h3>
@@ -103,15 +113,15 @@
           </div>
         </a>
         <a href="news-4.html" class="news-card" data-tag="보도자료">
-          <div class="news-photo" style="background-image:linear-gradient(150deg,rgba(30,127,150,.3),rgba(15,74,92,.55)),url('assets/img/news-4.jpg')"></div>
+          <div class="news-photo" role="img" aria-label="에이엠피, 산업용수 순환여과 플랜트 신규 수주 관련 이미지" style="background-image:linear-gradient(150deg,rgba(30,127,150,.3),rgba(15,74,92,.55)),url('assets/img/news-4.jpg')"></div>
           <div class="news-body">
-            <div class="news-meta"><span class="news-tag" style="color:#1E7F96;background:rgba(30,127,150,.09)">보도자료</span><span class="news-date">2026.03</span></div>
+            <div class="news-meta"><span class="news-tag" style="color:#166578;background:rgba(30,127,150,.09)">보도자료</span><span class="news-date">2026.03</span></div>
             <h3>에이엠피, 산업용수 순환여과 플랜트 신규 수주</h3>
             <span class="news-arrow">→</span>
           </div>
         </a>
         <a href="news-5.html" class="news-card" data-tag="채용">
-          <div class="news-photo" style="background-image:linear-gradient(150deg,rgba(11,36,56,.34),rgba(8,24,38,.6)),url('assets/img/news-5.jpg')"></div>
+          <div class="news-photo" role="img" aria-label="컬리버 그룹 2026 상반기 신입·경력 공개채용 시작 관련 이미지" style="background-image:linear-gradient(150deg,rgba(11,36,56,.34),rgba(8,24,38,.6)),url('assets/img/news-5.jpg')"></div>
           <div class="news-body">
             <div class="news-meta"><span class="news-tag" style="color:#0B2438;background:rgba(11,36,56,.08)">채용</span><span class="news-date">2026.02</span></div>
             <h3>컬리버 그룹 2026 상반기 신입·경력 공개채용 시작</h3>
@@ -119,7 +129,7 @@
           </div>
         </a>
         <a href="news-6.html" class="news-card" data-tag="소식">
-          <div class="news-photo" style="background-image:linear-gradient(150deg,rgba(62,124,79,.3),rgba(36,82,50,.55)),url('assets/img/news-6.jpg')"></div>
+          <div class="news-photo" role="img" aria-label="수신제팜 수경재배 채소, 대형 유통사 입점 확정 관련 이미지" style="background-image:linear-gradient(150deg,rgba(62,124,79,.3),rgba(36,82,50,.55)),url('assets/img/news-6.jpg')"></div>
           <div class="news-body">
             <div class="news-meta"><span class="news-tag" style="color:#3E7C4F;background:rgba(62,124,79,.1)">소식</span><span class="news-date">2026.01</span></div>
             <h3>수신제팜 수경재배 채소, 대형 유통사 입점 확정</h3>
@@ -155,8 +165,8 @@
           <div class="footer-col">
             <span class="head">CONTACT</span>
             <a href="contact.html"><span class="t-ko">문의하기</span><span class="t-en">Contact</span></a>
-            <span>contact@culiver.co.kr</span>
-            <span>T. 000-0000-0000</span>
+            <span class="plain">contact@culiver.co.kr</span>
+            <span class="plain">T. 000-0000-0000</span>
           </div>
         </div>
       </div>

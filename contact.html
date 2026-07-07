@@ -13,7 +13,8 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body data-lang="ko" class="subpage" data-page="contact.html">
+<body data-lang="ko" class="subpage">
+<script>(function(){try{var l=localStorage.getItem('cg_lang');if(l==='en'){document.body.setAttribute('data-lang','en');document.documentElement.setAttribute('lang','en');}}catch(e){}})();</script>
 
   <div class="progress" id="progress"></div>
 
@@ -25,14 +26,22 @@
     <nav>
       <div class="nav-links" id="navLinks">
         <a href="about.html" class=""><span class="t-ko">그룹소개</span><span class="t-en">About</span></a>
-        <a href="business.html" class=""><span class="t-ko">사업영역</span><span class="t-en">Business</span></a>
+        <div class="nav-item-drop">
+          <a href="business.html" class="nav-drop-toggle " aria-haspopup="true" aria-expanded="false"><span class="t-ko">사업영역</span><span class="t-en">Business</span><span class="car" aria-hidden="true">▾</span></a>
+          <div class="nav-drop-panel">
+          <a href="culiver-aqua.html"><span class="nm">컬리버</span><span class="en">CULIVER</span></a>
+          <a href="amp.html"><span class="nm">에이엠피</span><span class="en">AMP</span></a>
+          <a href="cobaltive.html"><span class="nm">코발티브</span><span class="en">COBALTIVE</span></a>
+          <a href="susinje-farm.html"><span class="nm">수신제팜</span><span class="en">SUSINJE FARM</span></a>
+          </div>
+        </div>
         <a href="sustainability.html" class=""><span class="t-ko">지속가능경영</span><span class="t-en">Sustainability</span></a>
         <a href="newsroom.html" class=""><span class="t-ko">뉴스룸</span><span class="t-en">Newsroom</span></a>
         <a href="careers.html" class=""><span class="t-ko">채용</span><span class="t-en">Careers</span></a>
         <a href="contact.html" class="current"><span class="t-ko">문의</span><span class="t-en">Contact</span></a>
       </div>
       <button class="lang-toggle" id="langToggle">EN</button>
-      <button class="hamburger" id="hamburger" aria-label="menu">☰</button>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">☰</button>
     </nav>
   </header>
   <div class="mobile-menu" id="mobileMenu">
@@ -56,10 +65,11 @@
   </div>
   <section class="page-hero">
     <div class="inner">
-      <nav class="breadcrumb"><a href="index.html"><span class="t-ko">홈</span><span class="t-en">Home</span></a><span class="sep">/</span><a href="contact.html"><span class="t-ko">문의</span><span class="t-en">Contact</span></a></nav>
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html"><span class="t-ko">홈</span><span class="t-en">Home</span></a><span class="sep">/</span><span aria-current="page"><span class="t-ko">문의</span><span class="t-en">Contact</span></span></nav>
       <p class="eyebrow">CONTACT</p>
       <h1><span class="t-ko">함께 만들 순환을 제안하세요</span><span class="t-en">Let's build a loop together</span></h1>
       <p class="sub"><span class="t-ko">사업 제휴, 투자, 제품·구매, 채용 등 무엇이든 문의해 주세요.</span><span class="t-en">Partnerships, investment, products, hiring — reach out about anything.</span></p>
+      
     </div>
   </section>
   <section class="section contact">
@@ -69,10 +79,10 @@
         <h2 class="h2 t-ko">함께 만들<br>순환을 제안하세요</h2>
         <h2 class="h2 t-en">Let's build a loop together</h2>
         <div class="contact-info">
-          <div class="row"><span class="k">EMAIL</span><span class="v">contact@culiver.co.kr</span></div>
-          <div class="row"><span class="k">TEL</span><span class="v">000-0000-0000</span></div>
-          <div class="row">
-            <span class="k"><span class="t-ko">주소</span><span class="t-en">ADDRESS</span></span>
+          <div class="kv"><span class="kv-k">EMAIL</span><span class="kv-v">contact@culiver.co.kr</span></div>
+          <div class="kv"><span class="kv-k">TEL</span><span class="kv-v">000-0000-0000</span></div>
+          <div class="kv">
+            <span class="kv-k"><span class="t-ko">주소</span><span class="t-en">ADDRESS</span></span>
             <span class="addr t-ko">본사 주소를 입력하세요 (실제 정보로 교체)</span>
             <span class="addr t-en">Replace with headquarters address</span>
           </div>
@@ -84,26 +94,35 @@
           <div class="form-row">
             <label>
               <span class="lbl"><span class="t-ko">이름</span><span class="t-en">Name</span></span>
-              <input name="name" placeholder="홍길동">
+              <input name="name" placeholder="홍길동" required autocomplete="name">
             </label>
             <label>
+              <span class="lbl"><span class="t-ko">이메일</span><span class="t-en">Email</span></span>
+              <input type="email" name="email" placeholder="you@example.com" required autocomplete="email">
+            </label>
+          </div>
+          <div class="form-row">
+            <label>
               <span class="lbl"><span class="t-ko">회사·소속</span><span class="t-en">Company</span></span>
-              <input name="company" placeholder="컬리버">
+              <input name="company" placeholder="컬리버" autocomplete="organization">
+            </label>
+            <label>
+              <span class="lbl"><span class="t-ko">문의 유형</span><span class="t-en">Inquiry type</span></span>
+              <select name="type">
+                <option>사업 제휴</option>
+                <option>투자 · IR</option>
+                <option>제품 · 구매</option>
+                <option>채용</option>
+                <option>기타</option>
+              </select>
             </label>
           </div>
           <label>
-            <span class="lbl"><span class="t-ko">문의 유형</span><span class="t-en">Inquiry type</span></span>
-            <select name="type">
-              <option>사업 제휴</option>
-              <option>투자 · IR</option>
-              <option>제품 · 구매</option>
-              <option>채용</option>
-              <option>기타</option>
-            </select>
-          </label>
-          <label>
-            <span class="lbl"><span class="t-ko">내용</span><span class="t-en">Message</span></span>
-            <textarea name="message" rows="4" placeholder="문의 내용을 입력하세요"></textarea>
+            <span class="lbl-row">
+              <span class="lbl"><span class="t-ko">내용</span><span class="t-en">Message</span></span>
+              <span class="counter" id="msgCounter">0 / 4000</span>
+            </span>
+            <textarea name="message" rows="4" maxlength="4000" placeholder="문의 내용을 입력하세요" required></textarea>
           </label>
           <button type="submit" class="form-submit"><span class="t-ko">문의 보내기</span><span class="t-en">Send inquiry</span></button>
           <p class="form-error" id="formError" role="alert" hidden></p>
@@ -156,8 +175,8 @@
           <div class="footer-col">
             <span class="head">CONTACT</span>
             <a href="contact.html"><span class="t-ko">문의하기</span><span class="t-en">Contact</span></a>
-            <span>contact@culiver.co.kr</span>
-            <span>T. 000-0000-0000</span>
+            <span class="plain">contact@culiver.co.kr</span>
+            <span class="plain">T. 000-0000-0000</span>
           </div>
         </div>
       </div>

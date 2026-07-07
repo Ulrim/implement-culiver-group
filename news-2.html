@@ -13,7 +13,8 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body data-lang="ko" class="subpage" data-page="newsroom.html">
+<body data-lang="ko" class="subpage">
+<script>(function(){try{var l=localStorage.getItem('cg_lang');if(l==='en'){document.body.setAttribute('data-lang','en');document.documentElement.setAttribute('lang','en');}}catch(e){}})();</script>
 
   <div class="progress" id="progress"></div>
 
@@ -25,14 +26,22 @@
     <nav>
       <div class="nav-links" id="navLinks">
         <a href="about.html" class=""><span class="t-ko">그룹소개</span><span class="t-en">About</span></a>
-        <a href="business.html" class=""><span class="t-ko">사업영역</span><span class="t-en">Business</span></a>
+        <div class="nav-item-drop">
+          <a href="business.html" class="nav-drop-toggle " aria-haspopup="true" aria-expanded="false"><span class="t-ko">사업영역</span><span class="t-en">Business</span><span class="car" aria-hidden="true">▾</span></a>
+          <div class="nav-drop-panel">
+          <a href="culiver-aqua.html"><span class="nm">컬리버</span><span class="en">CULIVER</span></a>
+          <a href="amp.html"><span class="nm">에이엠피</span><span class="en">AMP</span></a>
+          <a href="cobaltive.html"><span class="nm">코발티브</span><span class="en">COBALTIVE</span></a>
+          <a href="susinje-farm.html"><span class="nm">수신제팜</span><span class="en">SUSINJE FARM</span></a>
+          </div>
+        </div>
         <a href="sustainability.html" class=""><span class="t-ko">지속가능경영</span><span class="t-en">Sustainability</span></a>
         <a href="newsroom.html" class="current"><span class="t-ko">뉴스룸</span><span class="t-en">Newsroom</span></a>
         <a href="careers.html" class=""><span class="t-ko">채용</span><span class="t-en">Careers</span></a>
         <a href="contact.html" class=""><span class="t-ko">문의</span><span class="t-en">Contact</span></a>
       </div>
       <button class="lang-toggle" id="langToggle">EN</button>
-      <button class="hamburger" id="hamburger" aria-label="menu">☰</button>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">☰</button>
     </nav>
   </header>
   <div class="mobile-menu" id="mobileMenu">
@@ -56,25 +65,30 @@
   </div>
   <section class="page-hero">
     <div class="inner">
-      <nav class="breadcrumb"><a href="index.html"><span class="t-ko">홈</span><span class="t-en">Home</span></a><span class="sep">/</span><a href="newsroom.html"><span class="t-ko">뉴스룸</span><span class="t-en">Newsroom</span></a><span class="sep">/</span><span class="t-ko">기사</span><span class="t-en">Article</span></nav>
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html"><span class="t-ko">홈</span><span class="t-en">Home</span></a><span class="sep">/</span><a href="newsroom.html"><span class="t-ko">뉴스룸</span><span class="t-en">Newsroom</span></a><span class="sep">/</span><span aria-current="page"><span class="t-ko">코발티브, 굴패각 업사이클 소재 친환경 인증 획득</span><span class="t-en">코발티브, 굴패각 업사이클 소재 친환경 인증 획득</span></span></nav>
       <p class="eyebrow">NEWSROOM</p>
-      <h1><span class="t-ko">컬리버 그룹 소식</span><span class="t-en">News from the group</span></h1>
+      <h2><span class="t-ko">컬리버 그룹 소식</span><span class="t-en">News from the group</span></h2>
       <p class="sub"><span class="t-ko">보도자료·소식·채용 소식을 전합니다.</span><span class="t-en">Press, updates, and hiring news.</span></p>
+      
     </div>
   </section>
   <section class="section bg-paper">
     <div class="wrap">
       <article class="article reveal">
         <div class="art-meta">
-          <span class="art-tag" style="color:#77653F;background:rgba(142,122,92,.12)">소식</span>
+          <span class="art-tag" style="color:#6E5D38;background:rgba(142,122,92,.12)">소식</span>
           <span class="art-date">2026.05</span>
         </div>
         <h1>코발티브, 굴패각 업사이클 소재 친환경 인증 획득</h1>
-        <div class="art-cover" style="background-image:linear-gradient(150deg,rgba(142,122,92,.5),rgba(94,79,58,.7)),url('assets/img/news-2.jpg')"></div>
-          <p>코발티브가 굴 패각을 업사이클한 친환경 소재로 인증을 획득했습니다. 버려지던 패각을 자원으로 되살려 폐기물과 배출을 구조적으로 줄이는 성과를 인정받았습니다.</p>
-          <p>코발티브는 패각 정제·가공을 통해 탄산칼슘 기반 기능성 소재 ‘숨쉘’과 생활 제품 ‘셸픽’을 선보이고 있습니다.</p>
+        <div class="art-cover" role="img" aria-label="코발티브, 굴패각 업사이클 소재 친환경 인증 획득 관련 이미지" style="background-image:linear-gradient(150deg,rgba(142,122,92,.5),rgba(94,79,58,.7)),url('assets/img/news-2.jpg')"></div>
+          <p><a href="cobaltive.html">코발티브</a>가 굴 패각을 업사이클한 친환경 소재로 인증을 획득했습니다. 버려지던 패각을 자원으로 되살려 폐기물과 배출을 구조적으로 줄이는 성과를 인정받았습니다.</p>
+          <p>코발티브는 패각 정제·가공을 통해 탄산칼슘 기반 기능성 소재 ‘<a href="cobaltive.html">숨쉘</a>’과 생활 제품 ‘<a href="cobaltive.html">셸픽</a>’을 선보이고 있습니다.</p>
           <p>앞으로도 자원순환 소재 라인업을 확대해 나갈 예정입니다.</p>
           <p class="note"><span class="t-ko">※ 본 기사는 예시 콘텐츠입니다. 실제 보도자료·소식으로 교체하세요.</span><span class="t-en">※ Example content — replace with a real article.</span></p>
+      <a class="about-card" href="cobaltive.html">
+        <span class="badge" style="background:#6E5D38">03</span>
+        <span class="body"><h4><span class="t-ko">코발티브</span><span class="t-en">COBALTIVE</span></h4><p><span class="t-ko">자원순환 소재</span><span class="t-en">UPCYCLED MATERIALS</span></p></span>
+      </a>
       </article>
       <div class="pager">
         <a href="news-1.html">← <span class="t-ko">이전 글</span><span class="t-en">Previous</span></a>
@@ -109,8 +123,8 @@
           <div class="footer-col">
             <span class="head">CONTACT</span>
             <a href="contact.html"><span class="t-ko">문의하기</span><span class="t-en">Contact</span></a>
-            <span>contact@culiver.co.kr</span>
-            <span>T. 000-0000-0000</span>
+            <span class="plain">contact@culiver.co.kr</span>
+            <span class="plain">T. 000-0000-0000</span>
           </div>
         </div>
       </div>
