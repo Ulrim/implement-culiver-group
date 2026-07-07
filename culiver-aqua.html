@@ -1,47 +1,193 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" class="no-js">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>컬리버 CULIVER — 컬리버 그룹 CULIVER GROUP</title>
-  <meta name="description" content="미생물 기반 BFT 바이오플락 기술로 흰다리새우를 육상에서 연중 안정 생산합니다.">
+  <meta name="description" content="미생물 기반 BFT 바이오플락 기술로 흰다리새우를 육상에서 연중 안정 생산합니다. 항생제 없는 양식, 데이터로 관리되는 수조.">
+  <script>document.documentElement.className = 'js';</script>
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600&display=swap">
-  <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body {
-      min-height:100vh; display:flex; align-items:center; justify-content:center;
-      font-family:'Pretendard Variable',Pretendard,-apple-system,sans-serif;
-      color:#F6F4EF; text-align:center; padding:40px 24px;
-      background:linear-gradient(168deg,#081826 0%,#0B2438 55%,#0E4E78 160%);
-      -webkit-font-smoothing:antialiased;
-    }
-    .box { max-width:640px; display:flex; flex-direction:column; align-items:center; gap:22px; }
-    .group { display:flex; align-items:baseline; gap:9px; opacity:.7; }
-    .group .m { font-size:15px; font-weight:800; letter-spacing:.14em; }
-    .group .s { font-size:9.5px; font-weight:500; letter-spacing:.3em; opacity:.7; }
-    .tag { font-size:12px; font-weight:800; letter-spacing:.28em; color:#7FC4C9; }
-    h1 { font-family:'Noto Serif KR',serif; font-weight:600; font-size:clamp(40px,8vw,72px); line-height:1; display:flex; flex-direction:column; gap:8px; }
-    h1 .en { font-size:clamp(15px,2.4vw,20px); font-weight:700; letter-spacing:.2em; color:rgba(246,244,239,.55); font-family:'Pretendard Variable',sans-serif; }
-    .lead { font-size:16.5px; line-height:1.8; color:rgba(246,244,239,.8); max-width:520px; }
-    .lead.en { font-size:14.5px; color:rgba(246,244,239,.55); line-height:1.7; }
-    .soon { margin-top:6px; font-size:13px; font-weight:700; letter-spacing:.2em; color:#7FC4C9; border:1px solid rgba(127,196,201,.4); border-radius:99px; padding:10px 22px; }
-    .back { margin-top:10px; display:inline-flex; align-items:center; gap:8px; text-decoration:none; color:#F6F4EF; font-size:14.5px; font-weight:700; border:1px solid rgba(246,244,239,.35); border-radius:99px; padding:13px 26px; transition:background .25s,color .25s; }
-    .back:hover { background:#F6F4EF; color:#0B2438; }
-  </style>
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
-  <div class="box">
-    <a class="group" href="index.html" style="text-decoration:none;color:inherit"><span class="m">CULIVER</span><span class="s">GROUP</span></a>
-    <span class="tag">스마트 양식 · SMART AQUACULTURE</span>
-    <h1>컬리버<span class="en">CULIVER</span></h1>
-    <p class="lead">미생물 기반 BFT 바이오플락 기술로 흰다리새우를 육상에서 연중 안정 생산합니다.</p>
-    <p class="lead en">Year-round, land-based whiteleg shrimp production powered by microbial BFT technology.</p>
-    <span class="soon">사이트 준비 중 · COMING SOON</span>
-    <a class="back" href="index.html">← 컬리버 그룹 홈으로</a>
+<body data-lang="ko" class="subpage" data-page="business.html">
+
+  <div class="progress" id="progress"></div>
+
+  <header class="gnb" id="gnb">
+    <a href="index.html" class="brand">
+      <span class="brand-mark">CULIVER</span>
+      <span class="brand-sub">GROUP</span>
+    </a>
+    <nav>
+      <div class="nav-links" id="navLinks">
+        <a href="about.html" class=""><span class="t-ko">그룹소개</span><span class="t-en">About</span></a>
+        <a href="business.html" class="current"><span class="t-ko">사업영역</span><span class="t-en">Business</span></a>
+        <a href="sustainability.html" class=""><span class="t-ko">지속가능경영</span><span class="t-en">Sustainability</span></a>
+        <a href="newsroom.html" class=""><span class="t-ko">뉴스룸</span><span class="t-en">Newsroom</span></a>
+        <a href="careers.html" class=""><span class="t-ko">채용</span><span class="t-en">Careers</span></a>
+        <a href="contact.html" class=""><span class="t-ko">문의</span><span class="t-en">Contact</span></a>
+      </div>
+      <button class="lang-toggle" id="langToggle">EN</button>
+      <button class="hamburger" id="hamburger" aria-label="menu">☰</button>
+    </nav>
+  </header>
+  <div class="mobile-menu" id="mobileMenu">
+    <nav>
+      <a href="about.html"><span class="mm-no">01</span><span class="mm-label"><span class="t-ko">그룹소개</span><span class="t-en">About</span></span></a>
+      <a href="business.html"><span class="mm-no">02</span><span class="mm-label"><span class="t-ko">사업영역</span><span class="t-en">Business</span></span></a>
+      <a href="sustainability.html"><span class="mm-no">03</span><span class="mm-label"><span class="t-ko">지속가능경영</span><span class="t-en">Sustainability</span></span></a>
+      <a href="newsroom.html"><span class="mm-no">04</span><span class="mm-label"><span class="t-ko">뉴스룸</span><span class="t-en">Newsroom</span></span></a>
+      <a href="careers.html"><span class="mm-no">05</span><span class="mm-label"><span class="t-ko">채용</span><span class="t-en">Careers</span></span></a>
+      <a href="contact.html"><span class="mm-no">06</span><span class="mm-label"><span class="t-ko">문의</span><span class="t-en">Contact</span></span></a>
+    </nav>
+    <div class="mm-family">
+      <span class="mm-family-label">FAMILY</span>
+      <div class="mm-family-row">
+        <a href="culiver-aqua.html">컬리버</a>
+        <a href="amp.html">에이엠피</a>
+        <a href="cobaltive.html">코발티브</a>
+        <a href="susinje-farm.html">수신제팜</a>
+      </div>
+    </div>
   </div>
+  <section class="page-hero" style="background:linear-gradient(160deg,#081826,#0A2C46 60%,#0E4E78 130%)">
+    <div class="inner">
+      <nav class="breadcrumb"><a href="index.html"><span class="t-ko">홈</span><span class="t-en">Home</span></a><span class="sep">/</span><a href="business.html"><span class="t-ko">사업영역</span><span class="t-en">Business</span></a><span class="sep">/</span><span class="t-ko">컬리버</span><span class="t-en">CULIVER</span></nav>
+      <p class="eyebrow">SMART AQUACULTURE</p>
+      <h1><span class="t-ko">컬리버</span><span class="t-en">CULIVER</span></h1>
+      <p class="sub"><span class="t-ko">미생물 기반 BFT 바이오플락 기술로 흰다리새우를 육상에서 연중 안정 생산합니다. 항생제 없는 양식, 데이터로 관리되는 수조.</span><span class="t-en">Year-round, land-based whiteleg shrimp production powered by microbial BFT technology — antibiotic-free, data-managed.</span></p>
+    </div>
+  </section>
+  <section class="section bg-paper">
+    <div class="wrap">
+      <div class="section-intro reveal" style="text-align:left;max-width:820px;margin-left:0">
+        <p class="eyebrow" style="color:#0E4E78">스마트 양식 · SMART AQUACULTURE</p>
+        <h2 class="h2 t-ko">컬리버 소개</h2>
+        <h2 class="h2 t-en">About CULIVER</h2>
+        <p class="lead"><span class="t-ko">컬리버는 미생물 기반 BFT(바이오플락) 기술로 흰다리새우를 육상에서 연중 생산하는 스마트 양식 기업입니다. 항생제 없이, 데이터로 관리되는 수조에서 균일한 품질의 새우를 안정적으로 길러냅니다.</span><span class="t-en">CULIVER is a smart-aquaculture company producing whiteleg shrimp year-round on land with microbial BFT technology — antibiotic-free, in data-managed tanks.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tall bg-card">
+    <div class="wrap">
+      <div class="section-intro reveal">
+        <p class="eyebrow" style="color:#0E4E78">TECHNOLOGY</p>
+        <h2 class="h2 t-ko">핵심 기술</h2>
+        <h2 class="h2 t-en">Core technology</h2>
+      </div>
+      <div class="feature-grid reveal">
+        <div class="feature">
+          <span class="k">01</span>
+          <h3><span class="t-ko">BFT 바이오플락</span><span class="t-en">BFT Bioflocs</span></h3>
+          <p><span class="t-ko">미생물이 사육수 속 유기물을 분해해 물을 되살리는 무환수·저환수 양식 기술입니다.</span><span class="t-en">Microbes break down organic matter in the water, enabling low- and zero-exchange farming.</span></p>
+        </div>
+        <div class="feature">
+          <span class="k">02</span>
+          <h3><span class="t-ko">육상 순환 양식</span><span class="t-en">Land-based farming</span></h3>
+          <p><span class="t-ko">외부 환경에 영향받지 않는 실내 수조에서 연중 균일한 품질로 생산합니다.</span><span class="t-en">Indoor tanks produce a consistent harvest all year, shielded from the outside environment.</span></p>
+        </div>
+        <div class="feature">
+          <span class="k">03</span>
+          <h3><span class="t-ko">Shrimp365 데이터 관제</span><span class="t-en">Shrimp365 monitoring</span></h3>
+          <p><span class="t-ko">수온·용존산소·수질을 실시간으로 모니터링하고 자동 제어합니다.</span><span class="t-en">Water temperature, oxygen, and quality are monitored and controlled in real time.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tall bg-paper">
+    <div class="wrap">
+      <div class="section-intro reveal">
+        <p class="eyebrow" style="color:#0E4E78">PRODUCTS</p>
+        <h2 class="h2 t-ko">제품 · 서비스</h2>
+        <h2 class="h2 t-en">Products &amp; services</h2>
+      </div>
+      <div class="product-grid reveal">
+        <div class="product">
+          <h3><span class="t-ko">무항생제 흰다리새우</span><span class="t-en">Antibiotic-free shrimp</span></h3>
+          <p><span class="t-ko">항생제 없이 길러낸 신선·냉장 새우를 식자재·유통 채널에 공급합니다.</span><span class="t-en">Fresh, chilled, antibiotic-free shrimp for food-service and retail.</span></p>
+        </div>
+        <div class="product">
+          <h3><span class="t-ko">활새우 공급</span><span class="t-en">Live shrimp</span></h3>
+          <p><span class="t-ko">산지에서 직송하는 활새우를 공급합니다.</span><span class="t-en">Live shrimp shipped directly from the farm.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tall bg-card">
+    <div class="wrap">
+      <div class="section-intro reveal">
+        <p class="eyebrow" style="color:#0E4E78">BY THE NUMBERS</p>
+        <h2 class="h2 t-ko">주요 지표</h2>
+        <h2 class="h2 t-en">Key figures</h2>
+        <p class="lead"><span class="t-ko">‘예시’ 표기는 실제 수치로 교체하세요.</span><span class="t-en">Replace any “예시 / replace” figures with real data.</span></p>
+      </div>
+      <div class="metrics reveal">
+        <div class="metric"><span class="v" style="color:#0E4E78">365</span><span class="l"><span class="t-ko">연중 생산일</span><span class="t-en">Days a year</span></span></div>
+        <div class="metric"><span class="v" style="color:#0E4E78">100%</span><span class="l"><span class="t-ko">무항생제</span><span class="t-en">Antibiotic-free</span></span></div>
+        <div class="metric"><span class="v" style="color:#0E4E78">BFT</span><span class="l"><span class="t-ko">핵심 양식 기술</span><span class="t-en">Core method</span></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-paper">
+    <div class="wrap reveal">
+      <div class="cta-band" style="background:linear-gradient(160deg,#081826,#0A2C46 60%,#0E4E78 130%)">
+        <div>
+          <h2><span class="t-ko">컬리버에 대해 더 알고 싶으신가요?</span><span class="t-en">Want to know more about CULIVER?</span></h2>
+          <p><span class="t-ko">사업 제휴·제품·구매 문의를 환영합니다.</span><span class="t-en">We welcome partnership, product, and purchase inquiries.</span></p>
+        </div>
+        <a class="btn btn-primary" href="contact.html"><span class="t-ko">문의하기</span><span class="t-en">Contact</span> →</a>
+      </div>
+    </div>
+  </section>
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="mark"><span class="m">CULIVER</span><span class="s">GROUP</span></div>
+          <p class="t-ko">바다에서 농장까지, 순환하는 내일을 기릅니다.</p>
+          <p class="t-en">From ocean to farm, we cultivate a circular tomorrow.</p>
+        </div>
+        <div class="footer-cols">
+          <div class="footer-col">
+            <span class="head">FAMILY</span>
+            <a href="culiver-aqua.html">컬리버 <span class="rom">CULIVER</span></a>
+            <a href="amp.html">에이엠피 <span class="rom">AMP</span></a>
+            <a href="cobaltive.html">코발티브 <span class="rom">COBALTIVE</span></a>
+            <a href="susinje-farm.html">수신제팜 <span class="rom">SUSINJE FARM</span></a>
+          </div>
+          <div class="footer-col">
+            <span class="head">GROUP</span>
+            <a href="about.html"><span class="t-ko">그룹소개</span><span class="t-en">About</span></a>
+            <a href="about.html#history"><span class="t-ko">연혁</span><span class="t-en">History</span></a>
+            <a href="sustainability.html"><span class="t-ko">지속가능경영</span><span class="t-en">Sustainability</span></a>
+            <a href="careers.html"><span class="t-ko">채용</span><span class="t-en">Careers</span></a>
+          </div>
+          <div class="footer-col">
+            <span class="head">CONTACT</span>
+            <a href="contact.html"><span class="t-ko">문의하기</span><span class="t-en">Contact</span></a>
+            <span>contact@culiver.co.kr</span>
+            <span>T. 000-0000-0000</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 CULIVER GROUP. All rights reserved.</span>
+        <span class="t-ko">사업자 정보 · 주소는 실제 정보로 교체하세요</span>
+        <span class="t-en">Replace with real business registration &amp; address</span>
+      </div>
+    </div>
+  </footer>
+
+  <button class="to-top" id="toTop" aria-label="top">↑</button>
+
+  <script src="assets/js/main.js"></script>
 </body>
 </html>

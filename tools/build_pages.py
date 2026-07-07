@@ -3,11 +3,13 @@
 """
 Static page generator for the CULIVER GROUP site.
 
-Emits index.html and the corporate sub-pages (about, business,
-sustainability, newsroom, careers, contact) sharing one header, footer,
-and mobile menu so the chrome stays consistent. Pure output — the site
-needs no build step to run; this is only a dev convenience for keeping
-the shared markup DRY. Run from the repo root:  python3 tools/build_pages.py
+Emits the homepage, the corporate sub-pages, and the detail pages
+(affiliate companies, news articles, job postings) — all sharing one
+header, footer, and mobile menu so the chrome stays consistent. Output
+is plain static HTML; the site needs no build step to run. This script
+is only a dev convenience for keeping shared markup DRY.
+
+    python3 tools/build_pages.py
 """
 import os
 
@@ -50,9 +52,9 @@ def head(title, desc):
 def header(active):
     links = ""
     for href, ko, en in NAV:
-        cur = " current" if href == active else ""
+        cur = "current" if href == active else ""
         links += (
-            f'        <a href="{href}" class="{cur.strip()}">'
+            f'        <a href="{href}" class="{cur}">'
             f'<span class="t-ko">{ko}</span><span class="t-en">{en}</span></a>\n'
         )
     return (
@@ -143,10 +145,19 @@ FOOTER = """  <footer class="footer">
 """
 
 
-def page_hero(eyebrow, title_ko, title_en, sub_ko, sub_en, crumb_ko, crumb_en):
-    return f"""  <section class="page-hero">
+def page_hero(eyebrow, title_ko, title_en, sub_ko, sub_en, crumbs, bg=None):
+    """crumbs: list of (href_or_None, ko, en) between Home and current."""
+    parts = ['<a href="index.html"><span class="t-ko">홈</span><span class="t-en">Home</span></a>']
+    for href, ko, en in crumbs:
+        parts.append('<span class="sep">/</span>')
+        if href:
+            parts.append(f'<a href="{href}"><span class="t-ko">{ko}</span><span class="t-en">{en}</span></a>')
+        else:
+            parts.append(f'<span class="t-ko">{ko}</span><span class="t-en">{en}</span>')
+    style = f' style="background:{bg}"' if bg else ""
+    return f"""  <section class="page-hero"{style}>
     <div class="inner">
-      <nav class="breadcrumb"><a href="index.html"><span class="t-ko">홈</span><span class="t-en">Home</span></a><span class="sep">/</span><span class="t-ko">{crumb_ko}</span><span class="t-en">{crumb_en}</span></nav>
+      <nav class="breadcrumb">{''.join(parts)}</nav>
       <p class="eyebrow">{eyebrow}</p>
       <h1><span class="t-ko">{title_ko}</span><span class="t-en">{title_en}</span></h1>
       <p class="sub"><span class="t-ko">{sub_ko}</span><span class="t-en">{sub_en}</span></p>
@@ -155,58 +166,144 @@ def page_hero(eyebrow, title_ko, title_en, sub_ko, sub_en, crumb_ko, crumb_en):
 """
 
 
-# ------------------------------------------------------------------ reusable blocks
+# ------------------------------------------------------------------ data
 BIZ = [
-    ("culiver-aqua.html", "01", "#0E4E78", "biz-culiver.jpg", False,
-     "linear-gradient(150deg,rgba(14,78,120,.5),rgba(10,44,70,.72))", "rgba(14,78,120,.08)",
-     "스마트 양식", "SMART AQUACULTURE", "컬리버", "CULIVER",
-     "미생물 기반 BFT 바이오플락 기술로 흰다리새우를 육상에서 연중 안정 생산합니다. 항생제 없는 양식, 데이터로 관리되는 수조.",
-     "Year-round, land-based whiteleg shrimp production powered by microbial BFT technology — antibiotic-free, data-managed.",
-     ["흰다리새우", "BFT 바이오플락", "Shrimp365"]),
-    ("amp.html", "02", "#1E7F96", "biz-amp.jpg", True,
-     "linear-gradient(150deg,rgba(30,127,150,.46),rgba(15,74,92,.72))", "rgba(30,127,150,.09)",
-     "수처리 솔루션", "WATER TREATMENT", "에이엠피", "AMP",
-     "양식장과 산업 현장의 물을 다루는 수처리 엔지니어링. 미생물 제제와 순환여과 시스템으로 물의 순환을 완성합니다.",
-     "Water-treatment engineering for aquaculture and industry — microbial agents and recirculating filtration that close the water loop.",
-     ["수처리 설비", "미생물 제제", "순환여과"]),
-    ("cobaltive.html", "03", "#77653F", "biz-cobaltive.jpg", False,
-     "linear-gradient(150deg,rgba(142,122,92,.46),rgba(94,79,58,.72))", "rgba(142,122,92,.12)",
-     "자원순환 소재", "UPCYCLED MATERIALS", "코발티브", "COBALTIVE",
-     "버려지는 굴 패각을 친환경 소재와 생활 제품으로 되살립니다. 폐기물이 아닌 자원으로 — 숨쉘, 셸픽.",
-     "Discarded oyster shells reborn as eco-materials and everyday products — waste turned back into a resource.",
-     ["굴패각 업사이클", "숨쉘", "셸픽"]),
-    ("susinje-farm.html", "04", "#3E7C4F", "biz-susinje.jpg", True,
-     "linear-gradient(150deg,rgba(62,124,79,.46),rgba(36,82,50,.72))", "rgba(62,124,79,.1)",
-     "스마트팜 · 유통", "SMART FARM · DISTRIBUTION", "수신제팜", "SUSINJE FARM",
-     "데이터 기반 수경재배로 기르고, 산지에서 식탁까지 직접 잇습니다. 스마트팜 재배와 신선 유통을 한 흐름으로.",
-     "Data-driven hydroponic growing connected directly to the table — smart-farm cultivation and fresh distribution in one flow.",
-     ["수경재배", "스마트팜", "신선유통"]),
+    dict(file="culiver-aqua.html", no="01", color="#0E4E78", deep="linear-gradient(160deg,#081826,#0A2C46 60%,#0E4E78 130%)",
+         img="biz-culiver.jpg", right=False,
+         overlay="linear-gradient(150deg,rgba(14,78,120,.5),rgba(10,44,70,.72))", chipbg="rgba(14,78,120,.08)",
+         tko="스마트 양식", ten="SMART AQUACULTURE", nko="컬리버", nen="CULIVER",
+         dko="미생물 기반 BFT 바이오플락 기술로 흰다리새우를 육상에서 연중 안정 생산합니다. 항생제 없는 양식, 데이터로 관리되는 수조.",
+         den="Year-round, land-based whiteleg shrimp production powered by microbial BFT technology — antibiotic-free, data-managed.",
+         chips=["흰다리새우", "BFT 바이오플락", "Shrimp365"],
+         leadko="컬리버는 미생물 기반 BFT(바이오플락) 기술로 흰다리새우를 육상에서 연중 생산하는 스마트 양식 기업입니다. 항생제 없이, 데이터로 관리되는 수조에서 균일한 품질의 새우를 안정적으로 길러냅니다.",
+         leaden="CULIVER is a smart-aquaculture company producing whiteleg shrimp year-round on land with microbial BFT technology — antibiotic-free, in data-managed tanks.",
+         features=[("BFT 바이오플락", "BFT Bioflocs", "미생물이 사육수 속 유기물을 분해해 물을 되살리는 무환수·저환수 양식 기술입니다.", "Microbes break down organic matter in the water, enabling low- and zero-exchange farming."),
+                   ("육상 순환 양식", "Land-based farming", "외부 환경에 영향받지 않는 실내 수조에서 연중 균일한 품질로 생산합니다.", "Indoor tanks produce a consistent harvest all year, shielded from the outside environment."),
+                   ("Shrimp365 데이터 관제", "Shrimp365 monitoring", "수온·용존산소·수질을 실시간으로 모니터링하고 자동 제어합니다.", "Water temperature, oxygen, and quality are monitored and controlled in real time.")],
+         products=[("무항생제 흰다리새우", "Antibiotic-free shrimp", "항생제 없이 길러낸 신선·냉장 새우를 식자재·유통 채널에 공급합니다.", "Fresh, chilled, antibiotic-free shrimp for food-service and retail."),
+                   ("활새우 공급", "Live shrimp", "산지에서 직송하는 활새우를 공급합니다.", "Live shrimp shipped directly from the farm.")],
+         metrics=[("365", "연중 생산일", "Days a year"), ("100%", "무항생제", "Antibiotic-free"), ("BFT", "핵심 양식 기술", "Core method")]),
+    dict(file="amp.html", no="02", color="#1E7F96", deep="linear-gradient(160deg,#081826,#0F4A5C 60%,#1E7F96 130%)",
+         img="biz-amp.jpg", right=True,
+         overlay="linear-gradient(150deg,rgba(30,127,150,.46),rgba(15,74,92,.72))", chipbg="rgba(30,127,150,.09)",
+         tko="수처리 솔루션", ten="WATER TREATMENT", nko="에이엠피", nen="AMP",
+         dko="양식장과 산업 현장의 물을 다루는 수처리 엔지니어링. 미생물 제제와 순환여과 시스템으로 물의 순환을 완성합니다.",
+         den="Water-treatment engineering for aquaculture and industry — microbial agents and recirculating filtration that close the water loop.",
+         chips=["수처리 설비", "미생물 제제", "순환여과"],
+         leadko="에이엠피는 양식장과 산업 현장의 물을 다루는 수처리 엔지니어링 기업입니다. 미생물 제제와 순환여과 시스템으로 물을 정화하고 되돌려, 그룹 순환 구조의 ‘물’ 축을 담당합니다.",
+         leaden="AMP is a water-treatment engineering company for aquaculture and industry. With microbial agents and recirculating systems, it purifies and returns water — the water axis of the group's loop.",
+         features=[("순환여과 시스템(RAS)", "Recirculating systems", "사육수를 여과·정화해 재사용하는 폐쇄형 순환 설비를 설계·시공합니다.", "Closed-loop systems that filter and reuse rearing water."),
+                   ("미생물 제제", "Microbial agents", "수질을 안정화하는 자체 미생물 제제를 개발·생산합니다.", "In-house microbial agents that stabilize water quality."),
+                   ("산업용수 처리", "Industrial water", "산업 현장의 용수·폐수 처리 플랜트를 설계·시공합니다.", "Design and construction of industrial water and wastewater plants.")],
+         products=[("양식 수처리 설비", "Aquaculture systems", "RAS 설계·시공·유지보수 서비스를 제공합니다.", "RAS design, construction, and maintenance."),
+                   ("미생물 제제", "Microbial products", "양식·환경용 미생물 솔루션을 공급합니다.", "Microbial solutions for aquaculture and environment."),
+                   ("산업용수 플랜트", "Industrial plants", "현장 맞춤형 수처리 플랜트를 구축합니다.", "Custom-built water-treatment plants.")],
+         metrics=[("RAS", "핵심 설비", "Core system"), ("예시", "누적 수주 (교체)", "Projects (replace)"), ("예시", "재이용률 % (교체)", "Reuse % (replace)")]),
+    dict(file="cobaltive.html", no="03", color="#77653F", deep="linear-gradient(160deg,#081826,#5E4F3A 60%,#8E7A5C 130%)",
+         img="biz-cobaltive.jpg", right=False,
+         overlay="linear-gradient(150deg,rgba(142,122,92,.46),rgba(94,79,58,.72))", chipbg="rgba(142,122,92,.12)",
+         tko="자원순환 소재", ten="UPCYCLED MATERIALS", nko="코발티브", nen="COBALTIVE",
+         dko="버려지는 굴 패각을 친환경 소재와 생활 제품으로 되살립니다. 폐기물이 아닌 자원으로 — 숨쉘, 셸픽.",
+         den="Discarded oyster shells reborn as eco-materials and everyday products — waste turned back into a resource.",
+         chips=["굴패각 업사이클", "숨쉘", "셸픽"],
+         leadko="코발티브는 버려지는 굴 패각을 친환경 소재와 생활 제품으로 되살리는 자원순환 소재 기업입니다. 폐기물을 자원으로 전환하여 그룹의 순환 고리를 자원 영역까지 넓힙니다.",
+         leaden="COBALTIVE is a circular-materials company that revives discarded oyster shells into eco-materials and products, extending the group's loop into resources.",
+         features=[("패각 정제·가공", "Shell processing", "수거한 굴 패각을 세척·분쇄·정제해 원료화합니다.", "Collected shells are washed, milled, and refined into raw material."),
+                   ("친환경 소재화", "Eco-materials", "탄산칼슘 기반 기능성·건축 소재로 개발합니다.", "Developed into calcium-carbonate-based functional and building materials."),
+                   ("제품화", "Productization", "소재를 생활 제품으로 상품화합니다.", "Materials commercialized into everyday products.")],
+         products=[("숨쉘", "SUMSHELL", "패각 기반 기능성 소재입니다.", "A functional material made from oyster shells."),
+                   ("셸픽", "SHELLPICK", "패각을 업사이클한 생활 제품입니다.", "Upcycled everyday products made from shells.")],
+         metrics=[("Upcycle", "핵심 가치", "Core value"), ("예시", "재활용 패각량 (교체)", "Shells recycled (replace)"), ("예시", "친환경 인증 (교체)", "Eco-cert (replace)")]),
+    dict(file="susinje-farm.html", no="04", color="#3E7C4F", deep="linear-gradient(160deg,#081826,#2A5A38 60%,#3E7C4F 130%)",
+         img="biz-susinje.jpg", right=True,
+         overlay="linear-gradient(150deg,rgba(62,124,79,.46),rgba(36,82,50,.72))", chipbg="rgba(62,124,79,.1)",
+         tko="스마트팜 · 유통", ten="SMART FARM · DISTRIBUTION", nko="수신제팜", nen="SUSINJE FARM",
+         dko="데이터 기반 수경재배로 기르고, 산지에서 식탁까지 직접 잇습니다. 스마트팜 재배와 신선 유통을 한 흐름으로.",
+         den="Data-driven hydroponic growing connected directly to the table — smart-farm cultivation and fresh distribution in one flow.",
+         chips=["수경재배", "스마트팜", "신선유통"],
+         leadko="수신제팜은 데이터 기반 수경재배 스마트팜과 신선 유통을 함께 운영합니다. 순환수로 기른 작물을 산지에서 식탁까지 직접 잇습니다.",
+         leaden="SUSINJE FARM runs data-driven hydroponic smart farms together with fresh distribution, connecting crops grown in recirculated water straight to the table.",
+         features=[("수경재배", "Hydroponics", "흙 없이 양액으로 작물을 균일하게 재배합니다.", "Crops grown uniformly in nutrient solution, without soil."),
+                   ("스마트팜 환경제어", "Smart-farm control", "온도·습도·양액을 데이터로 자동 관리합니다.", "Temperature, humidity, and nutrients managed automatically by data."),
+                   ("신선 유통", "Fresh distribution", "산지-식탁 직배송과 B2B 납품을 운영합니다.", "Farm-to-table delivery and B2B supply.")],
+         products=[("수경재배 채소", "Hydroponic vegetables", "청정 환경에서 기른 신선 채소를 공급합니다.", "Fresh vegetables grown in a clean environment."),
+                   ("정기배송", "Subscription", "가정·기업을 위한 정기 공급 서비스입니다.", "Recurring supply for homes and businesses.")],
+         metrics=[("Farm→Table", "유통 구조", "Model"), ("예시", "재배 면적 (교체)", "Grow area (replace)"), ("예시", "연간 출하량 (교체)", "Annual output (replace)")]),
 ]
 
+NEWS = [
+    dict(tagko="보도자료", tagen="Press", date="2026.06", title="컬리버, BFT 기반 흰다리새우 스마트 양식장 2호기 준공",
+         overlay="linear-gradient(150deg,rgba(14,78,120,.32),rgba(10,44,70,.55))", cover="linear-gradient(150deg,rgba(14,78,120,.5),rgba(10,44,70,.7))",
+         photo="news-1.jpg", color="#0E4E78", chipbg="rgba(14,78,120,.08)",
+         body=["컬리버가 BFT(바이오플락) 기반 흰다리새우 스마트 양식장 2호기를 준공했습니다. 이번 2호기는 데이터 기반 사육 관제 시스템을 전면 적용해 연중 안정 생산 역량을 한층 강화했습니다.",
+               "육상 순환 양식 방식으로 항생제 없이 균일한 품질의 새우를 생산하며, 사육수는 계열사 에이엠피의 수처리 공정과 연계해 순환·재사용됩니다.",
+               "컬리버 그룹은 이번 증설을 계기로 스마트 양식 생산 규모를 지속 확대해 나갈 계획입니다."]),
+    dict(tagko="소식", tagen="Updates", date="2026.05", title="코발티브, 굴패각 업사이클 소재 친환경 인증 획득",
+         overlay="linear-gradient(150deg,rgba(142,122,92,.3),rgba(94,79,58,.55))", cover="linear-gradient(150deg,rgba(142,122,92,.5),rgba(94,79,58,.7))",
+         photo="news-2.jpg", color="#77653F", chipbg="rgba(142,122,92,.12)",
+         body=["코발티브가 굴 패각을 업사이클한 친환경 소재로 인증을 획득했습니다. 버려지던 패각을 자원으로 되살려 폐기물과 배출을 구조적으로 줄이는 성과를 인정받았습니다.",
+               "코발티브는 패각 정제·가공을 통해 탄산칼슘 기반 기능성 소재 ‘숨쉘’과 생활 제품 ‘셸픽’을 선보이고 있습니다.",
+               "앞으로도 자원순환 소재 라인업을 확대해 나갈 예정입니다."]),
+    dict(tagko="소식", tagen="Updates", date="2026.04", title="수신제팜, 데이터 기반 수경재배 채소 정기유통 시작",
+         overlay="linear-gradient(150deg,rgba(62,124,79,.3),rgba(36,82,50,.55))", cover="linear-gradient(150deg,rgba(62,124,79,.5),rgba(36,82,50,.7))",
+         photo="news-3.jpg", color="#3E7C4F", chipbg="rgba(62,124,79,.1)",
+         body=["수신제팜이 데이터 기반 수경재배로 기른 채소의 정기유통을 시작했습니다. 스마트팜 환경제어로 균일한 품질을 유지하며, 산지에서 식탁까지 신선하게 배송합니다.",
+               "순환수를 활용한 재배로 자원 효율을 높였으며, 가정과 기업 고객을 대상으로 정기배송 서비스를 운영합니다."]),
+    dict(tagko="보도자료", tagen="Press", date="2026.03", title="에이엠피, 산업용수 순환여과 플랜트 신규 수주",
+         overlay="linear-gradient(150deg,rgba(30,127,150,.3),rgba(15,74,92,.55))", cover="linear-gradient(150deg,rgba(30,127,150,.5),rgba(15,74,92,.7))",
+         photo="news-4.jpg", color="#1E7F96", chipbg="rgba(30,127,150,.09)",
+         body=["에이엠피가 산업용수 순환여과 플랜트를 신규 수주했습니다. 순환여과(RAS)와 미생물 제제 기술을 결합해 용수 재이용률을 높이는 맞춤형 설비를 공급합니다.",
+               "에이엠피는 양식 수처리에서 축적한 기술을 산업 현장으로 확장하며 수처리 사업 영역을 넓혀가고 있습니다."]),
+    dict(tagko="채용", tagen="Hiring", date="2026.02", title="컬리버 그룹 2026 상반기 신입·경력 공개채용 시작",
+         overlay="linear-gradient(150deg,rgba(11,36,56,.34),rgba(8,24,38,.6))", cover="linear-gradient(150deg,rgba(11,36,56,.55),rgba(8,24,38,.75))",
+         photo="news-5.jpg", color="#0B2438", chipbg="rgba(11,36,56,.08)",
+         body=["컬리버 그룹이 2026년 상반기 신입·경력 공개채용을 시작합니다. 양식 생산, 수처리 엔지니어링, 소재 R&D, 스마트팜 재배 등 계열사 전 직무에서 인재를 모집합니다.",
+               "자세한 직무 내용과 지원 방법은 채용 페이지에서 확인하실 수 있습니다."]),
+    dict(tagko="소식", tagen="Updates", date="2026.01", title="수신제팜 수경재배 채소, 대형 유통사 입점 확정",
+         overlay="linear-gradient(150deg,rgba(62,124,79,.3),rgba(36,82,50,.55))", cover="linear-gradient(150deg,rgba(62,124,79,.5),rgba(36,82,50,.7))",
+         photo="news-6.jpg", color="#3E7C4F", chipbg="rgba(62,124,79,.1)",
+         body=["수신제팜의 수경재배 채소가 대형 유통사 입점을 확정했습니다. 데이터 기반 재배로 균일한 품질을 확보한 점이 좋은 평가를 받았습니다.",
+               "이번 입점을 통해 더 많은 소비자에게 신선한 채소를 선보일 수 있게 되었습니다."]),
+]
 
-def biz_cards():
-    out = ""
-    for href, no, color, img, right, overlay, chipbg, tko, ten, nko, nen, dko, den, chips in BIZ:
-        rc = " img-right" if right else ""
-        chip_html = "".join(
-            f'<span class="chip" style="color:{color};background:{chipbg}">{c}</span>' for c in chips
-        )
-        out += f"""        <a href="{href}" class="biz-card">
-          <div class="biz-media{rc}" style="background-image:{overlay},url('assets/img/{img}')">
-            <span class="biz-no">{no}</span>
-          </div>
-          <div class="biz-body">
-            <p class="biz-tag" style="color:{color}"><span class="t-ko">{tko}</span><span class="t-en">{ten}</span></p>
-            <h3 class="biz-name"><span class="t-ko">{nko}</span><span class="t-en">{nen}</span><span class="rom t-ko">{nen}</span></h3>
-            <p class="biz-desc t-ko">{dko}</p>
-            <p class="biz-desc t-en">{den}</p>
-            <div class="chips">{chip_html}</div>
-            <span class="biz-more" style="color:{color}"><span class="t-ko">자세히 보기</span><span class="t-en">Learn more</span> →</span>
-          </div>
-        </a>
-"""
-    return out
-
+ROLES = [
+    dict(slug="culiver", role="양식 생산 매니저", team="컬리버", color="#0E4E78", loc="충남 태안", type="정규직",
+         duties=[("BFT 양식장 사육수 관리 및 수질 모니터링", "Manage rearing water and monitor quality at BFT farms"),
+                 ("생산 일정·입식·출하 관리", "Plan production, stocking, and harvest"),
+                 ("Shrimp365 데이터 기반 사육 관리", "Run data-driven husbandry with Shrimp365")],
+         quals=[("수산·생물 관련 전공 또는 양식 경력", "Degree in fisheries/biology or aquaculture experience"),
+                ("데이터 기반 생산 관리에 대한 이해", "Understanding of data-driven production"),
+                ("현장 근무 가능자", "Willing to work on-site")],
+         plus=[("흰다리새우·BFT 양식 경험", "Whiteleg shrimp / BFT experience"),
+               ("관련 자격증 보유", "Relevant certifications")]),
+    dict(slug="amp", role="수처리 공정 엔지니어", team="에이엠피", color="#1E7F96", loc="경기 안산", type="정규직",
+         duties=[("순환여과(RAS) 설비 설계·운영", "Design and operate recirculating (RAS) systems"),
+                 ("미생물 제제 적용 및 수질 최적화", "Apply microbial agents and optimize water quality"),
+                 ("산업용수 플랜트 유지보수", "Maintain industrial water plants")],
+         quals=[("환경·화공·기계 관련 전공", "Degree in environmental/chemical/mechanical engineering"),
+                ("수처리 공정에 대한 이해", "Understanding of water-treatment processes"),
+                ("설비 현장 대응 가능자", "Able to respond on-site")],
+         plus=[("RAS·폐수처리 경험", "RAS or wastewater experience"),
+               ("수질환경기사 등 자격증", "Water-quality engineering license")]),
+    dict(slug="cobaltive", role="소재 R&D 연구원", team="코발티브", color="#77653F", loc="경남 통영", type="정규직",
+         duties=[("굴 패각 기반 소재 연구·개발", "Research and develop shell-based materials"),
+                 ("친환경 소재 물성 시험 및 분석", "Test and analyze eco-material properties"),
+                 ("제품화 스케일업 지원", "Support scale-up to products")],
+         quals=[("재료·화학 관련 전공", "Degree in materials/chemistry"),
+                ("실험 설계·분석 역량", "Experiment design and analysis skills"),
+                ("협업 능력", "Collaboration skills")],
+         plus=[("탄산칼슘·친환경 소재 경험", "Calcium-carbonate / eco-material experience"),
+               ("논문·특허 실적", "Publications or patents")]),
+    dict(slug="susinje", role="스마트팜 재배 담당", team="수신제팜", color="#3E7C4F", loc="전북 김제", type="정규직",
+         duties=[("수경재배 작물 재배 및 양액 관리", "Grow hydroponic crops and manage nutrient solution"),
+                 ("스마트팜 환경 데이터 운영", "Operate smart-farm environment data"),
+                 ("출하 품질 관리", "Manage harvest quality")],
+         quals=[("원예·농학 관련 전공 또는 재배 경력", "Degree in horticulture/agriculture or growing experience"),
+                ("스마트팜 시스템에 대한 이해", "Understanding of smart-farm systems"),
+                ("현장 근무 가능자", "Willing to work on-site")],
+         plus=[("수경재배 경험", "Hydroponics experience"),
+               ("스마트팜 운영 경험", "Smart-farm operations experience")]),
+]
 
 VALUES = """      <div class="values reveal">
         <div class="value">
@@ -258,37 +355,6 @@ ESG_CARDS = """      <div class="esg-grid reveal">
       </div>
 """
 
-NEWS = [
-    ("보도자료", "Press", "2026.06", "컬리버, BFT 기반 흰다리새우 스마트 양식장 2호기 준공",
-     "linear-gradient(150deg,rgba(14,78,120,.32),rgba(10,44,70,.55))", "news-1.jpg", "#0E4E78", "rgba(14,78,120,.08)"),
-    ("소식", "Updates", "2026.05", "코발티브, 굴패각 업사이클 소재 친환경 인증 획득",
-     "linear-gradient(150deg,rgba(142,122,92,.3),rgba(94,79,58,.55))", "news-2.jpg", "#77653F", "rgba(142,122,92,.12)"),
-    ("소식", "Updates", "2026.04", "수신제팜, 데이터 기반 수경재배 채소 정기유통 시작",
-     "linear-gradient(150deg,rgba(62,124,79,.3),rgba(36,82,50,.55))", "news-3.jpg", "#3E7C4F", "rgba(62,124,79,.1)"),
-    ("보도자료", "Press", "2026.03", "에이엠피, 산업용수 순환여과 플랜트 신규 수주",
-     "linear-gradient(150deg,rgba(30,127,150,.3),rgba(15,74,92,.55))", "news-4.jpg", "#1E7F96", "rgba(30,127,150,.09)"),
-    ("채용", "Hiring", "2026.02", "컬리버 그룹 2026 상반기 신입·경력 공개채용 시작",
-     "linear-gradient(150deg,rgba(11,36,56,.34),rgba(8,24,38,.6))", "news-5.jpg", "#0B2438", "rgba(11,36,56,.08)"),
-    ("소식", "Updates", "2026.01", "수신제팜 수경재배 채소, 대형 유통사 입점 확정",
-     "linear-gradient(150deg,rgba(62,124,79,.3),rgba(36,82,50,.55))", "news-6.jpg", "#3E7C4F", "rgba(62,124,79,.1)"),
-]
-
-
-def news_cards(limit=None):
-    out = ""
-    for tagko, _tagen, date, title, overlay, photo, color, chipbg in NEWS[:limit]:
-        out += f"""        <a href="newsroom.html" class="news-card" data-tag="{tagko}">
-          <div class="news-photo" style="background-image:{overlay},url('assets/img/{photo}')"></div>
-          <div class="news-body">
-            <div class="news-meta"><span class="news-tag" style="color:{color};background:{chipbg}">{tagko}</span><span class="news-date">{date}</span></div>
-            <h3>{title}</h3>
-            <span class="news-arrow">→</span>
-          </div>
-        </a>
-"""
-    return out
-
-
 CYCLE_BLOCK = """      <div class="cycle-grid reveal">
         <div class="ring" id="ring">
           <div class="ring-dash"></div>
@@ -328,10 +394,7 @@ CYCLE_BLOCK = """      <div class="cycle-grid reveal">
           <p class="t-ko" id="cycleDescKo">육상 BFT 양식장에서 나온 사육수를 에이엠피로 보내 정화합니다. 순환의 출발점입니다.</p>
           <p class="t-en" id="cycleDescEn">Rearing water from land-based BFT farms flows to AMP for treatment — the start of the loop.</p>
           <div class="cycle-dots" id="cycleDots">
-            <span style="width:30px;background:#0E4E78"></span>
-            <span></span>
-            <span></span>
-            <span></span>
+            <span style="width:30px;background:#0E4E78"></span><span></span><span></span><span></span>
           </div>
         </div>
       </div>
@@ -423,17 +486,61 @@ CONTACT_INFO = """      <div class="reveal">
 """
 
 
+def biz_cards():
+    out = ""
+    for c in BIZ:
+        rc = " img-right" if c["right"] else ""
+        chip_html = "".join(f'<span class="chip" style="color:{c["color"]};background:{c["chipbg"]}">{x}</span>' for x in c["chips"])
+        out += f"""        <a href="{c['file']}" class="biz-card">
+          <div class="biz-media{rc}" style="background-image:{c['overlay']},url('assets/img/{c['img']}')">
+            <span class="biz-no">{c['no']}</span>
+          </div>
+          <div class="biz-body">
+            <p class="biz-tag" style="color:{c['color']}"><span class="t-ko">{c['tko']}</span><span class="t-en">{c['ten']}</span></p>
+            <h3 class="biz-name"><span class="t-ko">{c['nko']}</span><span class="t-en">{c['nen']}</span><span class="rom t-ko">{c['nen']}</span></h3>
+            <p class="biz-desc t-ko">{c['dko']}</p>
+            <p class="biz-desc t-en">{c['den']}</p>
+            <div class="chips">{chip_html}</div>
+            <span class="biz-more" style="color:{c['color']}"><span class="t-ko">자세히 보기</span><span class="t-en">Learn more</span> →</span>
+          </div>
+        </a>
+"""
+    return out
+
+
+def news_cards(limit=None):
+    out = ""
+    for i, n in enumerate(NEWS[:limit]):
+        out += f"""        <a href="news-{i+1}.html" class="news-card" data-tag="{n['tagko']}">
+          <div class="news-photo" style="background-image:{n['overlay']},url('assets/img/{n['photo']}')"></div>
+          <div class="news-body">
+            <div class="news-meta"><span class="news-tag" style="color:{n['color']};background:{n['chipbg']}">{n['tagko']}</span><span class="news-date">{n['date']}</span></div>
+            <h3>{n['title']}</h3>
+            <span class="news-arrow">→</span>
+          </div>
+        </a>
+"""
+    return out
+
+
+def roles_list():
+    out = ""
+    for r in ROLES:
+        out += f"""        <a href="careers-{r['slug']}.html" class="role">
+          <span class="role-title">{r['role']}</span>
+          <span class="role-team" style="color:{r['color']}">{r['team']}</span>
+          <span class="role-loc">{r['loc']}</span>
+          <span class="role-type">{r['type']} →</span>
+        </a>
+"""
+    return out
+
+
 def write(name, body, active=None, subpage=True):
     cls = ' class="subpage"' if subpage else ""
     dp = f' data-page="{active}"' if active else ""
-    html = (
-        head(TITLES[name][0], TITLES[name][1])
-        + f'<body data-lang="ko"{cls}{dp}>\n\n'
-        + header(active if subpage else None)
-        + mobile_menu()
-        + body
-        + FOOTER
-    )
+    title, desc = TITLES.get(name, (name, ""))
+    html = head(title, desc) + f'<body data-lang="ko"{cls}{dp}>\n\n' + header(active if subpage else None) + mobile_menu() + body + FOOTER
     with open(os.path.join(ROOT, name), "w", encoding="utf-8") as f:
         f.write(html)
     print("wrote", name, f"({len(html)} bytes)")
@@ -442,19 +549,19 @@ def write(name, body, active=None, subpage=True):
 TITLES = {
     "index.html": ("컬리버 그룹 CULIVER GROUP — 바다에서 농장까지, 순환하는 내일을 기릅니다",
                    "컬리버 그룹은 스마트 양식, 수처리, 자원순환 소재, 스마트팜을 잇는 지속가능한 생산 생태계를 만들어 갑니다."),
-    "about.html": ("그룹소개 About — 컬리버 그룹 CULIVER GROUP",
-                   "‘기른다’는 하나의 동사에서 출발한 컬리버 그룹의 비전과 연혁, 그룹 개요를 소개합니다."),
-    "business.html": ("사업영역 Business — 컬리버 그룹 CULIVER GROUP",
-                      "스마트 양식·수처리·자원순환 소재·스마트팜, 하나의 순환으로 연결된 컬리버 그룹의 네 개 사업."),
-    "sustainability.html": ("지속가능경영 Sustainability — 컬리버 그룹 CULIVER GROUP",
-                            "ESG는 별도 활동이 아니라 컬리버 그룹 네 사업이 존재하는 이유입니다."),
-    "newsroom.html": ("뉴스룸 Newsroom — 컬리버 그룹 CULIVER GROUP",
-                      "컬리버 그룹과 계열사의 보도자료·소식·채용 소식을 전합니다."),
-    "careers.html": ("채용 Careers — 컬리버 그룹 CULIVER GROUP",
-                     "바다와 농장, 실험실과 현장을 잇는 사람들을 찾습니다. 인재상·채용 절차·공고·복리후생 안내."),
-    "contact.html": ("문의 Contact — 컬리버 그룹 CULIVER GROUP",
-                     "사업 제휴, 투자, 제품·구매, 채용 등 컬리버 그룹에 문의하세요."),
+    "about.html": ("그룹소개 About — 컬리버 그룹 CULIVER GROUP", "‘기른다’는 하나의 동사에서 출발한 컬리버 그룹의 비전과 연혁, 조직, 그룹 개요를 소개합니다."),
+    "business.html": ("사업영역 Business — 컬리버 그룹 CULIVER GROUP", "스마트 양식·수처리·자원순환 소재·스마트팜, 하나의 순환으로 연결된 컬리버 그룹의 네 개 사업."),
+    "sustainability.html": ("지속가능경영 Sustainability — 컬리버 그룹 CULIVER GROUP", "ESG는 별도 활동이 아니라 컬리버 그룹 네 사업이 존재하는 이유입니다."),
+    "newsroom.html": ("뉴스룸 Newsroom — 컬리버 그룹 CULIVER GROUP", "컬리버 그룹과 계열사의 보도자료·소식·채용 소식을 전합니다."),
+    "careers.html": ("채용 Careers — 컬리버 그룹 CULIVER GROUP", "바다와 농장, 실험실과 현장을 잇는 사람들을 찾습니다. 인재상·채용 절차·공고·복리후생 안내."),
+    "contact.html": ("문의 Contact — 컬리버 그룹 CULIVER GROUP", "사업 제휴, 투자, 제품·구매, 채용 등 컬리버 그룹에 문의하세요."),
 }
+for _c in BIZ:
+    TITLES[_c["file"]] = (f"{_c['nko']} {_c['nen']} — 컬리버 그룹 CULIVER GROUP", _c["dko"])
+for _i, _n in enumerate(NEWS, 1):
+    TITLES[f"news-{_i}.html"] = (f"{_n['title']} — 컬리버 그룹 뉴스룸", _n["title"])
+for _r in ROLES:
+    TITLES[f"careers-{_r['slug']}.html"] = (f"{_r['role']} ({_r['team']}) 채용 — 컬리버 그룹", f"{_r['team']} {_r['role']} 채용 공고")
 
 # ================================================================= HOME
 home = f"""  <section id="top" class="hero">
@@ -560,7 +667,7 @@ about = (
     page_hero("ABOUT CULIVER GROUP", "기르는 일의 순환을 설계합니다", "We design the cycle of cultivation",
               "‘기른다’는 하나의 동사에서 출발한 네 개의 사업이 하나의 순환으로 연결됩니다.",
               "Four businesses born from a single verb — to cultivate — connected as one loop.",
-              "그룹소개", "About")
+              [("about.html", "그룹소개", "About")])
     + """  <section class="section bg-paper">
     <div class="wrap">
       <div class="greeting reveal">
@@ -606,6 +713,27 @@ about = (
   <section class="section tall bg-card">
     <div class="wrap">
       <div class="section-intro reveal">
+        <p class="eyebrow">ORGANIZATION</p>
+        <h2 class="h2 t-ko">그룹 구조</h2>
+        <h2 class="h2 t-en">Group structure</h2>
+        <p class="lead"><span class="t-ko">지주 체제 아래 네 개의 계열사가 하나의 순환으로 연결됩니다.</span><span class="t-en">Under a holding structure, four affiliates are connected as one loop.</span></p>
+      </div>
+      <div class="org reveal">
+        <div class="org-top"><div class="t">컬리버 그룹</div><div class="s">CULIVER GROUP · HOLDINGS</div></div>
+        <div class="org-stem"></div>
+        <div class="org-row">
+          <a class="org-node" href="culiver-aqua.html" style="text-decoration:none;color:inherit"><div class="nm">컬리버</div><div class="en">CULIVER</div><div class="role">스마트 양식</div></a>
+          <a class="org-node" href="amp.html" style="text-decoration:none;color:inherit;border-top-color:#1E7F96"><div class="nm">에이엠피</div><div class="en">AMP</div><div class="role">수처리</div></a>
+          <a class="org-node" href="cobaltive.html" style="text-decoration:none;color:inherit;border-top-color:#8E7A5C"><div class="nm">코발티브</div><div class="en">COBALTIVE</div><div class="role">자원순환 소재</div></a>
+          <a class="org-node" href="susinje-farm.html" style="text-decoration:none;color:inherit;border-top-color:#3E7C4F"><div class="nm">수신제팜</div><div class="en">SUSINJE FARM</div><div class="role">스마트팜·유통</div></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tall bg-paper">
+    <div class="wrap">
+      <div class="section-intro reveal">
         <p class="eyebrow">GROUP OVERVIEW</p>
         <h2 class="h2 t-ko">그룹 개요</h2>
         <h2 class="h2 t-en">At a glance</h2>
@@ -619,6 +747,25 @@ about = (
       </dl>
     </div>
   </section>
+
+  <section class="section tall bg-card">
+    <div class="wrap">
+      <div class="section-intro reveal">
+        <p class="eyebrow">BRAND IDENTITY</p>
+        <h2 class="h2 t-ko">그룹 컬러</h2>
+        <h2 class="h2 t-en">Group colors</h2>
+        <p class="lead"><span class="t-ko">바다에서 농장까지, 순환을 잇는 네 사업의 색을 담았습니다.</span><span class="t-en">From ocean to farm — a palette that links the four businesses of the loop.</span></p>
+      </div>
+      <div class="ci-grid reveal">
+        <div class="swatch"><div class="chip" style="background:#0B2438"></div><div class="meta"><div class="nm">Deep Navy</div><div class="hex">#0B2438</div></div></div>
+        <div class="swatch"><div class="chip" style="background:#0E4E78"></div><div class="meta"><div class="nm">컬리버 Blue</div><div class="hex">#0E4E78</div></div></div>
+        <div class="swatch"><div class="chip" style="background:#1E7F96"></div><div class="meta"><div class="nm">에이엠피 Teal</div><div class="hex">#1E7F96</div></div></div>
+        <div class="swatch"><div class="chip" style="background:#8E7A5C"></div><div class="meta"><div class="nm">코발티브 Sand</div><div class="hex">#8E7A5C</div></div></div>
+        <div class="swatch"><div class="chip" style="background:#3E7C4F"></div><div class="meta"><div class="nm">수신제팜 Green</div><div class="hex">#3E7C4F</div></div></div>
+        <div class="swatch"><div class="chip" style="background:#7FC4C9"></div><div class="meta"><div class="nm">Aqua</div><div class="hex">#7FC4C9</div></div></div>
+      </div>
+    </div>
+  </section>
 """
 )
 write("about.html", about, active="about.html")
@@ -628,7 +775,7 @@ business = (
     page_hero("OUR BUSINESS", "하나의 순환, 네 개의 사업", "One cycle, four businesses",
               "양식에서 나온 물은 정화되고, 껍데기는 소재가 되며, 데이터는 농장으로 이어집니다.",
               "Water is treated and returned, shells become materials, data flows to the farm.",
-              "사업영역", "Business")
+              [("business.html", "사업영역", "Business")])
     + """  <section id="cycle" class="section bg-paper">
     <div class="wrap">
       <div class="cycle-head reveal">
@@ -649,6 +796,7 @@ business = (
         <p class="eyebrow">AFFILIATES</p>
         <h2 class="h2 t-ko">네 개의 계열사</h2>
         <h2 class="h2 t-en">Four affiliates</h2>
+        <p class="lead"><span class="t-ko">각 계열사를 눌러 사업·기술·제품을 자세히 확인하세요.</span><span class="t-en">Tap each affiliate for its business, technology, and products.</span></p>
       </div>
       <div class="biz-list reveal">
 """
@@ -665,7 +813,7 @@ sustain = (
     page_hero("SUSTAINABILITY", "지속가능성은 사업 그 자체입니다", "Sustainability is the business itself",
               "ESG는 컬리버 그룹의 별도 활동이 아니라, 네 사업이 존재하는 이유입니다.",
               "ESG is not a side program — it is why our four businesses exist.",
-              "지속가능경영", "Sustainability")
+              [("sustainability.html", "지속가능경영", "Sustainability")])
     + """  <section class="section esg">
     <div class="esg-glow"></div>
     <div class="wrap esg-inner">
@@ -683,6 +831,23 @@ sustain = (
     + """    </div>
   </section>
 
+  <section class="section tall bg-paper">
+    <div class="wrap">
+      <div class="section-intro reveal">
+        <p class="eyebrow">IMPACT</p>
+        <h2 class="h2 t-ko">성과 지표</h2>
+        <h2 class="h2 t-en">Our impact</h2>
+        <p class="lead"><span class="t-ko">아래 수치는 예시입니다 — 실제 성과 데이터로 교체하세요.</span><span class="t-en">The figures below are examples — replace with real performance data.</span></p>
+      </div>
+      <div class="metrics reveal">
+        <div class="metric"><span class="v" style="color:#0E4E78">100%</span><span class="l"><span class="t-ko">무항생제 양식</span><span class="t-en">Antibiotic-free</span></span></div>
+        <div class="metric"><span class="v" style="color:#1E7F96">예시</span><span class="l"><span class="t-ko">양식수 재이용률</span><span class="t-en">Water reused</span></span><span class="note"><span class="t-ko">실제 수치로 교체</span><span class="t-en">replace</span></span></div>
+        <div class="metric"><span class="v" style="color:#8E7A5C">예시</span><span class="l"><span class="t-ko">재활용 굴패각(톤)</span><span class="t-en">Shells recycled</span></span><span class="note"><span class="t-ko">실제 수치로 교체</span><span class="t-en">replace</span></span></div>
+        <div class="metric"><span class="v" style="color:#3E7C4F">예시</span><span class="l"><span class="t-ko">지역 일자리</span><span class="t-en">Local jobs</span></span><span class="note"><span class="t-ko">실제 수치로 교체</span><span class="t-en">replace</span></span></div>
+      </div>
+    </div>
+  </section>
+
   <section class="section tall contact">
     <div class="wrap">
       <div class="section-intro on-dark reveal">
@@ -698,6 +863,21 @@ sustain = (
       </div>
     </div>
   </section>
+
+  <section class="section tall bg-card">
+    <div class="wrap">
+      <div class="section-intro reveal">
+        <p class="eyebrow">REPORTS</p>
+        <h2 class="h2 t-ko">지속가능경영 자료</h2>
+        <h2 class="h2 t-en">Reports &amp; resources</h2>
+        <p class="lead"><span class="t-ko">지속가능경영 보고서를 준비 중입니다. 실제 파일로 링크를 교체하세요.</span><span class="t-en">A sustainability report is in preparation — replace the links with real files.</span></p>
+      </div>
+      <div class="report-row reveal">
+        <a class="btn-outline" href="#" onclick="return false"><span class="t-ko">📄 지속가능경영 보고서 (준비 중)</span><span class="t-en">📄 Sustainability report (soon)</span></a>
+        <a class="btn-outline" href="contact.html"><span class="t-ko">문의하기</span><span class="t-en">Contact us</span> →</a>
+      </div>
+    </div>
+  </section>
 """
 )
 write("sustainability.html", sustain, active="sustainability.html")
@@ -707,7 +887,7 @@ newsroom = (
     page_hero("NEWSROOM", "컬리버 그룹 소식", "News from the group",
               "컬리버 그룹과 계열사의 보도자료·소식·채용 소식을 전합니다.",
               "Press releases, updates, and hiring news from CULIVER Group and its affiliates.",
-              "뉴스룸", "Newsroom")
+              [("newsroom.html", "뉴스룸", "Newsroom")])
     + """  <section class="section bg-paper">
     <div class="wrap">
       <div class="news-head reveal">
@@ -738,7 +918,7 @@ careers = (
     page_hero("CAREERS", "기르는 사람들과 함께 자랍니다", "Grow with the growers",
               "바다와 농장, 실험실과 현장을 잇는 사람들을 찾습니다.",
               "We look for people who connect the sea and the farm, the lab and the field.",
-              "채용", "Careers")
+              [("careers.html", "채용", "Careers")])
     + """  <section class="section bg-paper">
     <div class="wrap">
       <div class="section-intro reveal">
@@ -780,11 +960,9 @@ careers = (
         </div>
       </div>
       <div class="roles reveal">
-        <a href="contact.html" class="role"><span class="role-title">양식 생산 매니저</span><span class="role-team" style="color:#0E4E78">컬리버</span><span class="role-loc">충남 태안</span><span class="role-type">정규직 →</span></a>
-        <a href="contact.html" class="role"><span class="role-title">수처리 공정 엔지니어</span><span class="role-team" style="color:#1E7F96">에이엠피</span><span class="role-loc">경기 안산</span><span class="role-type">정규직 →</span></a>
-        <a href="contact.html" class="role"><span class="role-title">소재 R&D 연구원</span><span class="role-team" style="color:#77653F">코발티브</span><span class="role-loc">경남 통영</span><span class="role-type">정규직 →</span></a>
-        <a href="contact.html" class="role"><span class="role-title">스마트팜 재배 담당</span><span class="role-team" style="color:#3E7C4F">수신제팜</span><span class="role-loc">전북 김제</span><span class="role-type">정규직 →</span></a>
-      </div>
+"""
+    + roles_list()
+    + """      </div>
     </div>
   </section>
 
@@ -812,7 +990,7 @@ contact = (
     page_hero("CONTACT", "함께 만들 순환을 제안하세요", "Let's build a loop together",
               "사업 제휴, 투자, 제품·구매, 채용 등 무엇이든 문의해 주세요.",
               "Partnerships, investment, products, hiring — reach out about anything.",
-              "문의", "Contact")
+              [("contact.html", "문의", "Contact")])
     + """  <section class="section contact">
     <div class="wrap contact-grid">
 """
@@ -834,5 +1012,166 @@ contact = (
 """
 )
 write("contact.html", contact, active="contact.html")
+
+# ================================================================= AFFILIATE DETAIL PAGES
+for c in BIZ:
+    feats = "".join(
+        f"""        <div class="feature">
+          <span class="k">{i+1:02d}</span>
+          <h3><span class="t-ko">{fko}</span><span class="t-en">{fen}</span></h3>
+          <p><span class="t-ko">{dko}</span><span class="t-en">{den}</span></p>
+        </div>
+""" for i, (fko, fen, dko, den) in enumerate(c["features"]))
+    prods = "".join(
+        f"""        <div class="product">
+          <h3><span class="t-ko">{pko}</span><span class="t-en">{pen}</span></h3>
+          <p><span class="t-ko">{dko}</span><span class="t-en">{den}</span></p>
+        </div>
+""" for (pko, pen, dko, den) in c["products"])
+    mets = "".join(
+        f"""        <div class="metric"><span class="v" style="color:{c['color']}">{v}</span><span class="l"><span class="t-ko">{lko}</span><span class="t-en">{len_}</span></span></div>
+""" for (v, lko, len_) in c["metrics"])
+    body = (
+        page_hero(c["ten"], c["nko"], c["nen"], c["dko"], c["den"],
+                  [("business.html", "사업영역", "Business"), (None, c["nko"], c["nen"])],
+                  bg=c["deep"])
+        + f"""  <section class="section bg-paper">
+    <div class="wrap">
+      <div class="section-intro reveal" style="text-align:left;max-width:820px;margin-left:0">
+        <p class="eyebrow" style="color:{c['color']}">{c['tko']} · {c['ten']}</p>
+        <h2 class="h2 t-ko">{c['nko']} 소개</h2>
+        <h2 class="h2 t-en">About {c['nen']}</h2>
+        <p class="lead"><span class="t-ko">{c['leadko']}</span><span class="t-en">{c['leaden']}</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tall bg-card">
+    <div class="wrap">
+      <div class="section-intro reveal">
+        <p class="eyebrow" style="color:{c['color']}">TECHNOLOGY</p>
+        <h2 class="h2 t-ko">핵심 기술</h2>
+        <h2 class="h2 t-en">Core technology</h2>
+      </div>
+      <div class="feature-grid reveal">
+{feats}      </div>
+    </div>
+  </section>
+
+  <section class="section tall bg-paper">
+    <div class="wrap">
+      <div class="section-intro reveal">
+        <p class="eyebrow" style="color:{c['color']}">PRODUCTS</p>
+        <h2 class="h2 t-ko">제품 · 서비스</h2>
+        <h2 class="h2 t-en">Products &amp; services</h2>
+      </div>
+      <div class="product-grid reveal">
+{prods}      </div>
+    </div>
+  </section>
+
+  <section class="section tall bg-card">
+    <div class="wrap">
+      <div class="section-intro reveal">
+        <p class="eyebrow" style="color:{c['color']}">BY THE NUMBERS</p>
+        <h2 class="h2 t-ko">주요 지표</h2>
+        <h2 class="h2 t-en">Key figures</h2>
+        <p class="lead"><span class="t-ko">‘예시’ 표기는 실제 수치로 교체하세요.</span><span class="t-en">Replace any “예시 / replace” figures with real data.</span></p>
+      </div>
+      <div class="metrics reveal">
+{mets}      </div>
+    </div>
+  </section>
+
+  <section class="section bg-paper">
+    <div class="wrap reveal">
+      <div class="cta-band" style="background:{c['deep']}">
+        <div>
+          <h2><span class="t-ko">{c['nko']}에 대해 더 알고 싶으신가요?</span><span class="t-en">Want to know more about {c['nen']}?</span></h2>
+          <p><span class="t-ko">사업 제휴·제품·구매 문의를 환영합니다.</span><span class="t-en">We welcome partnership, product, and purchase inquiries.</span></p>
+        </div>
+        <a class="btn btn-primary" href="contact.html"><span class="t-ko">문의하기</span><span class="t-en">Contact</span> →</a>
+      </div>
+    </div>
+  </section>
+"""
+    )
+    write(c["file"], body, active="business.html")
+
+# ================================================================= NEWS DETAIL PAGES
+for i, n in enumerate(NEWS):
+    idx = i + 1
+    prev_link = f'<a href="news-{idx-1}.html">← <span class="t-ko">이전 글</span><span class="t-en">Previous</span></a>' if idx > 1 else '<span class="disabled">← <span class="t-ko">이전 글</span><span class="t-en">Previous</span></span>'
+    next_link = f'<a href="news-{idx+1}.html"><span class="t-ko">다음 글</span><span class="t-en">Next</span> →</a>' if idx < len(NEWS) else '<span class="disabled"><span class="t-ko">다음 글</span><span class="t-en">Next</span> →</span>'
+    paras = "".join(f'          <p>{p}</p>\n' for p in n["body"])
+    body = (
+        page_hero("NEWSROOM", "컬리버 그룹 소식", "News from the group",
+                  "보도자료·소식·채용 소식을 전합니다.", "Press, updates, and hiring news.",
+                  [("newsroom.html", "뉴스룸", "Newsroom"), (None, "기사", "Article")])
+        + f"""  <section class="section bg-paper">
+    <div class="wrap">
+      <article class="article reveal">
+        <div class="art-meta">
+          <span class="art-tag" style="color:{n['color']};background:{n['chipbg']}">{n['tagko']}</span>
+          <span class="art-date">{n['date']}</span>
+        </div>
+        <h1>{n['title']}</h1>
+        <div class="art-cover" style="background-image:{n['cover']},url('assets/img/{n['photo']}')"></div>
+{paras}          <p class="note"><span class="t-ko">※ 본 기사는 예시 콘텐츠입니다. 실제 보도자료·소식으로 교체하세요.</span><span class="t-en">※ Example content — replace with a real article.</span></p>
+      </article>
+      <div class="pager">
+        {prev_link}
+        <a href="newsroom.html"><span class="t-ko">목록</span><span class="t-en">List</span></a>
+        {next_link}
+      </div>
+    </div>
+  </section>
+"""
+    )
+    write(f"news-{idx}.html", body, active="newsroom.html")
+
+# ================================================================= ROLE DETAIL PAGES
+for r in ROLES:
+    duties = "".join(f'            <li><span class="t-ko">{ko}</span><span class="t-en">{en}</span></li>\n' for ko, en in r["duties"])
+    quals = "".join(f'            <li><span class="t-ko">{ko}</span><span class="t-en">{en}</span></li>\n' for ko, en in r["quals"])
+    plus = "".join(f'            <li><span class="t-ko">{ko}</span><span class="t-en">{en}</span></li>\n' for ko, en in r["plus"])
+    body = (
+        page_hero("CAREERS", r["role"], r["role"],
+                  f"{r['team']} · {r['loc']} · {r['type']}", f"{r['team']} · {r['loc']} · {r['type']}",
+                  [("careers.html", "채용", "Careers"), (None, r["role"], r["role"])])
+        + f"""  <section class="section bg-paper">
+    <div class="wrap">
+      <div class="job-grid">
+        <div class="reveal">
+          <div class="job-block">
+            <h3><span class="t-ko">담당 업무</span><span class="t-en">Responsibilities</span></h3>
+            <ul class="ticks">
+{duties}            </ul>
+          </div>
+          <div class="job-block">
+            <h3><span class="t-ko">자격 요건</span><span class="t-en">Requirements</span></h3>
+            <ul class="ticks">
+{quals}            </ul>
+          </div>
+          <div class="job-block">
+            <h3><span class="t-ko">우대 사항</span><span class="t-en">Nice to have</span></h3>
+            <ul class="ticks">
+{plus}            </ul>
+          </div>
+          <p class="note" style="font-size:13px;color:rgba(11,30,45,.45)"><span class="t-ko">※ 본 공고는 예시입니다. 실제 채용 내용으로 교체하세요.</span><span class="t-en">※ Example posting — replace with a real job description.</span></p>
+        </div>
+        <aside class="job-aside reveal">
+          <div class="meta"><span class="k">TEAM</span><span class="v" style="color:{r['color']}">{r['team']}</span></div>
+          <div class="meta"><span class="k">LOCATION</span><span class="v">{r['loc']}</span></div>
+          <div class="meta"><span class="k">TYPE</span><span class="v">{r['type']}</span></div>
+          <a class="btn btn-primary" href="contact.html"><span class="t-ko">지원 · 문의</span><span class="t-en">Apply</span> →</a>
+          <a class="more-link" href="careers.html" style="margin-top:0"><span class="t-ko">← 전체 공고</span><span class="t-en">← All roles</span></a>
+        </aside>
+      </div>
+    </div>
+  </section>
+"""
+    )
+    write(f"careers-{r['slug']}.html", body, active="careers.html")
 
 print("done.")
