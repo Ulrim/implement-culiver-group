@@ -69,8 +69,8 @@
       <p class="hero-eyebrow">CULIVER GROUP</p>
       <h1 class="t-ko">바다에서 농장까지,<br>순환하는 내일을 기릅니다</h1>
       <h1 class="t-en">From ocean to farm,<br>we cultivate a circular tomorrow</h1>
-      <p class="hero-lead t-ko">컬리버 그룹은 스마트 양식, 수처리, 자원순환 소재, 스마트팜을 잇는<br>지속가능한 생산 생태계를 만들어 갑니다.</p>
-      <p class="hero-lead t-en">CULIVER Group builds a sustainable production ecosystem spanning smart aquaculture, water treatment, upcycled materials, and smart farming.</p>
+      <p class="hero-lead t-ko">스마트 양식·수처리·자원순환 소재·스마트팜, 4개 계열사를 둔 지주회사입니다.<br>한 사업의 부산물이 다음 사업의 원료가 되는 순환 생산 구조를 만듭니다.</p>
+      <p class="hero-lead t-en">A holding company over four affiliates — smart aquaculture, water treatment, upcycled materials, and smart farming — where one business's byproduct becomes the next one's raw material.</p>
       <div class="hero-cta">
         <a href="business.html" class="btn btn-primary"><span class="t-ko">사업영역 보기</span><span class="t-en">Our Business</span><span>→</span></a>
         <a href="contact.html" class="btn btn-ghost"><span class="t-ko">문의하기</span><span class="t-en">Contact</span></a>
@@ -123,6 +123,61 @@
           <p class="bento-tag"><span class="t-ko">스마트팜 · 유통</span><span class="t-en">SMART FARM · DISTRIBUTION</span></p>
           <h3 class="bento-name"><span class="t-ko">수신제팜</span><span class="t-en">SUSINJE FARM</span><span class="rom t-ko">SUSINJE FARM</span></h3>
         </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="cycle" class="section tall bg-paper">
+    <div class="wrap">
+      <div class="cycle-head reveal">
+        <p class="eyebrow">THE LOOP</p>
+        <h2 class="h2 t-ko">네 사업이 아니라, 하나의 순환입니다</h2>
+        <h2 class="h2 t-en">Not four businesses — one loop</h2>
+        <p class="sub t-ko">컬리버 그룹이 무엇을 하는 회사인지는 이 순환 하나로 설명됩니다. 노드를 눌러 각 사업이 맡는 역할을 확인하세요.</p>
+        <p class="sub t-en">This loop is the simplest way to understand what CULIVER Group does. Tap a node to see each business's role.</p>
+      </div>
+      <div class="cycle-grid reveal">
+        <div class="ring" id="ring">
+          <div class="ring-dash"></div>
+          <div class="ring-core">
+            <span class="role" id="ringRole" style="color:#0E4E78">양식</span>
+            <span class="ko" id="ringKo">컬리버</span>
+            <span class="en" id="ringEn">CULIVER</span>
+          </div>
+          <button class="node active" data-i="0" data-no="01" data-name-ko="컬리버" data-name-en="CULIVER" data-role="양식" data-color="#0E4E78"
+            data-dko="육상 BFT 양식장에서 나온 사육수를 에이엠피로 보내 정화합니다. 순환의 출발점입니다."
+            data-den="Rearing water from land-based BFT farms flows to AMP for treatment — the start of the loop."
+            style="top:2%;left:50%;background:#0E4E78;box-shadow:0 16px 34px -12px #0E4E78">
+            <span class="no">01</span><span class="nm">컬리버</span>
+          </button>
+          <button class="node" data-i="1" data-no="02" data-name-ko="에이엠피" data-name-en="AMP" data-role="수처리" data-color="#166578"
+            data-dko="정화·순환여과로 되살린 물을 다시 양식장과 스마트팜으로 돌려보냅니다."
+            data-den="Treated, recirculated water returns to the farms and smart-farm greenhouses."
+            style="top:50%;left:98%">
+            <span class="no">02</span><span class="nm">에이엠피</span>
+          </button>
+          <button class="node" data-i="2" data-no="03" data-name-ko="수신제팜" data-name-en="SUSINJE" data-role="재배·유통" data-color="#3E7C4F"
+            data-dko="순환수로 기른 작물을 데이터로 관리하고, 산지에서 식탁까지 직접 유통합니다."
+            data-den="Crops grown with recirculated water, data-managed and delivered farm-to-table."
+            style="top:98%;left:50%">
+            <span class="no">03</span><span class="nm">수신제팜</span>
+          </button>
+          <button class="node" data-i="3" data-no="04" data-name-ko="코발티브" data-name-en="COBALTIVE" data-role="자원순환" data-color="#6E5D38"
+            data-dko="버려지는 굴 패각을 소재로 되살려 그룹의 순환 고리를 자원 영역까지 넓힙니다."
+            data-den="Discarded oyster shells reborn as materials, extending the loop into resources."
+            style="top:50%;left:2%">
+            <span class="no">04</span><span class="nm">코발티브</span>
+          </button>
+        </div>
+        <div class="cycle-detail">
+          <span class="cycle-badge" id="cycleBadge" style="background:#0E4E78">01</span>
+          <h3 id="cycleTitle"><span class="t-ko">컬리버</span><span class="t-en">CULIVER</span> · <span style="color:#0E4E78">양식</span></h3>
+          <p class="t-ko" id="cycleDescKo">육상 BFT 양식장에서 나온 사육수를 에이엠피로 보내 정화합니다. 순환의 출발점입니다.</p>
+          <p class="t-en" id="cycleDescEn">Rearing water from land-based BFT farms flows to AMP for treatment — the start of the loop.</p>
+          <div class="cycle-dots" id="cycleDots">
+            <span class="active" style="background:#0E4E78"></span><span></span><span></span><span></span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -212,8 +267,8 @@
         </div>
         <a class="more-link" href="newsroom.html"><span class="t-ko">뉴스룸 전체 보기</span><span class="t-en">All news</span> →</a>
       </div>
-      <div class="news-grid reveal">
-        <a href="news-1.html" class="news-card" data-tag="보도자료">
+      <div class="news-grid reveal" id="newsPreview">
+        <a href="news.html?id=news-1" class="news-card" data-tag="보도자료">
           <div class="news-photo" role="img" aria-label="컬리버, BFT 기반 흰다리새우 스마트 양식장 2호기 준공 관련 이미지" style="background-image:linear-gradient(150deg,rgba(14,78,120,.32),rgba(10,44,70,.55)),url('assets/img/news-1.jpg')"></div>
           <div class="news-body">
             <div class="news-meta"><span class="news-tag" style="color:#0E4E78;background:rgba(14,78,120,.08)"><span class="t-ko">보도자료</span><span class="t-en">Press</span></span><span class="news-date">2026.06</span></div>
@@ -221,7 +276,7 @@
             <span class="news-arrow">→</span>
           </div>
         </a>
-        <a href="news-2.html" class="news-card" data-tag="소식">
+        <a href="news.html?id=news-2" class="news-card" data-tag="소식">
           <div class="news-photo" role="img" aria-label="코발티브, 굴패각 업사이클 소재 친환경 인증 획득 관련 이미지" style="background-image:linear-gradient(150deg,rgba(142,122,92,.3),rgba(94,79,58,.55)),url('assets/img/news-2.jpg')"></div>
           <div class="news-body">
             <div class="news-meta"><span class="news-tag" style="color:#6E5D38;background:rgba(142,122,92,.12)"><span class="t-ko">소식</span><span class="t-en">Updates</span></span><span class="news-date">2026.05</span></div>
@@ -229,7 +284,7 @@
             <span class="news-arrow">→</span>
           </div>
         </a>
-        <a href="news-3.html" class="news-card" data-tag="소식">
+        <a href="news.html?id=news-3" class="news-card" data-tag="소식">
           <div class="news-photo" role="img" aria-label="수신제팜, 데이터 기반 수경재배 채소 정기유통 시작 관련 이미지" style="background-image:linear-gradient(150deg,rgba(62,124,79,.3),rgba(36,82,50,.55)),url('assets/img/news-3.jpg')"></div>
           <div class="news-body">
             <div class="news-meta"><span class="news-tag" style="color:#3E7C4F;background:rgba(62,124,79,.1)"><span class="t-ko">소식</span><span class="t-en">Updates</span></span><span class="news-date">2026.04</span></div>

@@ -1,0 +1,99 @@
+/* ============================================================
+   Admin panel — a small internal tool, deliberately not styled to
+   match the public marketing site 1:1. It reuses the same brand
+   colors for recognizability but keeps its own compact layout.
+   ============================================================ */
+:root {
+  --ink: #0B2438;
+  --aqua: #1E7F96;
+  --aqua-ink: #166578;
+  --paper: #F6F4EF;
+  --card: #FFFFFF;
+  --line: rgba(11,36,56,.12);
+  --text-2: #445159;
+  --text-3: #5C6971;
+  --danger: #B3261E;
+  --radius: 14px;
+  --focus-ring: 0 0 0 3px rgba(127,196,201,.5);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Pretendard, Roboto, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  min-height: 100vh;
+}
+a { color: var(--aqua-ink); }
+.admin-topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 24px; background: var(--ink); color: #fff;
+}
+.admin-topbar .brand { font-weight: 700; letter-spacing: .02em; }
+.admin-topbar .brand small { display: block; font-weight: 400; font-size: 12px; opacity: .7; }
+.btn {
+  display: inline-flex; align-items: center; gap: 6px; border: none; border-radius: 10px;
+  padding: 10px 16px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit;
+}
+.btn-primary { background: var(--aqua-ink); color: #fff; }
+.btn-primary:hover { background: var(--ink); }
+.btn-ghost { background: transparent; color: inherit; border: 1px solid rgba(255,255,255,.35); }
+.btn-ghost:hover { background: rgba(255,255,255,.1); }
+.btn-line { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+.btn-line:hover { background: rgba(11,36,56,.05); }
+.btn-danger { background: transparent; color: var(--danger); border: 1px solid rgba(179,38,30,.4); }
+.btn-danger:hover { background: rgba(179,38,30,.08); }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+input:focus, select:focus, textarea:focus, button:focus-visible {
+  outline: none; box-shadow: var(--focus-ring); border-color: var(--aqua);
+}
+
+.admin-wrap { max-width: 960px; margin: 0 auto; padding: 32px 24px 80px; }
+
+/* login */
+.login-card {
+  max-width: 360px; margin: 12vh auto 0; background: var(--card); border-radius: var(--radius);
+  padding: 32px; box-shadow: 0 20px 50px -24px rgba(11,30,45,.35);
+}
+.login-card h1 { font-size: 18px; margin: 0 0 4px; }
+.login-card p { color: var(--text-3); font-size: 13px; margin: 0 0 20px; }
+.field { margin-bottom: 14px; }
+.field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+.field input, .field select, .field textarea {
+  width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px;
+  font: inherit; font-size: 14px; background: #fff; color: var(--ink);
+}
+.field textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+.field .hint { font-size: 12px; color: var(--text-3); margin-top: 4px; }
+.error-msg { color: var(--danger); font-size: 13px; margin: 10px 0 0; min-height: 1.2em; }
+
+/* dashboard */
+.admin-head-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; gap: 12px; flex-wrap: wrap; }
+.admin-head-row h2 { font-size: 20px; margin: 0; }
+
+.news-table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: var(--radius); overflow: hidden; box-shadow: 0 12px 32px -20px rgba(11,30,45,.25); }
+.news-table th, .news-table td { text-align: left; padding: 12px 14px; font-size: 13.5px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.news-table th { font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--text-3); background: rgba(11,36,56,.03); }
+.news-table tr:last-child td { border-bottom: none; }
+.news-table .title-cell { max-width: 320px; }
+.news-table .title-cell .en { display: block; font-size: 12px; color: var(--text-3); margin-top: 2px; }
+.status-pill { display: inline-block; padding: 3px 9px; border-radius: 999px; font-size: 11.5px; font-weight: 700; }
+.status-pill.pub { background: rgba(30,127,150,.12); color: var(--aqua-ink); }
+.status-pill.draft { background: rgba(11,36,56,.08); color: var(--text-2); }
+.row-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+.row-actions .btn { padding: 6px 10px; font-size: 12.5px; }
+.empty-state { text-align: center; padding: 40px 20px; color: var(--text-3); }
+
+/* editor */
+.editor-card { background: var(--card); border-radius: var(--radius); padding: 24px; box-shadow: 0 12px 32px -20px rgba(11,30,45,.25); }
+.editor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
+.editor-grid .field.full { grid-column: 1 / -1; }
+@media (max-width: 640px) { .editor-grid { grid-template-columns: 1fr; } }
+.editor-actions { display: flex; gap: 10px; margin-top: 16px; }
+.checkbox-field { display: flex; align-items: center; gap: 8px; }
+.checkbox-field input { width: auto; }
+
+.toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: var(--ink); color: #fff; padding: 10px 18px; border-radius: 10px; font-size: 13.5px; opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s; }
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(-4px); }
+
+.hidden { display: none !important; }
