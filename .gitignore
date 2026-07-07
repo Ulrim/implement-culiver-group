@@ -1,2 +1,13 @@
 .DS_Store
 Thumbs.db
+
+# local env & secrets — never commit
+.env
+.env.local
+.env*.local
+
+# Vercel CLI
+.vercel
+
+# Node
+node_modules/
