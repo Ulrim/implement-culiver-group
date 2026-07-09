@@ -78,10 +78,10 @@
             <div class="field full">
               <label for="fPhotoFile">대표 이미지 (선택)</label>
               <div class="photo-upload">
-                <div class="photo-preview" id="photoPreview"><span class="ph-empty">이미지 없음</span></div>
+                <div class="photo-preview" id="photoPreview" role="img" aria-label="이미지 없음"><span class="ph-empty" aria-hidden="true">이미지 없음</span></div>
                 <div class="photo-upload-controls">
                   <input type="file" id="fPhotoFile" accept="image/jpeg,image/png,image/webp,image/gif">
-                  <p class="hint" id="photoStatus">jpg/png/webp/gif, 4MB 이하. 업로드하면 자동으로 리사이즈되어 JPG로 저장됩니다.</p>
+                  <p class="hint" id="photoStatus" aria-live="polite">jpg/png/webp/gif, 3MB 이하. 업로드하면 자동으로 리사이즈되어 JPG로 저장됩니다.</p>
                   <label for="fPhoto" style="margin-top:10px;display:block">또는 이미지 URL 직접 입력</label>
                   <input type="text" id="fPhoto" placeholder="예: news-1.jpg 또는 https://...">
                 </div>
@@ -90,21 +90,26 @@
             <div class="field full">
               <label>언어별 제목·본문</label>
               <p class="hint">한국어·English는 필수입니다. 나머지 언어는 필요한 만큼만 채우세요 — 비워두면 해당 언어로는 기사가 표시되지 않습니다. 자동 번역은 지원하지 않습니다.</p>
-              <div class="lang-tabs" id="langTabs">
-                <button type="button" class="lang-tab active" data-lang="Ko">한국어<span class="req">*</span></button>
-                <button type="button" class="lang-tab" data-lang="En">English<span class="req">*</span></button>
-                <button type="button" class="lang-tab" data-lang="Vi">Tiếng Việt</button>
-                <button type="button" class="lang-tab" data-lang="Th">ภาษาไทย</button>
-                <button type="button" class="lang-tab" data-lang="Ja">日本語</button>
-                <button type="button" class="lang-tab" data-lang="Zh">中文</button>
+              <div class="lang-tabs" id="langTabs" role="group" aria-label="언어 선택">
+                <button type="button" class="lang-tab active" data-lang="Ko" aria-pressed="true" aria-label="한국어">한국어<span class="req">*</span></button>
+                <button type="button" class="lang-tab" data-lang="En" aria-pressed="false" aria-label="English">English<span class="req">*</span></button>
+                <button type="button" class="lang-tab" data-lang="Vi" aria-pressed="false" aria-label="Tiếng Việt">Tiếng Việt</button>
+                <button type="button" class="lang-tab" data-lang="Th" aria-pressed="false" aria-label="ภาษาไทย">ภาษาไทย</button>
+                <button type="button" class="lang-tab" data-lang="Ja" aria-pressed="false" aria-label="日本語">日本語</button>
+                <button type="button" class="lang-tab" data-lang="Zh" aria-pressed="false" aria-label="中文">中文</button>
               </div>
+              <!-- required is enforced in JS (assets/js/admin.js), not via the
+                   HTML required attribute: a required field inside a hidden
+                   (inactive-tab) panel is silently exempted from native
+                   constraint validation, which would let Save submit an
+                   incomplete article with no error shown at all -->
               <div class="lang-panel" data-lang="Ko">
-                <div class="field"><label for="fTitleKo">제목</label><input type="text" id="fTitleKo" required></div>
-                <div class="field"><label for="fBodyKo">본문 — 한 줄 = 한 문단</label><textarea id="fBodyKo" required></textarea></div>
+                <div class="field"><label for="fTitleKo">제목</label><input type="text" id="fTitleKo"></div>
+                <div class="field"><label for="fBodyKo">본문 — 한 줄 = 한 문단</label><textarea id="fBodyKo"></textarea></div>
               </div>
               <div class="lang-panel hidden" data-lang="En">
-                <div class="field"><label for="fTitleEn">제목</label><input type="text" id="fTitleEn" required></div>
-                <div class="field"><label for="fBodyEn">본문 — 한 줄 = 한 문단</label><textarea id="fBodyEn" required></textarea></div>
+                <div class="field"><label for="fTitleEn">제목</label><input type="text" id="fTitleEn"></div>
+                <div class="field"><label for="fBodyEn">본문 — 한 줄 = 한 문단</label><textarea id="fBodyEn"></textarea></div>
               </div>
               <div class="lang-panel hidden" data-lang="Vi">
                 <div class="field"><label for="fTitleVi">제목</label><input type="text" id="fTitleVi"></div>

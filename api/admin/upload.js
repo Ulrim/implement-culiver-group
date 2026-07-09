@@ -12,8 +12,23 @@
 var auth = require('../_lib/auth');
 var blobLib = require('../_lib/blob');
 
-var MAX_BYTES = 4 * 1024 * 1024; // 4MB — safely under Vercel's 4.5MB request body ceiling
+// 3MB raw -> ~4MB once base64-encoded for the JSON request body (base64
+// inflates size by ~4/3), safely under Vercel's 4.5MB request body ceiling
+var MAX_BYTES = 3 * 1024 * 1024;
 var EXT_BY_TYPE = { 'image/jpeg': 'jpg', 'image/png': 'png', 'image/webp': 'webp', 'image/gif': 'gif' };
+
+// the client always declares a contentType, but nothing stops a direct API
+// caller from lying about it — check the file's actual magic bytes match
+// before trusting it, so this endpoint can't be used to host arbitrary
+// binary content under a false image Content-Type on the project's own
+// trusted Blob domain
+function matchesMagicBytes(buffer, contentType) {
+  if (contentType === 'image/jpeg') return buffer.length >= 3 && buffer[0] === 0xFF && buffer[1] === 0xD8 && buffer[2] === 0xFF;
+  if (contentType === 'image/png') return buffer.length >= 8 && buffer.toString('hex', 0, 8) === '89504e470d0a1a0a';
+  if (contentType === 'image/gif') return buffer.length >= 6 && (buffer.toString('ascii', 0, 6) === 'GIF87a' || buffer.toString('ascii', 0, 6) === 'GIF89a');
+  if (contentType === 'image/webp') return buffer.length >= 12 && buffer.toString('ascii', 0, 4) === 'RIFF' && buffer.toString('ascii', 8, 12) === 'WEBP';
+  return false;
+}
 
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -51,7 +66,10 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ ok: false, error: '이미지 데이터가 비어 있습니다.' });
   }
   if (buffer.length > MAX_BYTES) {
-    return res.status(400).json({ ok: false, error: '이미지 용량은 4MB 이하만 가능합니다.' });
+    return res.status(400).json({ ok: false, error: '이미지 용량은 3MB 이하만 가능합니다.' });
+  }
+  if (!matchesMagicBytes(buffer, contentType)) {
+    return res.status(400).json({ ok: false, error: '올바른 이미지 파일이 아닙니다.' });
   }
 
   try {

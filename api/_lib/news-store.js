@@ -120,7 +120,7 @@ function withPublicFields(a) {
     date: a.date,
     photo: a.photo || null,
     color: theme.color, chipbg: theme.chipbg, overlay: theme.overlay, cover: theme.cover,
-    biz: theme.biz,
+    biz: theme.biz, themeLabelKo: theme.labelKo, themeLabelEn: theme.labelEn,
     published: a.published !== false,
     createdAt: a.createdAt, updatedAt: a.updatedAt
   };
@@ -196,7 +196,12 @@ function validateInput(body) {
   REQUIRED_LANGS.forEach(function (lang) {
     var tk = langKey('title', lang), bk = langKey('body', lang);
     if (!body[tk] || !String(body[tk]).trim()) errors.push(tk + ' is required');
-    if (!Array.isArray(body[bk]) || !body[bk].length) errors.push(bk + ' must be a non-empty array');
+    // check against the EFFECTIVE (trimmed, blank-line-filtered) content,
+    // not the raw array — otherwise e.g. bodyKo: ['   '] passes here as
+    // "non-empty" but sanitizeRecord's identical trim+filter collapses it
+    // to [], silently saving a "required" language with no body
+    var bodyArr = Array.isArray(body[bk]) ? body[bk].filter(function (p) { return p != null && String(p).trim(); }) : [];
+    if (!bodyArr.length) errors.push(bk + ' must be a non-empty array');
   });
   OPTIONAL_LANGS.forEach(function (lang) {
     var tk = langKey('title', lang), bk = langKey('body', lang);
@@ -209,19 +214,27 @@ function validateInput(body) {
   return errors;
 }
 
+// photo is either a short URL (real Blob store / hand-pasted link) or,
+// when BLOB_READ_WRITE_TOKEN isn't configured yet, a full base64 data:
+// URI from api/_lib/blob.js's fallback (see its own comment) — a 4MB
+// image (api/admin/upload.js's own cap) base64-encodes to ~5.6M
+// characters, so the cap here must clear that, not just a normal URL.
+var PHOTO_MAX_CHARS = 6000000;
+var PARAGRAPH_MAX_CHARS = 2000;
+
 function sanitizeRecord(body) {
   var out = {
     theme: body.theme,
     tag: body.tag,
     date: body.date,
-    photo: body.photo ? String(body.photo).trim().slice(0, 500) : null,
+    photo: body.photo ? String(body.photo).trim().slice(0, PHOTO_MAX_CHARS) : null,
     published: body.published !== false
   };
   LANGS.forEach(function (lang) {
     var tk = langKey('title', lang), bk = langKey('body', lang);
     out[tk] = body[tk] ? String(body[tk]).trim().slice(0, 200) : '';
     out[bk] = Array.isArray(body[bk])
-      ? body[bk].map(function (p) { return String(p).trim(); }).filter(Boolean).slice(0, 40)
+      ? body[bk].map(function (p) { return String(p).trim().slice(0, PARAGRAPH_MAX_CHARS); }).filter(Boolean).slice(0, 40)
       : [];
   });
   return out;

@@ -10,14 +10,13 @@
     });
   }
 
-  var THEME_LABELS = {
-    culiver: '컬리버', amp: '에이엠피', cobaltive: '코발티브', susinje: '수신제팜', group: '그룹'
-  };
-
   // capitalized lang codes match both the #fTitle{Lang}/#fBody{Lang} field
-  // ids and the API's title{Lang}/body{Lang} JSON keys 1:1
+  // ids and the API's title{Lang}/body{Lang} JSON keys 1:1. Ko/En are
+  // always the first two (required, matching api/_lib/news-store.js);
+  // EXTRA_LANGS is derived rather than retyped so it can't drift out of
+  // sync with ALL_LANGS.
   var ALL_LANGS = ['Ko', 'En', 'Vi', 'Th', 'Ja', 'Zh'];
-  var EXTRA_LANGS = ['Vi', 'Th', 'Ja', 'Zh'];
+  var EXTRA_LANGS = ALL_LANGS.slice(2);
 
   var loginView = $('#loginView'), listView = $('#listView'), editorView = $('#editorView');
   var logoutBtn = $('#logoutBtn');
@@ -84,10 +83,16 @@
       : '<span class="status-pill draft">임시저장</span>';
   }
 
+  // matches availableArticleLangs() in assets/js/main.js: a language only
+  // "counts" once both title AND body are filled in — a title-only or
+  // body-only language isn't shown to any visitor either, so signaling it
+  // as complete here would mislead the admin
+  function langHasContent(a, lang) {
+    return !!(a['title' + lang] && a['title' + lang].trim()) && !!(a['body' + lang] && a['body' + lang].length);
+  }
+
   function extraLangCount(a) {
-    return EXTRA_LANGS.filter(function (lang) {
-      return (a['title' + lang] && a['title' + lang].trim()) || (a['body' + lang] && a['body' + lang].length);
-    }).length;
+    return EXTRA_LANGS.filter(function (lang) { return langHasContent(a, lang); }).length;
   }
 
   function renderList() {
@@ -96,7 +101,7 @@
       var extra = extraLangCount(a);
       return '<tr>' +
         '<td>' + escHtml(a.date) + '</td>' +
-        '<td>' + escHtml(THEME_LABELS[a.theme] || a.theme) + '</td>' +
+        '<td>' + escHtml(a.themeLabelKo || a.theme) + '</td>' +
         '<td>' + escHtml(a.tagKo) + '</td>' +
         '<td class="title-cell">' + escHtml(a.titleKo) + '<span class="en">' + escHtml(a.titleEn) +
         (extra ? ' · +' + extra + '개 언어' : '') + '</span></td>' +
@@ -133,18 +138,16 @@
   /* ---------------------------------------------- editor */
   var editorForm = $('#editorForm'), editorError = $('#editorError'), deleteBtn = $('#deleteBtn');
   var fPhotoFile = $('#fPhotoFile'), fPhoto = $('#fPhoto'), photoPreview = $('#photoPreview'), photoStatus = $('#photoStatus');
-  var PHOTO_HINT = 'jpg/png/webp/gif, 4MB 이하. 업로드하면 자동으로 리사이즈되어 JPG로 저장됩니다.';
+  var PHOTO_HINT = 'jpg/png/webp/gif, 3MB 이하. 업로드하면 자동으로 리사이즈되어 JPG로 저장됩니다.';
 
   /* ---- language tabs ---- */
+  var LANG_TAB_NAMES = { Ko: '한국어', En: 'English', Vi: 'Tiếng Việt', Th: 'ภาษาไทย', Ja: '日本語', Zh: '中文' };
+
   function setupLangTabs() {
     var tabs = $all('.lang-tab');
     var panels = $all('.lang-panel');
     tabs.forEach(function (tab) {
-      tab.addEventListener('click', function () {
-        var lang = tab.getAttribute('data-lang');
-        tabs.forEach(function (t) { t.classList.toggle('active', t === tab); });
-        panels.forEach(function (p) { p.classList.toggle('hidden', p.getAttribute('data-lang') !== lang); });
-      });
+      tab.addEventListener('click', function () { activateLangTab(tab.getAttribute('data-lang')); });
     });
     ALL_LANGS.forEach(function (lang) {
       var title = $('#fTitle' + lang), body = $('#fBody' + lang);
@@ -153,17 +156,28 @@
     });
   }
 
+  // a language only "has content" once BOTH title and body are filled —
+  // matches availableArticleLangs() in assets/js/main.js, which is what
+  // actually decides whether a visitor can pick this language at all
   function updateTabIndicators() {
     ALL_LANGS.forEach(function (lang) {
       var title = $('#fTitle' + lang), body = $('#fBody' + lang);
-      var hasContent = !!(title && title.value.trim()) || !!(body && body.value.trim());
+      var hasContent = !!(title && title.value.trim()) && !!(body && body.value.trim());
       var tab = $('.lang-tab[data-lang="' + lang + '"]');
-      if (tab) tab.classList.toggle('has-content', hasContent);
+      if (!tab) return;
+      tab.classList.toggle('has-content', hasContent);
+      // the has-content dot is decorative (CSS ::after) — fold the same
+      // information into aria-label so screen-reader users get it too
+      tab.setAttribute('aria-label', LANG_TAB_NAMES[lang] + (hasContent ? ' (작성됨)' : ''));
     });
   }
 
   function activateLangTab(lang) {
-    $all('.lang-tab').forEach(function (t) { t.classList.toggle('active', t.getAttribute('data-lang') === lang); });
+    $all('.lang-tab').forEach(function (t) {
+      var active = t.getAttribute('data-lang') === lang;
+      t.classList.toggle('active', active);
+      t.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
     $all('.lang-panel').forEach(function (p) { p.classList.toggle('hidden', p.getAttribute('data-lang') !== lang); });
   }
 
@@ -174,9 +188,11 @@
     if (url) {
       photoPreview.style.backgroundImage = "url('" + url + "')";
       photoPreview.innerHTML = '';
+      photoPreview.setAttribute('aria-label', '업로드된 대표 이미지 미리보기');
     } else {
       photoPreview.style.backgroundImage = '';
-      photoPreview.innerHTML = '<span class="ph-empty">이미지 없음</span>';
+      photoPreview.innerHTML = '<span class="ph-empty" aria-hidden="true">이미지 없음</span>';
+      photoPreview.setAttribute('aria-label', '이미지 없음');
     }
   }
 
@@ -214,6 +230,8 @@
     });
   }
 
+  var photoUploadSeq = 0; // guards against a slower earlier upload's response clobbering a later one
+
   fPhotoFile.addEventListener('change', function () {
     var file = fPhotoFile.files && fPhotoFile.files[0];
     if (!file) return;
@@ -222,6 +240,7 @@
       fPhotoFile.value = '';
       return;
     }
+    var mySeq = ++photoUploadSeq;
     photoStatus.textContent = '업로드 중...';
     resizeImageToJpeg(file, 1600, 0.85)
       .then(function (jpegBlob) { return blobToBase64(jpegBlob); })
@@ -229,6 +248,7 @@
         return api('/api/admin/upload', { method: 'POST', body: { contentType: 'image/jpeg', dataBase64: base64 } });
       })
       .then(function (res) {
+        if (mySeq !== photoUploadSeq) return; // superseded by a later file selection
         if (!res.ok || !res.data.ok) {
           photoStatus.textContent = (res.data && res.data.error) || '업로드에 실패했습니다.';
           return;
@@ -238,6 +258,7 @@
         photoStatus.textContent = '업로드 완료.';
       })
       .catch(function () {
+        if (mySeq !== photoUploadSeq) return;
         photoStatus.textContent = '업로드 중 오류가 발생했습니다.';
       })
       .then(function () { fPhotoFile.value = ''; });
@@ -294,8 +315,30 @@
     });
   });
 
+  var REQUIRED_ADMIN_LANGS = ['Ko', 'En'];
+  var REQUIRED_LANG_NAMES = { Ko: '한국어', En: '영어' };
+
   editorForm.addEventListener('submit', function (e) {
     e.preventDefault();
+    editorError.textContent = '';
+
+    // required-language check by hand: the HTML `required` attribute
+    // can't be relied on here because #fTitleEn/#fBodyEn (and any other
+    // language's fields) live inside a .lang-panel that's display:none
+    // while that tab isn't active, and browsers silently exempt hidden
+    // fields from constraint validation — Save would otherwise post
+    // nothing and show no error at all if the admin never opens the
+    // English tab
+    var missingLang = REQUIRED_ADMIN_LANGS.filter(function (lang) {
+      var title = $('#fTitle' + lang), body = $('#fBody' + lang);
+      return !(title && title.value.trim()) || !(body && body.value.trim());
+    })[0];
+    if (missingLang) {
+      activateLangTab(missingLang);
+      editorError.textContent = REQUIRED_LANG_NAMES[missingLang] + ' 제목과 본문을 입력해 주세요.';
+      return;
+    }
+
     var id = $('#fId').value;
     var payload = {
       theme: $('#fTheme').value,
@@ -309,7 +352,6 @@
       payload['title' + lang] = title ? title.value.trim() : '';
       payload['body' + lang] = body ? body.value.split('\n').map(function (s) { return s.trim(); }).filter(Boolean) : [];
     });
-    editorError.textContent = '';
     var saveBtn = $('#saveBtn');
     saveBtn.disabled = true;
     var req = id
