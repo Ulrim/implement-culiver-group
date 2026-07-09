@@ -33,7 +33,13 @@ module.exports = async function handler(req, res) {
   var expected = process.env.ADMIN_PASSWORD;
   if (!expected) {
     console.error('[admin/login] Missing ADMIN_PASSWORD env var');
-    return res.status(500).json({ ok: false, error: '서버에 관리자 비밀번호가 설정되어 있지 않습니다.' });
+    return res.status(500).json({ ok: false, error: '서버에 ADMIN_PASSWORD 환경 변수가 설정되어 있지 않습니다.' });
+  }
+  if (!process.env.ADMIN_SESSION_SECRET) {
+    // without this, signing the session cookie below throws — fail with a
+    // clear message instead of a raw 500 crash page
+    console.error('[admin/login] Missing ADMIN_SESSION_SECRET env var');
+    return res.status(500).json({ ok: false, error: '서버에 ADMIN_SESSION_SECRET 환경 변수가 설정되어 있지 않습니다.' });
   }
 
   var password = typeof body.password === 'string' ? body.password : '';
