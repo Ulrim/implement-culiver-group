@@ -39,8 +39,9 @@ assets/
 api/
   contact.js              문의 폼 → Resend 이메일 발송
   news/index.js, news/[id].js   뉴스 CRUD API
-  admin/login.js, logout.js, me.js   관리자 세션 인증
-  _lib/kv.js, auth.js, news-store.js  공용 저장소·인증·데이터 모듈
+  admin/login.js, logout.js, me.js, upload.js   관리자 세션 인증 · 이미지 업로드
+  _lib/kv.js, blob.js, auth.js, news-store.js  공용 저장소·인증·데이터 모듈
+package.json              @vercel/blob 의존성 (이미지 업로드에만 사용 — 사이트/빌드 자체는 의존성 없음)
 ```
 
 ## 인터랙션
@@ -100,29 +101,34 @@ Vercel로 배포합니다. 정적 사이트라 빌드 단계가 없으며 `verce
 
 ## 뉴스룸 관리자 (동적, DB 연동)
 
-뉴스룸은 더 이상 빌드 시점 정적 데이터가 아닙니다. `admin.html`에서 로그인해 기사를 작성·수정·삭제·게시/임시저장할 수 있고, 변경 사항은 `newsroom.html` · 홈 화면 미리보기 · 기사 상세 페이지(`news.html?id=...`)에 즉시 반영됩니다.
+뉴스룸은 더 이상 빌드 시점 정적 데이터가 아닙니다. `admin.html`에서 로그인해 기사를 작성·수정·삭제·게시/임시저장할 수 있고, 이미지 업로드와 6개 언어(한국어·영어·베트남어·태국어·일본어·중국어) 입력을 지원합니다. 변경 사항은 `newsroom.html` · 홈 화면 미리보기 · 기사 상세 페이지(`news.html?id=...`)에 즉시 반영됩니다.
 
 **구성**
-- `admin.html` + `assets/js/admin.js` — 로그인 및 CRUD 대시보드 (내부 도구용 페이지, `robots: noindex`)
-- `api/news/*`, `api/admin/*` — 서버리스 API (외부 npm 패키지 없이 Vercel KV REST API를 `fetch`로 직접 호출)
+- `admin.html` + `assets/js/admin.js` — 로그인, CRUD 대시보드, 이미지 업로드, 언어별 탭 입력 (내부 도구용 페이지, `robots: noindex`)
+- `api/news/*`, `api/admin/*` — 서버리스 API
 - `api/_lib/news-store.js` — 기사 스키마·검증·시드 데이터(최초 배포 시 자동으로 6개 예시 기사로 채워짐)
+- `api/_lib/kv.js` — Vercel KV REST API를 `fetch`로 직접 호출 (외부 npm 패키지 없음)
+- `api/_lib/blob.js`, `api/admin/upload.js` — 이미지 업로드. `@vercel/blob` 패키지 사용(이 프로젝트의 유일한 npm 의존성 — `package.json` 참고)
 - `assets/js/main.js`의 `setupNews()` / `setupArticle()` — 공개 페이지에서 `/api/news`를 호출해 목록·상세를 그려냄. **JS가 없는 환경에서는** 빌드 시점에 박제된 예시 6개 기사만 보이는 정적 폴백으로 동작합니다(관리자가 이후에 수정·삭제·추가한 내용은 반영되지 않음 — 동적 CMS와 무빌드 정적 폴백을 동시에 만족시키는 절충입니다).
+
+**다국어 입력에 대해**: 한국어·영어는 필수, 나머지 4개 언어(베트남어·태국어·일본어·중국어)는 선택입니다. **자동/기계 번역은 지원하지 않습니다** — 관리자가 admin.html의 언어 탭에서 직접 입력한 문구만 저장됩니다. 기사 상세 페이지에는 입력된 언어만 선택 버튼으로 노출되며, 기본 선택 언어는 방문자가 사이트 상단에서 고른 한/영 설정을 따릅니다.
 
 **설정 (필수 — 이 단계 없이는 관리자 페이지가 동작하지 않습니다)**
 
-1. **Vercel → Project → Storage → Create Database**에서 KV(Redis 호환) 스토어를 만들고 **Connect to Project**로 연결하세요. 연결하면 `KV_REST_API_URL`, `KV_REST_API_TOKEN` 환경 변수가 프로젝트에 자동으로 추가됩니다. (Vercel의 스토리지 메뉴 구성은 종종 바뀌므로, "KV"라는 이름이 안 보이면 Upstash for Redis 등 Redis 호환 Marketplace 통합을 사용해도 됩니다 — 이 프로젝트는 `KV_REST_API_URL`/`KV_REST_API_TOKEN`이라는 이름의 REST 엔드포인트/토큰만 있으면 됩니다.)
-2. **Settings → Environment Variables**에 아래 두 값을 추가하세요:
+1. **KV(뉴스 데이터베이스)**: Vercel → Project → **Storage → Create Database**에서 KV(Redis 호환) 스토어를 만들고 **Connect to Project**로 연결하세요. 연결하면 `KV_REST_API_URL`, `KV_REST_API_TOKEN` 환경 변수가 자동으로 추가됩니다. ("KV"가 안 보이면 Upstash for Redis 등 Redis 호환 Marketplace 통합을 사용해도 됩니다 — 이 프로젝트는 `KV_REST_API_URL`/`KV_REST_API_TOKEN`이라는 이름의 REST 엔드포인트/토큰만 있으면 됩니다.)
+2. **Blob(이미지 저장소)**: 같은 **Storage** 화면에서 **Create Database → Blob**을 선택해 스토어를 만들고 **Connect to Project**로 연결하세요. 연결하면 `BLOB_READ_WRITE_TOKEN` 환경 변수가 자동으로 추가됩니다.
+3. **Settings → Environment Variables**에 아래 두 값을 직접 추가하세요:
 
    | 변수 | 필수 | 설명 |
    |------|------|------|
    | `ADMIN_PASSWORD` | ✅ | `/admin.html` 로그인 비밀번호 (관리자 1명 기준 — 다중 계정 없음) |
    | `ADMIN_SESSION_SECRET` | ✅ | 로그인 세션 서명용 무작위 문자열. 터미널에서 `openssl rand -hex 32`로 생성해 붙여넣으세요 |
 
-3. 저장 후 재배포 → `/admin.html`에서 비밀번호로 로그인.
+4. 저장 후 재배포 → `/admin.html`에서 비밀번호로 로그인.
 
 **로컬 테스트**
 
-KV 환경 변수 없이 로컬에서 실행하면(`vercel dev`) 메모리 저장소로 자동 대체되어 관리자 UI를 바로 테스트할 수 있습니다 — 단, 서버가 재시작되면 초기화되므로 실제 운영에는 반드시 위 1단계로 KV를 연결해야 합니다.
+KV·Blob 환경 변수 없이 로컬에서 실행하면(`vercel dev`) 둘 다 메모리/데이터 URI로 자동 대체되어 관리자 UI(이미지 업로드 포함)를 바로 테스트할 수 있습니다 — 단, 서버가 재시작되면 초기화되고 이미지도 페이지에 직접 인코딩된 임시 상태이므로, 실제 운영에는 반드시 위 1·2단계로 KV와 Blob을 연결해야 합니다.
 
 ## 페이지별 문구 변경 시트
 

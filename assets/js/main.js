@@ -44,6 +44,15 @@
       btn.textContent = next === 'ko' ? 'EN' : 'KR';
       applyFormI18n();
       try { localStorage.setItem(LANG_KEY, next); } catch (e) { /* storage unavailable */ }
+      // on news.html, the article title/body are painted once by the
+      // in-article language picker (paintArticleLang), not by the t-ko/t-en
+      // CSS toggle this button otherwise drives — re-sync them here so the
+      // sitewide toggle still translates the article, matching every other
+      // page, as long as the target language was actually filled in
+      if (currentArticleLang && typeof availableArticleLangs === 'function') {
+        var langs = availableArticleLangs(currentArticleLang.data);
+        if (langs.indexOf(next) !== -1) paintArticleLang(currentArticleLang.data, next);
+      }
     });
   }
 
@@ -253,13 +262,42 @@
     return iso && iso.length >= 7 ? iso.slice(0, 7).replace('-', '.') : (iso || '');
   }
 
+  // `photo` is admin-authored free text: either a legacy bare filename
+  // (seed data, lives under assets/img/) or a full URL/data: URI (the
+  // upload widget, or a hand-pasted external link) — only the bare
+  // filename needs the assets/img/ prefix.
+  function photoUrl(photo) {
+    if (!photo) return null;
+    if (/^(https?:)?\/\//.test(photo) || photo.indexOf('data:') === 0) return photo;
+    return 'assets/img/' + photo;
+  }
+
+  // Never build a `url(...)` for admin-authored text (photo) into an
+  // HTML string assigned via innerHTML: the browser HTML-decodes the
+  // style="..." attribute BEFORE handing its value to the CSS parser, so
+  // an HTML-escaped quote (&#39;) becomes a real ' again in the CSS
+  // context and can break out of url('...') into sibling declarations —
+  // HTML-escaping cannot make a value safe for a context it isn't being
+  // parsed as. Instead this is set via the CSSOM (element.style.*), which
+  // only ever parses a single property's value and can't inject siblings
+  // regardless of what characters the string contains — see
+  // applyCardPhotos()/paintArticleLang() below, which call this.
+  function cssStringLiteral(s) {
+    return '"' + String(s).replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/[\r\n]/g, '') + '"';
+  }
+
+  function photoBackgroundValue(gradient, photo) {
+    var url = photoUrl(photo);
+    return url ? gradient + ', url(' + cssStringLiteral(url) + ')' : gradient;
+  }
+
   // color/chipbg/overlay/cover are always server-derived from a fixed
   // theme enum (see api/_lib/news-store.js THEMES) — never free text —
-  // so they're safe to place directly into a style attribute.
-  function newsCardHtml(n) {
-    var bg = n.photo ? n.overlay + ",url('assets/img/" + escHtml(n.photo) + "')" : n.overlay;
-    return '<a href="news.html?id=' + encodeURIComponent(n.id) + '" class="news-card" data-tag="' + escHtml(n.tagKo) + '">' +
-      '<div class="news-photo" role="img" aria-label="' + escHtml(n.titleKo) + ' 관련 이미지" style="background-image:' + bg + '"></div>' +
+  // so they're safe to place directly into a style attribute. `photo` is
+  // NOT placed here — see applyCardPhotos().
+  function newsCardHtml(n, index) {
+    return '<a href="news.html?id=' + encodeURIComponent(n.id) + '" class="news-card" data-tag="' + escHtml(n.tagKo) + '" data-card-index="' + index + '">' +
+      '<div class="news-photo" role="img" aria-label="' + escHtml(n.titleKo) + ' 관련 이미지"></div>' +
       '<div class="news-body">' +
       '<div class="news-meta"><span class="news-tag" style="color:' + n.color + ';background:' + n.chipbg + '">' +
       '<span class="t-ko">' + escHtml(n.tagKo) + '</span><span class="t-en">' + escHtml(n.tagEn) + '</span></span>' +
@@ -269,12 +307,20 @@
       '</div></a>';
   }
 
+  function applyCardPhotos(container, items) {
+    items.forEach(function (n, i) {
+      var el = container.querySelector('.news-card[data-card-index="' + i + '"] .news-photo');
+      if (el) el.style.backgroundImage = photoBackgroundValue(n.overlay, n.photo);
+    });
+  }
+
   function loadNewsInto(container, opts) {
     if (!container) return;
     var qs = opts && opts.limit ? '?limit=' + opts.limit : '';
     fetch('/api/news' + qs).then(function (r) { return r.ok ? r.json() : null; }).then(function (data) {
       if (!data || !data.ok || !data.items) return; // keep the static seed fallback already in the DOM
       container.innerHTML = data.items.map(newsCardHtml).join('');
+      applyCardPhotos(container, data.items);
     }).catch(function () {
       // offline / KV not configured yet — static seed cards already rendered stay as-is
     });
@@ -328,12 +374,53 @@
       '</div>';
   }
 
-  function zipParagraphs(ko, en) {
-    ko = ko || []; en = en || [];
-    var n = Math.max(ko.length, en.length);
-    var out = [];
-    for (var i = 0; i < n; i++) out.push([ko[i] || en[i] || '', en[i] || ko[i] || '']);
-    return out;
+  // article title/body support 6 languages (ko/en written at build time
+  // are always present; vi/th/ja/zh are filled in by hand in the admin
+  // editor and may be partial or absent per article) — this in-article
+  // picker is independent of the site-wide KO/EN chrome toggle, which
+  // still only ever shows Korean or English nav/footer/labels.
+  var ARTICLE_LANGS = ['ko', 'en', 'vi', 'th', 'ja', 'zh'];
+  var ARTICLE_LANG_LABELS = { ko: '한국어', en: 'English', vi: 'Tiếng Việt', th: 'ภาษาไทย', ja: '日本語', zh: '中文' };
+
+  function capLang(l) { return l.charAt(0).toUpperCase() + l.slice(1); }
+
+  function availableArticleLangs(n) {
+    return ARTICLE_LANGS.filter(function (l) {
+      var t = n['title' + capLang(l)], b = n['body' + capLang(l)];
+      return !!(t && String(t).trim()) && Array.isArray(b) && b.length > 0;
+    });
+  }
+
+  var currentArticleLang = null; // lets the site-wide KO/EN toggle re-sync the article (see setupLang)
+
+  function paintArticleLang(n, lang) {
+    var titleEl = $('#artTitle'), bodyEl = $('#artBody'), coverEl = $('.art-cover');
+    var title = n['title' + capLang(lang)] || n.titleKo;
+    var paras = n['body' + capLang(lang)];
+    if (!paras || !paras.length) paras = n.bodyKo || [];
+    if (titleEl) titleEl.textContent = title;
+    if (bodyEl) bodyEl.innerHTML = paras.map(function (p) { return '<p>' + escHtml(p) + '</p>'; }).join('');
+    if (coverEl) {
+      coverEl.setAttribute('aria-label', title + ' 관련 이미지');
+      coverEl.style.backgroundImage = photoBackgroundValue(n.cover, n.photo);
+    }
+    document.title = title + ' — 컬리버 그룹 뉴스룸';
+    // both breadcrumb slots get the SAME (currently selected) title, not
+    // separate ko/en text — the article language picker can pick any of 6
+    // languages, not just the 2 the sitewide chrome toggle knows about, so
+    // the breadcrumb must follow the picker, not the chrome language
+    var crumb = $('.page-hero .breadcrumb [aria-current="page"]');
+    if (crumb) {
+      var ko = crumb.querySelector('.t-ko'), en = crumb.querySelector('.t-en');
+      if (ko) ko.textContent = title;
+      if (en) en.textContent = title;
+    }
+    $all('.art-lang').forEach(function (b) {
+      var active = b.getAttribute('data-lang') === lang;
+      b.classList.toggle('active', active);
+      b.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+    currentArticleLang = { data: n, lang: lang };
   }
 
   function aboutCardHtml(bizFile) {
@@ -351,10 +438,12 @@
   }
 
   function renderArticle(root, n, prevId, nextId) {
-    var bg = n.photo ? n.cover + ",url('assets/img/" + escHtml(n.photo) + "')" : n.cover;
-    var paras = zipParagraphs(n.bodyKo, n.bodyEn).map(function (pair) {
-      return '<p><span class="t-ko">' + escHtml(pair[0]) + '</span><span class="t-en">' + escHtml(pair[1]) + '</span></p>';
-    }).join('\n');
+    var langs = availableArticleLangs(n);
+    var siteLang = document.body.getAttribute('data-lang') === 'en' ? 'en' : 'ko';
+    var initialLang = langs.indexOf(siteLang) !== -1 ? siteLang : (langs[0] || 'ko');
+    var langButtons = langs.length > 1 ? langs.map(function (l) {
+      return '<button type="button" class="art-lang' + (l === initialLang ? ' active' : '') + '" data-lang="' + l + '" aria-pressed="' + (l === initialLang ? 'true' : 'false') + '">' + ARTICLE_LANG_LABELS[l] + '</button>';
+    }).join('') : '';
     var prevLink = prevId
       ? '<a href="news.html?id=' + encodeURIComponent(prevId) + '">← <span class="t-ko">이전 글</span><span class="t-en">Previous</span></a>'
       : '<span class="disabled">← <span class="t-ko">이전 글</span><span class="t-en">Previous</span></span>';
@@ -367,22 +456,25 @@
       '<span class="art-tag" style="color:' + n.color + ';background:' + n.chipbg + '">' +
       '<span class="t-ko">' + escHtml(n.tagKo) + '</span><span class="t-en">' + escHtml(n.tagEn) + '</span></span>' +
       '<span class="art-date">' + escHtml(newsDateLabel(n.date)) + '</span></div>' +
-      '<h1><span class="t-ko">' + escHtml(n.titleKo) + '</span><span class="t-en">' + escHtml(n.titleEn) + '</span></h1>' +
-      '<div class="art-cover" role="img" aria-label="' + escHtml(n.titleKo) + ' 관련 이미지" style="background-image:' + bg + '"></div>' +
-      paras +
+      (langButtons ? '<div class="art-langs" id="artLangs" role="group" aria-label="기사 언어 선택">' + langButtons + '</div>' : '') +
+      '<h1 id="artTitle"></h1>' +
+      '<div class="art-cover" role="img"></div>' +
+      '<div id="artBody"></div>' +
       aboutCardHtml(n.biz) +
       '</article>' +
       '<div class="pager">' + prevLink +
       '<a href="newsroom.html"><span class="t-ko">목록</span><span class="t-en">List</span></a>' +
       nextLink + '</div>';
 
-    document.title = n.titleKo + ' — 컬리버 그룹 뉴스룸';
-    var crumb = $('.page-hero .breadcrumb [aria-current="page"]');
-    if (crumb) {
-      var ko = crumb.querySelector('.t-ko'), en = crumb.querySelector('.t-en');
-      if (ko) ko.textContent = n.titleKo;
-      if (en) en.textContent = n.titleEn;
+    var langsEl = $('#artLangs');
+    if (langsEl) {
+      langsEl.addEventListener('click', function (e) {
+        var btn = e.target.closest && e.target.closest('.art-lang');
+        if (!btn) return;
+        paintArticleLang(n, btn.getAttribute('data-lang'));
+      });
     }
+    paintArticleLang(n, initialLang);
   }
 
   /* ---------------------------------------------- CONTACT form */
