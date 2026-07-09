@@ -40,6 +40,17 @@ var TAGS = {
   hiring: { ko: '채용', en: 'Hiring' }
 };
 
+// ko/en are written at build time and must always exist; vi/th/ja/zh are
+// filled in by hand in the admin editor (no machine translation), so an
+// article may legitimately have some or none of them yet.
+var REQUIRED_LANGS = ['ko', 'en'];
+var OPTIONAL_LANGS = ['vi', 'th', 'ja', 'zh'];
+var LANGS = REQUIRED_LANGS.concat(OPTIONAL_LANGS);
+
+function langKey(prefix, lang) {
+  return prefix + lang.charAt(0).toUpperCase() + lang.slice(1);
+}
+
 // the 6 articles tools/build_pages.py originally baked in statically —
 // seeded into KV on first read so the admin panel starts non-empty and
 // can edit/delete them like any other article.
@@ -101,20 +112,27 @@ var SEED = [
 function withPublicFields(a) {
   var theme = THEMES[a.theme] || THEMES.group;
   var tag = TAGS[a.tag] || TAGS.updates;
-  return {
+  var out = {
     id: a.id,
     theme: a.theme,
     tag: a.tag,
     tagKo: tag.ko, tagEn: tag.en,
     date: a.date,
-    titleKo: a.titleKo, titleEn: a.titleEn,
-    bodyKo: a.bodyKo, bodyEn: a.bodyEn,
     photo: a.photo || null,
     color: theme.color, chipbg: theme.chipbg, overlay: theme.overlay, cover: theme.cover,
     biz: theme.biz,
     published: a.published !== false,
     createdAt: a.createdAt, updatedAt: a.updatedAt
   };
+  // always return all 6 languages' keys (empty string/array if that
+  // language hasn't been filled in yet) so callers never have to guard
+  // against a missing key, only against an empty value
+  LANGS.forEach(function (lang) {
+    var tk = langKey('title', lang), bk = langKey('body', lang);
+    out[tk] = a[tk] || '';
+    out[bk] = Array.isArray(a[bk]) ? a[bk] : [];
+  });
+  return out;
 }
 
 function seedRecord(s) {
@@ -175,10 +193,16 @@ async function getWithNeighbors(id, opts) {
 function validateInput(body) {
   var errors = [];
   if (!body || typeof body !== 'object') return ['Invalid payload'];
-  if (!body.titleKo || !String(body.titleKo).trim()) errors.push('titleKo is required');
-  if (!body.titleEn || !String(body.titleEn).trim()) errors.push('titleEn is required');
-  if (!Array.isArray(body.bodyKo) || !body.bodyKo.length) errors.push('bodyKo must be a non-empty array');
-  if (!Array.isArray(body.bodyEn) || !body.bodyEn.length) errors.push('bodyEn must be a non-empty array');
+  REQUIRED_LANGS.forEach(function (lang) {
+    var tk = langKey('title', lang), bk = langKey('body', lang);
+    if (!body[tk] || !String(body[tk]).trim()) errors.push(tk + ' is required');
+    if (!Array.isArray(body[bk]) || !body[bk].length) errors.push(bk + ' must be a non-empty array');
+  });
+  OPTIONAL_LANGS.forEach(function (lang) {
+    var tk = langKey('title', lang), bk = langKey('body', lang);
+    if (body[tk] != null && typeof body[tk] !== 'string') errors.push(tk + ' must be a string');
+    if (body[bk] != null && !Array.isArray(body[bk])) errors.push(bk + ' must be an array');
+  });
   if (!THEMES[body.theme]) errors.push('theme must be one of ' + Object.keys(THEMES).join(', '));
   if (!TAGS[body.tag]) errors.push('tag must be one of ' + Object.keys(TAGS).join(', '));
   if (!body.date || !/^\d{4}-\d{2}-\d{2}$/.test(body.date)) errors.push('date must be YYYY-MM-DD');
@@ -186,17 +210,21 @@ function validateInput(body) {
 }
 
 function sanitizeRecord(body) {
-  return {
+  var out = {
     theme: body.theme,
     tag: body.tag,
     date: body.date,
-    titleKo: String(body.titleKo).trim().slice(0, 200),
-    titleEn: String(body.titleEn).trim().slice(0, 200),
-    bodyKo: body.bodyKo.map(function (p) { return String(p).trim(); }).filter(Boolean).slice(0, 40),
-    bodyEn: body.bodyEn.map(function (p) { return String(p).trim(); }).filter(Boolean).slice(0, 40),
     photo: body.photo ? String(body.photo).trim().slice(0, 500) : null,
     published: body.published !== false
   };
+  LANGS.forEach(function (lang) {
+    var tk = langKey('title', lang), bk = langKey('body', lang);
+    out[tk] = body[tk] ? String(body[tk]).trim().slice(0, 200) : '';
+    out[bk] = Array.isArray(body[bk])
+      ? body[bk].map(function (p) { return String(p).trim(); }).filter(Boolean).slice(0, 40)
+      : [];
+  });
+  return out;
 }
 
 async function create(body) {
@@ -235,6 +263,7 @@ async function remove(id) {
 
 module.exports = {
   THEMES: THEMES, TAGS: TAGS,
+  LANGS: LANGS, REQUIRED_LANGS: REQUIRED_LANGS, OPTIONAL_LANGS: OPTIONAL_LANGS,
   list: list, getWithNeighbors: getWithNeighbors,
   create: create, update: update, remove: remove
 };

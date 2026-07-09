@@ -75,27 +75,53 @@
               <label for="fDate">날짜</label>
               <input type="date" id="fDate" required>
             </div>
-            <div class="field">
-              <label for="fPhoto">이미지 URL (선택)</label>
-              <input type="text" id="fPhoto" placeholder="예: news-1.jpg 또는 https://...">
-              <p class="hint">assets/img/ 안의 파일명이거나 외부 이미지 URL. 비워두면 색상 그라디언트만 표시됩니다.</p>
+            <div class="field full">
+              <label for="fPhotoFile">대표 이미지 (선택)</label>
+              <div class="photo-upload">
+                <div class="photo-preview" id="photoPreview"><span class="ph-empty">이미지 없음</span></div>
+                <div class="photo-upload-controls">
+                  <input type="file" id="fPhotoFile" accept="image/jpeg,image/png,image/webp,image/gif">
+                  <p class="hint" id="photoStatus">jpg/png/webp/gif, 4MB 이하. 업로드하면 자동으로 리사이즈되어 JPG로 저장됩니다.</p>
+                  <label for="fPhoto" style="margin-top:10px;display:block">또는 이미지 URL 직접 입력</label>
+                  <input type="text" id="fPhoto" placeholder="예: news-1.jpg 또는 https://...">
+                </div>
+              </div>
             </div>
             <div class="field full">
-              <label for="fTitleKo">제목 (한글)</label>
-              <input type="text" id="fTitleKo" required>
-            </div>
-            <div class="field full">
-              <label for="fTitleEn">제목 (영문)</label>
-              <input type="text" id="fTitleEn" required>
-            </div>
-            <div class="field full">
-              <label for="fBodyKo">본문 (한글) — 한 줄 = 한 문단</label>
-              <textarea id="fBodyKo" required></textarea>
-            </div>
-            <div class="field full">
-              <label for="fBodyEn">본문 (영문) — 한 줄 = 한 문단</label>
-              <textarea id="fBodyEn" required></textarea>
-              <p class="hint">한글/영문 문단 줄 수를 맞춰주세요. 다르면 부족한 언어 쪽은 있는 문장으로 채워집니다.</p>
+              <label>언어별 제목·본문</label>
+              <p class="hint">한국어·English는 필수입니다. 나머지 언어는 필요한 만큼만 채우세요 — 비워두면 해당 언어로는 기사가 표시되지 않습니다. 자동 번역은 지원하지 않습니다.</p>
+              <div class="lang-tabs" id="langTabs">
+                <button type="button" class="lang-tab active" data-lang="Ko">한국어<span class="req">*</span></button>
+                <button type="button" class="lang-tab" data-lang="En">English<span class="req">*</span></button>
+                <button type="button" class="lang-tab" data-lang="Vi">Tiếng Việt</button>
+                <button type="button" class="lang-tab" data-lang="Th">ภาษาไทย</button>
+                <button type="button" class="lang-tab" data-lang="Ja">日本語</button>
+                <button type="button" class="lang-tab" data-lang="Zh">中文</button>
+              </div>
+              <div class="lang-panel" data-lang="Ko">
+                <div class="field"><label for="fTitleKo">제목</label><input type="text" id="fTitleKo" required></div>
+                <div class="field"><label for="fBodyKo">본문 — 한 줄 = 한 문단</label><textarea id="fBodyKo" required></textarea></div>
+              </div>
+              <div class="lang-panel hidden" data-lang="En">
+                <div class="field"><label for="fTitleEn">제목</label><input type="text" id="fTitleEn" required></div>
+                <div class="field"><label for="fBodyEn">본문 — 한 줄 = 한 문단</label><textarea id="fBodyEn" required></textarea></div>
+              </div>
+              <div class="lang-panel hidden" data-lang="Vi">
+                <div class="field"><label for="fTitleVi">제목</label><input type="text" id="fTitleVi"></div>
+                <div class="field"><label for="fBodyVi">본문 — 한 줄 = 한 문단</label><textarea id="fBodyVi"></textarea></div>
+              </div>
+              <div class="lang-panel hidden" data-lang="Th">
+                <div class="field"><label for="fTitleTh">제목</label><input type="text" id="fTitleTh"></div>
+                <div class="field"><label for="fBodyTh">본문 — 한 줄 = 한 문단</label><textarea id="fBodyTh"></textarea></div>
+              </div>
+              <div class="lang-panel hidden" data-lang="Ja">
+                <div class="field"><label for="fTitleJa">제목</label><input type="text" id="fTitleJa"></div>
+                <div class="field"><label for="fBodyJa">본문 — 한 줄 = 한 문단</label><textarea id="fBodyJa"></textarea></div>
+              </div>
+              <div class="lang-panel hidden" data-lang="Zh">
+                <div class="field"><label for="fTitleZh">제목</label><input type="text" id="fTitleZh"></div>
+                <div class="field"><label for="fBodyZh">본문 — 한 줄 = 한 문단</label><textarea id="fBodyZh"></textarea></div>
+              </div>
             </div>
             <div class="field full checkbox-field">
               <input type="checkbox" id="fPublished" checked>

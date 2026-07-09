@@ -328,12 +328,39 @@
       '</div>';
   }
 
-  function zipParagraphs(ko, en) {
-    ko = ko || []; en = en || [];
-    var n = Math.max(ko.length, en.length);
-    var out = [];
-    for (var i = 0; i < n; i++) out.push([ko[i] || en[i] || '', en[i] || ko[i] || '']);
-    return out;
+  // article title/body support 6 languages (ko/en written at build time
+  // are always present; vi/th/ja/zh are filled in by hand in the admin
+  // editor and may be partial or absent per article) — this in-article
+  // picker is independent of the site-wide KO/EN chrome toggle, which
+  // still only ever shows Korean or English nav/footer/labels.
+  var ARTICLE_LANGS = ['ko', 'en', 'vi', 'th', 'ja', 'zh'];
+  var ARTICLE_LANG_LABELS = { ko: '한국어', en: 'English', vi: 'Tiếng Việt', th: 'ภาษาไทย', ja: '日本語', zh: '中文' };
+
+  function capLang(l) { return l.charAt(0).toUpperCase() + l.slice(1); }
+
+  function availableArticleLangs(n) {
+    return ARTICLE_LANGS.filter(function (l) {
+      var t = n['title' + capLang(l)], b = n['body' + capLang(l)];
+      return !!(t && String(t).trim()) && Array.isArray(b) && b.length > 0;
+    });
+  }
+
+  function paintArticleLang(n, lang) {
+    var titleEl = $('#artTitle'), bodyEl = $('#artBody'), coverEl = $('.art-cover');
+    var title = n['title' + capLang(lang)] || n.titleKo;
+    var paras = n['body' + capLang(lang)];
+    if (!paras || !paras.length) paras = n.bodyKo || [];
+    if (titleEl) titleEl.textContent = title;
+    if (bodyEl) bodyEl.innerHTML = paras.map(function (p) { return '<p>' + escHtml(p) + '</p>'; }).join('');
+    if (coverEl) coverEl.setAttribute('aria-label', title + ' 관련 이미지');
+    document.title = title + ' — 컬리버 그룹 뉴스룸';
+    var crumb = $('.page-hero .breadcrumb [aria-current="page"]');
+    if (crumb) {
+      var ko = crumb.querySelector('.t-ko'), en = crumb.querySelector('.t-en');
+      if (ko) ko.textContent = n.titleKo;
+      if (en) en.textContent = n.titleEn;
+    }
+    $all('.art-lang').forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-lang') === lang); });
   }
 
   function aboutCardHtml(bizFile) {
@@ -352,9 +379,12 @@
 
   function renderArticle(root, n, prevId, nextId) {
     var bg = n.photo ? n.cover + ",url('assets/img/" + escHtml(n.photo) + "')" : n.cover;
-    var paras = zipParagraphs(n.bodyKo, n.bodyEn).map(function (pair) {
-      return '<p><span class="t-ko">' + escHtml(pair[0]) + '</span><span class="t-en">' + escHtml(pair[1]) + '</span></p>';
-    }).join('\n');
+    var langs = availableArticleLangs(n);
+    var siteLang = document.body.getAttribute('data-lang') === 'en' ? 'en' : 'ko';
+    var initialLang = langs.indexOf(siteLang) !== -1 ? siteLang : (langs[0] || 'ko');
+    var langButtons = langs.length > 1 ? langs.map(function (l) {
+      return '<button type="button" class="art-lang' + (l === initialLang ? ' active' : '') + '" data-lang="' + l + '">' + ARTICLE_LANG_LABELS[l] + '</button>';
+    }).join('') : '';
     var prevLink = prevId
       ? '<a href="news.html?id=' + encodeURIComponent(prevId) + '">← <span class="t-ko">이전 글</span><span class="t-en">Previous</span></a>'
       : '<span class="disabled">← <span class="t-ko">이전 글</span><span class="t-en">Previous</span></span>';
@@ -367,22 +397,25 @@
       '<span class="art-tag" style="color:' + n.color + ';background:' + n.chipbg + '">' +
       '<span class="t-ko">' + escHtml(n.tagKo) + '</span><span class="t-en">' + escHtml(n.tagEn) + '</span></span>' +
       '<span class="art-date">' + escHtml(newsDateLabel(n.date)) + '</span></div>' +
-      '<h1><span class="t-ko">' + escHtml(n.titleKo) + '</span><span class="t-en">' + escHtml(n.titleEn) + '</span></h1>' +
-      '<div class="art-cover" role="img" aria-label="' + escHtml(n.titleKo) + ' 관련 이미지" style="background-image:' + bg + '"></div>' +
-      paras +
+      (langButtons ? '<div class="art-langs" id="artLangs">' + langButtons + '</div>' : '') +
+      '<h1 id="artTitle"></h1>' +
+      '<div class="art-cover" role="img" style="background-image:' + bg + '"></div>' +
+      '<div id="artBody"></div>' +
       aboutCardHtml(n.biz) +
       '</article>' +
       '<div class="pager">' + prevLink +
       '<a href="newsroom.html"><span class="t-ko">목록</span><span class="t-en">List</span></a>' +
       nextLink + '</div>';
 
-    document.title = n.titleKo + ' — 컬리버 그룹 뉴스룸';
-    var crumb = $('.page-hero .breadcrumb [aria-current="page"]');
-    if (crumb) {
-      var ko = crumb.querySelector('.t-ko'), en = crumb.querySelector('.t-en');
-      if (ko) ko.textContent = n.titleKo;
-      if (en) en.textContent = n.titleEn;
+    var langsEl = $('#artLangs');
+    if (langsEl) {
+      langsEl.addEventListener('click', function (e) {
+        var btn = e.target.closest && e.target.closest('.art-lang');
+        if (!btn) return;
+        paintArticleLang(n, btn.getAttribute('data-lang'));
+      });
     }
+    paintArticleLang(n, initialLang);
   }
 
   /* ---------------------------------------------- CONTACT form */
