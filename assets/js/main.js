@@ -368,7 +368,7 @@
   }
 
   function renderArticleError(root) {
-    root.innerHTML = '<div class="article reveal in-view">' +
+    root.innerHTML = '<div class="article">' +
       '<p><span class="t-ko">기사를 찾을 수 없습니다.</span><span class="t-en">Article not found.</span></p>' +
       '<p><a class="btn btn-primary" href="newsroom.html"><span class="t-ko">뉴스룸으로</span><span class="t-en">Back to Newsroom</span></a></p>' +
       '</div>';
@@ -451,7 +451,7 @@
       ? '<a href="news.html?id=' + encodeURIComponent(nextId) + '"><span class="t-ko">다음 글</span><span class="t-en">Next</span> →</a>'
       : '<span class="disabled"><span class="t-ko">다음 글</span><span class="t-en">Next</span> →</span>';
 
-    root.innerHTML = '<article class="article reveal in-view">' +
+    root.innerHTML = '<article class="article">' +
       '<div class="art-meta">' +
       '<span class="art-tag" style="color:' + n.color + ';background:' + n.chipbg + '">' +
       '<span class="t-ko">' + escHtml(n.tagKo) + '</span><span class="t-en">' + escHtml(n.tagEn) + '</span></span>' +
