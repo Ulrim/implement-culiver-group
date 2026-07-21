@@ -134,7 +134,7 @@
 
   /* ---------------------------------------------- REVEAL on scroll */
   function setupReveal() {
-    var reveals = $all('.reveal');
+    var reveals = $all('.reveal, .reveal-stagger');
     if (!('IntersectionObserver' in window)) {
       reveals.forEach(function (e) { e.classList.add('is-visible'); });
       return;
