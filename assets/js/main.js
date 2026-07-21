@@ -82,13 +82,13 @@
       });
     }
 
-    // desktop "Business" dropdown: the panel's visibility is CSS-driven
-    // (:hover/:focus-within on .nav-item-drop); this only keeps the
+    // desktop dropdowns (그룹소개 / 사업영역): panel visibility is CSS-driven
+    // (:hover/:focus-within on .nav-item-drop); this only keeps each toggle's
     // aria-expanded state in sync, since a mismatched ARIA state is worse
-    // than none for screen-reader users.
-    var drop = $('.nav-item-drop');
-    var toggle = drop && $('.nav-drop-toggle', drop);
-    if (drop && toggle) {
+    // than none for screen-reader users. Runs per dropdown so any number work.
+    $all('.nav-item-drop').forEach(function (drop) {
+      var toggle = $('.nav-drop-toggle', drop);
+      if (!toggle) return;
       function closeDrop() { toggle.setAttribute('aria-expanded', 'false'); }
       document.addEventListener('click', function (e) {
         if (!drop.contains(e.target)) closeDrop();
@@ -112,7 +112,7 @@
       });
       drop.addEventListener('mouseenter', function () { toggle.setAttribute('aria-expanded', 'true'); });
       drop.addEventListener('mouseleave', closeDrop);
-    }
+    });
   }
 
   /* ---------------------------------------------- SCROLL: progress + back-to-top */

@@ -49,10 +49,15 @@ NAV = [
     ("about.html", "그룹소개", "About"),
     ("business.html", "사업영역", "Business"),
     ("sustainability.html", "지속가능경영", "Sustainability"),
+    ("ir.html", "투자정보", "IR"),
     ("newsroom.html", "뉴스룸", "Newsroom"),
     ("careers.html", "채용", "Careers"),
-    ("contact.html", "문의", "Contact"),
 ]
+
+# Contact is deliberately NOT in NAV — it renders as a distinct primary
+# CTA button (the site's main conversion path: partnership/investment/
+# purchase inquiries), not a peer text link.
+CONTACT_CTA = ("contact.html", "문의", "Contact")
 
 FAMILY = [
     ("culiver-aqua.html", "컬리버", "CULIVER"),
@@ -60,6 +65,25 @@ FAMILY = [
     ("cobaltive.html", "코발티브", "COBALTIVE"),
     ("susinje-farm.html", "수신제팜", "SUSINJE FARM"),
 ]
+
+# jump-links into the (long, single-page) About page's sections
+ABOUT_SECTIONS = [
+    ("about.html", "그룹 개요", "Overview"),
+    ("about.html#history", "연혁", "History"),
+    ("about.html#org", "조직·지배구조", "Organization"),
+    ("about.html#ci", "브랜드 컬러", "Brand color"),
+]
+
+# top-level items that open a dropdown panel. Each panel gets a labelled
+# heading so the relationship is explicit: under 사업영역 the four items
+# are the group's 계열사(legal entities); under 그룹소개 they are section
+# jump-links. label = (ko, en) heading; items = [(href, ko, en)]; all =
+# optional (href, ko, en) "see all" link shown at the panel foot.
+DROPDOWNS = {
+    "about.html": dict(label=("그룹", "GROUP"), items=ABOUT_SECTIONS, all=None),
+    "business.html": dict(label=("계열사", "AFFILIATES"), items=FAMILY,
+                          all=("business.html", "사업영역 전체 보기", "All businesses")),
+}
 
 
 def head(title, desc):
@@ -78,30 +102,48 @@ def head(title, desc):
     )
 
 
+def _drop_panel(drop):
+    """Render a labelled dropdown panel (heading + items + optional 'see all')."""
+    lko, len_ = drop["label"]
+    out = (
+        f'            <span class="nav-drop-head"><span class="t-ko">{lko}</span>'
+        f'<span class="t-en">{len_}</span></span>\n'
+    )
+    for ih, iko, ien in drop["items"]:
+        out += (
+            f'            <a href="{ih}"><span class="nm t-ko">{iko}</span>'
+            f'<span class="en t-en">{ien}</span></a>\n'
+        )
+    if drop.get("all"):
+        ah, ako, aen = drop["all"]
+        out += (
+            f'            <a href="{ah}" class="nav-drop-all"><span class="t-ko">{ako}</span>'
+            f'<span class="t-en">{aen}</span> →</a>\n'
+        )
+    return out
+
+
 def header(active):
     links = ""
     for href, ko, en in NAV:
-        if href == "business.html":
-            cur = "current" if href == active else ""
-            fam_links = "".join(
-                f'          <a href="{fh}"><span class="nm t-ko">{fko}</span><span class="en t-en">{fen}</span></a>\n'
-                for fh, fko, fen in FAMILY
-            )
+        cur = "current" if href == active else ""
+        if href in DROPDOWNS:
             links += (
                 '        <div class="nav-item-drop">\n'
                 f'          <a href="{href}" class="nav-drop-toggle {cur}" aria-haspopup="true" aria-expanded="false">'
                 f'<span class="t-ko">{ko}</span><span class="t-en">{en}</span><span class="car" aria-hidden="true">▾</span></a>\n'
                 '          <div class="nav-drop-panel">\n'
-                + fam_links +
+                + _drop_panel(DROPDOWNS[href]) +
                 "          </div>\n"
                 "        </div>\n"
             )
         else:
-            cur = "current" if href == active else ""
             links += (
                 f'        <a href="{href}" class="{cur}">'
                 f'<span class="t-ko">{ko}</span><span class="t-en">{en}</span></a>\n'
             )
+    ch, cko, cen = CONTACT_CTA
+    cta_cur = " current" if ch == active else ""
     return (
         '  <div class="progress" id="progress"></div>\n\n'
         '  <header class="gnb" id="gnb">\n'
@@ -113,6 +155,7 @@ def header(active):
         '      <div class="nav-links" id="navLinks">\n'
         + links +
         "      </div>\n"
+        f'      <a href="{ch}" class="nav-cta{cta_cur}"><span class="t-ko">{cko}</span><span class="t-en">{cen}</span></a>\n'
         '      <button class="lang-toggle" id="langToggle">EN</button>\n'
         '      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">☰</button>\n'
         "    </nav>\n"
@@ -121,10 +164,15 @@ def header(active):
 
 
 def mobile_menu():
+    # Contact rides along at the end of the mobile list (it's the CTA on
+    # desktop; on mobile it stays a first-class row so the path is still
+    # one tap away).
+    mob = NAV + [CONTACT_CTA]
     items = ""
-    for i, (href, ko, en) in enumerate(NAV, 1):
+    for i, (href, ko, en) in enumerate(mob, 1):
+        cta = " mm-cta" if href == CONTACT_CTA[0] else ""
         items += (
-            f'      <a href="{href}"><span class="mm-no">{i:02d}</span>'
+            f'      <a href="{href}" class="mm-link{cta}"><span class="mm-no">{i:02d}</span>'
             f'<span class="mm-label"><span class="t-ko">{ko}</span><span class="t-en">{en}</span></span></a>\n'
         )
     fam = "".join(
@@ -165,6 +213,7 @@ FOOTER = """  <footer class="footer">
             <a href="about.html"><span class="t-ko">그룹소개</span><span class="t-en">About</span></a>
             <a href="about.html#history"><span class="t-ko">연혁</span><span class="t-en">History</span></a>
             <a href="sustainability.html"><span class="t-ko">지속가능경영</span><span class="t-en">Sustainability</span></a>
+            <a href="ir.html"><span class="t-ko">투자정보</span><span class="t-en">IR</span></a>
             <a href="careers.html"><span class="t-ko">채용</span><span class="t-en">Careers</span></a>
           </div>
           <div class="footer-col">
@@ -768,6 +817,7 @@ TITLES = {
     "about.html": ("그룹소개 About — 컬리버 그룹 CULIVER GROUP", "‘기른다’는 하나의 동사에서 출발한 컬리버 그룹의 비전과 연혁, 조직, 그룹 개요를 소개합니다."),
     "business.html": ("사업영역 Business — 컬리버 그룹 CULIVER GROUP", "스마트 양식·수처리·자원순환 소재·스마트팜, 하나의 순환으로 연결된 컬리버 그룹의 네 개 사업."),
     "sustainability.html": ("지속가능경영 Sustainability — 컬리버 그룹 CULIVER GROUP", "ESG는 별도 활동이 아니라 컬리버 그룹 네 사업이 존재하는 이유입니다."),
+    "ir.html": ("투자정보 IR — 컬리버 그룹 CULIVER GROUP", "컬리버 그룹의 지배구조, 주요 지표, 공시·자료실과 IR 문의 안내."),
     "newsroom.html": ("뉴스룸 Newsroom — 컬리버 그룹 CULIVER GROUP", "컬리버 그룹과 계열사의 보도자료·소식·채용 소식을 전합니다."),
     "news.html": ("뉴스룸 Newsroom — 컬리버 그룹 CULIVER GROUP", "컬리버 그룹과 계열사의 보도자료·소식·채용 소식을 전합니다."),
     "careers.html": ("채용 Careers — 컬리버 그룹 CULIVER GROUP", "바다와 농장, 실험실과 현장을 잇는 사람들을 찾습니다. 인재상·채용 절차·공고·복리후생 안내."),
@@ -937,7 +987,7 @@ about = (
     + """    </div>
   </section>
 
-  <section class="section tall bg-card">
+  <section id="org" class="section tall bg-card">
     <div class="wrap">
       <div class="section-intro reveal">
         <p class="eyebrow">ORGANIZATION</p>
@@ -975,7 +1025,7 @@ about = (
     </div>
   </section>
 
-  <section class="section tall bg-card">
+  <section id="ci" class="section tall bg-card">
     <div class="wrap">
       <div class="section-intro reveal">
         <p class="eyebrow">BRAND IDENTITY</p>
@@ -1119,7 +1169,77 @@ sustain = (
   </section>
 """
 )
-write("sustainability.html", sustain, active="sustainability.html")
+# ================================================================= IR / INVESTOR RELATIONS
+# Structure is real; figures/filings are placeholders clearly marked
+# "준비 중 / soon" since there is no actual financial data yet.
+ir_contact = "contact.html?" + urllib.parse.urlencode({"type": "투자 · IR"})
+ir = (
+    page_hero("INVESTOR RELATIONS", "투자정보", "Investor Relations",
+              "지주 체제 아래 투명한 지배구조와 데이터 기반 의사결정을 지향합니다.",
+              "Under a holding structure, we pursue transparent governance and data-driven decisions.",
+              [("ir.html", "투자정보", "IR")])
+    + """  <section class="section tall bg-paper">
+    <div class="wrap">
+      <div class="section-intro reveal">
+        <p class="eyebrow">GOVERNANCE</p>
+        <h2 class="h2 t-ko">지배구조</h2>
+        <h2 class="h2 t-en">Governance</h2>
+        <p class="lead"><span class="t-ko">컬리버 그룹은 지주회사 체제 아래 네 개 계열사를 하나의 비전으로 정렬합니다.</span><span class="t-en">CULIVER Group aligns its four affiliates under one vision through a holding-company structure.</span></p>
+      </div>
+      <div class="commitments reveal">
+        <div class="commitment"><span class="no">01</span><div><h3><span class="t-ko">지주 체제</span><span class="t-en">Holding structure</span></h3><p><span class="t-ko">지주회사가 네 계열사의 전략과 자원 배분을 통합 관리합니다.</span><span class="t-en">The holding company integrates strategy and capital allocation across the four affiliates.</span></p></div></div>
+        <div class="commitment"><span class="no">02</span><div><h3><span class="t-ko">투명한 의사결정</span><span class="t-en">Transparent decisions</span></h3><p><span class="t-ko">데이터에 기반한 의사결정과 정보 공개를 원칙으로 합니다.</span><span class="t-en">Data-driven decision-making and disclosure are our operating principles.</span></p></div></div>
+        <div class="commitment"><span class="no">03</span><div><h3><span class="t-ko">순환 기반 성장</span><span class="t-en">Circular growth</span></h3><p><span class="t-ko">한 사업의 부산물이 다음 사업의 원료가 되는 구조로 지속 성장을 추구합니다.</span><span class="t-en">We pursue durable growth through a loop where each business's byproduct feeds the next.</span></p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tall bg-card">
+    <div class="wrap">
+      <div class="section-intro reveal">
+        <p class="eyebrow">KEY FIGURES</p>
+        <h2 class="h2 t-ko">주요 지표</h2>
+        <h2 class="h2 t-en">Key figures</h2>
+        <p class="lead"><span class="t-ko">‘준비 중’ 항목은 실제 재무·경영 데이터로 교체하세요.</span><span class="t-en">Replace the “준비 중 / soon” items with real financial data.</span></p>
+      </div>
+      <div class="metrics bento-metrics reveal">
+        <div class="metric"><span class="v" style="color:#0E4E78">4</span><span class="l"><span class="t-ko">계열사</span><span class="t-en">Affiliates</span></span></div>
+        <div class="metric"><span class="v" style="color:#14606E"><span class="t-ko">준비 중</span><span class="t-en">soon</span></span><span class="l"><span class="t-ko">연결 매출</span><span class="t-en">Consolidated revenue</span></span><span class="note"><span class="t-ko">실제 수치로 교체</span><span class="t-en">replace</span></span></div>
+        <div class="metric"><span class="v" style="color:#6E5D38"><span class="t-ko">준비 중</span><span class="t-en">soon</span></span><span class="l"><span class="t-ko">영업이익</span><span class="t-en">Operating profit</span></span><span class="note"><span class="t-ko">실제 수치로 교체</span><span class="t-en">replace</span></span></div>
+        <div class="metric"><span class="v" style="color:#3E7C4F"><span class="t-ko">준비 중</span><span class="t-en">soon</span></span><span class="l"><span class="t-ko">임직원 수</span><span class="t-en">Employees</span></span><span class="note"><span class="t-ko">실제 수치로 교체</span><span class="t-en">replace</span></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tall bg-paper">
+    <div class="wrap">
+      <div class="section-intro reveal">
+        <p class="eyebrow">DISCLOSURES</p>
+        <h2 class="h2 t-ko">공시 · 자료실</h2>
+        <h2 class="h2 t-en">Disclosures &amp; filings</h2>
+        <p class="lead"><span class="t-ko">감사보고서·IR 자료는 준비 중입니다. 실제 파일로 링크를 교체하세요.</span><span class="t-en">Audit reports and IR materials are in preparation — replace with real files.</span></p>
+      </div>
+      <div class="report-row reveal">
+        <span class="btn-outline is-disabled" aria-disabled="true"><span class="t-ko">📄 감사보고서 (준비 중)</span><span class="t-en">📄 Audit report (soon)</span></span>
+        <span class="btn-outline is-disabled" aria-disabled="true"><span class="t-ko">📄 IR 자료 (준비 중)</span><span class="t-en">📄 IR deck (soon)</span></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-card">
+    <div class="wrap reveal">
+      <div class="cta-band" style="background:linear-gradient(160deg,#041821,#0C3A47 60%,#1B6E7D 130%)">
+        <div>
+          <h2><span class="t-ko">투자·IR 문의</span><span class="t-en">Investor inquiries</span></h2>
+          <p><span class="t-ko">투자 및 IR 관련 문의를 환영합니다.</span><span class="t-en">We welcome investment and IR inquiries.</span></p>
+        </div>
+        <a class="btn btn-primary" href=\"""" + ir_contact + """"><span class="t-ko">IR 문의하기</span><span class="t-en">Contact IR</span> →</a>
+      </div>
+    </div>
+  </section>
+"""
+)
+write("ir.html", ir, active="ir.html")
 
 # ================================================================= NEWSROOM
 newsroom = (
