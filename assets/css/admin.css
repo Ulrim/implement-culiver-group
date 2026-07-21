@@ -4,17 +4,17 @@
    colors for recognizability but keeps its own compact layout.
    ============================================================ */
 :root {
-  --ink: #0B2438;
-  --aqua: #1E7F96;
-  --aqua-ink: #166578;
-  --paper: #F6F4EF;
+  --ink: #06202B;
+  --aqua: #1B6E7D;
+  --aqua-ink: #14606E;
+  --paper: #EBF1EE;
   --card: #FFFFFF;
-  --line: rgba(11,36,56,.12);
-  --text-2: #445159;
-  --text-3: #5C6971;
+  --line: rgba(6,32,43,.12);
+  --text-2: #3D4E54;
+  --text-3: #566469;
   --danger: #B3261E;
   --radius: 14px;
-  --focus-ring: 0 0 0 3px rgba(127,196,201,.5);
+  --focus-ring: 0 0 0 3px rgba(79,163,165,.55);
 }
 * { box-sizing: border-box; }
 body {
