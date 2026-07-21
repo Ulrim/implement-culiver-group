@@ -219,8 +219,8 @@ FOOTER = """  <footer class="footer">
           <div class="footer-col">
             <span class="head">CONTACT</span>
             <a href="contact.html"><span class="t-ko">문의하기</span><span class="t-en">Contact</span></a>
-            <span class="plain">contact@culiver.co.kr</span>
-            <span class="plain">T. 000-0000-0000</span>
+            <a href="https://culiver.ai" target="_blank" rel="noopener">culiver.ai</a>
+            <span class="plain"><span class="t-ko">전남 순천시</span><span class="t-en">Suncheon, Jeonnam</span></span>
           </div>
         </div>
       </div>
@@ -297,67 +297,72 @@ BIZ = [
          deep="linear-gradient(160deg,#041821,#0A2C46 60%,#0E4E78 130%)",
          img="biz-culiver.jpg", right=False,
          overlay="linear-gradient(150deg,rgba(14,78,120,.5),rgba(10,44,70,.72))", chipbg="rgba(14,78,120,.08)",
-         tko="스마트 양식", ten="SMART AQUACULTURE", nko="컬리버", nen="CULIVER",
-         dko="미생물 기반 BFT 바이오플락 기술로 흰다리새우를 육상에서 연중 안정 생산합니다. 항생제 없는 양식, 데이터로 관리되는 수조.",
-         den="Year-round, land-based whiteleg shrimp production powered by microbial BFT technology — antibiotic-free, data-managed.",
-         chips=["흰다리새우", "BFT 바이오플락", "Shrimp365"],
-         leadko="컬리버는 미생물 기반 BFT(바이오플락) 기술로 흰다리새우를 육상에서 연중 생산하는 스마트 양식 기업입니다. 항생제 없이, 데이터로 관리되는 수조에서 균일한 품질의 새우를 안정적으로 길러냅니다.",
-         leaden="CULIVER is a smart-aquaculture company producing whiteleg shrimp year-round on land with microbial BFT technology — antibiotic-free, in data-managed tanks.",
-         features=[("BFT 바이오플락", "BFT Bioflocs", "미생물이 사육수 속 유기물을 분해해 물을 되살리는 무환수·저환수 양식 기술입니다.", "Microbes break down organic matter in the water, enabling low- and zero-exchange farming."),
-                   ("육상 순환 양식", "Land-based farming", "외부 환경에 영향받지 않는 실내 수조에서 연중 균일한 품질로 생산합니다.", "Indoor tanks produce a consistent harvest all year, shielded from the outside environment."),
-                   ("Shrimp365 데이터 관제", "Shrimp365 monitoring", "수온·용존산소·수질을 실시간으로 모니터링하고 자동 제어합니다.", "Water temperature, oxygen, and quality are monitored and controlled in real time.")],
-         products=[("무항생제 흰다리새우", "Antibiotic-free shrimp", "항생제 없이 길러낸 신선·냉장 새우를 식자재·유통 채널에 공급합니다.", "Fresh, chilled, antibiotic-free shrimp for food-service and retail."),
-                   ("활새우 공급", "Live shrimp", "산지에서 직송하는 활새우를 공급합니다.", "Live shrimp shipped directly from the farm.")],
-         metrics=[("365", "연중 생산일", "Days a year"), ("100%", "무항생제", "Antibiotic-free"), ("BFT", "핵심 양식 기술", "Core method")]),
+         tko="스마트 양식 · AI", ten="SMART AQUACULTURE · AI", nko="컬리버", nen="CULIVER",
+         dko="흰다리새우 육상 양식에 프리미엄 사료·복합 유용미생물·질병 조기진단·수질 데이터 관리를 하나로 묶은 통합 솔루션 기업입니다.",
+         den="An integrated whiteleg-shrimp aquaculture solution — premium feed, complex probiotics, early disease diagnostics, and data-driven water management in one system.",
+         chips=["흰다리새우", "복합 유용미생물", "Shrimp365"],
+         leadko="컬리버는 흰다리새우 육상 양식의 5대 요소(사료·미생물·수질·질병·데이터)를 표준화한 통합 솔루션 기업이자 그룹의 지주회사입니다. 프리미엄 사료와 6종 복합 유용미생물, PCR 기반 질병 조기진단, Shrimp365 데이터 플랫폼으로 ‘감’에 의존하던 양식을 데이터 기반 표준 공정으로 바꿉니다.",
+         leaden="CULIVER — the group's holding company — standardizes the five pillars of land-based whiteleg-shrimp farming: feed, microbes, water, disease, and data. Premium feed, a 6-strain probiotic blend, PCR-based early diagnostics, and the Shrimp365 platform turn guesswork farming into a data-driven standard process.",
+         features=[("복합 유용미생물", "Complex probiotics", "바실러스·락토바실러스 등 6종을 조합한 유용미생물로 수질을 개선하고 유해균을 억제합니다. 조성물·배합 특허 출원을 진행 중입니다.", "A 6-strain blend (Bacillus, Lactobacillus and more) improves water quality and suppresses pathogens; composition & blend patents are pending."),
+                   ("질병 조기진단", "Early diagnostics", "PCR 검사로 급성간췌장괴사병·흰반점바이러스 등을 주 1회 조기 진단해, 조기 대응 시 생존율을 크게 끌어올립니다.", "Weekly PCR screening for AHPND, white-spot virus and more enables early response that sharply raises survival."),
+                   ("수질 · 데이터 관리", "Water & data", "수온·pH·용존산소 등 수질을 매일 3회 측정하고 주간 리포트로 문제를 조기에 파악하는 Shrimp365 플랫폼을 운영합니다.", "Water is measured 3×/day and surfaced in weekly reports via the Shrimp365 platform, catching problems early.")],
+         products=[dict(nko="컬리버 1호", nen="Culiver No.1", dko="바실러스 등 유익균을 복합 조성한 새우양식용 미생물제제. 사육수 수질 개선·유해균 억제용.", den="A complex beneficial-microbe agent for shrimp farming that improves water quality and suppresses pathogens.", tko="미생물제품", ten="Microbial", status="양산중", statusen="In production"),
+                   dict(nko="숨쉘 (SUMSHELL)", nen="SUMSHELL", dko="폐굴껍데기(굴패각 소성분말) 유래의 친환경 양식장 수질 pH 완충제. 시험성적서 보유.", den="An eco-friendly pH buffer for farm water made from calcined oyster-shell powder; test-report certified.", tko="미생물제품", ten="Microbial", status="양산중", statusen="In production"),
+                   dict(nko="Shrimp365", nen="Shrimp365", dko="수질·생육 데이터 기반의 AI 새우양식 통합관리 플랫폼(SaaS). 웹·앱으로 운영.", den="An AI-driven, SaaS platform for integrated shrimp-farm management from water and growth data.", tko="AI · SW", ten="AI · SW", status="운영중", statusen="Live")],
+         metrics=[("70%", "흰다리새우 생존율", "Survival rate"), ("7일", "수질 정상화 기간", "Water recovery"), ("6종", "복합 유용미생물", "Probiotic strains")]),
     dict(file="amp.html", no="02", color="#1B6E7D", ink="#14606E",
          deep="linear-gradient(160deg,#041821,#0C4A57 60%,#1B6E7D 130%)",
          img="biz-amp.jpg", right=True,
          overlay="linear-gradient(150deg,rgba(27,110,125,.5),rgba(12,58,71,.74))", chipbg="rgba(27,110,125,.1)",
-         tko="수처리 솔루션", ten="WATER TREATMENT", nko="에이엠피", nen="AMP",
-         dko="양식장과 산업 현장의 물을 다루는 수처리 엔지니어링. 미생물 제제와 순환여과 시스템으로 물의 순환을 완성합니다.",
-         den="Water-treatment engineering for aquaculture and industry — microbial agents and recirculating filtration that close the water loop.",
-         chips=["수처리 설비", "미생물 제제", "순환여과"],
-         leadko="에이엠피는 양식장과 산업 현장의 물을 다루는 수처리 엔지니어링 기업입니다. 미생물 제제와 순환여과 시스템으로 물을 정화하고 되돌려, 그룹 순환 구조의 ‘물’ 축을 담당합니다.",
-         leaden="AMP is a water-treatment engineering company for aquaculture and industry. With microbial agents and recirculating systems, it purifies and returns water — the water axis of the group's loop.",
-         features=[("순환여과 시스템(RAS)", "Recirculating systems", "사육수를 여과·정화해 재사용하는 폐쇄형 순환 설비를 설계·시공합니다.", "Closed-loop systems that filter and reuse rearing water."),
-                   ("미생물 제제", "Microbial agents", "수질을 안정화하는 자체 미생물 제제를 개발·생산합니다.", "In-house microbial agents that stabilize water quality."),
-                   ("산업용수 처리", "Industrial water", "산업 현장의 용수·폐수 처리 플랜트를 설계·시공합니다.", "Design and construction of industrial water and wastewater plants.")],
-         products=[("양식 수처리 설비", "Aquaculture systems", "RAS 설계·시공·유지보수 서비스를 제공합니다.", "RAS design, construction, and maintenance."),
-                   ("미생물 제제", "Microbial products", "양식·환경용 미생물 솔루션을 공급합니다.", "Microbial solutions for aquaculture and environment."),
-                   ("산업용수 플랜트", "Industrial plants", "현장 맞춤형 수처리 플랜트를 구축합니다.", "Custom-built water-treatment plants.")],
-         metrics=[("RAS", "핵심 설비", "Core system"), ("예시", "누적 수주 (교체)", "Projects (replace)"), ("예시", "재이용률 % (교체)", "Reuse % (replace)")]),
-    dict(file="cobaltive.html", no="03", color="#8E7A5C", ink="#6E5D38",
-         deep="linear-gradient(160deg,#041821,#5E4F3A 60%,#8E7A5C 130%)",
+         tko="소재 · 환경 엔지니어링", ten="MATERIALS · ENVIRONMENT", nko="에이엠피", nen="AMP",
+         dko="이차전지 전구체 소재·장비와 폐수·공정수 처리, 공조용 특수 부품까지 — 소재와 환경을 잇는 엔지니어링 기업입니다.",
+         den="Battery-precursor materials and equipment, wastewater and process-water treatment, and specialty HVAC components — engineering that connects materials and environment.",
+         chips=["이차전지 전구체", "망초폐수 처리", "공조부품"],
+         leadko="에이엠피는 이차전지 전구체(NCM) 소재·장비와 망초폐수·공정수 재순환 처리, 공조용 특수 알루미늄 부품을 아우르는 소재·환경 엔지니어링 기업입니다. 육상양식용 미생물 배양수조 등 그룹의 양식 사업과도 맞닿아 있습니다.",
+         leaden="AMP is a materials-and-environment engineering company spanning battery-precursor (NCM) materials and equipment, sodium-sulfate wastewater / process-water recirculation, and specialty aluminum HVAC components — also linked to the group's aquaculture through microbe culture tanks.",
+         features=[("이차전지 전구체 장비", "Battery-precursor equipment", "NCM(니켈·코발트·망간) 삼원계 전구체 생산을 위한 공침반응기와 입자선별·필터 장치를 개발합니다.", "Co-precipitation reactors and particle-filtration systems for producing NCM ternary precursors."),
+                   ("폐수 · 공정수 처리", "Water treatment", "이차전지 생산 시 발생하는 망초폐수(Na₂SO₄)를 물리·전기화학적으로 처리해 공정수로 재순환합니다.", "Sodium-sulfate (Na₂SO₄) wastewater from battery production is treated and recirculated as process water."),
+                   ("공조 특수부품", "HVAC components", "브레이징 용접이 가능한 2종 알루미늄 압연 Clad AL Pipe를 공조시스템용으로 양산합니다(ISO9001).", "Brazable clad-aluminum pipe for HVAC systems, produced under ISO9001.")],
+         products=[dict(nko="이차전지 망초폐수 처리 시스템", nen="Battery wastewater system", dko="전구체·양극재 생산 시 발생하는 망초폐수(Na₂SO₄)를 이온 제거 후 공정에 재투입하는 시스템.", den="Removes ions from sodium-sulfate battery wastewater and returns it to the process.", tko="소재·환경", ten="Materials", status="개발중", statusen="In development"),
+                   dict(nko="공침반응기 (5L)", nen="Co-precipitation reactor (5L)", dko="pH·교반·온도를 제어해 NCM 삼원계 전구체를 생산하는 반응기. 조선대 납품 예정.", den="A reactor producing NCM ternary precursors under pH, agitation and temperature control.", tko="소재·환경", ten="Materials", status="시제품", statusen="Prototype"),
+                   dict(nko="공정수 재순환 시스템", nen="Process-water recirculation", dko="전구체 세척 공정수를 공침반응기로 순환시켜 재활용하는 시스템.", den="Recirculates precursor-washing process water back to the reactor for reuse.", tko="소재·환경", ten="Materials", status="시제품", statusen="Prototype"),
+                   dict(nko="전구체 입자선별·필터장치", nen="Precursor filtration", dko="사이클러 필터·필터프레스로 전구체와 망초폐수를 분리하는 장치.", den="Separates precursor from sodium-sulfate wastewater using cyclone filters and a filter press.", tko="소재·환경", ten="Materials", status="시제품", statusen="Prototype"),
+                   dict(nko="미생물 배양수조", nen="Microbe culture tank", dko="육상양식 BFT 시스템용 미생물 자동 배양수조. 2단 구조로 순환·DO를 공급해 RAS에 투입.", den="An automated microbe culture tank for land-based BFT/RAS aquaculture systems.", tko="양식장비", ten="Aqua-equipment", status="개발중", statusen="In development"),
+                   dict(nko="Header Pipe", nen="Header Pipe", dko="공조시스템(열교환기·콘덴서 등)에 적용되는 브레이징 가능 2종 알루미늄 Clad AL Pipe.", den="Brazable dual-alloy clad-aluminum pipe for HVAC heat exchangers and condensers.", tko="공조부품", ten="HVAC", status="양산중", statusen="In production")],
+         metrics=[("NCM", "삼원계 전구체", "Ternary precursor"), ("ISO9001", "공조부품 인증", "Certification"), ("6", "개발·양산 품목", "Product lines")]),
+    dict(file="cobaltive.html", no="03", color="#A88F63", ink="#6E5D38",
+         deep="linear-gradient(160deg,#041821,#5E4F3A 60%,#A88F63 130%)",
          img="biz-cobaltive.jpg", right=False,
-         overlay="linear-gradient(150deg,rgba(142,122,92,.46),rgba(94,79,58,.72))", chipbg="rgba(142,122,92,.12)",
-         tko="자원순환 소재", ten="UPCYCLED MATERIALS", nko="코발티브", nen="COBALTIVE",
-         dko="버려지는 굴 패각을 친환경 소재와 생활 제품으로 되살립니다. 폐기물이 아닌 자원으로 — 숨쉘, 셸픽.",
-         den="Discarded oyster shells reborn as eco-materials and everyday products — waste turned back into a resource.",
-         chips=["굴패각 업사이클", "숨쉘", "셸픽"],
-         leadko="코발티브는 버려지는 굴 패각을 친환경 소재와 생활 제품으로 되살리는 자원순환 소재 기업입니다. 폐기물을 자원으로 전환하여 그룹의 순환 고리를 자원 영역까지 넓힙니다.",
-         leaden="COBALTIVE is a circular-materials company that revives discarded oyster shells into eco-materials and products, extending the group's loop into resources.",
-         features=[("패각 정제·가공", "Shell processing", "수거한 굴 패각을 세척·분쇄·정제해 원료화합니다.", "Collected shells are washed, milled, and refined into raw material."),
-                   ("친환경 소재화", "Eco-materials", "탄산칼슘 기반 기능성·건축 소재로 개발합니다.", "Developed into calcium-carbonate-based functional and building materials."),
-                   ("제품화", "Productization", "소재를 생활 제품으로 상품화합니다.", "Materials commercialized into everyday products.")],
-         products=[("숨쉘", "SUMSHELL", "패각 기반 기능성 소재입니다.", "A functional material made from oyster shells."),
-                   ("셸픽", "SHELLPICK", "패각을 업사이클한 생활 제품입니다.", "Upcycled everyday products made from shells.")],
-         metrics=[("Upcycle", "핵심 가치", "Core value"), ("예시", "재활용 패각량 (교체)", "Shells recycled (replace)"), ("예시", "친환경 인증 (교체)", "Eco-cert (replace)")]),
-    dict(file="susinje-farm.html", no="04", color="#3E7C4F", ink="#3E7C4F",
+         overlay="linear-gradient(150deg,rgba(168,143,99,.5),rgba(94,79,58,.74))", chipbg="rgba(168,143,99,.14)",
+         tko="패각 업사이클 디자인", ten="UPCYCLED SHELL DESIGN", nko="코발티브", nen="COBALTIVE",
+         dko="버려지는 굴 패각을 ‘패각콘크리트’ 소재로 되살려 가구·오브제·굿즈로 만드는 자원순환 디자인 브랜드입니다.",
+         den="A circular-design brand that revives discarded oyster shells into ‘shell-concrete’ furniture, objects, and goods.",
+         chips=["패각콘크리트", "업사이클 디자인", "굿즈 · 가구"],
+         leadko="코발티브는 버려지는 굴 패각을 자체 ‘패각콘크리트’ 소재로 되살려 스툴·벤치·오브제·굿즈 등 디자인 제품으로 만드는 자원순환 브랜드입니다. 와디즈 펀딩, 오늘의집, 벤처나라 등에서 제품을 선보이며 녹색제품·저탄소제품 인증을 추진하고 있습니다.",
+         leaden="COBALTIVE revives discarded oyster shells into its own ‘shell-concrete’ material, crafting stools, benches, objects, and goods. Its products are sold via Wadiz, Ohou, and Venture-Nara, with green- and low-carbon-product certifications in progress.",
+         features=[("패각콘크리트 소재", "Shell-concrete material", "굴 패각을 원료로 한 자체 패각콘크리트로 가구·오브제를 성형합니다.", "An in-house shell-concrete made from oyster shells, cast into furniture and objects."),
+                   ("업사이클 디자인 제품", "Upcycled design", "스툴·벤치부터 캔들홀더·거치대·굿즈까지 다양한 디자인 제품을 만듭니다.", "From stools and benches to candle holders, stands, and goods."),
+                   ("친환경 인증 · 판로", "Certification & channels", "녹색제품·저탄소제품 인증을 추진하며 와디즈·오늘의집·벤처나라 등에서 판매합니다.", "Pursuing green/low-carbon certification, sold via Wadiz, Ohou, and Venture-Nara.")],
+         products=[dict(nko="U 스툴", nen="U Stool", dko="패각콘크리트 1인용 스툴(U 타입). 벤처나라 입점.", den="A single-seat shell-concrete stool (U type); listed on Venture-Nara.", tko="가구", ten="Furniture", status="벤처나라 입점", statusen="Retail listed"),
+                   dict(nko="큐브 스툴", nen="Cube Stool", dko="패각콘크리트 큐브형 1인용 스툴. 벤처나라 입점.", den="A cube-form shell-concrete stool; listed on Venture-Nara.", tko="가구", ten="Furniture", status="벤처나라 입점", statusen="Retail listed"),
+                   dict(nko="U 벤치", nen="U Bench", dko="패각콘크리트 2인용 벤치(U 타입).", den="A two-seat shell-concrete bench (U type).", tko="가구", ten="Furniture", status="심사 진행중", statusen="Under review"),
+                   dict(nko="부여석조여래좌상 홀더", nen="Buyeo Buddha Holder", dko="보물 329호 부여석조여래좌상 3D 데이터를 활용한 인센스·캔들홀더 굿즈. 와디즈 펀딩 완료.", den="An incense/candle holder based on 3D data of Treasure No.329; Wadiz funding completed.", tko="오브제", ten="Object", status="펀딩 완료", statusen="Funded"),
+                   dict(nko="가족오브제", nen="Family Object", dko="아빠·엄마·아이로 구성된 3인 가족 오브제(구성 추가 가능). 오늘의집 판매.", den="A three-piece family object set; sold on Ohou.", tko="오브제", ten="Object", status="오늘의집 판매", statusen="On sale"),
+                   dict(nko="소라홀더", nen="Conch Holder", dko="에어플랜트(이오난사)용 소라 모양 오브제 — 패각이 다시 소라로. 오늘의집 판매.", den="A conch-shaped holder for air plants — shell reborn as shell; sold on Ohou.", tko="오브제", ten="Object", status="오늘의집 판매", statusen="On sale")],
+         metrics=[("패각콘크리트", "핵심 소재", "Core material"), ("10+", "제품 라인업", "Product lines"), ("녹색·저탄소", "인증 추진", "Eco-cert (WIP)")]),
+    dict(file="susinje-farm.html", no="04", color="#3E7C4F", ink="#3E7C4F", coming_soon=True,
          deep="linear-gradient(160deg,#041821,#2A5A38 60%,#3E7C4F 130%)",
          img="biz-susinje.jpg", right=True,
          overlay="linear-gradient(150deg,rgba(62,124,79,.46),rgba(36,82,50,.72))", chipbg="rgba(62,124,79,.1)",
          tko="스마트팜 · 유통", ten="SMART FARM · DISTRIBUTION", nko="수신제팜", nen="SUSINJE FARM",
-         dko="데이터 기반 수경재배로 기르고, 산지에서 식탁까지 직접 잇습니다. 스마트팜 재배와 신선 유통을 한 흐름으로.",
-         den="Data-driven hydroponic growing connected directly to the table — smart-farm cultivation and fresh distribution in one flow.",
-         chips=["수경재배", "스마트팜", "신선유통"],
-         leadko="수신제팜은 데이터 기반 수경재배 스마트팜과 신선 유통을 함께 운영합니다. 순환수로 기른 작물을 산지에서 식탁까지 직접 잇습니다.",
-         leaden="SUSINJE FARM runs data-driven hydroponic smart farms together with fresh distribution, connecting crops grown in recirculated water straight to the table.",
-         features=[("수경재배", "Hydroponics", "흙 없이 양액으로 작물을 균일하게 재배합니다.", "Crops grown uniformly in nutrient solution, without soil."),
-                   ("스마트팜 환경제어", "Smart-farm control", "온도·습도·양액을 데이터로 자동 관리합니다.", "Temperature, humidity, and nutrients managed automatically by data."),
-                   ("신선 유통", "Fresh distribution", "산지-식탁 직배송과 B2B 납품을 운영합니다.", "Farm-to-table delivery and B2B supply.")],
-         products=[("수경재배 채소", "Hydroponic vegetables", "청정 환경에서 기른 신선 채소를 공급합니다.", "Fresh vegetables grown in a clean environment."),
-                   ("정기배송", "Subscription", "가정·기업을 위한 정기 공급 서비스입니다.", "Recurring supply for homes and businesses.")],
-         metrics=[("Farm→Table", "유통 구조", "Model"), ("예시", "재배 면적 (교체)", "Grow area (replace)"), ("예시", "연간 출하량 (교체)", "Annual output (replace)")]),
+         dko="컬리버 그룹의 계열사로, 스마트팜·유통 분야에서 준비 중입니다.",
+         den="A CULIVER Group affiliate in the smart-farm and distribution field — details in preparation.",
+         chips=["스마트팜", "유통", "준비 중"],
+         leadko="수신제팜은 컬리버 그룹의 계열사입니다. 스마트팜·유통 분야의 상세 사업·제품 소개는 준비 중이며, 확정되는 대로 순차적으로 공개할 예정입니다.",
+         leaden="SUSINJE FARM is a CULIVER Group affiliate. Its detailed business and product information in smart farming and distribution is in preparation and will be published as it is confirmed.",
+         features=[],
+         products=[],
+         metrics=[]),
 ]
 BIZ_BY_FILE = {c["file"]: c for c in BIZ}
 
@@ -370,109 +375,101 @@ AFFILIATE_LINKS = {
 }
 
 NEWS = [
-    dict(tagko="보도자료", tagen="Press", date="2026.06", title="컬리버, BFT 기반 흰다리새우 스마트 양식장 2호기 준공",
-         titleen="CULIVER completes second BFT-based smart shrimp farm",
+    dict(tagko="보도자료", tagen="Press", date="2025.05", title="컬리버, 복합 유용미생물제제 출시",
+         titleen="CULIVER launches its complex probiotic agent",
          overlay="linear-gradient(150deg,rgba(14,78,120,.32),rgba(10,44,70,.55))", cover="linear-gradient(150deg,rgba(14,78,120,.5),rgba(10,44,70,.7))",
          photo="news-1.jpg", color="#0E4E78", chipbg="rgba(14,78,120,.08)", biz="culiver-aqua.html",
-         body=["컬리버가 BFT(바이오플락) 기반 흰다리새우 스마트 양식장 2호기를 준공했습니다. 이번 2호기는 데이터 기반 사육 관제 시스템을 전면 적용해 연중 안정 생산 역량을 한층 강화했습니다.",
-               "육상 순환 양식 방식으로 항생제 없이 균일한 품질의 새우를 생산하며, 사육수는 계열사 에이엠피의 수처리 공정과 연계해 순환·재사용됩니다.",
-               "컬리버 그룹은 이번 증설을 계기로 스마트 양식 생산 규모를 지속 확대해 나갈 계획입니다."]),
-    dict(tagko="소식", tagen="Updates", date="2026.05", title="코발티브, 굴패각 업사이클 소재 친환경 인증 획득",
-         titleen="COBALTIVE earns eco-certification for upcycled oyster-shell materials",
-         overlay="linear-gradient(150deg,rgba(142,122,92,.3),rgba(94,79,58,.55))", cover="linear-gradient(150deg,rgba(142,122,92,.5),rgba(94,79,58,.7))",
-         photo="news-2.jpg", color="#6E5D38", chipbg="rgba(142,122,92,.12)", biz="cobaltive.html",
-         body=["코발티브가 굴 패각을 업사이클한 친환경 소재로 인증을 획득했습니다. 버려지던 패각을 자원으로 되살려 폐기물과 배출을 구조적으로 줄이는 성과를 인정받았습니다.",
-               "코발티브는 패각 정제·가공을 통해 탄산칼슘 기반 기능성 소재 ‘숨쉘’과 생활 제품 ‘셸픽’을 선보이고 있습니다.",
-               "앞으로도 자원순환 소재 라인업을 확대해 나갈 예정입니다."]),
-    dict(tagko="소식", tagen="Updates", date="2026.04", title="수신제팜, 데이터 기반 수경재배 채소 정기유통 시작",
-         titleen="SUSINJE FARM launches subscription delivery for hydroponic vegetables",
+         body=["컬리버가 바실러스·락토바실러스 등 6종을 조합한 복합 유용미생물제제 ‘컬리버 1호’를 출시했습니다. 사육수 수질을 개선하고 유해균을 억제해 흰다리새우 양식의 안정성을 높입니다.",
+               "회사는 복합 유용미생물 조성물 및 배합에 대한 특허 출원을 진행 중이며, 유용미생물 투입과 질병 조기진단을 결합해 생존율을 크게 끌어올리고 있습니다."]),
+    dict(tagko="소식", tagen="Updates", date="2025.04", title="코발티브, 패각콘크리트 제품 와디즈 펀딩·오늘의집 입점",
+         titleen="COBALTIVE: shell-concrete goods funded on Wadiz, listed on Ohou",
+         overlay="linear-gradient(150deg,rgba(168,143,99,.3),rgba(94,79,58,.55))", cover="linear-gradient(150deg,rgba(168,143,99,.5),rgba(94,79,58,.7))",
+         photo="news-2.jpg", color="#6E5D38", chipbg="rgba(168,143,99,.14)", biz="cobaltive.html",
+         body=["코발티브가 버려지는 굴 패각을 되살린 ‘패각콘크리트’ 디자인 제품으로 와디즈 펀딩을 완료하고 오늘의집·벤처나라 등 판로를 넓히고 있습니다. 스툴·벤치·오브제·굿즈 등 다양한 라인업을 선보입니다.",
+               "패각콘크리트 가구는 녹색제품·저탄소제품 인증을 추진 중이며, 버려지던 패각을 자원으로 되살려 순환의 고리를 완성합니다."]),
+    dict(tagko="소식", tagen="Updates", date="2025.03", title="컬리버 그룹, 계열사 체제로 순환 생산 생태계 구축",
+         titleen="CULIVER Group builds a circular production ecosystem across its affiliates",
          overlay="linear-gradient(150deg,rgba(62,124,79,.3),rgba(36,82,50,.55))", cover="linear-gradient(150deg,rgba(62,124,79,.5),rgba(36,82,50,.7))",
          photo="news-3.jpg", color="#3E7C4F", chipbg="rgba(62,124,79,.1)", biz="susinje-farm.html",
-         body=["수신제팜이 데이터 기반 수경재배로 기른 채소의 정기유통을 시작했습니다. 스마트팜 환경제어로 균일한 품질을 유지하며, 산지에서 식탁까지 신선하게 배송합니다.",
-               "순환수를 활용한 재배로 자원 효율을 높였으며, 가정과 기업 고객을 대상으로 정기배송 서비스를 운영합니다."]),
-    dict(tagko="보도자료", tagen="Press", date="2026.03", title="에이엠피, 산업용수 순환여과 플랜트 신규 수주",
-         titleen="AMP wins new industrial water recirculation plant contract",
-         overlay="linear-gradient(150deg,rgba(30,127,150,.3),rgba(15,74,92,.55))", cover="linear-gradient(150deg,rgba(30,127,150,.5),rgba(15,74,92,.7))",
-         photo="news-4.jpg", color="#166578", chipbg="rgba(30,127,150,.09)", biz="amp.html",
-         body=["에이엠피가 산업용수 순환여과 플랜트를 신규 수주했습니다. 순환여과(RAS)와 미생물 제제 기술을 결합해 용수 재이용률을 높이는 맞춤형 설비를 공급합니다.",
-               "에이엠피는 양식 수처리에서 축적한 기술을 산업 현장으로 확장하며 수처리 사업 영역을 넓혀가고 있습니다."]),
-    dict(tagko="채용", tagen="Hiring", date="2026.02", title="컬리버 그룹 2026 상반기 신입·경력 공개채용 시작",
-         titleen="CULIVER Group opens 2026 first-half hiring",
+         body=["컬리버 그룹이 스마트양식(컬리버), 소재·환경(에이엠피), 패각 업사이클(코발티브), 스마트팜·유통(수신제팜)으로 이어지는 계열사 체제를 갖췄습니다. 한 사업의 부산물이 다른 사업의 원료가 되는 순환 구조를 지향합니다.",
+               "수신제팜 등 일부 계열사의 상세 사업 소개는 준비 중이며, 확정되는 대로 순차적으로 공개할 예정입니다."]),
+    dict(tagko="보도자료", tagen="Press", date="2025.02", title="에이엠피, 이차전지 전구체 공침반응기 시제품 완성",
+         titleen="AMP completes a prototype co-precipitation reactor for battery precursors",
+         overlay="linear-gradient(150deg,rgba(27,110,125,.3),rgba(12,58,71,.55))", cover="linear-gradient(150deg,rgba(27,110,125,.5),rgba(12,58,71,.7))",
+         photo="news-4.jpg", color="#14606E", chipbg="rgba(27,110,125,.1)", biz="amp.html",
+         body=["에이엠피가 NCM(니켈·코발트·망간) 삼원계 전구체 생산용 공침반응기(5L) 시제품을 완성했습니다. pH·교반·온도 조건을 정밀 제어해 전구체를 생산하며, 내부 테스트를 거쳐 대학 연구기관 납품을 앞두고 있습니다.",
+               "에이엠피는 이차전지 생산 과정에서 발생하는 망초폐수(Na₂SO₄)를 처리해 공정수로 재순환하는 시스템도 함께 개발하고 있습니다."]),
+    dict(tagko="채용", tagen="Hiring", date="2025.01", title="컬리버 그룹 신입·경력 공개채용",
+         titleen="CULIVER Group opens hiring across its affiliates",
          overlay="linear-gradient(150deg,rgba(11,36,56,.34),rgba(8,24,38,.6))", cover="linear-gradient(150deg,rgba(11,36,56,.55),rgba(8,24,38,.75))",
          photo="news-5.jpg", color="#06202B", chipbg="rgba(6,32,43,.08)", biz=None,
-         body=["컬리버 그룹이 2026년 상반기 신입·경력 공개채용을 시작합니다. 양식 생산, 수처리 엔지니어링, 소재 R&D, 스마트팜 재배 등 계열사 전 직무에서 인재를 모집합니다.",
+         body=["컬리버 그룹이 계열사 공개채용을 시작합니다. 양식 생산, 소재·환경 엔지니어링, 소재 R&D, 디자인 제품 등 계열사 전 직무에서 인재를 모집합니다.",
                "자세한 직무 내용과 지원 방법은 채용 페이지에서 확인하실 수 있습니다."]),
-    dict(tagko="소식", tagen="Updates", date="2026.01", title="수신제팜 수경재배 채소, 대형 유통사 입점 확정",
-         titleen="SUSINJE FARM's hydroponic vegetables land major retail placement",
-         overlay="linear-gradient(150deg,rgba(62,124,79,.3),rgba(36,82,50,.55))", cover="linear-gradient(150deg,rgba(62,124,79,.5),rgba(36,82,50,.7))",
-         photo="news-6.jpg", color="#3E7C4F", chipbg="rgba(62,124,79,.1)", biz="susinje-farm.html",
-         body=["수신제팜의 수경재배 채소가 대형 유통사 입점을 확정했습니다. 데이터 기반 재배로 균일한 품질을 확보한 점이 좋은 평가를 받았습니다.",
-               "이번 입점을 통해 더 많은 소비자에게 신선한 채소를 선보일 수 있게 되었습니다."]),
+    dict(tagko="소식", tagen="Updates", date="2024.12", title="컬리버, 기업부설연구소 설립·벤처기업 확인·TIPS 선정",
+         titleen="CULIVER: R&D lab established, venture-firm certified, selected for TIPS",
+         overlay="linear-gradient(150deg,rgba(14,78,120,.3),rgba(10,44,70,.55))", cover="linear-gradient(150deg,rgba(14,78,120,.5),rgba(10,44,70,.7))",
+         photo="news-6.jpg", color="#0E4E78", chipbg="rgba(14,78,120,.08)", biz="culiver-aqua.html",
+         body=["컬리버가 기업부설연구소를 설립하고 벤처기업 확인, 전남 청년기업 인증, 정부 TIPS 프로그램 선정 등 기술 기반과 성장 동력을 확보했습니다.",
+               "Shrimp365 상표와 아쿠아포닉스 특허를 확보했으며, 데이터 기반 양식 관리 플랫폼 개발을 가속하고 있습니다."]),
 ]
 
-# inline first-mention hyperlinks inside article bodies
-NEWS[0]["body"] = linkify_first(NEWS[0]["body"], "컬리버", "culiver-aqua.html")
-NEWS[1]["body"] = linkify_first(NEWS[1]["body"], "코발티브", "cobaltive.html")
-NEWS[1]["body"] = linkify_first(NEWS[1]["body"], "숨쉘", "cobaltive.html")
-NEWS[1]["body"] = linkify_first(NEWS[1]["body"], "셸픽", "cobaltive.html")
-NEWS[2]["body"] = linkify_first(NEWS[2]["body"], "수신제팜", "susinje-farm.html")
+# inline first-mention hyperlinks inside article bodies (terms guaranteed to
+# appear in the corresponding body text above)
+NEWS[0]["body"] = linkify_first(NEWS[0]["body"], "컬리버 1호", "culiver-aqua.html")
+NEWS[1]["body"] = linkify_first(NEWS[1]["body"], "패각콘크리트", "cobaltive.html")
 NEWS[3]["body"] = linkify_first(NEWS[3]["body"], "에이엠피", "amp.html")
 NEWS[4]["body"] = linkify_first(NEWS[4]["body"], "채용 페이지", "careers.html")
-NEWS[5]["body"] = linkify_first(NEWS[5]["body"], "수신제팜", "susinje-farm.html")
+NEWS[5]["body"] = linkify_first(NEWS[5]["body"], "Shrimp365", "culiver-aqua.html")
 
 ROLES = [
     dict(slug="culiver", biz="culiver-aqua.html", color="#0E4E78",
-         role_ko="양식 생산 매니저", role_en="Aquaculture Production Manager",
+         role_ko="양식 생산·관리 매니저", role_en="Aquaculture Production Manager",
          team_ko="컬리버", team_en="CULIVER",
-         loc_ko="충남 태안", loc_en="Taean, Chungnam",
+         loc_ko="전남 순천", loc_en="Suncheon, Jeonnam",
          type_ko="정규직", type_en="Full-time",
-         duties=[("BFT 양식장 사육수 관리 및 수질 모니터링", "Manage rearing water and monitor quality at BFT farms"),
+         duties=[("복합 유용미생물 투입·사육수 수질 관리", "Manage probiotic dosing and rearing-water quality"),
                  ("생산 일정·입식·출하 관리", "Plan production, stocking, and harvest"),
                  ("Shrimp365 데이터 기반 사육 관리", "Run data-driven husbandry with Shrimp365")],
          quals=[("수산·생물 관련 전공 또는 양식 경력", "Degree in fisheries/biology or aquaculture experience"),
                 ("데이터 기반 생산 관리에 대한 이해", "Understanding of data-driven production"),
                 ("현장 근무 가능자", "Willing to work on-site")],
-         plus=[("흰다리새우·BFT 양식 경험", "Whiteleg shrimp / BFT experience"),
+         plus=[("흰다리새우 양식 경험", "Whiteleg shrimp farming experience"),
                ("관련 자격증 보유", "Relevant certifications")]),
-    dict(slug="amp", biz="amp.html", color="#166578",
-         role_ko="수처리 공정 엔지니어", role_en="Water Treatment Process Engineer",
+    dict(slug="amp", biz="amp.html", color="#14606E",
+         role_ko="소재 · 환경 엔지니어", role_en="Materials & Environment Engineer",
          team_ko="에이엠피", team_en="AMP",
-         loc_ko="경기 안산", loc_en="Ansan, Gyeonggi",
+         loc_ko="전남 순천 (협의)", loc_en="Suncheon (negotiable)",
          type_ko="정규직", type_en="Full-time",
-         duties=[("순환여과(RAS) 설비 설계·운영", "Design and operate recirculating (RAS) systems"),
-                 ("미생물 제제 적용 및 수질 최적화", "Apply microbial agents and optimize water quality"),
-                 ("산업용수 플랜트 유지보수", "Maintain industrial water plants")],
+         duties=[("이차전지 전구체 장비(공침반응기 등) 설계·운영", "Design and operate battery-precursor equipment"),
+                 ("망초폐수·공정수 처리 및 재순환 시스템 개발", "Develop wastewater / process-water recirculation systems"),
+                 ("공조 부품 등 소재·환경 프로젝트 지원", "Support HVAC-component and other materials projects")],
          quals=[("환경·화공·기계 관련 전공", "Degree in environmental/chemical/mechanical engineering"),
-                ("수처리 공정에 대한 이해", "Understanding of water-treatment processes"),
+                ("공정·설비에 대한 이해", "Understanding of processes and equipment"),
                 ("설비 현장 대응 가능자", "Able to respond on-site")],
-         plus=[("RAS·폐수처리 경험", "RAS or wastewater experience"),
-               ("수질환경기사 등 자격증", "Water-quality engineering license")]),
+         plus=[("이차전지 소재·수처리 경험", "Battery-materials or water-treatment experience"),
+               ("관련 기사 자격증", "Relevant engineering license")]),
     dict(slug="cobaltive", biz="cobaltive.html", color="#6E5D38",
-         role_ko="소재 R&D 연구원", role_en="Materials R&D Researcher",
+         role_ko="제품 디자이너", role_en="Product Designer",
          team_ko="코발티브", team_en="COBALTIVE",
-         loc_ko="경남 통영", loc_en="Tongyeong, Gyeongnam",
+         loc_ko="전남 순천 (협의)", loc_en="Suncheon (negotiable)",
          type_ko="정규직", type_en="Full-time",
-         duties=[("굴 패각 기반 소재 연구·개발", "Research and develop shell-based materials"),
-                 ("친환경 소재 물성 시험 및 분석", "Test and analyze eco-material properties"),
-                 ("제품화 스케일업 지원", "Support scale-up to products")],
-         quals=[("재료·화학 관련 전공", "Degree in materials/chemistry"),
-                ("실험 설계·분석 역량", "Experiment design and analysis skills"),
+         duties=[("패각콘크리트 기반 가구·오브제·굿즈 디자인", "Design shell-concrete furniture, objects, and goods"),
+                 ("3D 데이터·성형·시제품 제작 협업", "Collaborate on 3D data, casting, and prototyping"),
+                 ("펀딩·입점 등 상품화·판로 지원", "Support commercialization and retail channels")],
+         quals=[("제품·산업·공예 디자인 전공 또는 경력", "Degree/experience in product, industrial, or craft design"),
+                ("3D 모델링 등 제작 역량", "3D modeling and making skills"),
                 ("협업 능력", "Collaboration skills")],
-         plus=[("탄산칼슘·친환경 소재 경험", "Calcium-carbonate / eco-material experience"),
-               ("논문·특허 실적", "Publications or patents")]),
+         plus=[("업사이클·친환경 제품 경험", "Upcycled / eco-product experience"),
+               ("펀딩·커머스 경험", "Crowdfunding or commerce experience")]),
     dict(slug="susinje", biz="susinje-farm.html", color="#3E7C4F",
-         role_ko="스마트팜 재배 담당", role_en="Smart Farm Cultivation Specialist",
+         role_ko="스마트팜 · 유통 직무 (준비 중)", role_en="Smart-farm & distribution (soon)",
          team_ko="수신제팜", team_en="SUSINJE FARM",
-         loc_ko="전북 김제", loc_en="Gimje, Jeonbuk",
-         type_ko="정규직", type_en="Full-time",
-         duties=[("수경재배 작물 재배 및 양액 관리", "Grow hydroponic crops and manage nutrient solution"),
-                 ("스마트팜 환경 데이터 운영", "Operate smart-farm environment data"),
-                 ("출하 품질 관리", "Manage harvest quality")],
-         quals=[("원예·농학 관련 전공 또는 재배 경력", "Degree in horticulture/agriculture or growing experience"),
-                ("스마트팜 시스템에 대한 이해", "Understanding of smart-farm systems"),
-                ("현장 근무 가능자", "Willing to work on-site")],
-         plus=[("수경재배 경험", "Hydroponics experience"),
-               ("스마트팜 운영 경험", "Smart-farm operations experience")]),
+         loc_ko="전남 순천 (협의)", loc_en="Suncheon (negotiable)",
+         type_ko="상시", type_en="Ongoing",
+         duties=[("스마트팜·유통 분야 채용은 준비 중입니다", "Hiring for smart-farm & distribution is in preparation"),
+                 ("관심 있는 분은 문의를 남겨 주세요", "Interested candidates are welcome to reach out")],
+         quals=[("스마트팜·유통 분야에 대한 관심", "Interest in smart farming / distribution")],
+         plus=[]),
 ]
 
 VALUES = """      <div class="values reveal">
@@ -536,8 +533,8 @@ ESG_CARDS = """      <div class="esg-grid reveal">
         <div class="esg-card">
           <span class="label">E — ENVIRONMENT</span>
           <h3><span class="t-ko">자원의 재순환</span><span class="t-en">Circular resources</span></h3>
-          <p class="t-ko">굴 패각 업사이클, 양식수 순환여과, 무항생제 생산으로 폐기물과 배출을 구조적으로 줄입니다.</p>
-          <p class="t-en">Shell upcycling, recirculating aquaculture water, and antibiotic-free production structurally cut waste and emissions.</p>
+          <p class="t-ko">굴 패각 업사이클, 복합 유용미생물 기반 양식, 이차전지 공정수 재순환으로 폐기물과 배출을 구조적으로 줄입니다.</p>
+          <p class="t-en">Shell upcycling, probiotic-based aquaculture, and battery process-water recirculation structurally cut waste and emissions.</p>
         </div>
         <div class="esg-card">
           <span class="label">S — SOCIAL</span>
@@ -559,8 +556,8 @@ ESG_TEASER = """      <div class="esg-grid reveal">
         <div class="esg-card">
           <span class="label">E — ENVIRONMENT</span>
           <h3><span class="t-ko">자원의 재순환</span><span class="t-en">Circular resources</span></h3>
-          <p class="t-ko">패각 업사이클과 순환여과로 폐기물을 줄입니다.</p>
-          <p class="t-en">Shell upcycling and recirculating water cut waste.</p>
+          <p class="t-ko">패각 업사이클과 공정수 재순환으로 폐기물을 줄입니다.</p>
+          <p class="t-en">Shell upcycling and process-water recirculation cut waste.</p>
         </div>
         <div class="esg-card">
           <span class="label">S — SOCIAL</span>
@@ -581,40 +578,40 @@ CYCLE_BLOCK = """      <div class="cycle-grid reveal">
         <div class="ring" id="ring">
           <div class="ring-dash"></div>
           <div class="ring-core">
-            <span class="role" id="ringRole" style="color:#0E4E78">양식</span>
+            <span class="role" id="ringRole" style="color:#0E4E78">스마트양식</span>
             <span class="ko" id="ringKo">컬리버</span>
             <span class="en" id="ringEn">CULIVER</span>
           </div>
-          <button class="node active" data-i="0" data-no="01" data-name-ko="컬리버" data-name-en="CULIVER" data-role="양식" data-color="#0E4E78"
-            data-dko="육상 BFT 양식장에서 나온 사육수를 에이엠피로 보내 정화합니다. 순환의 출발점입니다."
-            data-den="Rearing water from land-based BFT farms flows to AMP for treatment — the start of the loop."
+          <button class="node active" data-i="0" data-no="01" data-name-ko="컬리버" data-name-en="CULIVER" data-role="스마트양식" data-color="#0E4E78"
+            data-dko="프리미엄 사료·복합 유용미생물·질병 진단·데이터로 흰다리새우를 표준 공정으로 기릅니다. 순환의 출발점입니다."
+            data-den="Whiteleg shrimp raised as a standard process — premium feed, probiotics, diagnostics, and data. The start of the loop."
             style="top:2%;left:50%;background:#0E4E78;box-shadow:0 16px 34px -12px #0E4E78">
             <span class="no">01</span><span class="nm">컬리버</span>
           </button>
-          <button class="node" data-i="1" data-no="02" data-name-ko="에이엠피" data-name-en="AMP" data-role="수처리" data-color="#166578"
-            data-dko="정화·순환여과로 되살린 물을 다시 양식장과 스마트팜으로 돌려보냅니다."
-            data-den="Treated, recirculated water returns to the farms and smart-farm greenhouses."
+          <button class="node" data-i="1" data-no="02" data-name-ko="에이엠피" data-name-en="AMP" data-role="소재·환경" data-color="#14606E"
+            data-dko="이차전지 소재·장비와 폐수·공정수 처리 기술을 다루고, 육상양식용 미생물 배양수조로 양식 사업과 이어집니다."
+            data-den="Battery materials/equipment and water treatment — linked back to aquaculture through microbe culture tanks."
             style="top:50%;left:98%">
             <span class="no">02</span><span class="nm">에이엠피</span>
           </button>
-          <button class="node" data-i="2" data-no="03" data-name-ko="수신제팜" data-name-en="SUSINJE" data-role="재배·유통" data-color="#3E7C4F"
-            data-dko="순환수로 기른 작물을 데이터로 관리하고, 산지에서 식탁까지 직접 유통합니다."
-            data-den="Crops grown with recirculated water, data-managed and delivered farm-to-table."
+          <button class="node" data-i="2" data-no="03" data-name-ko="수신제팜" data-name-en="SUSINJE" data-role="스마트팜·유통" data-color="#3E7C4F"
+            data-dko="스마트팜·유통 분야의 계열사입니다. 상세 사업 소개는 준비 중입니다."
+            data-den="A smart-farm & distribution affiliate — details in preparation."
             style="top:98%;left:50%">
             <span class="no">03</span><span class="nm">수신제팜</span>
           </button>
-          <button class="node" data-i="3" data-no="04" data-name-ko="코발티브" data-name-en="COBALTIVE" data-role="자원순환" data-color="#6E5D38"
-            data-dko="버려지는 굴 패각을 소재로 되살려 그룹의 순환 고리를 자원 영역까지 넓힙니다."
-            data-den="Discarded oyster shells reborn as materials, extending the loop into resources."
+          <button class="node" data-i="3" data-no="04" data-name-ko="코발티브" data-name-en="COBALTIVE" data-role="패각 업사이클" data-color="#6E5D38"
+            data-dko="버려지는 굴 패각을 ‘패각콘크리트’로 되살려 가구·오브제로 만듭니다. 컬리버가 쓰는 패각 자원과 이어지는 순환의 고리입니다."
+            data-den="Discarded oyster shells reborn as ‘shell-concrete’ furniture and objects — closing the shell-resource loop."
             style="top:50%;left:2%">
             <span class="no">04</span><span class="nm">코발티브</span>
           </button>
         </div>
         <div class="cycle-detail">
           <span class="cycle-badge" id="cycleBadge" style="background:#0E4E78">01</span>
-          <h3 id="cycleTitle"><span class="t-ko">컬리버</span><span class="t-en">CULIVER</span> · <span style="color:#0E4E78">양식</span></h3>
-          <p class="t-ko" id="cycleDescKo">육상 BFT 양식장에서 나온 사육수를 에이엠피로 보내 정화합니다. 순환의 출발점입니다.</p>
-          <p class="t-en" id="cycleDescEn">Rearing water from land-based BFT farms flows to AMP for treatment — the start of the loop.</p>
+          <h3 id="cycleTitle"><span class="t-ko">컬리버</span><span class="t-en">CULIVER</span> · <span style="color:#0E4E78">스마트양식</span></h3>
+          <p class="t-ko" id="cycleDescKo">프리미엄 사료·복합 유용미생물·질병 진단·데이터로 흰다리새우를 표준 공정으로 기릅니다. 순환의 출발점입니다.</p>
+          <p class="t-en" id="cycleDescEn">Whiteleg shrimp raised as a standard process — premium feed, probiotics, diagnostics, and data. The start of the loop.</p>
           <div class="cycle-dots" id="cycleDots">
             <span class="active" style="background:#0E4E78"></span><span></span><span></span><span></span>
           </div>
@@ -623,29 +620,31 @@ CYCLE_BLOCK = """      <div class="cycle-grid reveal">
 """
 
 HISTORY_BLOCK = """      <div class="hist-years reveal" id="histYears">
-        <button class="hist-year" data-i="0" data-color="#0E4E78" data-tko="컬리버 설립" data-ten="CULIVER founded"
-          data-dko="육상 흰다리새우 BFT 양식 연구로 그룹의 출발점을 세웠습니다."
-          data-den="The group began with R&amp;D in land-based whiteleg shrimp BFT aquaculture.">2019</button>
-        <button class="hist-year" data-i="1" data-color="#166578" data-tko="에이엠피 합류 · 수처리 내재화" data-ten="AMP joins — water treatment"
-          data-dko="수처리·미생물 기술을 그룹에 내재화하며 순환 구조의 두 번째 축을 마련했습니다."
-          data-den="Brought water-treatment and microbial technology in-house, forming the second axis of the loop.">2021</button>
-        <button class="hist-year" data-i="2" data-color="#6E5D38" data-tko="코발티브 출범 · 자원순환" data-ten="COBALTIVE launched"
-          data-dko="굴 패각 업사이클 사업을 시작하며 자원순환 영역으로 확장했습니다."
-          data-den="Started oyster-shell upcycling, expanding into the circular-materials domain.">2023</button>
-        <button class="hist-year" data-i="3" data-color="#3E7C4F" data-tko="수신제팜 편입 · 스마트팜" data-ten="SUSINJE FARM joins"
-          data-dko="수경재배 스마트팜과 신선 유통을 더해 바다에서 농장까지 잇는 포트폴리오를 완성했습니다."
-          data-den="Added hydroponic smart-farming and fresh distribution, completing the ocean-to-farm portfolio.">2025</button>
-        <button class="hist-year active" data-i="4" data-color="#06202B" data-tko="컬리버 그룹 지주 체제 전환" data-ten="Holding structure"
-          data-dko="네 개 사업을 하나의 그룹 비전 아래 정렬하고 지주 체제로 전환했습니다."
-          data-den="Aligned four businesses under one group vision and transitioned to a holding structure."
-          style="background:#06202B;border-color:#06202B">2026</button>
+        <button class="hist-year active" data-i="0" data-color="#0E4E78" data-tko="컬리버 법인설립 · 연구 기반 마련" data-ten="CULIVER incorporated"
+          data-dko="컬리버 법인을 설립하고 기업부설연구소·벤처기업 확인·전남 청년기업 인증과 함께 Shrimp365 상표, 아쿠아포닉스 특허 등 기술 기반을 마련했습니다."
+          data-den="CULIVER was incorporated, establishing an R&amp;D lab, venture-firm certification, and the Shrimp365 trademark and aquaponics patent."
+          style="background:#0E4E78;border-color:#0E4E78">2024</button>
+        <button class="hist-year" data-i="1" data-color="#14606E" data-tko="복합 유용미생물 출시 · TIPS 선정" data-ten="Probiotics launch · TIPS"
+          data-dko="복합 유용미생물제제를 출시하고 양식 관리 플랫폼 개발에 착수했습니다. TIPS 선정 등 초기 투자를 유치했습니다."
+          data-den="Launched the complex-probiotic agent, began developing the farm-management platform, and was selected for TIPS.">2025</button>
+        <button class="hist-year" data-i="2" data-color="#1B6E7D" data-tko="양식 관리 플랫폼 출시" data-ten="Platform launch"
+          data-dko="Shrimp365 양식 관리 플랫폼을 출시하고 국내외 시장 확장을 시작했습니다."
+          data-den="Launched the Shrimp365 farm-management platform and began domestic and overseas expansion.">2026</button>
+        <button class="hist-year" data-i="3" data-color="#3E7C4F" data-tko="동남아 진출 · 사업 확장" data-ten="SEA expansion"
+          data-dko="베트남 등 동남아 시장과 국내 양어(뱀장어 등) 시장으로 확장하고, 양식 기술·관리 플랫폼을 고도화합니다."
+          data-den="Expanding into Southeast Asia (Vietnam and more) and domestic fish farming, while advancing the platform."
+          style="">2027+</button>
+        <button class="hist-year" data-i="4" data-color="#06202B" data-tko="농·축산업 확장 · IPO 목표" data-ten="Agri expansion · IPO"
+          data-dko="유용미생물제제 제조시설과 인공지능 기반 솔루션을 확장하고, 농·축산업 시장 진출과 IPO를 목표로 합니다."
+          data-den="Scaling probiotic manufacturing and AI solutions, entering agriculture/livestock, and targeting an IPO."
+          style="">비전</button>
       </div>
       <div class="hist-detail">
-        <div class="hist-big" id="histBig" style="color:#06202B">2026</div>
+        <div class="hist-big" id="histBig" style="color:#0E4E78">2024</div>
         <div class="hist-text">
-          <h3 id="histTitle"><span class="t-ko">컬리버 그룹 지주 체제 전환</span><span class="t-en">Holding structure</span></h3>
-          <p class="t-ko" id="histDescKo">네 개 사업을 하나의 그룹 비전 아래 정렬하고 지주 체제로 전환했습니다.</p>
-          <p class="t-en" id="histDescEn">Aligned four businesses under one group vision and transitioned to a holding structure.</p>
+          <h3 id="histTitle"><span class="t-ko">컬리버 법인설립 · 연구 기반 마련</span><span class="t-en">CULIVER incorporated</span></h3>
+          <p class="t-ko" id="histDescKo">컬리버 법인을 설립하고 기업부설연구소·벤처기업 확인·전남 청년기업 인증과 함께 Shrimp365 상표, 아쿠아포닉스 특허 등 기술 기반을 마련했습니다.</p>
+          <p class="t-en" id="histDescEn">CULIVER was incorporated, establishing an R&amp;D lab, venture-firm certification, and the Shrimp365 trademark and aquaponics patent.</p>
         </div>
       </div>
 """
@@ -708,13 +707,13 @@ CONTACT_INFO = """      <div class="reveal">
         <h2 class="h2 t-ko">함께 만들<br>순환을 제안하세요</h2>
         <h2 class="h2 t-en">Let's build a loop together</h2>
         <div class="contact-info">
-          <div class="kv"><span class="kv-k">EMAIL</span><span class="kv-v">contact@culiver.co.kr</span></div>
-          <div class="kv"><span class="kv-k">TEL</span><span class="kv-v">000-0000-0000</span></div>
+          <div class="kv"><span class="kv-k">WEB</span><span class="kv-v">culiver.ai</span></div>
           <div class="kv">
             <span class="kv-k"><span class="t-ko">주소</span><span class="t-en">ADDRESS</span></span>
-            <span class="addr t-ko">본사 주소를 입력하세요 (실제 정보로 교체)</span>
-            <span class="addr t-en">Replace with headquarters address</span>
+            <span class="addr t-ko">전남 순천시</span>
+            <span class="addr t-en">Suncheon, Jeonnam, Korea</span>
           </div>
+          <div class="kv"><span class="kv-k">EMAIL · TEL</span><span class="kv-v"><span class="t-ko">준비 중 — 아래 폼으로 문의</span><span class="t-en">Coming soon — use the form</span></span></div>
         </div>
       </div>
 """
@@ -835,8 +834,8 @@ home = f"""  <section id="top" class="hero">
       <p class="hero-eyebrow">CULIVER GROUP</p>
       <h1 class="t-ko">바다에서 농장까지,<br>순환하는 내일을 기릅니다</h1>
       <h1 class="t-en">From ocean to farm,<br>we cultivate a circular tomorrow</h1>
-      <p class="hero-lead t-ko">스마트 양식·수처리·자원순환 소재·스마트팜, 4개 계열사를 둔 지주회사입니다.<br>한 사업의 부산물이 다음 사업의 원료가 되는 순환 생산 구조를 만듭니다.</p>
-      <p class="hero-lead t-en">A holding company over four affiliates — smart aquaculture, water treatment, upcycled materials, and smart farming — where one business's byproduct becomes the next one's raw material.</p>
+      <p class="hero-lead t-ko">흰다리새우 스마트양식(컬리버)을 중심으로, 소재·환경(에이엠피)과 패각 업사이클(코발티브)까지 —<br>데이터와 미생물 기술로 1차산업을 다시 쓰는 컬리버 그룹입니다.</p>
+      <p class="hero-lead t-en">CULIVER Group rewrites primary industry with data and microbial technology — from smart whiteleg-shrimp aquaculture (CULIVER) to materials &amp; environment (AMP) and shell upcycling (COBALTIVE).</p>
       <div class="hero-cta">
         <a href="business.html" class="btn btn-primary"><span class="t-ko">사업영역 보기</span><span class="t-en">Our Business</span><span>→</span></a>
         <a href="contact.html" class="btn btn-ghost"><span class="t-ko">문의하기</span><span class="t-en">Contact</span></a>
@@ -848,9 +847,9 @@ home = f"""  <section id="top" class="hero">
   <section class="stats">
     <div class="wrap stats-grid reveal">
       <div class="stat"><div class="stat-num"><span class="val" data-count="4">4</span><span class="suffix"></span></div><span class="stat-label"><span class="t-ko">계열사</span><span class="t-en">Affiliates</span></span></div>
-      <div class="stat"><div class="stat-num"><span class="val" data-count="100">100</span><span class="suffix">%</span></div><span class="stat-label"><span class="t-ko">무항생제 양식</span><span class="t-en">Antibiotic-free</span></span></div>
-      <div class="stat"><div class="stat-num"><span class="val" data-count="365">365</span><span class="suffix"></span></div><span class="stat-label"><span class="t-ko">연중 생산</span><span class="t-en">Days a year</span></span></div>
-      <div class="stat"><div class="stat-num"><span class="val" data-count="2019">2019</span><span class="suffix"></span></div><span class="stat-label"><span class="t-ko">그룹 시작</span><span class="t-en">Since</span></span></div>
+      <div class="stat"><div class="stat-num"><span class="val" data-count="70">70</span><span class="suffix">%</span></div><span class="stat-label"><span class="t-ko">흰다리새우 생존율</span><span class="t-en">Shrimp survival</span></span></div>
+      <div class="stat"><div class="stat-num"><span class="val" data-count="6">6</span><span class="suffix">종</span></div><span class="stat-label"><span class="t-ko">복합 유용미생물</span><span class="t-en">Probiotic strains</span></span></div>
+      <div class="stat"><div class="stat-num"><span class="val">2024</span></div><span class="stat-label"><span class="t-ko">그룹 설립</span><span class="t-en">Founded</span></span></div>
     </div>
   </section>
 
@@ -953,7 +952,7 @@ about = (
           <p class="t-ko">컬리버 그룹은 ‘기른다’는 하나의 동사에서 시작했습니다. 새우를 기르고, 그 물을 되살리고, 버려지던 껍데기를 소재로 되살리며, 데이터로 작물을 길러 식탁까지 잇습니다.</p>
           <p class="t-ko">우리는 1차 산업을 과학과 데이터의 언어로 다시 씁니다. 한 사업의 부산물이 다른 사업의 원료가 되는 순환 구조 속에서, 버려지는 것 없이 지속가능한 생산 생태계를 만들어 가겠습니다. 바다와 어촌, 산지와 지역사회와 함께 성장하겠습니다.</p>
           <p class="t-en">CULIVER Group began with a single verb — to cultivate. We raise shrimp, restore their water, revive discarded shells into materials, and grow crops with data all the way to the table. We are rewriting primary industry in the language of science, building a circular, sustainable production ecosystem where nothing is wasted.</p>
-          <div class="sign"><b>컬리버 그룹</b><span class="t-ko">대표이사</span><span class="t-en">CEO, CULIVER GROUP</span></div>
+          <div class="sign"><b>컬리버 그룹 대표이사 정석</b><span class="t-ko">Jeong Seok · 대표이사</span><span class="t-en">Jeong Seok · CEO, CULIVER GROUP</span></div>
         </div>
       </div>
     </div>
@@ -1017,10 +1016,12 @@ about = (
       </div>
       <dl class="overview reveal">
         <div class="row"><dt><span class="t-ko">그룹명</span><span class="t-en">Group</span></dt><dd>컬리버 그룹 · CULIVER GROUP</dd></div>
-        <div class="row"><dt><span class="t-ko">설립</span><span class="t-en">Founded</span></dt><dd><span class="t-ko">2019년 (2026년 지주 체제 전환)</span><span class="t-en">2019 (holding structure since 2026)</span></dd></div>
+        <div class="row"><dt><span class="t-ko">대표이사</span><span class="t-en">CEO</span></dt><dd><span class="t-ko">정석</span><span class="t-en">Jeong Seok</span></dd></div>
+        <div class="row"><dt><span class="t-ko">설립</span><span class="t-en">Founded</span></dt><dd><span class="t-ko">2024년 (컬리버 법인설립)</span><span class="t-en">2024 (CULIVER incorporated)</span></dd></div>
         <div class="row"><dt><span class="t-ko">계열사</span><span class="t-en">Affiliates</span></dt><dd><span class="t-ko">컬리버 · 에이엠피 · 코발티브 · 수신제팜 (4개사)</span><span class="t-en">CULIVER · AMP · COBALTIVE · SUSINJE FARM (4)</span></dd></div>
-        <div class="row"><dt><span class="t-ko">사업영역</span><span class="t-en">Businesses</span></dt><dd><span class="t-ko">스마트 양식 · 수처리 · 자원순환 소재 · 스마트팜/유통</span><span class="t-en">Smart aquaculture · water treatment · upcycled materials · smart farming</span></dd></div>
-        <div class="row"><dt><span class="t-ko">본사</span><span class="t-en">HQ</span></dt><dd><span class="t-ko">본사 주소를 입력하세요 (실제 정보로 교체)</span><span class="t-en">Replace with headquarters address</span></dd></div>
+        <div class="row"><dt><span class="t-ko">사업영역</span><span class="t-en">Businesses</span></dt><dd><span class="t-ko">스마트 양식·AI · 소재/환경 · 패각 업사이클 · 스마트팜/유통</span><span class="t-en">Smart aquaculture·AI · materials/environment · shell upcycling · smart farm/distribution</span></dd></div>
+        <div class="row"><dt><span class="t-ko">본사</span><span class="t-en">HQ</span></dt><dd><span class="t-ko">전남 순천시</span><span class="t-en">Suncheon, Jeonnam</span></dd></div>
+        <div class="row"><dt><span class="t-ko">홈페이지</span><span class="t-en">Web</span></dt><dd>culiver.ai</dd></div>
       </dl>
     </div>
   </section>
@@ -1126,13 +1127,13 @@ sustain = (
         <p class="eyebrow">IMPACT</p>
         <h2 class="h2 t-ko">성과 지표</h2>
         <h2 class="h2 t-en">Our impact</h2>
-        <p class="lead"><span class="t-ko">‘예시’로 표기된 수치는 실제 성과 데이터로 교체하세요.</span><span class="t-en">Figures marked “예시 / example” should be replaced with real performance data.</span></p>
+        <p class="lead"><span class="t-ko">기술로 만든 실측 성과입니다. 데이터 기반 표준 공정이 자원 효율과 생산성을 동시에 끌어올립니다.</span><span class="t-en">Measured results from technology — a data-driven standard process that raises both resource efficiency and productivity.</span></p>
       </div>
       <div class="metrics bento-metrics reveal-stagger">
-        <div class="metric"><span class="v" style="color:#0E4E78"><span data-count="100">0</span>%</span><span class="l"><span class="t-ko">무항생제 양식</span><span class="t-en">Antibiotic-free</span></span></div>
-        <div class="metric"><span class="v" style="color:#166578"><span class="t-ko">예시</span><span class="t-en">example</span></span><span class="l"><span class="t-ko">양식수 재이용률</span><span class="t-en">Water reused</span></span><span class="note"><span class="t-ko">실제 수치로 교체</span><span class="t-en">replace</span></span></div>
-        <div class="metric"><span class="v" style="color:#6E5D38"><span class="t-ko">예시</span><span class="t-en">example</span></span><span class="l"><span class="t-ko">재활용 굴패각(톤)</span><span class="t-en">Shells recycled</span></span><span class="note"><span class="t-ko">실제 수치로 교체</span><span class="t-en">replace</span></span></div>
-        <div class="metric"><span class="v" style="color:#3E7C4F"><span class="t-ko">예시</span><span class="t-en">example</span></span><span class="l"><span class="t-ko">지역 일자리</span><span class="t-en">Local jobs</span></span><span class="note"><span class="t-ko">실제 수치로 교체</span><span class="t-en">replace</span></span></div>
+        <div class="metric"><span class="v" style="color:#0E4E78"><span data-count="70">0</span>%</span><span class="l"><span class="t-ko">흰다리새우 생존율</span><span class="t-en">Shrimp survival</span></span></div>
+        <div class="metric"><span class="v" style="color:#14606E"><span data-count="65">0</span>%</span><span class="l"><span class="t-ko">미생물 비용 절감</span><span class="t-en">Microbe cost cut</span></span></div>
+        <div class="metric"><span class="v" style="color:#6E5D38">패각콘크리트</span><span class="l"><span class="t-ko">굴패각 자원화</span><span class="t-en">Shell upcycling</span></span></div>
+        <div class="metric"><span class="v" style="color:#1B6E7D"><span data-count="7">0</span>일</span><span class="l"><span class="t-ko">수질 정상화 기간</span><span class="t-en">Water recovery</span></span></div>
       </div>
     </div>
   </section>
@@ -1145,7 +1146,7 @@ sustain = (
         <h2 class="h2 t-en">What we commit to</h2>
       </div>
       <div class="commitments reveal-stagger">
-        <div class="commitment"><span class="no">01</span><div><h3><span class="t-ko">무항생제·저배출 생산</span><span class="t-en">Antibiotic-free, low-emission production</span></h3><p><span class="t-ko">BFT 양식과 순환여과로 항생제 사용과 오염 배출을 구조적으로 낮춥니다.</span><span class="t-en">BFT aquaculture and recirculating filtration structurally reduce antibiotics and discharge.</span></p></div></div>
+        <div class="commitment"><span class="no">01</span><div><h3><span class="t-ko">유용미생물 기반 저투입 생산</span><span class="t-en">Probiotic-based, low-input production</span></h3><p><span class="t-ko">복합 유용미생물과 데이터 관리로 약품 의존과 폐사를 낮추고 사료·투입 비용을 줄입니다.</span><span class="t-en">Complex probiotics and data management reduce chemical dependence, mortality, and feed/input costs.</span></p></div></div>
         <div class="commitment"><span class="no">02</span><div><h3><span class="t-ko">자원 순환의 확대</span><span class="t-en">Expanding resource circulation</span></h3><p><span class="t-ko">굴 패각 업사이클을 넘어 부산물을 원료로 되돌리는 순환 범위를 넓혀 갑니다.</span><span class="t-en">Beyond shell upcycling, we keep widening the loop that returns byproducts to raw materials.</span></p></div></div>
         <div class="commitment"><span class="no">03</span><div><h3><span class="t-ko">지역사회와의 상생</span><span class="t-en">Coexistence with communities</span></h3><p><span class="t-ko">생산의 현장인 어촌·산지와 일자리·가치를 나누며 함께 성장합니다.</span><span class="t-en">We grow together with the fishing villages and farmlands where we produce.</span></p></div></div>
         <div class="commitment"><span class="no">04</span><div><h3><span class="t-ko">투명한 지배구조</span><span class="t-en">Transparent governance</span></h3><p><span class="t-ko">데이터에 기반한 의사결정과 투명한 정보 공개를 지향합니다.</span><span class="t-en">We pursue data-driven decisions and transparent disclosure.</span></p></div></div>
@@ -1199,16 +1200,16 @@ ir = (
   <section class="section tall bg-card">
     <div class="wrap">
       <div class="section-intro reveal">
-        <p class="eyebrow">KEY FIGURES</p>
-        <h2 class="h2 t-ko">주요 지표</h2>
-        <h2 class="h2 t-en">Key figures</h2>
-        <p class="lead"><span class="t-ko">‘준비 중’ 항목은 실제 재무·경영 데이터로 교체하세요.</span><span class="t-en">Replace the “준비 중 / soon” items with real financial data.</span></p>
+        <p class="eyebrow">MARKET</p>
+        <h2 class="h2 t-ko">시장 기회</h2>
+        <h2 class="h2 t-en">Market opportunity</h2>
+        <p class="lead"><span class="t-ko">생산만 하면 팔리는 시장 — 국내 새우 자급률은 10%에 불과하고, 시장의 경쟁 축은 ‘생산량’에서 ‘지속가능성·기술’로 이동하고 있습니다.</span><span class="t-en">A market where supply is the constraint — Korea's shrimp self-sufficiency is just 10%, and competition is shifting from volume to sustainability and technology.</span></p>
       </div>
       <div class="metrics bento-metrics reveal-stagger">
-        <div class="metric"><span class="v" style="color:#0E4E78"><span data-count="4">0</span></span><span class="l"><span class="t-ko">계열사</span><span class="t-en">Affiliates</span></span></div>
-        <div class="metric"><span class="v" style="color:#14606E"><span class="t-ko">준비 중</span><span class="t-en">soon</span></span><span class="l"><span class="t-ko">연결 매출</span><span class="t-en">Consolidated revenue</span></span><span class="note"><span class="t-ko">실제 수치로 교체</span><span class="t-en">replace</span></span></div>
-        <div class="metric"><span class="v" style="color:#6E5D38"><span class="t-ko">준비 중</span><span class="t-en">soon</span></span><span class="l"><span class="t-ko">영업이익</span><span class="t-en">Operating profit</span></span><span class="note"><span class="t-ko">실제 수치로 교체</span><span class="t-en">replace</span></span></div>
-        <div class="metric"><span class="v" style="color:#3E7C4F"><span class="t-ko">준비 중</span><span class="t-en">soon</span></span><span class="l"><span class="t-ko">임직원 수</span><span class="t-en">Employees</span></span><span class="note"><span class="t-ko">실제 수치로 교체</span><span class="t-en">replace</span></span></div>
+        <div class="metric"><span class="v" style="color:#0E4E78">160조</span><span class="l"><span class="t-ko">글로벌 양식 시장</span><span class="t-en">Global aquaculture</span></span></div>
+        <div class="metric"><span class="v" style="color:#14606E"><span data-count="10">0</span>%</span><span class="l"><span class="t-ko">국내 새우 자급률</span><span class="t-en">Domestic self-sufficiency</span></span></div>
+        <div class="metric"><span class="v" style="color:#1B6E7D">70%</span><span class="l"><span class="t-ko">흰다리새우 생존율</span><span class="t-en">Shrimp survival</span></span></div>
+        <div class="metric"><span class="v" style="color:#3E7C4F"><span data-count="4">0</span></span><span class="l"><span class="t-ko">계열사</span><span class="t-en">Affiliates</span></span></div>
       </div>
     </div>
   </section>
@@ -1216,12 +1217,39 @@ ir = (
   <section class="section tall bg-paper">
     <div class="wrap">
       <div class="section-intro reveal">
-        <p class="eyebrow">DISCLOSURES</p>
-        <h2 class="h2 t-ko">공시 · 자료실</h2>
-        <h2 class="h2 t-en">Disclosures &amp; filings</h2>
-        <p class="lead"><span class="t-ko">감사보고서·IR 자료는 준비 중입니다. 실제 파일로 링크를 교체하세요.</span><span class="t-en">Audit reports and IR materials are in preparation — replace with real files.</span></p>
+        <p class="eyebrow">ROADMAP</p>
+        <h2 class="h2 t-ko">성장 로드맵 · 매출 목표</h2>
+        <h2 class="h2 t-en">Growth roadmap · revenue targets</h2>
+        <p class="lead"><span class="t-ko">유용미생물제제와 양식 관리 솔루션을 기반으로 국내외 시장에 확장하며, IPO를 목표로 합니다. 아래 수치는 회사 사업계획상의 목표치입니다.</span><span class="t-en">Scaling probiotics and the farm-management platform across domestic and overseas markets toward an IPO. The figures below are the company's business-plan targets.</span></p>
       </div>
-      <div class="report-row reveal">
+      <div class="metrics bento-metrics reveal-stagger">
+        <div class="metric"><span class="v" style="color:#0E4E78">5.5억</span><span class="l"><span class="t-ko">2025 매출 목표</span><span class="t-en">2025 target</span></span></div>
+        <div class="metric"><span class="v" style="color:#14606E">58억</span><span class="l"><span class="t-ko">2027 매출 목표</span><span class="t-en">2027 target</span></span></div>
+        <div class="metric"><span class="v" style="color:#1B6E7D">271억</span><span class="l"><span class="t-ko">2030 매출 목표</span><span class="t-en">2030 target</span></span></div>
+        <div class="metric"><span class="v" style="color:#3E7C4F">730억</span><span class="l"><span class="t-ko">2033 매출 목표</span><span class="t-en">2033 target</span></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tall bg-card">
+    <div class="wrap">
+      <div class="section-intro reveal">
+        <p class="eyebrow">CREDENTIALS</p>
+        <h2 class="h2 t-ko">주요 인증 · 실적</h2>
+        <h2 class="h2 t-en">Certifications &amp; milestones</h2>
+      </div>
+      <div class="chips reveal-stagger" style="gap:10px">
+        <span class="chip" style="background:rgba(14,78,120,.08);color:#0E4E78">TIPS 선정</span>
+        <span class="chip" style="background:rgba(14,78,120,.08);color:#0E4E78">기업부설연구소</span>
+        <span class="chip" style="background:rgba(14,78,120,.08);color:#0E4E78">벤처기업확인</span>
+        <span class="chip" style="background:rgba(14,78,120,.08);color:#0E4E78">전남 청년기업 인증</span>
+        <span class="chip" style="background:rgba(14,78,120,.08);color:#0E4E78">순천대 강소지역기업</span>
+        <span class="chip" style="background:rgba(14,78,120,.08);color:#0E4E78">청창사 ‘우수’ 졸업</span>
+        <span class="chip" style="background:rgba(14,78,120,.08);color:#0E4E78">Shrimp365 상표</span>
+        <span class="chip" style="background:rgba(14,78,120,.08);color:#0E4E78">아쿠아포닉스 특허</span>
+        <span class="chip" style="background:rgba(14,78,120,.08);color:#0E4E78">복합 유용미생물 특허 출원 중</span>
+      </div>
+      <div class="report-row reveal" style="margin-top:32px">
         <span class="btn-outline is-disabled" aria-disabled="true"><span class="t-ko">📄 감사보고서 (준비 중)</span><span class="t-en">📄 Audit report (soon)</span></span>
         <span class="btn-outline is-disabled" aria-disabled="true"><span class="t-ko">📄 IR 자료 (준비 중)</span><span class="t-en">📄 IR deck (soon)</span></span>
       </div>
@@ -1398,10 +1426,14 @@ for c in BIZ:
 """ for i, (fko, fen, dko, den) in enumerate(c["features"]))
     prods = "".join(
         f"""        <div class="product">
-          <h3><span class="t-ko">{pko}</span><span class="t-en">{pen}</span></h3>
-          <p><span class="t-ko">{dko}</span><span class="t-en">{den}</span></p>
+          <div class="product-top">
+            <span class="product-cat" style="color:{c['ink']}"><span class="t-ko">{p['tko']}</span><span class="t-en">{p['ten']}</span></span>
+            <span class="product-status"><span class="t-ko">{p['status']}</span><span class="t-en">{p['statusen']}</span></span>
+          </div>
+          <h3><span class="t-ko">{p['nko']}</span><span class="t-en">{p['nen']}</span></h3>
+          <p><span class="t-ko">{p['dko']}</span><span class="t-en">{p['den']}</span></p>
         </div>
-""" for (pko, pen, dko, den) in c["products"])
+""" for p in c["products"])
     mets = "".join(
         f"""        <div class="metric"><span class="v" style="color:{c['ink']}">{metric_value(v)}</span><span class="l"><span class="t-ko">{lko}</span><span class="t-en">{len_}</span></span></div>
 """ for (v, lko, len_) in c["metrics"])
@@ -1430,6 +1462,56 @@ for c in BIZ:
   </section>
 """
 
+    if c.get("coming_soon"):
+        mid = f"""  <section class="section tall bg-card">
+    <div class="wrap">
+      <div class="section-intro reveal">
+        <p class="eyebrow" style="color:{c['ink']}">COMING SOON</p>
+        <h2 class="h2 t-ko">상세 소개 준비 중</h2>
+        <h2 class="h2 t-en">Details in preparation</h2>
+        <p class="lead"><span class="t-ko">{c['nko']}의 사업·제품 상세는 준비 중입니다. 확정되는 대로 순차적으로 공개할 예정입니다.</span><span class="t-en">Detailed business and product information for {c['nen']} is in preparation and will be published as it is confirmed.</span></p>
+      </div>
+    </div>
+  </section>
+"""
+    else:
+        mid = f"""  <section class="section tall bg-card">
+    <div class="wrap">
+      <div class="section-intro reveal">
+        <p class="eyebrow" style="color:{c['ink']}">TECHNOLOGY</p>
+        <h2 class="h2 t-ko">핵심 기술</h2>
+        <h2 class="h2 t-en">Core technology</h2>
+      </div>
+      <div class="feature-grid reveal-stagger">
+{feats}      </div>
+    </div>
+  </section>
+
+  <section class="section tall bg-paper">
+    <div class="wrap">
+      <div class="section-intro reveal">
+        <p class="eyebrow" style="color:{c['ink']}">PRODUCTS</p>
+        <h2 class="h2 t-ko">제품 · 서비스</h2>
+        <h2 class="h2 t-en">Products &amp; services</h2>
+      </div>
+      <div class="product-grid reveal-stagger">
+{prods}      </div>
+    </div>
+  </section>
+
+  <section class="section tall bg-card">
+    <div class="wrap">
+      <div class="section-intro reveal">
+        <p class="eyebrow" style="color:{c['ink']}">BY THE NUMBERS</p>
+        <h2 class="h2 t-ko">주요 지표</h2>
+        <h2 class="h2 t-en">Key figures</h2>
+      </div>
+      <div class="metrics bento-metrics reveal-stagger">
+{mets}      </div>
+    </div>
+  </section>
+"""
+
     body = (
         page_hero(c["ten"], c["nko"], c["nen"], c["dko"], c["den"],
                   [("business.html", "사업영역", "Business"), (None, c["nko"], c["nen"])],
@@ -1444,44 +1526,8 @@ for c in BIZ:
       </div>
     </div>
   </section>
-
-  <section class="section tall bg-card">
-    <div class="wrap">
-      <div class="section-intro reveal">
-        <p class="eyebrow" style="color:{c['ink']}">TECHNOLOGY</p>
-        <h2 class="h2 t-ko">핵심 기술</h2>
-        <h2 class="h2 t-en">Core technology</h2>
-      </div>
-      <div class="feature-grid reveal">
-{feats}      </div>
-    </div>
-  </section>
-
-  <section class="section tall bg-paper">
-    <div class="wrap">
-      <div class="section-intro reveal">
-        <p class="eyebrow" style="color:{c['ink']}">PRODUCTS</p>
-        <h2 class="h2 t-ko">제품 · 서비스</h2>
-        <h2 class="h2 t-en">Products &amp; services</h2>
-      </div>
-      <div class="product-grid reveal">
-{prods}      </div>
-    </div>
-  </section>
-
-  <section class="section tall bg-card">
-    <div class="wrap">
-      <div class="section-intro reveal">
-        <p class="eyebrow" style="color:{c['ink']}">BY THE NUMBERS</p>
-        <h2 class="h2 t-ko">주요 지표</h2>
-        <h2 class="h2 t-en">Key figures</h2>
-        <p class="lead"><span class="t-ko">‘예시’ 표기는 실제 수치로 교체하세요.</span><span class="t-en">Replace any “예시 / replace” figures with real data.</span></p>
-      </div>
-      <div class="metrics reveal">
-{mets}      </div>
-    </div>
-  </section>
 """
+        + mid
         + related
         + f"""  <section class="section bg-paper">
     <div class="wrap reveal">
