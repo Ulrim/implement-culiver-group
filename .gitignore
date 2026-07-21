@@ -12,3 +12,8 @@ Thumbs.db
 # Node
 node_modules/
 __pycache__/
+
+# Locally-installed agent skills (dev tooling, not site content)
+.agents/
+.claude/skills/
+skills-lock.json

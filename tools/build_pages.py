@@ -31,7 +31,9 @@ FONTS = (
     '  <link rel="preconnect" href="https://fonts.googleapis.com">\n'
     '  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
     '  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">\n'
-    '  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600&display=swap">\n'
+    # Archivo at expanded width (wdth=125) — the Latin display face; Korean
+    # display glyphs fall back to Pretendard (loaded above) automatically.
+    '  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,500;125,600;125,700;125,800&display=swap">\n'
 )
 
 # tiny inline script placed immediately after <body> opens (before any
@@ -243,7 +245,7 @@ def linkify_first(paragraphs, term, href):
 # ------------------------------------------------------------------ data
 BIZ = [
     dict(file="culiver-aqua.html", no="01", color="#0E4E78", ink="#0E4E78",
-         deep="linear-gradient(160deg,#081826,#0A2C46 60%,#0E4E78 130%)",
+         deep="linear-gradient(160deg,#041821,#0A2C46 60%,#0E4E78 130%)",
          img="biz-culiver.jpg", right=False,
          overlay="linear-gradient(150deg,rgba(14,78,120,.5),rgba(10,44,70,.72))", chipbg="rgba(14,78,120,.08)",
          tko="스마트 양식", ten="SMART AQUACULTURE", nko="컬리버", nen="CULIVER",
@@ -258,10 +260,10 @@ BIZ = [
          products=[("무항생제 흰다리새우", "Antibiotic-free shrimp", "항생제 없이 길러낸 신선·냉장 새우를 식자재·유통 채널에 공급합니다.", "Fresh, chilled, antibiotic-free shrimp for food-service and retail."),
                    ("활새우 공급", "Live shrimp", "산지에서 직송하는 활새우를 공급합니다.", "Live shrimp shipped directly from the farm.")],
          metrics=[("365", "연중 생산일", "Days a year"), ("100%", "무항생제", "Antibiotic-free"), ("BFT", "핵심 양식 기술", "Core method")]),
-    dict(file="amp.html", no="02", color="#1E7F96", ink="#166578",
-         deep="linear-gradient(160deg,#081826,#0F4A5C 60%,#1E7F96 130%)",
+    dict(file="amp.html", no="02", color="#1B6E7D", ink="#14606E",
+         deep="linear-gradient(160deg,#041821,#0C4A57 60%,#1B6E7D 130%)",
          img="biz-amp.jpg", right=True,
-         overlay="linear-gradient(150deg,rgba(30,127,150,.46),rgba(15,74,92,.72))", chipbg="rgba(30,127,150,.09)",
+         overlay="linear-gradient(150deg,rgba(27,110,125,.5),rgba(12,58,71,.74))", chipbg="rgba(27,110,125,.1)",
          tko="수처리 솔루션", ten="WATER TREATMENT", nko="에이엠피", nen="AMP",
          dko="양식장과 산업 현장의 물을 다루는 수처리 엔지니어링. 미생물 제제와 순환여과 시스템으로 물의 순환을 완성합니다.",
          den="Water-treatment engineering for aquaculture and industry — microbial agents and recirculating filtration that close the water loop.",
@@ -276,7 +278,7 @@ BIZ = [
                    ("산업용수 플랜트", "Industrial plants", "현장 맞춤형 수처리 플랜트를 구축합니다.", "Custom-built water-treatment plants.")],
          metrics=[("RAS", "핵심 설비", "Core system"), ("예시", "누적 수주 (교체)", "Projects (replace)"), ("예시", "재이용률 % (교체)", "Reuse % (replace)")]),
     dict(file="cobaltive.html", no="03", color="#8E7A5C", ink="#6E5D38",
-         deep="linear-gradient(160deg,#081826,#5E4F3A 60%,#8E7A5C 130%)",
+         deep="linear-gradient(160deg,#041821,#5E4F3A 60%,#8E7A5C 130%)",
          img="biz-cobaltive.jpg", right=False,
          overlay="linear-gradient(150deg,rgba(142,122,92,.46),rgba(94,79,58,.72))", chipbg="rgba(142,122,92,.12)",
          tko="자원순환 소재", ten="UPCYCLED MATERIALS", nko="코발티브", nen="COBALTIVE",
@@ -292,7 +294,7 @@ BIZ = [
                    ("셸픽", "SHELLPICK", "패각을 업사이클한 생활 제품입니다.", "Upcycled everyday products made from shells.")],
          metrics=[("Upcycle", "핵심 가치", "Core value"), ("예시", "재활용 패각량 (교체)", "Shells recycled (replace)"), ("예시", "친환경 인증 (교체)", "Eco-cert (replace)")]),
     dict(file="susinje-farm.html", no="04", color="#3E7C4F", ink="#3E7C4F",
-         deep="linear-gradient(160deg,#081826,#2A5A38 60%,#3E7C4F 130%)",
+         deep="linear-gradient(160deg,#041821,#2A5A38 60%,#3E7C4F 130%)",
          img="biz-susinje.jpg", right=True,
          overlay="linear-gradient(150deg,rgba(62,124,79,.46),rgba(36,82,50,.72))", chipbg="rgba(62,124,79,.1)",
          tko="스마트팜 · 유통", ten="SMART FARM · DISTRIBUTION", nko="수신제팜", nen="SUSINJE FARM",
@@ -348,7 +350,7 @@ NEWS = [
     dict(tagko="채용", tagen="Hiring", date="2026.02", title="컬리버 그룹 2026 상반기 신입·경력 공개채용 시작",
          titleen="CULIVER Group opens 2026 first-half hiring",
          overlay="linear-gradient(150deg,rgba(11,36,56,.34),rgba(8,24,38,.6))", cover="linear-gradient(150deg,rgba(11,36,56,.55),rgba(8,24,38,.75))",
-         photo="news-5.jpg", color="#0B2438", chipbg="rgba(11,36,56,.08)", biz=None,
+         photo="news-5.jpg", color="#06202B", chipbg="rgba(6,32,43,.08)", biz=None,
          body=["컬리버 그룹이 2026년 상반기 신입·경력 공개채용을 시작합니다. 양식 생산, 수처리 엔지니어링, 소재 R&D, 스마트팜 재배 등 계열사 전 직무에서 인재를 모집합니다.",
                "자세한 직무 내용과 지원 방법은 채용 페이지에서 확인하실 수 있습니다."]),
     dict(tagko="소식", tagen="Updates", date="2026.01", title="수신제팜 수경재배 채소, 대형 유통사 입점 확정",
@@ -584,13 +586,13 @@ HISTORY_BLOCK = """      <div class="hist-years reveal" id="histYears">
         <button class="hist-year" data-i="3" data-color="#3E7C4F" data-tko="수신제팜 편입 · 스마트팜" data-ten="SUSINJE FARM joins"
           data-dko="수경재배 스마트팜과 신선 유통을 더해 바다에서 농장까지 잇는 포트폴리오를 완성했습니다."
           data-den="Added hydroponic smart-farming and fresh distribution, completing the ocean-to-farm portfolio.">2025</button>
-        <button class="hist-year active" data-i="4" data-color="#0B2438" data-tko="컬리버 그룹 지주 체제 전환" data-ten="Holding structure"
+        <button class="hist-year active" data-i="4" data-color="#06202B" data-tko="컬리버 그룹 지주 체제 전환" data-ten="Holding structure"
           data-dko="네 개 사업을 하나의 그룹 비전 아래 정렬하고 지주 체제로 전환했습니다."
           data-den="Aligned four businesses under one group vision and transitioned to a holding structure."
-          style="background:#0B2438;border-color:#0B2438">2026</button>
+          style="background:#06202B;border-color:#06202B">2026</button>
       </div>
       <div class="hist-detail">
-        <div class="hist-big" id="histBig" style="color:#0B2438">2026</div>
+        <div class="hist-big" id="histBig" style="color:#06202B">2026</div>
         <div class="hist-text">
           <h3 id="histTitle"><span class="t-ko">컬리버 그룹 지주 체제 전환</span><span class="t-en">Holding structure</span></h3>
           <p class="t-ko" id="histDescKo">네 개 사업을 하나의 그룹 비전 아래 정렬하고 지주 체제로 전환했습니다.</p>
@@ -854,7 +856,7 @@ home = f"""  <section id="top" class="hero">
           <p class="sub t-en">ESG is not a side program — it is why our four businesses exist.</p>
         </div>
       </div>
-{ESG_TEASER}      <a class="more-link" href="sustainability.html" style="color:#7FC4C9"><span class="t-ko">지속가능경영 자세히</span><span class="t-en">More on sustainability</span> →</a>
+{ESG_TEASER}      <a class="more-link" href="sustainability.html" style="color:#4FA3A5"><span class="t-ko">지속가능경영 자세히</span><span class="t-en">More on sustainability</span> →</a>
     </div>
   </section>
 
@@ -948,7 +950,7 @@ about = (
         <div class="org-stem"></div>
         <div class="org-row">
           <a class="org-node" href="culiver-aqua.html"><div class="nm">컬리버</div><div class="en">CULIVER</div><div class="role">스마트 양식</div></a>
-          <a class="org-node" href="amp.html" style="border-top-color:#1E7F96"><div class="nm">에이엠피</div><div class="en">AMP</div><div class="role">수처리</div></a>
+          <a class="org-node" href="amp.html" style="border-top-color:#1B6E7D"><div class="nm">에이엠피</div><div class="en">AMP</div><div class="role">수처리</div></a>
           <a class="org-node" href="cobaltive.html" style="border-top-color:#8E7A5C"><div class="nm">코발티브</div><div class="en">COBALTIVE</div><div class="role">자원순환 소재</div></a>
           <a class="org-node" href="susinje-farm.html" style="border-top-color:#3E7C4F"><div class="nm">수신제팜</div><div class="en">SUSINJE FARM</div><div class="role">스마트팜·유통</div></a>
         </div>
@@ -982,12 +984,12 @@ about = (
         <p class="lead"><span class="t-ko">바다에서 농장까지, 순환을 잇는 네 사업의 색을 담았습니다.</span><span class="t-en">From ocean to farm — a palette that links the four businesses of the loop.</span></p>
       </div>
       <div class="ci-grid reveal">
-        <div class="swatch"><div class="chip" style="background:#0B2438"></div><div class="meta"><div class="nm">Deep Navy</div><div class="hex">#0B2438</div></div></div>
+        <div class="swatch"><div class="chip" style="background:#06202B"></div><div class="meta"><div class="nm">Abyss</div><div class="hex">#06202B</div></div></div>
         <div class="swatch"><div class="chip" style="background:#0E4E78"></div><div class="meta"><div class="nm">컬리버 Blue</div><div class="hex">#0E4E78</div></div></div>
-        <div class="swatch"><div class="chip" style="background:#1E7F96"></div><div class="meta"><div class="nm">에이엠피 Teal</div><div class="hex">#1E7F96</div></div></div>
-        <div class="swatch"><div class="chip" style="background:#8E7A5C"></div><div class="meta"><div class="nm">코발티브 Sand</div><div class="hex">#8E7A5C</div></div></div>
+        <div class="swatch"><div class="chip" style="background:#1B6E7D"></div><div class="meta"><div class="nm">에이엠피 Tide</div><div class="hex">#1B6E7D</div></div></div>
+        <div class="swatch"><div class="chip" style="background:#A88F63"></div><div class="meta"><div class="nm">코발티브 Sand</div><div class="hex">#A88F63</div></div></div>
         <div class="swatch"><div class="chip" style="background:#3E7C4F"></div><div class="meta"><div class="nm">수신제팜 Green</div><div class="hex">#3E7C4F</div></div></div>
-        <div class="swatch"><div class="chip" style="background:#7FC4C9"></div><div class="meta"><div class="nm">Aqua</div><div class="hex">#7FC4C9</div></div></div>
+        <div class="swatch"><div class="chip" style="background:#4FA3A5"></div><div class="meta"><div class="nm">Current</div><div class="hex">#4FA3A5</div></div></div>
       </div>
     </div>
   </section>

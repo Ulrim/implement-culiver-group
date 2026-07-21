@@ -1,37 +1,48 @@
 /* ============================================================
-   CULIVER GROUP — corporate homepage
-   Palette
-     ink        #0B1E2D   deep navy text
-     deep       #0B2438 / #081826  dark backgrounds
-     teal       #1E7F96   primary accent (backgrounds/UI/badges)
-     teal-ink   #166578   darker teal — WCAG-AA-safe for text/labels
-                          and for solid fills paired with white text
-                          (raw --teal only clears ~4.2:1 on paper/card,
-                          just under the 4.5:1 text minimum)
-     sand       #8E7A5C   COBALTIVE canonical brand hue (swatches,
-                          decorative borders, non-text accents)
-     sand-ink   #6E5D38   darker sand — WCAG-AA-safe for COBALTIVE
-                          text/labels and white-text-on-fill uses
-     aqua       #7FC4C9   light accent (used on dark backgrounds)
-     paper      #F6F4EF   light background
-     card       #FDFCFA   card surface
-   Brand hues: culiver #0E4E78 (AA-safe as-is) · amp/teal #1E7F96 (needs
-   teal-ink for text) · cobaltive #8E7A5C (needs sand-ink for text) ·
-   susinje #3E7C4F (AA-safe as-is)
+   CULIVER GROUP — corporate site
+   "Tidal" palette — a water-column depth scale from abyss to surface.
+   The brand is a loop from sea to farm, so the palette is built as an
+   actual depth gradient (deepest water = darkest value) rather than an
+   arbitrary set of brand colors. Scrolling reads as rising from deep
+   water toward the surface/foam where the farm begins.
+
+     abyss      #06202B   deepest water — dark sections, body text on light
+     deep       #0C3A47   deep water — secondary dark
+     tide       #1B6E7D   mid-water teal — primary brand; AA-safe as TEXT
+                          on foam/surface (~5.1:1), unlike the old --teal
+     tide-ink   #14606E   darker teal for small text / dense UI
+     current    #4FA3A5   bright light-teal accent — for dark backgrounds
+     foam       #EBF1EE   COOL sea-foam off-white background (deliberately
+                          not a warm cream — foam is cold, and warm cream
+                          is the generic default this brief avoids)
+     surface    #FAFCFB   card surface (barely-there cool white)
+     sand/-ink  #A88F63 / #6E5D38   COBALTIVE shore hue + AA-safe text ink
+   Affiliate hues sit ON the depth scale: culiver #0E4E78 (deep, AA-safe) ·
+   amp = tide #1B6E7D (mid) · cobaltive sand (shore) · susinje #3E7C4F
+   (surface green, AA-safe).
+
+   Type: --display = Archivo (expanded-width grotesque, infrastructure/
+   signage feel) for Latin display + Pretendard fallback for Korean
+   glyphs; --sans = Pretendard for all body/UI. No serif — a cream+serif
+   pairing is the AI-default look this brief steers away from.
    ============================================================ */
 
 :root {
-  --ink: #0B1E2D;
-  --deep: #0B2438;
-  --deep-2: #081826;
-  --teal: #1E7F96;
-  --teal-ink: #166578;
-  --sand: #8E7A5C;
+  --ink: #06202B;
+  --deep: #0C3A47;
+  --deep-2: #06202B;
+  --abyss: #041821;
+  --teal: #1B6E7D;
+  --teal-ink: #14606E;
+  --tide: #1B6E7D;
+  --current: #4FA3A5;
+  --sand: #A88F63;
   --sand-ink: #6E5D38;
-  --aqua: #7FC4C9;
-  --paper: #F6F4EF;
-  --card: #FDFCFA;
-  --serif: 'Noto Serif KR', serif;
+  --aqua: #7FD1D0;
+  --paper: #EBF1EE;
+  --card: #FAFCFB;
+  --display: 'Archivo', 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, sans-serif;
+  --serif: var(--display); /* legacy alias — all former serif display type now uses --display */
   --sans: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, sans-serif;
   --wrap: 1240px;
   --pad-x: clamp(20px, 5vw, 48px);
@@ -39,9 +50,9 @@
   /* contrast-safe secondary/tertiary text tokens (solid colors, not
      ad hoc rgba alpha blends — every value below clears 4.5:1 against
      both --paper and --card) */
-  --text-2: #445159;
-  --text-3: #5C6971;
-  --text-3-dark: rgba(246, 244, 239, .6);
+  --text-2: #3D4E54;
+  --text-3: #566469;
+  --text-3-dark: rgba(235, 241, 238, .62);
 
   /* spacing scale (8pt grid) + fluid section rhythm */
   --space-1: 8px;
@@ -59,7 +70,18 @@
   --radius-card: 20px;
 
   /* focus ring */
-  --focus-ring: 0 0 0 3px rgba(127, 196, 201, .5);
+  --focus-ring: 0 0 0 3px rgba(79, 163, 165, .55);
+}
+
+/* Latin display type is an expanded-width grotesque; Korean glyphs fall
+   back to Pretendard automatically (per-glyph). Only wdth=125 instances
+   are loaded, so this renders expanded even where font-stretch is unset. */
+.h-serif, .h2, .hero h1, .page-hero h1, .page-hero h2,
+.biz-name, .bento-name, .cycle-detail h3, .hist-big,
+.stat-num .val, .stat-num .suffix, .metric .v, .article h1,
+.cta-band h2, .form-sent h3, .org-top .t, .org-node .nm,
+.mm-label, .ring-core .ko {
+  font-stretch: expanded;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
