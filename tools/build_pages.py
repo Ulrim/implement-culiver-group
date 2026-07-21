@@ -864,7 +864,7 @@ home = f"""  <section id="top" class="hero">
         </div>
         <a class="more-link" href="business.html"><span class="t-ko">사업영역 전체 보기</span><span class="t-en">All businesses</span> →</a>
       </div>
-      <div class="bento-grid reveal">
+      <div class="bento-grid reveal-stagger">
 {biz_bento()}      </div>
     </div>
   </section>
@@ -1033,7 +1033,7 @@ about = (
         <h2 class="h2 t-en">Group colors</h2>
         <p class="lead"><span class="t-ko">바다에서 농장까지, 순환을 잇는 네 사업의 색을 담았습니다.</span><span class="t-en">From ocean to farm — a palette that links the four businesses of the loop.</span></p>
       </div>
-      <div class="ci-grid reveal">
+      <div class="ci-grid reveal-stagger">
         <div class="swatch"><div class="chip" style="background:#06202B"></div><div class="meta"><div class="nm">Abyss</div><div class="hex">#06202B</div></div></div>
         <div class="swatch"><div class="chip" style="background:#0E4E78"></div><div class="meta"><div class="nm">컬리버 Blue</div><div class="hex">#0E4E78</div></div></div>
         <div class="swatch"><div class="chip" style="background:#1B6E7D"></div><div class="meta"><div class="nm">에이엠피 Tide</div><div class="hex">#1B6E7D</div></div></div>
@@ -1075,7 +1075,7 @@ business = (
         <h2 class="h2 t-en">Four affiliates</h2>
         <p class="lead"><span class="t-ko">각 계열사를 눌러 사업·기술·제품을 자세히 확인하세요.</span><span class="t-en">Tap each affiliate for its business, technology, and products.</span></p>
       </div>
-      <div class="biz-list reveal">
+      <div class="biz-list reveal-stagger">
 """
     + biz_cards()
     + """      </div>
@@ -1128,7 +1128,7 @@ sustain = (
         <h2 class="h2 t-en">Our impact</h2>
         <p class="lead"><span class="t-ko">‘예시’로 표기된 수치는 실제 성과 데이터로 교체하세요.</span><span class="t-en">Figures marked “예시 / example” should be replaced with real performance data.</span></p>
       </div>
-      <div class="metrics bento-metrics reveal">
+      <div class="metrics bento-metrics reveal-stagger">
         <div class="metric"><span class="v" style="color:#0E4E78"><span data-count="100">0</span>%</span><span class="l"><span class="t-ko">무항생제 양식</span><span class="t-en">Antibiotic-free</span></span></div>
         <div class="metric"><span class="v" style="color:#166578"><span class="t-ko">예시</span><span class="t-en">example</span></span><span class="l"><span class="t-ko">양식수 재이용률</span><span class="t-en">Water reused</span></span><span class="note"><span class="t-ko">실제 수치로 교체</span><span class="t-en">replace</span></span></div>
         <div class="metric"><span class="v" style="color:#6E5D38"><span class="t-ko">예시</span><span class="t-en">example</span></span><span class="l"><span class="t-ko">재활용 굴패각(톤)</span><span class="t-en">Shells recycled</span></span><span class="note"><span class="t-ko">실제 수치로 교체</span><span class="t-en">replace</span></span></div>
@@ -1144,7 +1144,7 @@ sustain = (
         <h2 class="h2 t-ko">지속가능을 위한 약속</h2>
         <h2 class="h2 t-en">What we commit to</h2>
       </div>
-      <div class="commitments reveal">
+      <div class="commitments reveal-stagger">
         <div class="commitment"><span class="no">01</span><div><h3><span class="t-ko">무항생제·저배출 생산</span><span class="t-en">Antibiotic-free, low-emission production</span></h3><p><span class="t-ko">BFT 양식과 순환여과로 항생제 사용과 오염 배출을 구조적으로 낮춥니다.</span><span class="t-en">BFT aquaculture and recirculating filtration structurally reduce antibiotics and discharge.</span></p></div></div>
         <div class="commitment"><span class="no">02</span><div><h3><span class="t-ko">자원 순환의 확대</span><span class="t-en">Expanding resource circulation</span></h3><p><span class="t-ko">굴 패각 업사이클을 넘어 부산물을 원료로 되돌리는 순환 범위를 넓혀 갑니다.</span><span class="t-en">Beyond shell upcycling, we keep widening the loop that returns byproducts to raw materials.</span></p></div></div>
         <div class="commitment"><span class="no">03</span><div><h3><span class="t-ko">지역사회와의 상생</span><span class="t-en">Coexistence with communities</span></h3><p><span class="t-ko">생산의 현장인 어촌·산지와 일자리·가치를 나누며 함께 성장합니다.</span><span class="t-en">We grow together with the fishing villages and farmlands where we produce.</span></p></div></div>
@@ -1169,6 +1169,8 @@ sustain = (
   </section>
 """
 )
+write("sustainability.html", sustain, active="sustainability.html")
+
 # ================================================================= IR / INVESTOR RELATIONS
 # Structure is real; figures/filings are placeholders clearly marked
 # "준비 중 / soon" since there is no actual financial data yet.
@@ -1186,7 +1188,7 @@ ir = (
         <h2 class="h2 t-en">Governance</h2>
         <p class="lead"><span class="t-ko">컬리버 그룹은 지주회사 체제 아래 네 개 계열사를 하나의 비전으로 정렬합니다.</span><span class="t-en">CULIVER Group aligns its four affiliates under one vision through a holding-company structure.</span></p>
       </div>
-      <div class="commitments reveal">
+      <div class="commitments reveal-stagger">
         <div class="commitment"><span class="no">01</span><div><h3><span class="t-ko">지주 체제</span><span class="t-en">Holding structure</span></h3><p><span class="t-ko">지주회사가 네 계열사의 전략과 자원 배분을 통합 관리합니다.</span><span class="t-en">The holding company integrates strategy and capital allocation across the four affiliates.</span></p></div></div>
         <div class="commitment"><span class="no">02</span><div><h3><span class="t-ko">투명한 의사결정</span><span class="t-en">Transparent decisions</span></h3><p><span class="t-ko">데이터에 기반한 의사결정과 정보 공개를 원칙으로 합니다.</span><span class="t-en">Data-driven decision-making and disclosure are our operating principles.</span></p></div></div>
         <div class="commitment"><span class="no">03</span><div><h3><span class="t-ko">순환 기반 성장</span><span class="t-en">Circular growth</span></h3><p><span class="t-ko">한 사업의 부산물이 다음 사업의 원료가 되는 구조로 지속 성장을 추구합니다.</span><span class="t-en">We pursue durable growth through a loop where each business's byproduct feeds the next.</span></p></div></div>
@@ -1202,8 +1204,8 @@ ir = (
         <h2 class="h2 t-en">Key figures</h2>
         <p class="lead"><span class="t-ko">‘준비 중’ 항목은 실제 재무·경영 데이터로 교체하세요.</span><span class="t-en">Replace the “준비 중 / soon” items with real financial data.</span></p>
       </div>
-      <div class="metrics bento-metrics reveal">
-        <div class="metric"><span class="v" style="color:#0E4E78">4</span><span class="l"><span class="t-ko">계열사</span><span class="t-en">Affiliates</span></span></div>
+      <div class="metrics bento-metrics reveal-stagger">
+        <div class="metric"><span class="v" style="color:#0E4E78"><span data-count="4">0</span></span><span class="l"><span class="t-ko">계열사</span><span class="t-en">Affiliates</span></span></div>
         <div class="metric"><span class="v" style="color:#14606E"><span class="t-ko">준비 중</span><span class="t-en">soon</span></span><span class="l"><span class="t-ko">연결 매출</span><span class="t-en">Consolidated revenue</span></span><span class="note"><span class="t-ko">실제 수치로 교체</span><span class="t-en">replace</span></span></div>
         <div class="metric"><span class="v" style="color:#6E5D38"><span class="t-ko">준비 중</span><span class="t-en">soon</span></span><span class="l"><span class="t-ko">영업이익</span><span class="t-en">Operating profit</span></span><span class="note"><span class="t-ko">실제 수치로 교체</span><span class="t-en">replace</span></span></div>
         <div class="metric"><span class="v" style="color:#3E7C4F"><span class="t-ko">준비 중</span><span class="t-en">soon</span></span><span class="l"><span class="t-ko">임직원 수</span><span class="t-en">Employees</span></span><span class="note"><span class="t-ko">실제 수치로 교체</span><span class="t-en">replace</span></span></div>
@@ -1319,7 +1321,7 @@ careers = (
           <h2 class="h2 t-en">Open positions</h2>
         </div>
       </div>
-      <div class="roles reveal">
+      <div class="roles reveal-stagger">
 """
     + roles_list()
     + """      </div>
@@ -1414,7 +1416,7 @@ for c in BIZ:
         <h2 class="h2 t-ko">함께 보면 좋은 콘텐츠</h2>
         <h2 class="h2 t-en">Related content</h2>
       </div>
-      <div class="related-grid reveal">
+      <div class="related-grid reveal-stagger">
         <a class="related-card" href="news.html?id=news-{news_idx}">
           <span class="ic">📰</span>
           <span class="body"><span class="kicker"><span class="t-ko">최근 소식</span><span class="t-en">LATEST NEWS</span></span><span class="title">{related_news['title']}</span></span>
