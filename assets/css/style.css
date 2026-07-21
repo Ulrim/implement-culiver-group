@@ -202,10 +202,27 @@ input:focus, textarea:focus, select:focus {
    panel actually closes instead of staying open via the pseudo-class */
 .nav-drop-toggle[aria-expanded="false"] + .nav-drop-panel { opacity: 0 !important; pointer-events: none !important; }
 .nav-drop-panel a { display: flex; flex-direction: column; gap: 2px; padding: 12px 14px; border-radius: 12px; text-decoration: none; color: var(--ink); opacity: 1; border: none; }
-.nav-drop-panel a:hover { background: rgba(30,127,150,.08); }
+.nav-drop-panel a:hover { background: rgba(27,110,125,.09); }
 .nav-drop-panel .nm { font-family: var(--serif); font-size: 15px; font-weight: 600; }
 .nav-drop-panel .en { font-size: 10.5px; font-weight: 700; letter-spacing: .12em; color: var(--text-3); }
+/* panel heading names what the items are (계열사 / GROUP sections) */
+.nav-drop-head { grid-column: 1 / -1; padding: 4px 14px 2px; font-size: 10.5px; font-weight: 800; letter-spacing: .2em; color: var(--text-3); }
+/* full-width "see all" foot link, laid out as a row not a stacked item */
+.nav-drop-all { grid-column: 1 / -1; flex-direction: row !important; align-items: center; gap: 6px; margin-top: 4px; padding-top: 12px !important; border-top: 1px solid rgba(6,32,43,.08); border-radius: 0 !important; font-size: 13px; font-weight: 700; color: var(--tide-ink); }
+.nav-drop-all:hover { background: none !important; gap: 10px; }
 @media (max-width: 900px) { .nav-item-drop { display: none; } }
+
+/* primary CTA in the nav — the site's main conversion path. Filled so it
+   reads as an action in both nav states (transparent-over-hero and the
+   scrolled light bar). */
+.nav-cta {
+  display: inline-flex; align-items: center; background: var(--current); color: #06202B;
+  border-radius: 99px; padding: 9px 20px; font-size: 14px; font-weight: 700;
+  text-decoration: none; white-space: nowrap; transition: background .2s, transform .2s;
+}
+.nav-cta:hover { background: var(--aqua); transform: translateY(-1px); }
+.nav-cta:active { transform: scale(.97); }
+@media (max-width: 900px) { .nav-cta { display: none; } }
 
 .lang-toggle {
   display: flex; align-items: center; gap: 6px;
@@ -229,7 +246,7 @@ input:focus, textarea:focus, select:focus {
 /* ============================================================ MOBILE MENU */
 .mobile-menu {
   position: fixed; inset: 0; z-index: 99;
-  background: linear-gradient(168deg, #081826 0%, #0B2438 55%, #0E3A52 100%);
+  background: linear-gradient(168deg, #041821 0%, #06202B 55%, #0C3A47 100%);
   color: var(--paper);
   display: none; flex-direction: column; justify-content: center;
   padding: 96px 30px 40px; overflow-y: auto;
@@ -238,9 +255,12 @@ input:focus, textarea:focus, select:focus {
 .mobile-menu nav { display: flex; flex-direction: column; }
 .mobile-menu nav a {
   display: flex; align-items: baseline; gap: 16px; padding: 15px 4px;
-  border-bottom: 1px solid rgba(246,244,239,.14); color: inherit; text-decoration: none;
+  border-bottom: 1px solid rgba(235,241,238,.14); color: inherit; text-decoration: none;
 }
-.mm-no { font-size: 11px; font-weight: 800; letter-spacing: .24em; color: var(--aqua); }
+/* Contact is the CTA on desktop; here it's the last row, accented so the
+   conversion path still stands out */
+.mobile-menu nav a.mm-cta .mm-label { color: var(--current); }
+.mm-no { font-size: 11px; font-weight: 800; letter-spacing: .24em; color: var(--current); }
 .mm-label { font-family: var(--serif); font-size: 26px; font-weight: 500; }
 .mm-family { margin-top: 32px; display: flex; flex-direction: column; gap: 14px; }
 .mm-family-label { font-size: 11px; font-weight: 800; letter-spacing: .28em; color: rgba(246,244,239,.45); }
