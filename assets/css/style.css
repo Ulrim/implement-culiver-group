@@ -715,7 +715,11 @@ body.subpage .gnb.menu-open { background: transparent; border-bottom-color: tran
 
 /* product cards */
 .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%,240px),1fr)); gap: 18px; }
-.product { padding: 28px 26px; background: var(--paper); border: 1px solid rgba(11,30,45,.08); border-radius: var(--radius-card); }
+.product { display: flex; flex-direction: column; padding: 26px 24px; background: var(--paper); border: 1px solid rgba(11,30,45,.08); border-radius: var(--radius-card); transition: transform .35s cubic-bezier(.2,.9,.3,1.2), box-shadow .35s ease, border-color .3s; }
+.product:hover { transform: translateY(-5px); box-shadow: 0 24px 46px -22px rgba(6,32,43,.3); border-color: rgba(11,30,45,.14); }
+.product-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
+.product-cat { font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.product-status { font-size: 11px; font-weight: 700; color: var(--text-3); background: rgba(6,32,43,.06); border-radius: 99px; padding: 4px 10px; white-space: nowrap; }
 .product h3 { margin: 0 0 8px; font-size: 17px; font-weight: 750; }
 .product p { margin: 0; font-size: 14.5px; line-height: 1.7; color: var(--text-2); }
 
