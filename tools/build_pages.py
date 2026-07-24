@@ -198,7 +198,7 @@ FOOTER = """  <footer class="footer">
       <div class="footer-top">
         <div class="footer-brand">
           <div class="mark"><span class="m">CULIVER</span><span class="s">GROUP</span></div>
-          <p class="t-ko">바다에서 농장까지, 순환하는 내일을 기릅니다.</p>
+          <p class="t-ko">바다에서 농장까지, 잘 기르는 기술을 만듭니다.</p>
           <p class="t-en">From ocean to farm, we cultivate a circular tomorrow.</p>
         </div>
         <div class="footer-cols">
@@ -478,24 +478,24 @@ VALUES = """      <div class="values reveal">
           <span class="value-no" style="color:#0E4E78">01</span>
           <div class="value-body">
             <h3><span class="t-ko">순환 Circularity</span><span class="t-en">Circularity</span></h3>
-            <p class="t-ko">한 사업의 부산물이 다른 사업의 원료가 됩니다. 버려지는 것 없이 순환하는 생산 구조를 지향합니다.</p>
-            <p class="t-en">One business's byproduct becomes another's raw material — a production structure where nothing is wasted.</p>
+            <p class="t-ko">한 사업에서 남은 것이 다른 사업의 원료가 됩니다. 버리는 것을 최대한 줄이려고 합니다.</p>
+            <p class="t-en">What's left over from one business becomes raw material for another. We try to waste as little as possible.</p>
           </div>
         </div>
         <div class="value">
           <span class="value-no" style="color:#166578">02</span>
           <div class="value-body">
             <h3><span class="t-ko">기술 Technology</span><span class="t-en">Technology</span></h3>
-            <p class="t-ko">미생물, 수처리, 데이터. 1차 산업을 과학의 언어로 다시 씁니다.</p>
-            <p class="t-en">Microbes, water engineering, data — rewriting primary industry in the language of science.</p>
+            <p class="t-ko">미생물, 수처리, 데이터로 1차산업의 일하는 방식을 바꿉니다.</p>
+            <p class="t-en">Microbes, water engineering, and data change how primary industry works.</p>
           </div>
         </div>
         <div class="value">
           <span class="value-no" style="color:#3E7C4F">03</span>
           <div class="value-body">
             <h3><span class="t-ko">상생 Coexistence</span><span class="t-en">Coexistence</span></h3>
-            <p class="t-ko">바다와 어촌, 산지와 지역사회. 생산의 현장과 함께 성장하는 방식을 선택합니다.</p>
-            <p class="t-en">The sea and fishing villages, farms and their communities — we choose to grow together.</p>
+            <p class="t-ko">바다와 어촌, 산지와 지역사회. 생산 현장과 함께 성장하려고 합니다.</p>
+            <p class="t-en">We want to grow together with the places we produce in — the sea, fishing villages, farms, and local communities.</p>
           </div>
         </div>
       </div>
@@ -515,8 +515,8 @@ VALUES_TEASER = """      <div class="values reveal">
           <span class="value-no" style="color:#166578">02</span>
           <div class="value-body">
             <h3><span class="t-ko">기술 Technology</span><span class="t-en">Technology</span></h3>
-            <p class="t-ko">미생물과 데이터로 1차 산업을 다시 씁니다.</p>
-            <p class="t-en">Rewriting primary industry with microbes and data.</p>
+            <p class="t-ko">미생물과 데이터로 1차산업의 방식을 바꿉니다.</p>
+            <p class="t-en">Changing how primary industry works, with microbes and data.</p>
           </div>
         </div>
         <div class="value">
@@ -705,8 +705,8 @@ FORM_BLOCK = """      <div class="form-wrap reveal" id="formWrap">
 
 CONTACT_INFO = """      <div class="reveal">
         <p class="eyebrow on-dark">CONTACT</p>
-        <h2 class="h2 t-ko">함께 만들<br>순환을 제안하세요</h2>
-        <h2 class="h2 t-en">Let's build a loop together</h2>
+        <h2 class="h2 t-ko">함께 일하거나<br>협업하고 싶다면</h2>
+        <h2 class="h2 t-en">Want to work or partner with us?</h2>
         <div class="contact-info">
           <div class="kv"><span class="kv-k">WEB</span><span class="kv-v">culiver.ai</span></div>
           <div class="kv">
@@ -714,7 +714,7 @@ CONTACT_INFO = """      <div class="reveal">
             <span class="addr t-ko">전남 순천시</span>
             <span class="addr t-en">Suncheon, Jeonnam, Korea</span>
           </div>
-          <div class="kv"><span class="kv-k">EMAIL · TEL</span><span class="kv-v"><span class="t-ko">준비 중 — 아래 폼으로 문의</span><span class="t-en">Coming soon — use the form</span></span></div>
+          <div class="kv"><span class="kv-k">EMAIL · TEL</span><span class="kv-v"><span class="t-ko">준비 중입니다. 아래 폼으로 남겨 주세요</span><span class="t-en">Coming soon — please use the form below</span></span></div>
         </div>
       </div>
 """
@@ -812,15 +812,15 @@ def write(name, body, active=None, subpage=True):
 
 
 TITLES = {
-    "index.html": ("컬리버 그룹 CULIVER GROUP — 바다에서 농장까지, 순환하는 내일을 기릅니다",
+    "index.html": ("컬리버 그룹 CULIVER GROUP — 바다에서 농장까지, 잘 기르는 기술을 만듭니다",
                    "컬리버 그룹은 스마트 양식, 수처리, 자원순환 소재, 스마트팜을 잇는 지속가능한 생산 생태계를 만들어 갑니다."),
-    "about.html": ("그룹소개 About — 컬리버 그룹 CULIVER GROUP", "‘기른다’는 하나의 동사에서 출발한 컬리버 그룹의 비전과 연혁, 조직, 그룹 개요를 소개합니다."),
-    "business.html": ("사업영역 Business — 컬리버 그룹 CULIVER GROUP", "스마트 양식·수처리·자원순환 소재·스마트팜, 하나의 순환으로 연결된 컬리버 그룹의 네 개 사업."),
-    "sustainability.html": ("지속가능경영 Sustainability — 컬리버 그룹 CULIVER GROUP", "ESG는 별도 활동이 아니라 컬리버 그룹 네 사업이 존재하는 이유입니다."),
+    "about.html": ("그룹소개 About — 컬리버 그룹 CULIVER GROUP", "잘 기르는 일에서 시작한 컬리버 그룹의 비전과 연혁, 조직, 그룹 개요를 소개합니다."),
+    "business.html": ("사업영역 Business — 컬리버 그룹 CULIVER GROUP", "스마트 양식·수처리·자원순환 소재·스마트팜, 서로 이어진 컬리버 그룹의 네 개 사업."),
+    "sustainability.html": ("지속가능경영 Sustainability — 컬리버 그룹 CULIVER GROUP", "폐기물을 줄이고 자원을 다시 쓰는 일이 곧 컬리버 그룹의 사업입니다."),
     "ir.html": ("투자정보 IR — 컬리버 그룹 CULIVER GROUP", "컬리버 그룹의 지배구조, 주요 지표, 공시·자료실과 IR 문의 안내."),
     "newsroom.html": ("뉴스룸 Newsroom — 컬리버 그룹 CULIVER GROUP", "컬리버 그룹과 계열사의 보도자료·소식·채용 소식을 전합니다."),
     "news.html": ("뉴스룸 Newsroom — 컬리버 그룹 CULIVER GROUP", "컬리버 그룹과 계열사의 보도자료·소식·채용 소식을 전합니다."),
-    "careers.html": ("채용 Careers — 컬리버 그룹 CULIVER GROUP", "바다와 농장, 실험실과 현장을 잇는 사람들을 찾습니다. 인재상·채용 절차·공고·복리후생 안내."),
+    "careers.html": ("채용 Careers — 컬리버 그룹 CULIVER GROUP", "바다와 농장, 실험실과 현장에서 일할 사람을 찾습니다. 인재상·채용 절차·공고·복리후생 안내."),
     "contact.html": ("문의 Contact — 컬리버 그룹 CULIVER GROUP", "사업 제휴, 투자, 제품·구매, 채용 등 컬리버 그룹에 문의하세요."),
 }
 for _c in BIZ:
@@ -833,10 +833,10 @@ home = f"""  <section id="top" class="hero">
     <div class="hero-glow"></div>
     <div class="hero-inner">
       <p class="hero-eyebrow">CULIVER GROUP</p>
-      <h1 class="t-ko">바다에서 농장까지,<br>순환하는 내일을 기릅니다</h1>
-      <h1 class="t-en">From ocean to farm,<br>we cultivate a circular tomorrow</h1>
-      <p class="hero-lead t-ko">흰다리새우 스마트양식(컬리버)을 중심으로, 소재·환경(에이엠피)과 패각 업사이클(코발티브)까지 —<br>데이터와 미생물 기술로 1차산업을 다시 쓰는 컬리버 그룹입니다.</p>
-      <p class="hero-lead t-en">CULIVER Group rewrites primary industry with data and microbial technology — from smart whiteleg-shrimp aquaculture (CULIVER) to materials &amp; environment (AMP) and shell upcycling (COBALTIVE).</p>
+      <h1 class="t-ko">바다에서 농장까지,<br>잘 기르는 기술을 만듭니다</h1>
+      <h1 class="t-en">From ocean to farm,<br>the technology to grow better</h1>
+      <p class="hero-lead t-ko">흰다리새우 스마트양식(컬리버)에서 시작해 소재·환경(에이엠피), 패각 업사이클(코발티브)까지.<br>미생물과 데이터로 1차산업의 방식을 바꾸는 네 개의 회사입니다.</p>
+      <p class="hero-lead t-en">Four companies changing how primary industry works, with microbes and data — from smart whiteleg-shrimp aquaculture (CULIVER) to materials &amp; environment (AMP) and shell upcycling (COBALTIVE).</p>
       <div class="hero-cta">
         <a href="business.html" class="btn btn-primary"><span class="t-ko">사업영역 보기</span><span class="t-en">Our Business</span><span>→</span></a>
         <a href="contact.html" class="btn btn-ghost"><span class="t-ko">문의하기</span><span class="t-en">Contact</span></a>
@@ -859,8 +859,8 @@ home = f"""  <section id="top" class="hero">
       <div class="section-head-row reveal">
         <div>
           <p class="eyebrow">OUR BUSINESS</p>
-          <h2 class="h2 t-ko">하나의 순환, 네 개의 사업</h2>
-          <h2 class="h2 t-en">One cycle, four businesses</h2>
+          <h2 class="h2 t-ko">컬리버 그룹의 네 가지 사업</h2>
+          <h2 class="h2 t-en">Four businesses, one group</h2>
         </div>
         <a class="more-link" href="business.html"><span class="t-ko">사업영역 전체 보기</span><span class="t-en">All businesses</span> →</a>
       </div>
@@ -873,10 +873,10 @@ home = f"""  <section id="top" class="hero">
     <div class="wrap">
       <div class="cycle-head reveal">
         <p class="eyebrow">THE LOOP</p>
-        <h2 class="h2 t-ko">네 사업이 아니라, 하나의 순환입니다</h2>
-        <h2 class="h2 t-en">Not four businesses — one loop</h2>
-        <p class="sub t-ko">컬리버 그룹이 무엇을 하는 회사인지는 이 순환 하나로 설명됩니다. 노드를 눌러 각 사업이 맡는 역할을 확인하세요.</p>
-        <p class="sub t-en">This loop is the simplest way to understand what CULIVER Group does. Tap a node to see each business's role.</p>
+        <h2 class="h2 t-ko">한 사업에서 나온 것이<br>다음 사업의 원료가 됩니다</h2>
+        <h2 class="h2 t-en">One business's output becomes the next one's input</h2>
+        <p class="sub t-ko">컬리버 그룹이 하는 일은 이 그림 하나로 정리됩니다. 각 사업을 눌러 어떤 역할을 하는지 확인해 보세요.</p>
+        <p class="sub t-en">This one diagram sums up what CULIVER Group does. Tap a business to see its role.</p>
       </div>
 {CYCLE_BLOCK}    </div>
   </section>
@@ -885,10 +885,10 @@ home = f"""  <section id="top" class="hero">
     <div class="wrap about-grid">
       <div class="about-intro reveal">
         <p class="eyebrow">ABOUT CULIVER GROUP</p>
-        <h2 class="h2 t-ko">기르는 일의<br>순환을 설계합니다</h2>
-        <h2 class="h2 t-en">We design the cycle<br>of cultivation</h2>
-        <p class="t-ko">컬리버 그룹은 ‘기른다’는 하나의 동사에서 출발했습니다. 각 사업은 서로의 출발점이 됩니다.</p>
-        <p class="t-en">CULIVER Group began with a single verb: to cultivate. Each business feeds the next.</p>
+        <h2 class="h2 t-ko">컬리버 그룹은<br>이런 회사입니다</h2>
+        <h2 class="h2 t-en">What CULIVER Group<br>is about</h2>
+        <p class="t-ko">잘 기르는 일에서 시작한 네 개의 사업이 서로 이어져 있습니다. 한 사업이 다른 사업의 출발점이 됩니다.</p>
+        <p class="t-en">Four businesses that started with growing things well, and connect to one another — each is where the next begins.</p>
         <a class="more-link" href="about.html"><span class="t-ko">그룹소개 자세히</span><span class="t-en">More about us</span> →</a>
       </div>
 {VALUES_TEASER}    </div>
@@ -900,10 +900,10 @@ home = f"""  <section id="top" class="hero">
       <div class="reveal">
         <p class="eyebrow on-dark">SUSTAINABILITY</p>
         <div class="esg-head">
-          <h2 class="h2 t-ko">지속가능성은 사업 그 자체입니다</h2>
-          <h2 class="h2 t-en">Sustainability is the business itself</h2>
-          <p class="sub t-ko">ESG는 컬리버 그룹의 별도 활동이 아니라, 네 사업이 존재하는 이유입니다.</p>
-          <p class="sub t-en">ESG is not a side program — it is why our four businesses exist.</p>
+          <h2 class="h2 t-ko">지속가능성은<br>저희 사업의 기본입니다</h2>
+          <h2 class="h2 t-en">Sustainability is built<br>into what we do</h2>
+          <p class="sub t-ko">폐기물을 줄이고 자원을 다시 쓰는 일이 곧 저희가 하는 사업입니다. 따로 하는 ESG 캠페인이 아닙니다.</p>
+          <p class="sub t-en">Cutting waste and reusing resources is our actual business, not a separate ESG campaign.</p>
         </div>
       </div>
 {ESG_TEASER}      <a class="more-link" href="sustainability.html" style="color:#4FA3A5"><span class="t-ko">지속가능경영 자세히</span><span class="t-en">More on sustainability</span> →</a>
@@ -941,18 +941,18 @@ write("index.html", home, active=None, subpage=False)
 
 # ================================================================= ABOUT
 about = (
-    page_hero("ABOUT CULIVER GROUP", "기르는 일의 순환을 설계합니다", "We design the cycle of cultivation",
-              "‘기른다’는 하나의 동사에서 출발한 네 개의 사업이 하나의 순환으로 연결됩니다.",
-              "Four businesses born from a single verb — to cultivate — connected as one loop.",
+    page_hero("ABOUT CULIVER GROUP", "컬리버 그룹을 소개합니다", "About CULIVER Group",
+              "잘 기르는 일에서 시작한 네 개의 사업이 서로 이어져 있습니다.",
+              "Four businesses that started with growing things well, all connected to one another.",
               [("about.html", "그룹소개", "About")])
     + """  <section class="section bg-paper">
     <div class="wrap">
       <div class="greeting reveal">
         <div class="portrait"><span>CULIVER GROUP</span></div>
         <div class="body">
-          <p class="t-ko">컬리버 그룹은 ‘기른다’는 하나의 동사에서 시작했습니다. 새우를 기르고, 그 물을 되살리고, 버려지던 껍데기를 소재로 되살리며, 데이터로 작물을 길러 식탁까지 잇습니다.</p>
-          <p class="t-ko">우리는 1차 산업을 과학과 데이터의 언어로 다시 씁니다. 한 사업의 부산물이 다른 사업의 원료가 되는 순환 구조 속에서, 버려지는 것 없이 지속가능한 생산 생태계를 만들어 가겠습니다. 바다와 어촌, 산지와 지역사회와 함께 성장하겠습니다.</p>
-          <p class="t-en">CULIVER Group began with a single verb — to cultivate. We raise shrimp, restore their water, revive discarded shells into materials, and grow crops with data all the way to the table. We are rewriting primary industry in the language of science, building a circular, sustainable production ecosystem where nothing is wasted.</p>
+          <p class="t-ko">컬리버 그룹은 잘 기르는 일에서 시작했습니다. 새우를 기르고, 그 물을 되살리고, 버려지던 껍데기를 소재로 다시 쓰고, 데이터로 작물을 길러 식탁까지 잇습니다.</p>
+          <p class="t-ko">저희는 미생물과 수처리, 데이터로 1차산업의 일하는 방식을 바꾸고 있습니다. 한 사업에서 남은 것이 다른 사업의 원료가 되도록 만들어, 버리는 것을 줄이려 합니다. 바다와 어촌, 산지와 지역사회와 함께 성장하겠습니다.</p>
+          <p class="t-en">CULIVER Group started with growing things well. We raise shrimp, restore their water, turn discarded shells into materials, and grow crops with data all the way to the table. Using microbes, water treatment, and data, we're changing how primary industry works — and making what's left over from one business into raw material for another, so we waste less.</p>
           <div class="sign"><b>컬리버 그룹 대표이사 정석</b><span class="t-ko">Jeong Seok · 대표이사</span><span class="t-en">Jeong Seok · CEO, CULIVER GROUP</span></div>
         </div>
       </div>
@@ -965,7 +965,7 @@ about = (
         <p class="eyebrow">OUR VALUES</p>
         <h2 class="h2 t-ko">세 가지 약속</h2>
         <h2 class="h2 t-en">Three commitments</h2>
-        <p class="lead"><span class="t-ko">순환·기술·상생 — 컬리버 그룹이 일하는 방식입니다.</span><span class="t-en">Circularity, technology, coexistence — the way CULIVER Group works.</span></p>
+        <p class="lead"><span class="t-ko">순환, 기술, 상생. 컬리버 그룹이 일하는 방식입니다.</span><span class="t-en">Circularity, technology, coexistence — the way CULIVER Group works.</span></p>
       </div>
       <div class="about-grid">
         <div></div>
@@ -979,8 +979,8 @@ about = (
     <div class="wrap">
       <div class="hist-head reveal">
         <p class="eyebrow">HISTORY</p>
-        <h2 class="h2 t-ko">순환을 만들어온 길</h2>
-        <h2 class="h2 t-en">The path to the loop</h2>
+        <h2 class="h2 t-ko">걸어온 길</h2>
+        <h2 class="h2 t-en">How we got here</h2>
       </div>
 """
     + HISTORY_BLOCK
@@ -993,7 +993,7 @@ about = (
         <p class="eyebrow">ORGANIZATION</p>
         <h2 class="h2 t-ko">그룹 구조</h2>
         <h2 class="h2 t-en">Group structure</h2>
-        <p class="lead"><span class="t-ko">지주 체제 아래 네 개의 계열사가 하나의 순환으로 연결됩니다.</span><span class="t-en">Under a holding structure, four affiliates are connected as one loop.</span></p>
+        <p class="lead"><span class="t-ko">지주회사 아래 네 개의 계열사가 있습니다.</span><span class="t-en">Four affiliates under a single holding company.</span></p>
       </div>
       <div class="org reveal">
         <div class="org-top"><div class="t">컬리버 그룹</div><div class="s">CULIVER GROUP · HOLDINGS</div></div>
@@ -1051,7 +1051,7 @@ write("about.html", about, active="about.html")
 
 # ================================================================= BUSINESS
 business = (
-    page_hero("OUR BUSINESS", "하나의 순환, 네 개의 사업", "One cycle, four businesses",
+    page_hero("OUR BUSINESS", "컬리버 그룹의 네 가지 사업", "Four businesses, one group",
               "양식에서 나온 물은 정화되고, 껍데기는 소재가 되며, 데이터는 농장으로 이어집니다.",
               "Water is treated and returned, shells become materials, data flows to the farm.",
               [("business.html", "사업영역", "Business")])
@@ -1059,10 +1059,10 @@ business = (
     <div class="wrap">
       <div class="cycle-head reveal">
         <p class="eyebrow">THE LOOP</p>
-        <h2 class="h2 t-ko">버려지는 것 없이, 순환합니다</h2>
-        <h2 class="h2 t-en">Nothing wasted — everything circulates</h2>
-        <p class="sub t-ko">노드를 눌러 각 사업이 순환 구조에서 맡는 역할을 확인하세요.</p>
-        <p class="sub t-en">Tap a node to see the role each business plays in the loop.</p>
+        <h2 class="h2 t-ko">한 사업의 부산물이<br>다른 사업의 원료가 됩니다</h2>
+        <h2 class="h2 t-en">One business's byproduct feeds another</h2>
+        <p class="sub t-ko">각 사업을 눌러 어떤 역할을 하는지 확인해 보세요.</p>
+        <p class="sub t-en">Tap a business to see the role it plays.</p>
       </div>
 """
     + CYCLE_BLOCK
@@ -1101,9 +1101,9 @@ write("business.html", business, active="business.html")
 
 # ================================================================= SUSTAINABILITY
 sustain = (
-    page_hero("SUSTAINABILITY", "지속가능성은 사업 그 자체입니다", "Sustainability is the business itself",
-              "ESG는 컬리버 그룹의 별도 활동이 아니라, 네 사업이 존재하는 이유입니다.",
-              "ESG is not a side program — it is why our four businesses exist.",
+    page_hero("SUSTAINABILITY", "지속가능성은 저희 사업의 기본입니다", "Sustainability is built into what we do",
+              "폐기물을 줄이고 자원을 다시 쓰는 일이 곧 컬리버 그룹이 하는 사업입니다.",
+              "Cutting waste and reusing resources is our actual business.",
               [("sustainability.html", "지속가능경영", "Sustainability")])
     + """  <section class="section esg">
     <div class="esg-glow"></div>
@@ -1113,8 +1113,8 @@ sustain = (
         <div class="esg-head">
           <h2 class="h2 t-ko">사업 안에 담긴 지속가능성</h2>
           <h2 class="h2 t-en">Sustainability built into the business</h2>
-          <p class="sub t-ko">환경·사회·지배구조는 각 사업의 설계 원리입니다.</p>
-          <p class="sub t-en">Environment, society, and governance are design principles of every business.</p>
+          <p class="sub t-ko">환경·사회·지배구조를 각 사업을 만드는 기준으로 삼습니다.</p>
+          <p class="sub t-en">We treat environment, society, and governance as the basis for how each business is run.</p>
         </div>
       </div>
 """
@@ -1305,9 +1305,9 @@ write("newsroom.html", newsroom, active="newsroom.html")
 
 # ================================================================= CAREERS
 careers = (
-    page_hero("CAREERS", "기르는 사람들과 함께 자랍니다", "Grow with the growers",
-              "바다와 농장, 실험실과 현장을 잇는 사람들을 찾습니다.",
-              "We look for people who connect the sea and the farm, the lab and the field.",
+    page_hero("CAREERS", "함께 일할 사람을 찾습니다", "Join the team",
+              "바다와 농장, 실험실과 현장에서 일할 사람을 찾고 있습니다.",
+              "We're looking for people to work across the sea and the farm, the lab and the field.",
               [("careers.html", "채용", "Careers")],
               cta_html='<a class="careers-hero-cta" href="#roles"><span class="t-ko">채용 공고 보기</span><span class="t-en">View openings</span> ↓</a>')
     + """  <section class="section bg-paper">
