@@ -31,9 +31,10 @@ FONTS = (
     '  <link rel="preconnect" href="https://fonts.googleapis.com">\n'
     '  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
     '  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">\n'
-    # Archivo at expanded width (wdth=125) — the Latin display face; Korean
-    # display glyphs fall back to Pretendard (loaded above) automatically.
-    '  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,500;125,600;125,700;125,800&display=swap">\n'
+    # Archivo at expanded width (wdth=125) — the Latin display face. Korean
+    # display glyphs fall through to Gothic A1 (a solid, confident gothic that
+    # pairs with Archivo's industrial grotesque); body Korean stays Pretendard.
+    '  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,500;125,600;125,700;125,800&family=Gothic+A1:wght@500;600;700;800;900&display=swap">\n'
 )
 
 # tiny inline script placed immediately after <body> opens (before any
