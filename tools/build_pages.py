@@ -315,22 +315,22 @@ BIZ = [
          deep="linear-gradient(160deg,#041821,#0C4A57 60%,#1B6E7D 130%)",
          img="biz-amp.jpg", right=True,
          overlay="linear-gradient(150deg,rgba(27,110,125,.5),rgba(12,58,71,.74))", chipbg="rgba(27,110,125,.1)",
-         tko="소재 · 환경 엔지니어링", ten="MATERIALS · ENVIRONMENT", nko="에이엠피", nen="AMP",
-         dko="이차전지 전구체 소재·장비와 폐수·공정수 처리, 공조용 특수 부품까지 — 소재와 환경을 잇는 엔지니어링 기업입니다.",
-         den="Battery-precursor materials and equipment, wastewater and process-water treatment, and specialty HVAC components — engineering that connects materials and environment.",
-         chips=["이차전지 전구체", "망초폐수 처리", "공조부품"],
-         leadko="에이엠피는 이차전지 전구체(NCM) 소재·장비와 망초폐수·공정수 재순환 처리, 공조용 특수 알루미늄 부품을 아우르는 소재·환경 엔지니어링 기업입니다. 육상양식용 미생물 배양수조 등 그룹의 양식 사업과도 맞닿아 있습니다.",
-         leaden="AMP is a materials-and-environment engineering company spanning battery-precursor (NCM) materials and equipment, sodium-sulfate wastewater / process-water recirculation, and specialty aluminum HVAC components — also linked to the group's aquaculture through microbe culture tanks.",
-         features=[("이차전지 전구체 장비", "Battery-precursor equipment", "NCM(니켈·코발트·망간) 삼원계 전구체 생산을 위한 공침반응기와 입자선별·필터 장치를 개발합니다.", "Co-precipitation reactors and particle-filtration systems for producing NCM ternary precursors."),
-                   ("폐수 · 공정수 처리", "Water treatment", "이차전지 생산 시 발생하는 망초폐수(Na₂SO₄)를 물리·전기화학적으로 처리해 공정수로 재순환합니다.", "Sodium-sulfate (Na₂SO₄) wastewater from battery production is treated and recirculated as process water."),
-                   ("공조 특수부품", "HVAC components", "브레이징 용접이 가능한 2종 알루미늄 압연 Clad AL Pipe를 공조시스템용으로 양산합니다(ISO9001).", "Brazable clad-aluminum pipe for HVAC systems, produced under ISO9001.")],
+         tko="수처리 · 물 매니지먼트", ten="WATER MANAGEMENT", nko="에이엠피", nen="AMP",
+         dko="수처리 시스템 설비의 설계·제작·설치·시운전부터 실시간 수질 모니터링까지. 이차전지 공정 설비와 공조부품 제조 기술이 바탕입니다.",
+         den="Water-treatment systems — designed, built, installed, commissioned and monitored in real time. Battery-process equipment and HVAC-parts manufacturing are the foundation.",
+         chips=["수처리 시스템 설비", "실시간 수질 모니터링", "공조부품 제조"],
+         leadko="에이엠피는 현장마다 다른 물의 성상에 맞춰 수처리 시스템 설비를 설계·제작·설치하는 기업입니다. 이차전지 폐수처리, 공정수 재순환, 육상양식 물관리, 제약·화학 폐수처리 네 분야를 다루며, 수질 센서와 실시간 모니터링 프로그램으로 물을 관리합니다. 자체 공장에서 구조물과 장치를 직접 제작하고, 공조용 Clad AL Header Pipe 제조로 쌓은 용접·가공 역량이 설비 제작의 바탕입니다.",
+         leaden="AMP designs, builds and installs water-treatment systems tailored to each site's water. It covers four areas — battery wastewater, process-water reuse, aquaculture water, and pharma/chemical wastewater — and manages water with sensors and a live monitoring program. Everything is fabricated in-house, built on welding and machining experience from making clad-aluminum HVAC header pipe.",
+         features=[("수처리 시스템 설비", "Water-treatment systems", "원수 성상을 분석해 현장에 맞춘 수처리 설비를 설계·제작·설치·시운전합니다. 이차전지·공정수·양식·제약화학 네 분야.", "Site-specific water-treatment systems designed, built, installed and commissioned across four fields."),
+                   ("실시간 수질 모니터링", "Real-time monitoring", "pH·EC·온도·탁도·TDS·DO를 센서로 측정해 실시간 프로그램에서 확인하고, 이상이 생기면 알림으로 대응합니다.", "Sensors track pH, EC, temperature, turbidity, TDS and DO in a live program, with alerts on anomalies."),
+                   ("제조 기반", "Manufacturing base", "공조용 Clad AL Header Pipe 제조와 이차전지 전구체 공침반응기 제작 역량이 수처리 설비 제작을 뒷받침합니다.", "Clad-aluminum HVAC header pipe and battery-precursor reactors — the fabrication base behind the water systems.")],
          products=[dict(nko="이차전지 망초폐수 처리 시스템", nen="Battery wastewater system", dko="전구체·양극재 생산 시 발생하는 망초폐수(Na₂SO₄)를 이온 제거 후 공정에 재투입하는 시스템.", den="Removes ions from sodium-sulfate battery wastewater and returns it to the process.", tko="소재·환경", ten="Materials", status="개발중", statusen="In development"),
                    dict(nko="공침반응기 (5L)", nen="Co-precipitation reactor (5L)", dko="pH·교반·온도를 제어해 NCM 삼원계 전구체를 생산하는 반응기. 조선대 납품 예정.", den="A reactor producing NCM ternary precursors under pH, agitation and temperature control.", tko="소재·환경", ten="Materials", status="시제품", statusen="Prototype"),
                    dict(nko="공정수 재순환 시스템", nen="Process-water recirculation", dko="전구체 세척 공정수를 공침반응기로 순환시켜 재활용하는 시스템.", den="Recirculates precursor-washing process water back to the reactor for reuse.", tko="소재·환경", ten="Materials", status="시제품", statusen="Prototype"),
                    dict(nko="전구체 입자선별·필터장치", nen="Precursor filtration", dko="사이클러 필터·필터프레스로 전구체와 망초폐수를 분리하는 장치.", den="Separates precursor from sodium-sulfate wastewater using cyclone filters and a filter press.", tko="소재·환경", ten="Materials", status="시제품", statusen="Prototype"),
                    dict(nko="미생물 배양수조", nen="Microbe culture tank", dko="육상양식 BFT 시스템용 미생물 자동 배양수조. 2단 구조로 순환·DO를 공급해 RAS에 투입.", den="An automated microbe culture tank for land-based BFT/RAS aquaculture systems.", tko="양식장비", ten="Aqua-equipment", status="개발중", statusen="In development"),
                    dict(nko="Header Pipe", nen="Header Pipe", dko="공조시스템(열교환기·콘덴서 등)에 적용되는 브레이징 가능 2종 알루미늄 Clad AL Pipe.", den="Brazable dual-alloy clad-aluminum pipe for HVAC heat exchangers and condensers.", tko="공조부품", ten="HVAC", status="양산중", statusen="In production")],
-         metrics=[("NCM", "삼원계 전구체", "Ternary precursor"), ("ISO9001", "공조부품 인증", "Certification"), ("6", "개발·양산 품목", "Product lines")]),
+         metrics=[("4", "수처리 적용분야", "Applications"), ("7", "수행 프로세스", "Process steps"), ("ISO9001", "공조부품 인증", "Certification")]),
     dict(file="cobaltive.html", no="03", color="#A88F63", ink="#6E5D38",
          deep="linear-gradient(160deg,#041821,#5E4F3A 60%,#A88F63 130%)",
          img="biz-cobaltive.jpg", right=False,
@@ -812,8 +812,8 @@ def write(name, body, active=None, subpage=True):
 
 
 TITLES = {
-    "index.html": ("컬리버 그룹 CULIVER GROUP — 바다에서 농장까지, 잘 기르는 기술을 만듭니다",
-                   "컬리버 그룹은 스마트 양식, 수처리, 자원순환 소재, 스마트팜을 잇는 지속가능한 생산 생태계를 만들어 갑니다."),
+    "index.html": ("에이엠피 AMP — 현장에 맞춘 설비, 데이터로 관리하는 물",
+                   "에이엠피(AMP)는 이차전지 폐수처리·공정수 재순환·육상양식·제약화학 수처리 시스템 설비를 설계·제작·설치하고, 실시간 수질 모니터링을 제공합니다."),
     "about.html": ("그룹소개 About — 컬리버 그룹 CULIVER GROUP", "잘 기르는 일에서 시작한 컬리버 그룹의 비전과 연혁, 조직, 그룹 개요를 소개합니다."),
     "business.html": ("사업영역 Business — 컬리버 그룹 CULIVER GROUP", "스마트 양식·수처리·자원순환 소재·스마트팜, 서로 이어진 컬리버 그룹의 네 개 사업."),
     "sustainability.html": ("지속가능경영 Sustainability — 컬리버 그룹 CULIVER GROUP", "폐기물을 줄이고 자원을 다시 쓰는 일이 곧 컬리버 그룹의 사업입니다."),
@@ -832,14 +832,14 @@ for _r in ROLES:
 home = f"""  <section id="top" class="hero">
     <div class="hero-glow"></div>
     <div class="hero-inner">
-      <p class="hero-eyebrow">CULIVER GROUP</p>
-      <h1 class="t-ko">바다에서 농장까지,<br>잘 기르는 기술을 만듭니다</h1>
-      <h1 class="t-en">From ocean to farm,<br>the technology to grow better</h1>
-      <p class="hero-lead t-ko">흰다리새우 스마트양식(컬리버)에서 시작해 소재·환경(에이엠피), 패각 업사이클(코발티브)까지.<br>미생물과 데이터로 1차산업의 방식을 바꾸는 네 개의 회사입니다.</p>
-      <p class="hero-lead t-en">Four companies changing how primary industry works, with microbes and data — from smart whiteleg-shrimp aquaculture (CULIVER) to materials &amp; environment (AMP) and shell upcycling (COBALTIVE).</p>
+      <p class="hero-eyebrow">AMP · WATER MANAGEMENT</p>
+      <h1 class="t-ko">현장에 맞춘 설비,<br>데이터로 관리하는 물</h1>
+      <h1 class="t-en">Water systems built for the site,<br>managed by data</h1>
+      <p class="hero-lead t-ko">에이엠피(AMP)는 수처리 시스템 설비의 설계·제작·설치·시운전부터 실시간 수질 모니터링까지 맡습니다. 이차전지 공정 설비와 공조부품 제조 기술이 그 바탕입니다.</p>
+      <p class="hero-lead t-en">AMP designs, builds, installs and commissions water-treatment systems, and monitors water quality in real time. Battery-process equipment and HVAC-parts manufacturing are the foundation.</p>
       <div class="hero-cta">
-        <a href="business.html" class="btn btn-primary"><span class="t-ko">사업영역 보기</span><span class="t-en">Our Business</span><span>→</span></a>
-        <a href="contact.html" class="btn btn-ghost"><span class="t-ko">문의하기</span><span class="t-en">Contact</span></a>
+        <a href="amp.html" class="btn btn-primary"><span class="t-ko">수처리 솔루션 보기</span><span class="t-en">Water solutions</span><span>→</span></a>
+        <a href="contact.html" class="btn btn-ghost"><span class="t-ko">견적·기술상담</span><span class="t-en">Get a quote</span></a>
       </div>
     </div>
     <div class="scroll-hint"><span>SCROLL</span><span class="bar"></span></div>
@@ -847,10 +847,10 @@ home = f"""  <section id="top" class="hero">
 
   <section class="stats">
     <div class="wrap stats-grid reveal">
-      <div class="stat"><div class="stat-num"><span class="val" data-count="4">4</span><span class="suffix"></span></div><span class="stat-label"><span class="t-ko">계열사</span><span class="t-en">Affiliates</span></span></div>
-      <div class="stat"><div class="stat-num"><span class="val" data-count="70">70</span><span class="suffix">%</span></div><span class="stat-label"><span class="t-ko">흰다리새우 생존율</span><span class="t-en">Shrimp survival</span></span></div>
-      <div class="stat"><div class="stat-num"><span class="val" data-count="6">6</span><span class="suffix">종</span></div><span class="stat-label"><span class="t-ko">복합 유용미생물</span><span class="t-en">Probiotic strains</span></span></div>
-      <div class="stat"><div class="stat-num"><span class="val">2024</span></div><span class="stat-label"><span class="t-ko">그룹 설립</span><span class="t-en">Founded</span></span></div>
+      <div class="stat"><div class="stat-num"><span class="val" data-count="7">7</span><span class="suffix">단계</span></div><span class="stat-label"><span class="t-ko">수행 프로세스</span><span class="t-en">Process steps</span></span></div>
+      <div class="stat"><div class="stat-num"><span class="val" data-count="4">4</span><span class="suffix">분야</span></div><span class="stat-label"><span class="t-ko">수처리 적용 분야</span><span class="t-en">Applications</span></span></div>
+      <div class="stat"><div class="stat-num"><span class="val" data-count="6">6</span><span class="suffix">종</span></div><span class="stat-label"><span class="t-ko">수질 측정 항목</span><span class="t-en">Quality metrics</span></span></div>
+      <div class="stat"><div class="stat-num"><span class="val" data-count="3">3</span><span class="suffix">개</span></div><span class="stat-label"><span class="t-ko">공신력 인증</span><span class="t-en">Certifications</span></span></div>
     </div>
   </section>
 
@@ -858,55 +858,73 @@ home = f"""  <section id="top" class="hero">
     <div class="wrap">
       <div class="section-head-row reveal">
         <div>
-          <p class="eyebrow">OUR BUSINESS</p>
-          <h2 class="h2 t-ko">컬리버 그룹의 네 가지 사업</h2>
-          <h2 class="h2 t-en">Four businesses, one group</h2>
+          <p class="eyebrow">APPLICATION</p>
+          <h2 class="h2 t-ko">물이 다르면, 설비도 달라야 합니다</h2>
+          <h2 class="h2 t-en">Different water needs different systems</h2>
         </div>
-        <a class="more-link" href="business.html"><span class="t-ko">사업영역 전체 보기</span><span class="t-en">All businesses</span> →</a>
+        <a class="more-link" href="amp.html"><span class="t-ko">수처리 전체 보기</span><span class="t-en">All water solutions</span> →</a>
       </div>
-      <div class="bento-grid reveal-stagger">
-{biz_bento()}      </div>
+      <div class="amp-areas reveal-stagger">
+        <article class="amp-area">
+          <div class="amp-area-img" style="background-image:url('assets/img/amp/area-battery.jpg')" role="img" aria-label="이차전지 폐수처리 Pilot 설비"></div>
+          <div class="amp-area-body">
+            <span class="amp-area-no">01</span>
+            <h3 class="t-ko">이차전지 폐수처리</h3><h3 class="t-en">Battery wastewater</h3>
+            <p class="t-ko">전구체·양극재 공정에서 나오는 망초폐수(Na₂SO₄)를 전처리·농축·EDR(전기투석역전)로 처리해 공정수로 재이용합니다.</p>
+            <p class="t-en">Sodium-sulfate wastewater from precursor/cathode processes is pre-treated, concentrated and run through EDR, then reused as process water.</p>
+          </div>
+        </article>
+        <article class="amp-area">
+          <div class="amp-area-img" style="background-image:url('assets/img/amp/area-recycle.jpg')" role="img" aria-label="공정수 재순환 시스템"></div>
+          <div class="amp-area-body">
+            <span class="amp-area-no">02</span>
+            <h3 class="t-ko">공정수 재순환</h3><h3 class="t-en">Process-water reuse</h3>
+            <p class="t-ko">입자 선별·필터 장치로 공정수를 재이용하는 현장 맞춤형 재순환 시스템을 설계·제작합니다.</p>
+            <p class="t-en">Site-specific recirculation systems that screen particles and filter process water for reuse.</p>
+          </div>
+        </article>
+        <article class="amp-area">
+          <div class="amp-area-img" style="background-image:url('assets/img/amp/area-aqua.jpg')" role="img" aria-label="육상양식 물관리"></div>
+          <div class="amp-area-body">
+            <span class="amp-area-no">03</span>
+            <h3 class="t-ko">육상양식 물관리</h3><h3 class="t-en">Aquaculture water</h3>
+            <p class="t-ko">RAS·BFT 양식장의 수질을 센서와 모니터링 프로그램으로 관리하고, 미생물 배양수조를 제작합니다.</p>
+            <p class="t-en">Sensor-based monitoring for RAS/BFT farms, plus microbe culture tanks we build in-house.</p>
+          </div>
+        </article>
+        <article class="amp-area">
+          <div class="amp-area-img" style="background-image:url('assets/img/amp/area-pharma.jpg')" role="img" aria-label="제약·화학 폐수처리"></div>
+          <div class="amp-area-body">
+            <span class="amp-area-no">04</span>
+            <h3 class="t-ko">제약·화학 폐수처리</h3><h3 class="t-en">Pharma &amp; chemical</h3>
+            <p class="t-ko">원수 성상을 분석해 현장마다 다른 폐수에 맞춘 수처리 시스템을 설계·제작·설치합니다.</p>
+            <p class="t-en">We analyze each influent and build treatment systems matched to that site's wastewater.</p>
+          </div>
+        </article>
+      </div>
     </div>
   </section>
 
-  <section id="cycle" class="section tall bg-paper">
-    <div class="wrap">
-      <div class="cycle-head reveal">
-        <p class="eyebrow">THE LOOP</p>
-        <h2 class="h2 t-ko">한 사업에서 나온 것이<br>다음 사업의 원료가 됩니다</h2>
-        <h2 class="h2 t-en">One business's output becomes the next one's input</h2>
-        <p class="sub t-ko">컬리버 그룹이 하는 일은 이 그림 하나로 정리됩니다. 각 사업을 눌러 어떤 역할을 하는지 확인해 보세요.</p>
-        <p class="sub t-en">This one diagram sums up what CULIVER Group does. Tap a business to see its role.</p>
-      </div>
-{CYCLE_BLOCK}    </div>
-  </section>
-
   <section class="section tall bg-card">
-    <div class="wrap about-grid">
-      <div class="about-intro reveal">
-        <p class="eyebrow">ABOUT CULIVER GROUP</p>
-        <h2 class="h2 t-ko">컬리버 그룹은<br>이런 회사입니다</h2>
-        <h2 class="h2 t-en">What CULIVER Group<br>is about</h2>
-        <p class="t-ko">잘 기르는 일에서 시작한 네 개의 사업이 서로 이어져 있습니다. 한 사업이 다른 사업의 출발점이 됩니다.</p>
-        <p class="t-en">Four businesses that started with growing things well, and connect to one another — each is where the next begins.</p>
-        <a class="more-link" href="about.html"><span class="t-ko">그룹소개 자세히</span><span class="t-en">More about us</span> →</a>
+    <div class="wrap amp-split reveal">
+      <div class="amp-split-text">
+        <p class="eyebrow">PROCESS · MONITORING</p>
+        <h2 class="h2 t-ko">진단에서 유지관리까지,<br>데이터로 관리합니다</h2>
+        <h2 class="h2 t-en">From diagnosis to upkeep,<br>managed by data</h2>
+        <p class="t-ko">자체 공장에서 구조물과 장치를 직접 제작하기 때문에 설계 변경에도 빠르게 대응합니다. 수질 센서로 측정한 값을 실시간 프로그램에서 확인하고, 이상이 생기면 알림으로 대응합니다.</p>
+        <p class="t-en">We fabricate the structures and devices in our own shop, so design changes are quick. Sensor readings show up in a live program, and anomalies trigger alerts.</p>
+        <ol class="amp-steps">
+          <li><span class="t-ko">현장·수질 진단</span><span class="t-en">Site &amp; water diagnosis</span></li>
+          <li><span class="t-ko">처리목표 설정</span><span class="t-en">Set targets</span></li>
+          <li><span class="t-ko">공정설계</span><span class="t-en">Process design</span></li>
+          <li><span class="t-ko">Pilot·시제품 제작</span><span class="t-en">Pilot build</span></li>
+          <li><span class="t-ko">설비 제작·설치</span><span class="t-en">Build &amp; install</span></li>
+          <li><span class="t-ko">시운전</span><span class="t-en">Commissioning</span></li>
+          <li><span class="t-ko">모니터링·유지관리</span><span class="t-en">Monitor &amp; maintain</span></li>
+        </ol>
+        <p class="amp-metrics-line"><span class="t-ko">실시간 측정 항목</span><span class="t-en">Live metrics</span> · pH · EC · 온도 · 탁도 · TDS · DO</p>
       </div>
-{VALUES_TEASER}    </div>
-  </section>
-
-  <section class="section tall esg">
-    <div class="esg-glow"></div>
-    <div class="wrap esg-inner">
-      <div class="reveal">
-        <p class="eyebrow on-dark">SUSTAINABILITY</p>
-        <div class="esg-head">
-          <h2 class="h2 t-ko">지속가능성은<br>저희 사업의 기본입니다</h2>
-          <h2 class="h2 t-en">Sustainability is built<br>into what we do</h2>
-          <p class="sub t-ko">폐기물을 줄이고 자원을 다시 쓰는 일이 곧 저희가 하는 사업입니다. 따로 하는 ESG 캠페인이 아닙니다.</p>
-          <p class="sub t-en">Cutting waste and reusing resources is our actual business, not a separate ESG campaign.</p>
-        </div>
-      </div>
-{ESG_TEASER}      <a class="more-link" href="sustainability.html" style="color:#4FA3A5"><span class="t-ko">지속가능경영 자세히</span><span class="t-en">More on sustainability</span> →</a>
+      <div class="amp-split-img" style="background-image:url('assets/img/amp/monitoring.jpg')" role="img" aria-label="실시간 수질 모니터링 현장"></div>
     </div>
   </section>
 
@@ -914,9 +932,54 @@ home = f"""  <section id="top" class="hero">
     <div class="wrap">
       <div class="section-head-row reveal">
         <div>
+          <p class="eyebrow">GROUP</p>
+          <h2 class="h2 t-ko">함께하는 기업</h2>
+          <h2 class="h2 t-en">Companies we work with</h2>
+        </div>
+      </div>
+      <p class="sub reveal" style="margin:0 0 28px;max-width:640px"><span class="t-ko">수처리를 중심으로, 스마트양식과 자원 업사이클까지 이어집니다.</span><span class="t-en">Water treatment at the center, reaching into smart aquaculture and resource upcycling.</span></p>
+      <div class="rel-grid reveal-stagger">
+        <article class="rel-card">
+          <div class="rel-img" style="background-image:url('assets/img/amp/reactor.jpg')"></div>
+          <div class="rel-body">
+            <span class="rel-tag">수처리 · 소재·환경</span>
+            <h3>에이엠피 <span class="rom">AMP</span></h3>
+            <p class="t-ko">수처리 시스템 설비, 이차전지 공정 장비, 공조부품 제조.</p>
+            <p class="t-en">Water-treatment systems, battery-process equipment, HVAC parts.</p>
+            <a class="more-link" href="amp.html"><span class="t-ko">자세히</span><span class="t-en">More</span> →</a>
+          </div>
+        </article>
+        <article class="rel-card">
+          <div class="rel-img" style="background-image:url('assets/img/biz-culiver.jpg')"></div>
+          <div class="rel-body">
+            <span class="rel-tag">스마트양식 · AI</span>
+            <h3>컬리버 <span class="rom">CULIVER</span></h3>
+            <p class="t-ko">흰다리새우 스마트양식, 복합 유용미생물·데이터 기반 수질 관리.</p>
+            <p class="t-en">Smart whiteleg-shrimp aquaculture with probiotics and data-driven water care.</p>
+            <a class="more-link" href="culiver-aqua.html"><span class="t-ko">자세히</span><span class="t-en">More</span> →</a>
+          </div>
+        </article>
+        <article class="rel-card">
+          <div class="rel-img" style="background-image:url('assets/img/biz-cobaltive.jpg')"></div>
+          <div class="rel-body">
+            <span class="rel-tag">자원 업사이클 · 디자인</span>
+            <h3>코발티브 <span class="rom">COBALTIVE</span></h3>
+            <p class="t-ko">버려지는 굴 패각을 ‘패각콘크리트’ 소재로 되살려 가구·오브제·굿즈로 만듭니다.</p>
+            <p class="t-en">Discarded oyster shells reborn as ‘shell-concrete’ furniture, objects and goods.</p>
+            <a class="more-link" href="cobaltive.html"><span class="t-ko">자세히</span><span class="t-en">More</span> →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tall bg-card">
+    <div class="wrap">
+      <div class="section-head-row reveal">
+        <div>
           <p class="eyebrow">NEWSROOM</p>
-          <h2 class="h2 t-ko">컬리버 그룹 소식</h2>
-          <h2 class="h2 t-en">News from the group</h2>
+          <h2 class="h2 t-ko">소식</h2>
+          <h2 class="h2 t-en">News</h2>
         </div>
         <a class="more-link" href="newsroom.html"><span class="t-ko">뉴스룸 전체 보기</span><span class="t-en">All news</span> →</a>
       </div>
@@ -924,6 +987,7 @@ home = f"""  <section id="top" class="hero">
 {news_cards(3)}      </div>
     </div>
   </section>
+
 
   <section class="section bg-card">
     <div class="wrap reveal">
