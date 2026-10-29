@@ -47,10 +47,10 @@ LANG_RESTORE_SCRIPT = (
 )
 
 NAV = [
-    ("about.html", "그룹소개", "About"),
+    ("about.html", "회사소개", "About"),
     ("business.html", "사업영역", "Business"),
     ("sustainability.html", "지속가능경영", "Sustainability"),
-    ("ir.html", "투자정보", "IR"),
+    ("ir.html", "실적·인증", "Record"),
     ("newsroom.html", "뉴스룸", "Newsroom"),
     ("careers.html", "채용", "Careers"),
 ]
@@ -69,9 +69,9 @@ FAMILY = [
 
 # jump-links into the (long, single-page) About page's sections
 ABOUT_SECTIONS = [
-    ("about.html", "그룹 개요", "Overview"),
+    ("about.html", "회사 개요", "Overview"),
     ("about.html#history", "연혁", "History"),
-    ("about.html#org", "조직·지배구조", "Organization"),
+    ("about.html#org", "조직", "Organization"),
     ("about.html#ci", "브랜드 컬러", "Brand color"),
 ]
 
@@ -81,7 +81,7 @@ ABOUT_SECTIONS = [
 # jump-links. label = (ko, en) heading; items = [(href, ko, en)]; all =
 # optional (href, ko, en) "see all" link shown at the panel foot.
 DROPDOWNS = {
-    "about.html": dict(label=("그룹", "GROUP"), items=ABOUT_SECTIONS, all=None),
+    "about.html": dict(label=("회사", "COMPANY"), items=ABOUT_SECTIONS, all=None),
     "business.html": dict(label=("계열사", "AFFILIATES"), items=FAMILY,
                           all=("business.html", "사업영역 전체 보기", "All businesses")),
 }
@@ -210,11 +210,11 @@ FOOTER = """  <footer class="footer">
             <a href="susinje-farm.html">수신제팜 <span class="rom">SUSINJE FARM</span></a>
           </div>
           <div class="footer-col">
-            <span class="head">GROUP</span>
-            <a href="about.html"><span class="t-ko">그룹소개</span><span class="t-en">About</span></a>
+            <span class="head">COMPANY</span>
+            <a href="about.html"><span class="t-ko">회사소개</span><span class="t-en">About</span></a>
             <a href="about.html#history"><span class="t-ko">연혁</span><span class="t-en">History</span></a>
             <a href="sustainability.html"><span class="t-ko">지속가능경영</span><span class="t-en">Sustainability</span></a>
-            <a href="ir.html"><span class="t-ko">투자정보</span><span class="t-en">IR</span></a>
+            <a href="ir.html"><span class="t-ko">실적·인증</span><span class="t-en">Record</span></a>
             <a href="careers.html"><span class="t-ko">채용</span><span class="t-en">Careers</span></a>
           </div>
           <div class="footer-col">
@@ -226,9 +226,9 @@ FOOTER = """  <footer class="footer">
         </div>
       </div>
       <div class="footer-bottom">
-        <span>© 2026 CULIVER GROUP. All rights reserved.</span>
-        <span class="t-ko">사업자 정보 · 주소는 실제 정보로 교체하세요</span>
-        <span class="t-en">Replace with real business registration &amp; address</span>
+        <span>© 2026 유한회사 에이엠피 (AMP Co., Ltd.) All rights reserved.</span>
+        <span class="t-ko">사업자등록번호 171-81-03763 · 전남 광양시 광양읍 익신산단3길 40, 409호</span>
+        <span class="t-en">Business Reg. 171-81-03763 · Gwangyang, Jeonnam, Korea</span>
       </div>
     </div>
   </footer>
@@ -356,11 +356,11 @@ BIZ = [
          img="biz-susinje.jpg", right=True,
          overlay="linear-gradient(150deg,rgba(62,124,79,.46),rgba(36,82,50,.72))", chipbg="rgba(62,124,79,.1)",
          tko="스마트팜 · 유통", ten="SMART FARM · DISTRIBUTION", nko="수신제팜", nen="SUSINJE FARM",
-         dko="컬리버 그룹의 계열사로, 스마트팜·유통 분야에서 준비 중입니다.",
-         den="A CULIVER Group affiliate in the smart-farm and distribution field — details in preparation.",
+         dko="에이엠피와 함께하는 기업으로, 스마트팜·유통 분야에서 준비 중입니다.",
+         den="A partner company of AMP in the smart-farm and distribution field — details in preparation.",
          chips=["스마트팜", "유통", "준비 중"],
-         leadko="수신제팜은 컬리버 그룹의 계열사입니다. 스마트팜·유통 분야의 상세 사업·제품 소개는 준비 중이며, 확정되는 대로 순차적으로 공개할 예정입니다.",
-         leaden="SUSINJE FARM is a CULIVER Group affiliate. Its detailed business and product information in smart farming and distribution is in preparation and will be published as it is confirmed.",
+         leadko="수신제팜은 에이엠피와 함께하는 기업입니다. 스마트팜·유통 분야의 상세 사업·제품 소개는 준비 중이며, 확정되는 대로 순차적으로 공개할 예정입니다.",
+         leaden="SUSINJE FARM is a partner company of AMP. Its detailed business and product information in smart farming and distribution is in preparation and will be published as it is confirmed.",
          features=[],
          products=[],
          metrics=[]),
@@ -390,23 +390,23 @@ NEWS = [
          photo="news-2.jpg", color="#6E5D38", chipbg="rgba(168,143,99,.14)", biz="cobaltive.html",
          body=["코발티브가 버려지는 굴 패각을 되살린 ‘패각콘크리트’ 디자인 제품으로 와디즈 펀딩을 완료하고 오늘의집·벤처나라 등 판로를 넓히고 있습니다. 스툴·벤치·오브제·굿즈 등 다양한 라인업을 선보입니다.",
                "패각콘크리트 가구는 녹색제품·저탄소제품 인증을 추진 중이며, 버려지던 패각을 자원으로 되살려 순환의 고리를 완성합니다."]),
-    dict(tagko="소식", tagen="Updates", date="2025.03", title="컬리버 그룹, 계열사 체제로 순환 생산 생태계 구축",
-         titleen="CULIVER Group builds a circular production ecosystem across its affiliates",
-         overlay="linear-gradient(150deg,rgba(62,124,79,.3),rgba(36,82,50,.55))", cover="linear-gradient(150deg,rgba(62,124,79,.5),rgba(36,82,50,.7))",
-         photo="news-3.jpg", color="#3E7C4F", chipbg="rgba(62,124,79,.1)", biz="susinje-farm.html",
-         body=["컬리버 그룹이 스마트양식(컬리버), 소재·환경(에이엠피), 패각 업사이클(코발티브), 스마트팜·유통(수신제팜)으로 이어지는 계열사 체제를 갖췄습니다. 한 사업의 부산물이 다른 사업의 원료가 되는 순환 구조를 지향합니다.",
-               "수신제팜 등 일부 계열사의 상세 사업 소개는 준비 중이며, 확정되는 대로 순차적으로 공개할 예정입니다."]),
+    dict(tagko="보도자료", tagen="Press", date="2026.03", title="에이엠피, 벤처기업 확인(혁신성장유형) 획득",
+         titleen="AMP certified as a venture firm (innovation-growth type)",
+         overlay="linear-gradient(150deg,rgba(27,110,125,.3),rgba(12,58,71,.55))", cover="linear-gradient(150deg,rgba(27,110,125,.5),rgba(12,58,71,.7))",
+         photo="news-3.jpg", color="#14606E", chipbg="rgba(27,110,125,.1)", biz="amp.html",
+         body=["유한회사 에이엠피가 벤처기업 확인(혁신성장유형)을 획득했습니다. 수처리 설비 설계·제작 역량과 이차전지 공정장비·공조부품 제조 기술의 혁신성을 인정받았습니다.",
+               "에이엠피는 앞서 뿌리기업 확인(한국생산기술연구원)과 전라남도지사 표창도 받았습니다."]),
     dict(tagko="보도자료", tagen="Press", date="2025.02", title="에이엠피, 이차전지 전구체 공침반응기 시제품 완성",
          titleen="AMP completes a prototype co-precipitation reactor for battery precursors",
          overlay="linear-gradient(150deg,rgba(27,110,125,.3),rgba(12,58,71,.55))", cover="linear-gradient(150deg,rgba(27,110,125,.5),rgba(12,58,71,.7))",
          photo="news-4.jpg", color="#14606E", chipbg="rgba(27,110,125,.1)", biz="amp.html",
          body=["에이엠피가 NCM(니켈·코발트·망간) 삼원계 전구체 생산용 공침반응기(5L) 시제품을 완성했습니다. pH·교반·온도 조건을 정밀 제어해 전구체를 생산하며, 내부 테스트를 거쳐 대학 연구기관 납품을 앞두고 있습니다.",
                "에이엠피는 이차전지 생산 과정에서 발생하는 망초폐수(Na₂SO₄)를 처리해 공정수로 재순환하는 시스템도 함께 개발하고 있습니다."]),
-    dict(tagko="채용", tagen="Hiring", date="2025.01", title="컬리버 그룹 신입·경력 공개채용",
-         titleen="CULIVER Group opens hiring across its affiliates",
+    dict(tagko="채용", tagen="Hiring", date="2025.11", title="에이엠피, 수처리 설비 현장 인력 채용",
+         titleen="AMP is hiring for water-treatment system projects",
          overlay="linear-gradient(150deg,rgba(11,36,56,.34),rgba(8,24,38,.6))", cover="linear-gradient(150deg,rgba(11,36,56,.55),rgba(8,24,38,.75))",
-         photo="news-5.jpg", color="#06202B", chipbg="rgba(6,32,43,.08)", biz=None,
-         body=["컬리버 그룹이 계열사 공개채용을 시작합니다. 양식 생산, 소재·환경 엔지니어링, 소재 R&D, 디자인 제품 등 계열사 전 직무에서 인재를 모집합니다.",
+         photo="news-5.jpg", color="#06202B", chipbg="rgba(6,32,43,.08)", biz="amp.html",
+         body=["유한회사 에이엠피가 수처리 설비 제작·설치 현장과 공조부품 제조 분야에서 함께할 인재를 모집합니다.",
                "자세한 직무 내용과 지원 방법은 채용 페이지에서 확인하실 수 있습니다."]),
     dict(tagko="소식", tagen="Updates", date="2024.12", title="컬리버, 기업부설연구소 설립·벤처기업 확인·TIPS 선정",
          titleen="CULIVER: R&D lab established, venture-firm certified, selected for TIPS",
@@ -441,7 +441,7 @@ ROLES = [
     dict(slug="amp", biz="amp.html", color="#14606E",
          role_ko="소재 · 환경 엔지니어", role_en="Materials & Environment Engineer",
          team_ko="에이엠피", team_en="AMP",
-         loc_ko="전남 순천 (협의)", loc_en="Suncheon (negotiable)",
+         loc_ko="전남 광양", loc_en="Gwangyang, Jeonnam",
          type_ko="정규직", type_en="Full-time",
          duties=[("이차전지 전구체 장비(공침반응기 등) 설계·운영", "Design and operate battery-precursor equipment"),
                  ("망초폐수·공정수 처리 및 재순환 시스템 개발", "Develop wastewater / process-water recirculation systems"),
@@ -479,25 +479,25 @@ VALUES = """      <div class="values reveal">
         <div class="value">
           <span class="value-no" style="color:#0E4E78">01</span>
           <div class="value-body">
-            <h3><span class="t-ko">순환 Circularity</span><span class="t-en">Circularity</span></h3>
-            <p class="t-ko">한 사업에서 남은 것이 다른 사업의 원료가 됩니다. 버리는 것을 최대한 줄이려고 합니다.</p>
-            <p class="t-en">What's left over from one business becomes raw material for another. We try to waste as little as possible.</p>
+            <h3><span class="t-ko">전문성 Professionalism</span><span class="t-en">Professionalism</span></h3>
+            <p class="t-ko">현장 경험과 기술로 수처리 설비를 직접 설계·제작합니다. 자체 공장에서 구조물과 장치를 만듭니다.</p>
+            <p class="t-en">We design and build water-treatment systems with real field experience, fabricating the structures and devices in our own shop.</p>
           </div>
         </div>
         <div class="value">
           <span class="value-no" style="color:#166578">02</span>
           <div class="value-body">
-            <h3><span class="t-ko">기술 Technology</span><span class="t-en">Technology</span></h3>
-            <p class="t-ko">미생물, 수처리, 데이터로 1차산업의 일하는 방식을 바꿉니다.</p>
-            <p class="t-en">Microbes, water engineering, and data change how primary industry works.</p>
+            <h3><span class="t-ko">신뢰 Trust</span><span class="t-en">Trust</span></h3>
+            <p class="t-ko">작업표준서 기반 품질관리와 현장에 맞춘 사후관리로 신뢰받는 파트너가 됩니다.</p>
+            <p class="t-en">Standardized quality control and site-specific aftercare make us a partner you can rely on.</p>
           </div>
         </div>
         <div class="value">
           <span class="value-no" style="color:#3E7C4F">03</span>
           <div class="value-body">
-            <h3><span class="t-ko">상생 Coexistence</span><span class="t-en">Coexistence</span></h3>
-            <p class="t-ko">바다와 어촌, 산지와 지역사회. 생산 현장과 함께 성장하려고 합니다.</p>
-            <p class="t-en">We want to grow together with the places we produce in — the sea, fishing villages, farms, and local communities.</p>
+            <h3><span class="t-ko">도전 Challenge</span><span class="t-en">Challenge</span></h3>
+            <p class="t-ko">수처리·소재·환경의 새로운 분야에 끊임없이 도전하며, 창조적 혁신으로 가치를 만듭니다.</p>
+            <p class="t-en">We keep taking on new fields in water, materials and environment, creating value through innovation.</p>
           </div>
         </div>
       </div>
@@ -623,31 +623,27 @@ CYCLE_BLOCK = """      <div class="cycle-grid reveal">
 """
 
 HISTORY_BLOCK = """      <div class="hist-years reveal" id="histYears">
-        <button class="hist-year active" data-i="0" data-color="#0E4E78" data-tko="컬리버 법인설립 · 연구 기반 마련" data-ten="CULIVER incorporated"
-          data-dko="컬리버 법인을 설립하고 기업부설연구소·벤처기업 확인·전남 청년기업 인증과 함께 Shrimp365 상표, 아쿠아포닉스 특허 등 기술 기반을 마련했습니다."
-          data-den="CULIVER was incorporated, establishing an R&amp;D lab, venture-firm certification, and the Shrimp365 trademark and aquaponics patent."
-          style="background:#0E4E78;border-color:#0E4E78">2024</button>
-        <button class="hist-year" data-i="1" data-color="#14606E" data-tko="복합 유용미생물 출시 · TIPS 선정" data-ten="Probiotics launch · TIPS"
-          data-dko="복합 유용미생물제제를 출시하고 양식 관리 플랫폼 개발에 착수했습니다. TIPS 선정 등 초기 투자를 유치했습니다."
-          data-den="Launched the complex-probiotic agent, began developing the farm-management platform, and was selected for TIPS.">2025</button>
-        <button class="hist-year" data-i="2" data-color="#1B6E7D" data-tko="양식 관리 플랫폼 출시" data-ten="Platform launch"
-          data-dko="Shrimp365 양식 관리 플랫폼을 출시하고 국내외 시장 확장을 시작했습니다."
-          data-den="Launched the Shrimp365 farm-management platform and began domestic and overseas expansion.">2026</button>
-        <button class="hist-year" data-i="3" data-color="#3E7C4F" data-tko="동남아 진출 · 사업 확장" data-ten="SEA expansion"
-          data-dko="베트남 등 동남아 시장과 국내 양어(뱀장어 등) 시장으로 확장하고, 양식 기술·관리 플랫폼을 고도화합니다."
-          data-den="Expanding into Southeast Asia (Vietnam and more) and domestic fish farming, while advancing the platform."
-          style="">2027+</button>
-        <button class="hist-year" data-i="4" data-color="#06202B" data-tko="농·축산업 확장 · IPO 목표" data-ten="Agri expansion · IPO"
-          data-dko="유용미생물제제 제조시설과 인공지능 기반 솔루션을 확장하고, 농·축산업 시장 진출과 IPO를 목표로 합니다."
-          data-den="Scaling probiotic manufacturing and AI solutions, entering agriculture/livestock, and targeting an IPO."
+        <button class="hist-year active" data-i="0" data-color="#14606E" data-tko="중소벤처기업청장 상장" data-ten="SMBA commissioner award"
+          data-dko="광주·전남지방중소벤처기업청장 상장을 수상했습니다(모범적인 기업경영)."
+          data-den="Received a commendation from the Gwangju·Jeonnam SMBA commissioner for exemplary management."
+          style="background:#14606E;border-color:#14606E">2024</button>
+        <button class="hist-year" data-i="1" data-color="#1B6E7D" data-tko="사업 개시 · 뿌리기업·표창·지점" data-ten="Founded · certs · branch"
+          data-dko="유한회사 에이엠피 사업을 개시(2025.01)하고, 뿌리기업 확인(한국생산기술연구원), 전라남도지사 표창, 여수 융합지구 지점 등록을 이어갔습니다."
+          data-den="AMP began operations (Jan 2025), then earned Root-industry certification, a Jeonnam governor's commendation, and registered its Yeosu branch.">2025</button>
+        <button class="hist-year" data-i="2" data-color="#4FA3A5" data-tko="벤처기업 확인 · 사업 확장" data-ten="Venture cert · growth"
+          data-dko="벤처기업 확인(혁신성장유형, 2026.03)을 받고, 스마트제조 전환지원·AI솔루션 구축지원 사업을 수행했습니다."
+          data-den="Certified as a venture firm (innovation-growth type, Mar 2026) and carried out smart-manufacturing and AI-solution support projects.">2026</button>
+        <button class="hist-year" data-i="3" data-color="#06202B" data-tko="수처리 전문기업으로" data-ten="A water-treatment specialist"
+          data-dko="현장 맞춤 수처리 설비와 데이터 기반 물관리로, 수처리·소재·환경을 아우르는 신뢰받는 파트너가 되겠습니다."
+          data-den="With site-specific water systems and data-driven management, becoming a trusted partner across water, materials and environment."
           style="">비전</button>
       </div>
       <div class="hist-detail">
-        <div class="hist-big" id="histBig" style="color:#0E4E78">2024</div>
+        <div class="hist-big" id="histBig" style="color:#14606E">2024</div>
         <div class="hist-text">
-          <h3 id="histTitle"><span class="t-ko">컬리버 법인설립 · 연구 기반 마련</span><span class="t-en">CULIVER incorporated</span></h3>
-          <p class="t-ko" id="histDescKo">컬리버 법인을 설립하고 기업부설연구소·벤처기업 확인·전남 청년기업 인증과 함께 Shrimp365 상표, 아쿠아포닉스 특허 등 기술 기반을 마련했습니다.</p>
-          <p class="t-en" id="histDescEn">CULIVER was incorporated, establishing an R&amp;D lab, venture-firm certification, and the Shrimp365 trademark and aquaponics patent.</p>
+          <h3 id="histTitle"><span class="t-ko">중소벤처기업청장 상장</span><span class="t-en">SMBA commissioner award</span></h3>
+          <p class="t-ko" id="histDescKo">광주·전남지방중소벤처기업청장 상장을 수상했습니다(모범적인 기업경영).</p>
+          <p class="t-en" id="histDescEn">Received a commendation from the Gwangju·Jeonnam SMBA commissioner for exemplary management.</p>
         </div>
       </div>
 """
@@ -677,7 +673,7 @@ FORM_BLOCK = """      <div class="form-wrap reveal" id="formWrap">
                    main.js swaps the displayed label from data-ko/data-en -->
               <select name="type">
                 <option value="사업 제휴" data-ko="사업 제휴" data-en="Business partnership">사업 제휴</option>
-                <option value="투자 · IR" data-ko="투자 · IR" data-en="Investment · IR">투자 · IR</option>
+                <option value="설비·기술상담" data-ko="설비·기술상담" data-en="Systems · technical">설비·기술상담</option>
                 <option value="제품 · 구매" data-ko="제품 · 구매" data-en="Product · Purchase">제품 · 구매</option>
                 <option value="채용" data-ko="채용" data-en="Careers">채용</option>
                 <option value="기타" data-ko="기타" data-en="Other">기타</option>
@@ -817,19 +813,19 @@ def write(name, body, active=None, subpage=True):
 TITLES = {
     "index.html": ("에이엠피 AMP — 현장에 맞춘 설비, 데이터로 관리하는 물",
                    "에이엠피(AMP)는 이차전지 폐수처리·공정수 재순환·육상양식·제약화학 수처리 시스템 설비를 설계·제작·설치하고, 실시간 수질 모니터링을 제공합니다."),
-    "about.html": ("그룹소개 About — 컬리버 그룹 CULIVER GROUP", "잘 기르는 일에서 시작한 컬리버 그룹의 비전과 연혁, 조직, 그룹 개요를 소개합니다."),
-    "business.html": ("사업영역 Business — 컬리버 그룹 CULIVER GROUP", "스마트 양식·수처리·자원순환 소재·스마트팜, 서로 이어진 컬리버 그룹의 네 개 사업."),
-    "sustainability.html": ("지속가능경영 Sustainability — 컬리버 그룹 CULIVER GROUP", "폐기물을 줄이고 자원을 다시 쓰는 일이 곧 컬리버 그룹의 사업입니다."),
-    "ir.html": ("투자정보 IR — 컬리버 그룹 CULIVER GROUP", "컬리버 그룹의 지배구조, 주요 지표, 공시·자료실과 IR 문의 안내."),
-    "newsroom.html": ("뉴스룸 Newsroom — 컬리버 그룹 CULIVER GROUP", "컬리버 그룹과 계열사의 보도자료·소식·채용 소식을 전합니다."),
-    "news.html": ("뉴스룸 Newsroom — 컬리버 그룹 CULIVER GROUP", "컬리버 그룹과 계열사의 보도자료·소식·채용 소식을 전합니다."),
-    "careers.html": ("채용 Careers — 컬리버 그룹 CULIVER GROUP", "바다와 농장, 실험실과 현장에서 일할 사람을 찾습니다. 인재상·채용 절차·공고·복리후생 안내."),
+    "about.html": ("회사소개 About — 에이엠피 AMP", "수처리·물 매니지먼트 전문기업 에이엠피(AMP)의 인사말·연혁·조직·회사 개요를 소개합니다."),
+    "business.html": ("사업영역 Business — 에이엠피 AMP", "이차전지 폐수처리·공정수 재순환·육상양식·제약화학 수처리 설비. 에이엠피(AMP)의 사업영역."),
+    "sustainability.html": ("지속가능경영 Sustainability — 에이엠피 AMP", "폐수를 처리해 다시 쓰고, 자원을 순환시키는 일이 곧 에이엠피(AMP)의 사업입니다."),
+    "ir.html": ("실적·인증 — 에이엠피 AMP", "에이엠피(AMP)의 시장 기회, 주요 지표, 인증·실적을 소개합니다."),
+    "newsroom.html": ("뉴스룸 Newsroom — 에이엠피 AMP", "에이엠피(AMP)의 보도자료·소식·채용 소식을 전합니다."),
+    "news.html": ("뉴스룸 Newsroom — 에이엠피 AMP", "에이엠피(AMP)의 보도자료·소식·채용 소식을 전합니다."),
+    "careers.html": ("채용 Careers — 에이엠피 AMP", "수처리 설비 현장에서 함께 일할 사람을 찾습니다. 인재상·채용 절차·공고·복리후생 안내."),
     "contact.html": ("문의 Contact — 에이엠피 AMP", "수처리 설비·기술상담, 사업 제휴, 제품·구매, 채용 등 에이엠피(AMP)에 문의하세요."),
 }
 for _c in BIZ:
-    TITLES[_c["file"]] = (f"{_c['nko']} {_c['nen']} — 컬리버 그룹 CULIVER GROUP", _c["dko"])
+    TITLES[_c["file"]] = (f"{_c['nko']} {_c['nen']} — 에이엠피 AMP", _c["dko"])
 for _r in ROLES:
-    TITLES[f"careers-{_r['slug']}.html"] = (f"{_r['role_ko']} ({_r['team_ko']}) 채용 — 컬리버 그룹", f"{_r['team_ko']} {_r['role_ko']} 채용 공고")
+    TITLES[f"careers-{_r['slug']}.html"] = (f"{_r['role_ko']} ({_r['team_ko']}) 채용 — 에이엠피 AMP", f"{_r['team_ko']} {_r['role_ko']} 채용 공고")
 
 # ================================================================= HOME
 home = f"""  <section id="top" class="hero">
@@ -1008,19 +1004,19 @@ write("index.html", home, active=None, subpage=False)
 
 # ================================================================= ABOUT
 about = (
-    page_hero("ABOUT CULIVER GROUP", "컬리버 그룹을 소개합니다", "About CULIVER Group",
-              "잘 기르는 일에서 시작한 네 개의 사업이 서로 이어져 있습니다.",
-              "Four businesses that started with growing things well, all connected to one another.",
-              [("about.html", "그룹소개", "About")])
+    page_hero("ABOUT AMP", "에이엠피를 소개합니다", "About AMP",
+              "현장·수질 진단부터 설비 제작·설치, 모니터링까지 한 흐름으로 수행하는 수처리 전문기업입니다.",
+              "A water-treatment company that does it all in one flow — from site and water diagnosis to building, installing and monitoring the systems.",
+              [("about.html", "회사소개", "About")])
     + """  <section class="section bg-paper">
     <div class="wrap">
       <div class="greeting reveal">
-        <div class="portrait"><span>CULIVER GROUP</span></div>
+        <div class="portrait"><span>AMP</span></div>
         <div class="body">
-          <p class="t-ko">컬리버 그룹은 잘 기르는 일에서 시작했습니다. 새우를 기르고, 그 물을 되살리고, 버려지던 껍데기를 소재로 다시 쓰고, 데이터로 작물을 길러 식탁까지 잇습니다.</p>
-          <p class="t-ko">저희는 미생물과 수처리, 데이터로 1차산업의 일하는 방식을 바꾸고 있습니다. 한 사업에서 남은 것이 다른 사업의 원료가 되도록 만들어, 버리는 것을 줄이려 합니다. 바다와 어촌, 산지와 지역사회와 함께 성장하겠습니다.</p>
-          <p class="t-en">CULIVER Group started with growing things well. We raise shrimp, restore their water, turn discarded shells into materials, and grow crops with data all the way to the table. Using microbes, water treatment, and data, we're changing how primary industry works — and making what's left over from one business into raw material for another, so we waste less.</p>
-          <div class="sign"><b>컬리버 그룹 대표이사 정석</b><span class="t-ko">Jeong Seok · 대표이사</span><span class="t-en">Jeong Seok · CEO, CULIVER GROUP</span></div>
+          <p class="t-ko">홈페이지를 방문해 주신 여러분께 감사드립니다. 에이엠피는 수처리·물 매니지먼트 분야에서 현장·수질 진단부터 공정 설계, 설비 제작·설치, 시운전, 모니터링까지 한 흐름으로 수행합니다.</p>
+          <p class="t-ko">이차전지 공정 폐수, 공정수 재순환, 육상양식, 제약·화학 폐수까지 현장마다 물의 성상이 다르다는 점에서 출발합니다. 이 사업의 바탕에는 공조부품 제조가 있습니다. Clad Aluminum Header Pipe를 주문 생산하며 쌓은 가공·품질관리 역량이 수처리 설비 제작의 기반입니다. 현장에 맞춘 설계·제작과 사후관리로 신뢰받는 파트너가 되겠습니다.</p>
+          <p class="t-en">Thank you for visiting. AMP handles water management end to end — site and water diagnosis, process design, fabrication, installation, commissioning and monitoring. It begins from the fact that every site's water is different. Underneath it is our manufacturing base: the machining and quality control built while producing clad-aluminum header pipe to order now underpins how we build water-treatment systems.</p>
+          <div class="sign"><b>유한회사 에이엠피 대표이사 안명원</b><span class="t-ko">안명원 · 대표이사</span><span class="t-en">Ahn Myung-won · CEO, AMP</span></div>
         </div>
       </div>
     </div>
@@ -1030,9 +1026,9 @@ about = (
     <div class="wrap">
       <div class="section-intro reveal">
         <p class="eyebrow">OUR VALUES</p>
-        <h2 class="h2 t-ko">세 가지 약속</h2>
-        <h2 class="h2 t-en">Three commitments</h2>
-        <p class="lead"><span class="t-ko">순환, 기술, 상생. 컬리버 그룹이 일하는 방식입니다.</span><span class="t-en">Circularity, technology, coexistence — the way CULIVER Group works.</span></p>
+        <h2 class="h2 t-ko">일하는 방식</h2>
+        <h2 class="h2 t-en">How we work</h2>
+        <p class="lead"><span class="t-ko">전문성, 신뢰, 도전. 에이엠피가 일하는 방식입니다.</span><span class="t-en">Professionalism, trust, challenge — the way AMP works.</span></p>
       </div>
       <div class="about-grid">
         <div></div>
@@ -1058,18 +1054,18 @@ about = (
     <div class="wrap">
       <div class="section-intro reveal">
         <p class="eyebrow">ORGANIZATION</p>
-        <h2 class="h2 t-ko">그룹 구조</h2>
-        <h2 class="h2 t-en">Group structure</h2>
-        <p class="lead"><span class="t-ko">지주회사 아래 네 개의 계열사가 있습니다.</span><span class="t-en">Four affiliates under a single holding company.</span></p>
+        <h2 class="h2 t-ko">사업 구조</h2>
+        <h2 class="h2 t-en">Business structure</h2>
+        <p class="lead"><span class="t-ko">수처리 설비를 중심으로, 공조부품 제조와 이차전지 공정장비가 이를 뒷받침합니다.</span><span class="t-en">Water-treatment systems at the center, supported by HVAC-parts manufacturing and battery-process equipment.</span></p>
       </div>
       <div class="org reveal">
-        <div class="org-top"><div class="t">컬리버 그룹</div><div class="s">CULIVER GROUP · HOLDINGS</div></div>
+        <div class="org-top"><div class="t">유한회사 에이엠피</div><div class="s">AMP Co., Ltd.</div></div>
         <div class="org-stem"></div>
         <div class="org-row">
-          <a class="org-node" href="culiver-aqua.html"><div class="nm">컬리버</div><div class="en">CULIVER</div><div class="role">스마트 양식</div></a>
-          <a class="org-node" href="amp.html" style="border-top-color:#1B6E7D"><div class="nm">에이엠피</div><div class="en">AMP</div><div class="role">수처리</div></a>
-          <a class="org-node" href="cobaltive.html" style="border-top-color:#8E7A5C"><div class="nm">코발티브</div><div class="en">COBALTIVE</div><div class="role">자원순환 소재</div></a>
-          <a class="org-node" href="susinje-farm.html" style="border-top-color:#3E7C4F"><div class="nm">수신제팜</div><div class="en">SUSINJE FARM</div><div class="role">스마트팜·유통</div></a>
+          <a class="org-node" href="amp.html"><div class="nm">수처리 설비</div><div class="en">WATER</div><div class="role">설계·제작·설치·모니터링</div></a>
+          <a class="org-node" href="amp.html" style="border-top-color:#1B6E7D"><div class="nm">공조부품 제조</div><div class="en">HVAC</div><div class="role">Clad AL Header Pipe</div></a>
+          <a class="org-node" href="amp.html" style="border-top-color:#4FA3A5"><div class="nm">이차전지 공정장비</div><div class="en">BATTERY</div><div class="role">공침반응기·폐수처리</div></a>
+          <a class="org-node" href="ir.html" style="border-top-color:#3E7C4F"><div class="nm">연구전담부서</div><div class="en">R&amp;D</div><div class="role">공정·소재 연구</div></a>
         </div>
       </div>
     </div>
@@ -1078,18 +1074,20 @@ about = (
   <section class="section tall bg-paper">
     <div class="wrap">
       <div class="section-intro reveal">
-        <p class="eyebrow">GROUP OVERVIEW</p>
-        <h2 class="h2 t-ko">그룹 개요</h2>
+        <p class="eyebrow">COMPANY OVERVIEW</p>
+        <h2 class="h2 t-ko">회사 개요</h2>
         <h2 class="h2 t-en">At a glance</h2>
       </div>
       <dl class="overview reveal">
-        <div class="row"><dt><span class="t-ko">그룹명</span><span class="t-en">Group</span></dt><dd>컬리버 그룹 · CULIVER GROUP</dd></div>
-        <div class="row"><dt><span class="t-ko">대표이사</span><span class="t-en">CEO</span></dt><dd><span class="t-ko">정석</span><span class="t-en">Jeong Seok</span></dd></div>
-        <div class="row"><dt><span class="t-ko">설립</span><span class="t-en">Founded</span></dt><dd><span class="t-ko">2024년 (컬리버 법인설립)</span><span class="t-en">2024 (CULIVER incorporated)</span></dd></div>
-        <div class="row"><dt><span class="t-ko">계열사</span><span class="t-en">Affiliates</span></dt><dd><span class="t-ko">컬리버 · 에이엠피 · 코발티브 · 수신제팜 (4개사)</span><span class="t-en">CULIVER · AMP · COBALTIVE · SUSINJE FARM (4)</span></dd></div>
-        <div class="row"><dt><span class="t-ko">사업영역</span><span class="t-en">Businesses</span></dt><dd><span class="t-ko">스마트 양식·AI · 소재/환경 · 패각 업사이클 · 스마트팜/유통</span><span class="t-en">Smart aquaculture·AI · materials/environment · shell upcycling · smart farm/distribution</span></dd></div>
-        <div class="row"><dt><span class="t-ko">본사</span><span class="t-en">HQ</span></dt><dd><span class="t-ko">전남 순천시</span><span class="t-en">Suncheon, Jeonnam</span></dd></div>
-        <div class="row"><dt><span class="t-ko">홈페이지</span><span class="t-en">Web</span></dt><dd>culiver.ai</dd></div>
+        <div class="row"><dt><span class="t-ko">회사명</span><span class="t-en">Company</span></dt><dd>유한회사 에이엠피 · AMP Co., Ltd.</dd></div>
+        <div class="row"><dt><span class="t-ko">대표이사</span><span class="t-en">CEO</span></dt><dd><span class="t-ko">안명원</span><span class="t-en">Ahn Myung-won</span></dd></div>
+        <div class="row"><dt><span class="t-ko">설립</span><span class="t-en">Founded</span></dt><dd><span class="t-ko">2025년 1월 (사업 개시)</span><span class="t-en">January 2025</span></dd></div>
+        <div class="row"><dt><span class="t-ko">사업자등록번호</span><span class="t-en">Business Reg.</span></dt><dd>171-81-03763</dd></div>
+        <div class="row"><dt><span class="t-ko">사업영역</span><span class="t-en">Businesses</span></dt><dd><span class="t-ko">수처리 시스템 설비 · 공조부품 제조 · 이차전지 공정장비</span><span class="t-en">Water-treatment systems · HVAC parts · battery-process equipment</span></dd></div>
+        <div class="row"><dt><span class="t-ko">본사</span><span class="t-en">HQ</span></dt><dd><span class="t-ko">전남 광양시 광양읍 익신산단3길 40, 409호</span><span class="t-en">409, 40 Iksinsandan 3-gil, Gwangyang-eup, Gwangyang, Jeonnam</span></dd></div>
+        <div class="row"><dt><span class="t-ko">사업장</span><span class="t-en">Sites</span></dt><dd><span class="t-ko">공장 — 광양 태인동 국가산업단지 · 지점·연구 — 여수 융합지구</span><span class="t-en">Plant — Taein-dong National Complex, Gwangyang · Branch/R&amp;D — Yeosu</span></dd></div>
+        <div class="row"><dt><span class="t-ko">인증</span><span class="t-en">Certifications</span></dt><dd><span class="t-ko">벤처기업 · 뿌리기업 · ISO 9001</span><span class="t-en">Venture firm · Root industry · ISO 9001</span></dd></div>
+        <div class="row"><dt><span class="t-ko">홈페이지</span><span class="t-en">Web</span></dt><dd>amp0404.co.kr</dd></div>
       </dl>
     </div>
   </section>
@@ -1098,9 +1096,9 @@ about = (
     <div class="wrap">
       <div class="section-intro reveal">
         <p class="eyebrow">BRAND IDENTITY</p>
-        <h2 class="h2 t-ko">그룹 컬러</h2>
-        <h2 class="h2 t-en">Group colors</h2>
-        <p class="lead"><span class="t-ko">바다에서 농장까지, 순환을 잇는 네 사업의 색을 담았습니다.</span><span class="t-en">From ocean to farm — a palette that links the four businesses of the loop.</span></p>
+        <h2 class="h2 t-ko">브랜드 컬러</h2>
+        <h2 class="h2 t-en">Brand colors</h2>
+        <p class="lead"><span class="t-ko">물과 설비, 데이터를 담은 에이엠피의 색입니다.</span><span class="t-en">AMP's palette — water, equipment, and data.</span></p>
       </div>
       <div class="ci-grid reveal-stagger">
         <div class="swatch"><div class="chip" style="background:#06202B"></div><div class="meta"><div class="nm">Abyss</div><div class="hex">#06202B</div></div></div>
@@ -1118,9 +1116,9 @@ write("about.html", about, active="about.html")
 
 # ================================================================= BUSINESS
 business = (
-    page_hero("OUR BUSINESS", "컬리버 그룹의 네 가지 사업", "Four businesses, one group",
-              "양식에서 나온 물은 정화되고, 껍데기는 소재가 되며, 데이터는 농장으로 이어집니다.",
-              "Water is treated and returned, shells become materials, data flows to the farm.",
+    page_hero("OUR BUSINESS", "에이엠피와 함께하는 사업", "AMP and partner businesses",
+              "수처리를 중심으로, 스마트양식과 자원 업사이클이 물과 자원으로 이어집니다.",
+              "Water treatment at the center, connected through water and resources to smart aquaculture and resource upcycling.",
               [("business.html", "사업영역", "Business")])
     + """  <section id="cycle" class="section bg-paper">
     <div class="wrap">
@@ -1169,8 +1167,8 @@ write("business.html", business, active="business.html")
 # ================================================================= SUSTAINABILITY
 sustain = (
     page_hero("SUSTAINABILITY", "지속가능성은 저희 사업의 기본입니다", "Sustainability is built into what we do",
-              "폐기물을 줄이고 자원을 다시 쓰는 일이 곧 컬리버 그룹이 하는 사업입니다.",
-              "Cutting waste and reusing resources is our actual business.",
+              "폐수를 처리해 다시 쓰고 자원을 순환시키는 일이 곧 에이엠피가 하는 사업입니다.",
+              "Treating and reusing water, and circulating resources, is AMP's actual business.",
               [("sustainability.html", "지속가능경영", "Sustainability")])
     + """  <section class="section esg">
     <div class="esg-glow"></div>
@@ -1243,24 +1241,24 @@ write("sustainability.html", sustain, active="sustainability.html")
 # ================================================================= IR / INVESTOR RELATIONS
 # Structure is real; figures/filings are placeholders clearly marked
 # "준비 중 / soon" since there is no actual financial data yet.
-ir_contact = "contact.html?" + urllib.parse.urlencode({"type": "투자 · IR"})
+ir_contact = "contact.html?" + urllib.parse.urlencode({"type": "설비·기술상담"})
 ir = (
-    page_hero("INVESTOR RELATIONS", "투자정보", "Investor Relations",
-              "지주 체제 아래 투명한 지배구조와 데이터 기반 의사결정을 지향합니다.",
-              "Under a holding structure, we pursue transparent governance and data-driven decisions.",
-              [("ir.html", "투자정보", "IR")])
+    page_hero("RECORD · CERTIFICATIONS", "실적·인증", "Record & Certifications",
+              "자체 제작 역량과 데이터 기반 물관리로 쌓아온 에이엠피의 강점과 공신력입니다.",
+              "AMP's strengths and credentials — built on in-house fabrication and data-driven water management.",
+              [("ir.html", "실적·인증", "Record")])
     + """  <section class="section tall bg-paper">
     <div class="wrap">
       <div class="section-intro reveal">
-        <p class="eyebrow">GOVERNANCE</p>
-        <h2 class="h2 t-ko">지배구조</h2>
-        <h2 class="h2 t-en">Governance</h2>
-        <p class="lead"><span class="t-ko">컬리버 그룹은 지주회사 체제 아래 네 개 계열사를 하나의 비전으로 정렬합니다.</span><span class="t-en">CULIVER Group aligns its four affiliates under one vision through a holding-company structure.</span></p>
+        <p class="eyebrow">STRENGTHS</p>
+        <h2 class="h2 t-ko">에이엠피의 강점</h2>
+        <h2 class="h2 t-en">What sets AMP apart</h2>
+        <p class="lead"><span class="t-ko">설계부터 제작·설치·사후관리까지 한 흐름으로 수행하는 수처리 전문기업입니다.</span><span class="t-en">A water-treatment specialist that handles design, fabrication, installation and aftercare in one flow.</span></p>
       </div>
       <div class="commitments reveal-stagger">
-        <div class="commitment"><span class="no">01</span><div><h3><span class="t-ko">지주 체제</span><span class="t-en">Holding structure</span></h3><p><span class="t-ko">지주회사가 네 계열사의 전략과 자원 배분을 통합 관리합니다.</span><span class="t-en">The holding company integrates strategy and capital allocation across the four affiliates.</span></p></div></div>
-        <div class="commitment"><span class="no">02</span><div><h3><span class="t-ko">투명한 의사결정</span><span class="t-en">Transparent decisions</span></h3><p><span class="t-ko">데이터에 기반한 의사결정과 정보 공개를 원칙으로 합니다.</span><span class="t-en">Data-driven decision-making and disclosure are our operating principles.</span></p></div></div>
-        <div class="commitment"><span class="no">03</span><div><h3><span class="t-ko">순환 기반 성장</span><span class="t-en">Circular growth</span></h3><p><span class="t-ko">한 사업의 부산물이 다음 사업의 원료가 되는 구조로 지속 성장을 추구합니다.</span><span class="t-en">We pursue durable growth through a loop where each business's byproduct feeds the next.</span></p></div></div>
+        <div class="commitment"><span class="no">01</span><div><h3><span class="t-ko">자체 제작 역량</span><span class="t-en">In-house fabrication</span></h3><p><span class="t-ko">자체 공장에서 구조물과 장치를 직접 제작해 설계 변경에도 빠르게 대응합니다.</span><span class="t-en">We fabricate structures and devices in our own shop, so design changes are quick.</span></p></div></div>
+        <div class="commitment"><span class="no">02</span><div><h3><span class="t-ko">데이터 기반 물관리</span><span class="t-en">Data-driven water</span></h3><p><span class="t-ko">수질 센서와 실시간 모니터링 프로그램으로 물 상태를 확인하고 이상에 대응합니다.</span><span class="t-en">Sensors and a live monitoring program track water and respond to anomalies.</span></p></div></div>
+        <div class="commitment"><span class="no">03</span><div><h3><span class="t-ko">제조 품질관리</span><span class="t-en">Manufacturing quality</span></h3><p><span class="t-ko">공조부품 제조로 쌓은 작업표준서 기반 품질관리가 수처리 설비 제작의 바탕입니다.</span><span class="t-en">Standardized quality control from HVAC-parts manufacturing underpins our water systems.</span></p></div></div>
       </div>
     </div>
   </section>
@@ -1268,16 +1266,15 @@ ir = (
   <section class="section tall bg-card">
     <div class="wrap">
       <div class="section-intro reveal">
-        <p class="eyebrow">MARKET</p>
-        <h2 class="h2 t-ko">시장 기회</h2>
-        <h2 class="h2 t-en">Market opportunity</h2>
-        <p class="lead"><span class="t-ko">생산만 하면 팔리는 시장 — 국내 새우 자급률은 10%에 불과하고, 시장의 경쟁 축은 ‘생산량’에서 ‘지속가능성·기술’로 이동하고 있습니다.</span><span class="t-en">A market where supply is the constraint — Korea's shrimp self-sufficiency is just 10%, and competition is shifting from volume to sustainability and technology.</span></p>
+        <p class="eyebrow">KEY FIGURES</p>
+        <h2 class="h2 t-ko">핵심 지표</h2>
+        <h2 class="h2 t-en">Key figures</h2>
       </div>
       <div class="metrics bento-metrics reveal-stagger">
-        <div class="metric"><span class="v" style="color:#0E4E78">160조</span><span class="l"><span class="t-ko">글로벌 양식 시장</span><span class="t-en">Global aquaculture</span></span></div>
-        <div class="metric"><span class="v" style="color:#14606E"><span data-count="10">0</span>%</span><span class="l"><span class="t-ko">국내 새우 자급률</span><span class="t-en">Domestic self-sufficiency</span></span></div>
-        <div class="metric"><span class="v" style="color:#1B6E7D">70%</span><span class="l"><span class="t-ko">흰다리새우 생존율</span><span class="t-en">Shrimp survival</span></span></div>
-        <div class="metric"><span class="v" style="color:#3E7C4F"><span data-count="4">0</span></span><span class="l"><span class="t-ko">계열사</span><span class="t-en">Affiliates</span></span></div>
+        <div class="metric"><span class="v" style="color:#14606E"><span data-count="4">0</span></span><span class="l"><span class="t-ko">수처리 적용 분야</span><span class="t-en">Applications</span></span></div>
+        <div class="metric"><span class="v" style="color:#1B6E7D"><span data-count="7">0</span></span><span class="l"><span class="t-ko">수행 프로세스 단계</span><span class="t-en">Process steps</span></span></div>
+        <div class="metric"><span class="v" style="color:#4FA3A5"><span data-count="6">0</span>종</span><span class="l"><span class="t-ko">실시간 수질 측정</span><span class="t-en">Live metrics</span></span></div>
+        <div class="metric"><span class="v" style="color:#06202B">ISO 9001</span><span class="l"><span class="t-ko">품질경영 인증</span><span class="t-en">Quality cert</span></span></div>
       </div>
     </div>
   </section>
@@ -1285,41 +1282,21 @@ ir = (
   <section class="section tall bg-paper">
     <div class="wrap">
       <div class="section-intro reveal">
-        <p class="eyebrow">ROADMAP</p>
-        <h2 class="h2 t-ko">성장 로드맵 · 매출 목표</h2>
-        <h2 class="h2 t-en">Growth roadmap · revenue targets</h2>
-        <p class="lead"><span class="t-ko">유용미생물제제와 양식 관리 솔루션을 기반으로 국내외 시장에 확장하며, IPO를 목표로 합니다. 아래 수치는 회사 사업계획상의 목표치입니다.</span><span class="t-en">Scaling probiotics and the farm-management platform across domestic and overseas markets toward an IPO. The figures below are the company's business-plan targets.</span></p>
-      </div>
-      <div class="metrics bento-metrics reveal-stagger">
-        <div class="metric"><span class="v" style="color:#0E4E78">5.5억</span><span class="l"><span class="t-ko">2025 매출 목표</span><span class="t-en">2025 target</span></span></div>
-        <div class="metric"><span class="v" style="color:#14606E">58억</span><span class="l"><span class="t-ko">2027 매출 목표</span><span class="t-en">2027 target</span></span></div>
-        <div class="metric"><span class="v" style="color:#1B6E7D">271억</span><span class="l"><span class="t-ko">2030 매출 목표</span><span class="t-en">2030 target</span></span></div>
-        <div class="metric"><span class="v" style="color:#3E7C4F">730억</span><span class="l"><span class="t-ko">2033 매출 목표</span><span class="t-en">2033 target</span></span></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section tall bg-card">
-    <div class="wrap">
-      <div class="section-intro reveal">
         <p class="eyebrow">CREDENTIALS</p>
-        <h2 class="h2 t-ko">주요 인증 · 실적</h2>
-        <h2 class="h2 t-en">Certifications &amp; milestones</h2>
+        <h2 class="h2 t-ko">인증 · 수상</h2>
+        <h2 class="h2 t-en">Certifications &amp; awards</h2>
       </div>
       <div class="chips reveal-stagger" style="gap:10px">
-        <span class="chip" style="background:rgba(14,78,120,.08);color:#0E4E78">TIPS 선정</span>
-        <span class="chip" style="background:rgba(14,78,120,.08);color:#0E4E78">기업부설연구소</span>
-        <span class="chip" style="background:rgba(14,78,120,.08);color:#0E4E78">벤처기업확인</span>
-        <span class="chip" style="background:rgba(14,78,120,.08);color:#0E4E78">전남 청년기업 인증</span>
-        <span class="chip" style="background:rgba(14,78,120,.08);color:#0E4E78">순천대 강소지역기업</span>
-        <span class="chip" style="background:rgba(14,78,120,.08);color:#0E4E78">청창사 ‘우수’ 졸업</span>
-        <span class="chip" style="background:rgba(14,78,120,.08);color:#0E4E78">Shrimp365 상표</span>
-        <span class="chip" style="background:rgba(14,78,120,.08);color:#0E4E78">아쿠아포닉스 특허</span>
-        <span class="chip" style="background:rgba(14,78,120,.08);color:#0E4E78">복합 유용미생물 특허 출원 중</span>
+        <span class="chip" style="background:rgba(20,96,110,.08);color:#14606E">벤처기업 확인</span>
+        <span class="chip" style="background:rgba(20,96,110,.08);color:#14606E">뿌리기업 확인</span>
+        <span class="chip" style="background:rgba(20,96,110,.08);color:#14606E">ISO 9001</span>
+        <span class="chip" style="background:rgba(20,96,110,.08);color:#14606E">연구전담부서</span>
+        <span class="chip" style="background:rgba(20,96,110,.08);color:#14606E">전라남도지사 표창</span>
+        <span class="chip" style="background:rgba(20,96,110,.08);color:#14606E">중소벤처기업청장 상장</span>
       </div>
       <div class="report-row reveal" style="margin-top:32px">
-        <span class="btn-outline is-disabled" aria-disabled="true"><span class="t-ko">📄 감사보고서 (준비 중)</span><span class="t-en">📄 Audit report (soon)</span></span>
-        <span class="btn-outline is-disabled" aria-disabled="true"><span class="t-ko">📄 IR 자료 (준비 중)</span><span class="t-en">📄 IR deck (soon)</span></span>
+        <span class="btn-outline is-disabled" aria-disabled="true"><span class="t-ko">📄 회사소개서 (준비 중)</span><span class="t-en">📄 Company profile (soon)</span></span>
+        <span class="btn-outline is-disabled" aria-disabled="true"><span class="t-ko">📄 시공 실적 자료 (준비 중)</span><span class="t-en">📄 Project record (soon)</span></span>
       </div>
     </div>
   </section>
@@ -1328,10 +1305,10 @@ ir = (
     <div class="wrap reveal">
       <div class="cta-band" style="background:linear-gradient(160deg,#041821,#0C3A47 60%,#1B6E7D 130%)">
         <div>
-          <h2><span class="t-ko">투자·IR 문의</span><span class="t-en">Investor inquiries</span></h2>
-          <p><span class="t-ko">투자 및 IR 관련 문의를 환영합니다.</span><span class="t-en">We welcome investment and IR inquiries.</span></p>
+          <h2><span class="t-ko">사업·기술 문의</span><span class="t-en">Business inquiries</span></h2>
+          <p><span class="t-ko">수처리 설비·기술상담, 사업 제휴 문의를 환영합니다.</span><span class="t-en">We welcome water-system, technical and partnership inquiries.</span></p>
         </div>
-        <a class="btn btn-primary" href=\"""" + ir_contact + """"><span class="t-ko">IR 문의하기</span><span class="t-en">Contact IR</span> →</a>
+        <a class="btn btn-primary" href=\"""" + ir_contact + """"><span class="t-ko">문의하기</span><span class="t-en">Contact</span> →</a>
       </div>
     </div>
   </section>
@@ -1341,9 +1318,9 @@ write("ir.html", ir, active="ir.html")
 
 # ================================================================= NEWSROOM
 newsroom = (
-    page_hero("NEWSROOM", "컬리버 그룹 소식", "News from the group",
-              "컬리버 그룹과 계열사의 보도자료·소식·채용 소식을 전합니다.",
-              "Press releases, updates, and hiring news from CULIVER Group and its affiliates.",
+    page_hero("NEWSROOM", "소식", "News",
+              "에이엠피의 보도자료·소식·채용 소식을 전합니다.",
+              "Press releases, updates and hiring news from AMP.",
               [("newsroom.html", "뉴스룸", "Newsroom")])
     + """  <section class="section bg-paper">
     <div class="wrap">
@@ -1403,7 +1380,7 @@ careers = (
         <div class="step"><div class="n">1</div><h3><span class="t-ko">서류 전형</span><span class="t-en">Application</span></h3><p><span class="t-ko">이력서와 자기소개서로 지원해 주세요.</span><span class="t-en">Apply with your resume and cover letter.</span></p></div>
         <div class="step"><div class="n">2</div><h3><span class="t-ko">실무 면접</span><span class="t-en">Team interview</span></h3><p><span class="t-ko">함께 일할 팀과 직무 역량을 확인합니다.</span><span class="t-en">Meet the team you'll work with.</span></p></div>
         <div class="step"><div class="n">3</div><h3><span class="t-ko">최종 면접</span><span class="t-en">Final interview</span></h3><p><span class="t-ko">가치관과 성장 방향을 함께 이야기합니다.</span><span class="t-en">We talk values and growth together.</span></p></div>
-        <div class="step"><div class="n">4</div><h3><span class="t-ko">입사</span><span class="t-en">Onboarding</span></h3><p><span class="t-ko">온보딩과 함께 컬리버 그룹의 일원이 됩니다.</span><span class="t-en">Join CULIVER Group with a full onboarding.</span></p></div>
+        <div class="step"><div class="n">4</div><h3><span class="t-ko">입사</span><span class="t-en">Onboarding</span></h3><p><span class="t-ko">온보딩과 함께 에이엠피의 일원이 됩니다.</span><span class="t-en">Join AMP with a full onboarding.</span></p></div>
       </div>
     </div>
   </section>
@@ -1619,7 +1596,7 @@ for c in BIZ:
 # client-side. The 6 build-time seed articles get thin redirect stubs
 # below so any old news-N.html links/bookmarks keep working.
 news_detail = (
-    page_hero("NEWSROOM", "컬리버 그룹 소식", "News from the group",
+    page_hero("NEWSROOM", "소식", "News",
               "보도자료·소식·채용 소식을 전합니다.", "Press, updates, and hiring news.",
               [("newsroom.html", "뉴스룸", "Newsroom"), (None, "불러오는 중...", "Loading…")],
               heading_level="h2")
