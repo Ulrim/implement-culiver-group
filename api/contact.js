@@ -61,14 +61,14 @@ module.exports = async function handler(req, res) {
 
   var apiKey = process.env.RESEND_API_KEY;
   var to = process.env.CONTACT_TO_EMAIL;
-  var from = process.env.CONTACT_FROM_EMAIL || 'CULIVER GROUP <onboarding@resend.dev>';
+  var from = process.env.CONTACT_FROM_EMAIL || 'AMP <onboarding@resend.dev>';
 
   if (!apiKey || !to) {
     console.error('[contact] Missing RESEND_API_KEY or CONTACT_TO_EMAIL env var');
     return res.status(500).json({ ok: false, error: '서버 설정 오류로 전송하지 못했습니다. 잠시 후 다시 시도해 주세요.' });
   }
 
-  var subject = '[컬리버 그룹 문의] ' + (type || '일반') + ' · ' + name;
+  var subject = '[에이엠피 문의] ' + (type || '일반') + ' · ' + name;
   var lines = [
     ['이름', name],
     ['이메일', email],
