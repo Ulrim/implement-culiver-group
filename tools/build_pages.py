@@ -61,8 +61,8 @@ NAV = [
 CONTACT_CTA = ("contact.html", "문의", "Contact")
 
 FAMILY = [
-    ("culiver-aqua.html", "컬리버", "CULIVER"),
     ("amp.html", "에이엠피", "AMP"),
+    ("culiver-aqua.html", "컬리버", "CULIVER"),
     ("cobaltive.html", "코발티브", "COBALTIVE"),
     ("susinje-farm.html", "수신제팜", "SUSINJE FARM"),
 ]
@@ -149,8 +149,8 @@ def header(active):
         '  <div class="progress" id="progress"></div>\n\n'
         '  <header class="gnb" id="gnb">\n'
         '    <a href="index.html" class="brand">\n'
-        '      <span class="brand-mark">CULIVER</span>\n'
-        '      <span class="brand-sub">GROUP</span>\n'
+        '      <span class="brand-mark">AMP</span>\n'
+        '      <span class="brand-sub">에이엠피</span>\n'
         "    </a>\n"
         "    <nav>\n"
         '      <div class="nav-links" id="navLinks">\n'
@@ -197,15 +197,15 @@ FOOTER = """  <footer class="footer">
     <div class="wrap">
       <div class="footer-top">
         <div class="footer-brand">
-          <div class="mark"><span class="m">CULIVER</span><span class="s">GROUP</span></div>
-          <p class="t-ko">바다에서 농장까지, 잘 기르는 기술을 만듭니다.</p>
-          <p class="t-en">From ocean to farm, we cultivate a circular tomorrow.</p>
+          <div class="mark"><span class="m">AMP</span><span class="s">에이엠피</span></div>
+          <p class="t-ko">현장에 맞춘 설비, 데이터로 관리하는 물.</p>
+          <p class="t-en">Water systems built for the site, managed by data.</p>
         </div>
         <div class="footer-cols">
           <div class="footer-col">
             <span class="head">FAMILY</span>
-            <a href="culiver-aqua.html">컬리버 <span class="rom">CULIVER</span></a>
             <a href="amp.html">에이엠피 <span class="rom">AMP</span></a>
+            <a href="culiver-aqua.html">컬리버 <span class="rom">CULIVER</span></a>
             <a href="cobaltive.html">코발티브 <span class="rom">COBALTIVE</span></a>
             <a href="susinje-farm.html">수신제팜 <span class="rom">SUSINJE FARM</span></a>
           </div>
@@ -294,9 +294,9 @@ def linkify_first(paragraphs, term, href):
 
 # ------------------------------------------------------------------ data
 BIZ = [
-    dict(file="culiver-aqua.html", no="01", color="#0E4E78", ink="#0E4E78",
+    dict(file="culiver-aqua.html", no="02", color="#0E4E78", ink="#0E4E78",
          deep="linear-gradient(160deg,#041821,#0A2C46 60%,#0E4E78 130%)",
-         img="biz-culiver.jpg", right=False,
+         img="biz-culiver.jpg", right=True,
          overlay="linear-gradient(150deg,rgba(14,78,120,.5),rgba(10,44,70,.72))", chipbg="rgba(14,78,120,.08)",
          tko="스마트 양식 · AI", ten="SMART AQUACULTURE · AI", nko="컬리버", nen="CULIVER",
          dko="흰다리새우 육상 양식에 프리미엄 사료·복합 유용미생물·질병 조기진단·수질 데이터 관리를 하나로 묶은 통합 솔루션 기업입니다.",
@@ -311,9 +311,9 @@ BIZ = [
                    dict(nko="숨쉘 (SUMSHELL)", nen="SUMSHELL", dko="폐굴껍데기(굴패각 소성분말) 유래의 친환경 양식장 수질 pH 완충제. 시험성적서 보유.", den="An eco-friendly pH buffer for farm water made from calcined oyster-shell powder; test-report certified.", tko="미생물제품", ten="Microbial", status="양산중", statusen="In production"),
                    dict(nko="Shrimp365", nen="Shrimp365", dko="수질·생육 데이터 기반의 AI 새우양식 통합관리 플랫폼(SaaS). 웹·앱으로 운영.", den="An AI-driven, SaaS platform for integrated shrimp-farm management from water and growth data.", tko="AI · SW", ten="AI · SW", status="운영중", statusen="Live")],
          metrics=[("70%", "흰다리새우 생존율", "Survival rate"), ("7일", "수질 정상화 기간", "Water recovery"), ("6종", "복합 유용미생물", "Probiotic strains")]),
-    dict(file="amp.html", no="02", color="#1B6E7D", ink="#14606E",
+    dict(file="amp.html", no="01", color="#1B6E7D", ink="#14606E",
          deep="linear-gradient(160deg,#041821,#0C4A57 60%,#1B6E7D 130%)",
-         img="biz-amp.jpg", right=True,
+         img="biz-amp.jpg", right=False,
          overlay="linear-gradient(150deg,rgba(27,110,125,.5),rgba(12,58,71,.74))", chipbg="rgba(27,110,125,.1)",
          tko="수처리 · 물 매니지먼트", ten="WATER MANAGEMENT", nko="에이엠피", nen="AMP",
          dko="수처리 시스템 설비의 설계·제작·설치·시운전부터 실시간 수질 모니터링까지. 이차전지 공정 설비와 공조부품 제조 기술이 바탕입니다.",
@@ -365,6 +365,8 @@ BIZ = [
          products=[],
          metrics=[]),
 ]
+# AMP leads the family ordering (shown first across the site)
+BIZ = [c for c in BIZ if c["file"] == "amp.html"] + [c for c in BIZ if c["file"] != "amp.html"]
 BIZ_BY_FILE = {c["file"]: c for c in BIZ}
 
 # maps affiliate file -> (1-based news index, careers slug) for cross-linking
@@ -812,8 +814,8 @@ def write(name, body, active=None, subpage=True):
 
 
 TITLES = {
-    "index.html": ("컬리버 그룹 CULIVER GROUP — 현장에 맞춘 설비, 데이터로 관리하는 물",
-                   "컬리버 그룹의 에이엠피(AMP)는 이차전지 폐수처리·공정수 재순환·육상양식·제약화학 수처리 시스템 설비를 설계·제작·설치하고, 실시간 수질 모니터링을 제공합니다."),
+    "index.html": ("에이엠피 AMP — 현장에 맞춘 설비, 데이터로 관리하는 물",
+                   "에이엠피(AMP)는 이차전지 폐수처리·공정수 재순환·육상양식·제약화학 수처리 시스템 설비를 설계·제작·설치하고, 실시간 수질 모니터링을 제공합니다."),
     "about.html": ("그룹소개 About — 컬리버 그룹 CULIVER GROUP", "잘 기르는 일에서 시작한 컬리버 그룹의 비전과 연혁, 조직, 그룹 개요를 소개합니다."),
     "business.html": ("사업영역 Business — 컬리버 그룹 CULIVER GROUP", "스마트 양식·수처리·자원순환 소재·스마트팜, 서로 이어진 컬리버 그룹의 네 개 사업."),
     "sustainability.html": ("지속가능경영 Sustainability — 컬리버 그룹 CULIVER GROUP", "폐기물을 줄이고 자원을 다시 쓰는 일이 곧 컬리버 그룹의 사업입니다."),
@@ -994,7 +996,7 @@ home = f"""  <section id="top" class="hero">
       <div class="cta-band">
         <div>
           <h2><span class="t-ko">함께 성장할 사람을 찾습니다</span><span class="t-en">Grow with us</span></h2>
-          <p><span class="t-ko">바다와 농장, 실험실과 현장을 잇는 컬리버 그룹의 채용을 확인하세요.</span><span class="t-en">See open roles across the CULIVER Group affiliates.</span></p>
+          <p><span class="t-ko">에이엠피와 계열사의 채용 공고를 확인하세요.</span><span class="t-en">See open roles at AMP and its affiliates.</span></p>
         </div>
         <a class="btn btn-primary" href="careers.html"><span class="t-ko">채용 보기</span><span class="t-en">Careers</span> →</a>
       </div>
