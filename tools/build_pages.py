@@ -220,8 +220,8 @@ FOOTER = """  <footer class="footer">
           <div class="footer-col">
             <span class="head">CONTACT</span>
             <a href="contact.html"><span class="t-ko">문의하기</span><span class="t-en">Contact</span></a>
-            <a href="https://culiver.ai" target="_blank" rel="noopener">culiver.ai</a>
-            <span class="plain"><span class="t-ko">전남 순천시</span><span class="t-en">Suncheon, Jeonnam</span></span>
+            <a href="https://amp0404.co.kr" target="_blank" rel="noopener">amp0404.co.kr</a>
+            <span class="plain"><span class="t-ko">전남 광양시</span><span class="t-en">Gwangyang, Jeonnam</span></span>
           </div>
         </div>
       </div>
@@ -668,7 +668,7 @@ FORM_BLOCK = """      <div class="form-wrap reveal" id="formWrap">
           <div class="form-row">
             <label>
               <span class="lbl"><span class="t-ko">회사·소속</span><span class="t-en">Company</span></span>
-              <input name="company" placeholder="컬리버" data-ph-ko="컬리버" data-ph-en="e.g. CULIVER" autocomplete="organization">
+              <input name="company" placeholder="회사명 / 소속" data-ph-ko="회사명 / 소속" data-ph-en="e.g. your company" autocomplete="organization">
             </label>
             <label>
               <span class="lbl"><span class="t-ko">문의 유형</span><span class="t-en">Inquiry type</span></span>
@@ -710,11 +710,12 @@ CONTACT_INFO = """      <div class="reveal">
         <h2 class="h2 t-ko">함께 일하거나<br>협업하고 싶다면</h2>
         <h2 class="h2 t-en">Want to work or partner with us?</h2>
         <div class="contact-info">
-          <div class="kv"><span class="kv-k">WEB</span><span class="kv-v">culiver.ai</span></div>
+          <div class="kv"><span class="kv-k"><span class="t-ko">회사</span><span class="t-en">COMPANY</span></span><span class="kv-v"><span class="t-ko">유한회사 에이엠피 · 대표이사 안명원</span><span class="t-en">AMP Co., Ltd. · CEO Ahn Myung-won</span></span></div>
+          <div class="kv"><span class="kv-k">WEB</span><span class="kv-v">amp0404.co.kr</span></div>
           <div class="kv">
             <span class="kv-k"><span class="t-ko">주소</span><span class="t-en">ADDRESS</span></span>
-            <span class="addr t-ko">전남 순천시</span>
-            <span class="addr t-en">Suncheon, Jeonnam, Korea</span>
+            <span class="addr t-ko">전남 광양시 광양읍 익신산단3길 40, 409호</span>
+            <span class="addr t-en">409, 40 Iksinsandan 3-gil, Gwangyang-eup, Gwangyang, Jeonnam, Korea</span>
           </div>
           <div class="kv"><span class="kv-k">EMAIL · TEL</span><span class="kv-v"><span class="t-ko">준비 중입니다. 아래 폼으로 남겨 주세요</span><span class="t-en">Coming soon — please use the form below</span></span></div>
         </div>
@@ -823,7 +824,7 @@ TITLES = {
     "newsroom.html": ("뉴스룸 Newsroom — 컬리버 그룹 CULIVER GROUP", "컬리버 그룹과 계열사의 보도자료·소식·채용 소식을 전합니다."),
     "news.html": ("뉴스룸 Newsroom — 컬리버 그룹 CULIVER GROUP", "컬리버 그룹과 계열사의 보도자료·소식·채용 소식을 전합니다."),
     "careers.html": ("채용 Careers — 컬리버 그룹 CULIVER GROUP", "바다와 농장, 실험실과 현장에서 일할 사람을 찾습니다. 인재상·채용 절차·공고·복리후생 안내."),
-    "contact.html": ("문의 Contact — 컬리버 그룹 CULIVER GROUP", "사업 제휴, 투자, 제품·구매, 채용 등 컬리버 그룹에 문의하세요."),
+    "contact.html": ("문의 Contact — 에이엠피 AMP", "수처리 설비·기술상담, 사업 제휴, 제품·구매, 채용 등 에이엠피(AMP)에 문의하세요."),
 }
 for _c in BIZ:
     TITLES[_c["file"]] = (f"{_c['nko']} {_c['nen']} — 컬리버 그룹 CULIVER GROUP", _c["dko"])
@@ -1456,9 +1457,9 @@ write("careers.html", careers, active="careers.html")
 
 # ================================================================= CONTACT
 contact = (
-    page_hero("CONTACT", "함께 만들 순환을 제안하세요", "Let's build a loop together",
-              "사업 제휴, 투자, 제품·구매, 채용 등 무엇이든 문의해 주세요.",
-              "Partnerships, investment, products, hiring — reach out about anything.",
+    page_hero("CONTACT", "에이엠피에 문의하기", "Contact AMP",
+              "수처리 설비·기술상담, 사업 제휴, 제품·구매, 채용 등 무엇이든 문의해 주세요.",
+              "Water-treatment systems, technical consulting, partnerships, products, hiring — reach out about anything.",
               [("contact.html", "문의", "Contact")])
     + """  <section class="section contact">
     <div class="wrap contact-grid">
