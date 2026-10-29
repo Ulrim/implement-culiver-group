@@ -812,8 +812,8 @@ def write(name, body, active=None, subpage=True):
 
 
 TITLES = {
-    "index.html": ("에이엠피 AMP — 현장에 맞춘 설비, 데이터로 관리하는 물",
-                   "에이엠피(AMP)는 이차전지 폐수처리·공정수 재순환·육상양식·제약화학 수처리 시스템 설비를 설계·제작·설치하고, 실시간 수질 모니터링을 제공합니다."),
+    "index.html": ("컬리버 그룹 CULIVER GROUP — 현장에 맞춘 설비, 데이터로 관리하는 물",
+                   "컬리버 그룹의 에이엠피(AMP)는 이차전지 폐수처리·공정수 재순환·육상양식·제약화학 수처리 시스템 설비를 설계·제작·설치하고, 실시간 수질 모니터링을 제공합니다."),
     "about.html": ("그룹소개 About — 컬리버 그룹 CULIVER GROUP", "잘 기르는 일에서 시작한 컬리버 그룹의 비전과 연혁, 조직, 그룹 개요를 소개합니다."),
     "business.html": ("사업영역 Business — 컬리버 그룹 CULIVER GROUP", "스마트 양식·수처리·자원순환 소재·스마트팜, 서로 이어진 컬리버 그룹의 네 개 사업."),
     "sustainability.html": ("지속가능경영 Sustainability — 컬리버 그룹 CULIVER GROUP", "폐기물을 줄이고 자원을 다시 쓰는 일이 곧 컬리버 그룹의 사업입니다."),
